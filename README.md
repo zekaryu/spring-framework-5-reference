@@ -14,7 +14,7 @@ Chinese verion of Spring Framework 5 Reference Documentation (https://docs.sprin
  
  * Gmail: [zekaryu@gmail.com](mailto:zekaryu@gmail.com)
  * Twitter: [@ZekarYu](https://twitter.com/zekaryu)
- * Github: [zekaryu](https://github.com/waylau)
+ * Github: [zekaryu](https://github.com/zekaryu)
 
 #### 编写参考
 
