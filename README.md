@@ -9,3 +9,13 @@ Chinese verion of Spring Framework 5 Reference Documentation (https://docs.sprin
 ## 意见、建议、勘误 
 
 如有勘误、意见或建议欢迎拍砖 https://github.com/zekaryu/spring-framework-5-reference/issues
+
+## 联系作者：
+ 
+ * Gmail: zekaryu@gmail.com
+ * Twitter: @ZekarYu
+ * Github: zekaryu
+
+#### 编写参考
+
+https://github.com/waylau/spring-framework-4-reference
