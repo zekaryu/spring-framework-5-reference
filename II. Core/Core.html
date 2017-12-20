@@ -12,99 +12,99 @@
 </head>
 <body id="spring-core" class="book toc2 toc-left">
 <div id="header">
-<h1>Core Technologies</h1>
+<h1>核心技术</h1>
 <div class="details">
 <span id="revnumber">version 5.0.0.RELEASE</span>
 </div>
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">目录</div>
 <ul class="sectlevel1">
-<li><a href="#beans">1. The IoC container</a>
+<li><a href="#beans">1. IoC容器</a>
 <ul class="sectlevel2">
-<li><a href="#beans-introduction">1.1. Introduction to the Spring IoC container and beans</a></li>
-<li><a href="#beans-basics">1.2. Container overview</a></li>
-<li><a href="#beans-definition">1.3. Bean overview</a></li>
-<li><a href="#beans-dependencies">1.4. Dependencies</a></li>
-<li><a href="#beans-factory-scopes">1.5. Bean scopes</a></li>
-<li><a href="#beans-factory-nature">1.6. Customizing the nature of a bean</a></li>
-<li><a href="#beans-child-bean-definitions">1.7. Bean definition inheritance</a></li>
-<li><a href="#beans-factory-extension">1.8. Container Extension Points</a></li>
-<li><a href="#beans-annotation-config">1.9. Annotation-based container configuration</a></li>
-<li><a href="#beans-classpath-scanning">1.10. Classpath scanning and managed components</a></li>
-<li><a href="#beans-standard-annotations">1.11. Using JSR 330 Standard Annotations</a></li>
-<li><a href="#beans-java">1.12. Java-based container configuration</a></li>
-<li><a href="#beans-environment">1.13. Environment abstraction</a></li>
-<li><a href="#context-load-time-weaver">1.14. Registering a LoadTimeWeaver</a></li>
-<li><a href="#context-introduction">1.15. Additional Capabilities of the ApplicationContext</a></li>
-<li><a href="#beans-beanfactory">1.16. The BeanFactory</a></li>
+<li><a href="#beans-introduction">1.1. Spring IoC 容器和 beans 介绍</a></li>
+<li><a href="#beans-basics">1.2. 容器概述</a></li>
+<li><a href="#beans-definition">1.3. Bean 概述</a></li>
+<li><a href="#beans-dependencies">1.4. 依赖</a></li>
+<li><a href="#beans-factory-scopes">1.5. Bean 的作用域</a></li>
+<li><a href="#beans-factory-nature">1.6. 自定义 bean 的特性</a></li>
+<li><a href="#beans-child-bean-definitions">1.7. Bean 定义的继承</a></li>
+<li><a href="#beans-factory-extension">1.8. 容器的扩展点</a></li>
+<li><a href="#beans-annotation-config">1.9. 基于注解的容器配置</a></li>
+<li><a href="#beans-classpath-scanning">1.10. 类路径扫描和管理组件</a></li>
+<li><a href="#beans-standard-annotations">1.11. 使用 JSR 330 标准注解</a></li>
+<li><a href="#beans-java">1.12. 基于 Java 的容器配置</a></li>
+<li><a href="#beans-environment">1.13. 环境抽象</a></li>
+<li><a href="#context-load-time-weaver">1.14. 注册 LoadTimeWeaver</a></li>
+<li><a href="#context-introduction">1.15. ApplicationContext 的其他作用</a></li>
+<li><a href="#beans-beanfactory">1.16. BeanFactory</a></li>
 </ul>
 </li>
-<li><a href="#resources">2. Resources</a>
+<li><a href="#resources">2. 资源</a>
 <ul class="sectlevel2">
-<li><a href="#resources-introduction">2.1. Introduction</a></li>
-<li><a href="#resources-resource">2.2. The Resource interface</a></li>
-<li><a href="#resources-implementations">2.3. Built-in Resource implementations</a></li>
-<li><a href="#resources-resourceloader">2.4. The ResourceLoader</a></li>
-<li><a href="#resources-resourceloaderaware">2.5. The ResourceLoaderAware interface</a></li>
-<li><a href="#resources-as-dependencies">2.6. Resources as dependencies</a></li>
-<li><a href="#resources-app-ctx">2.7. Application contexts and Resource paths</a></li>
+<li><a href="#resources-introduction">2.1. 简介</a></li>
+<li><a href="#resources-resource">2.2. 资源接口</a></li>
+<li><a href="#resources-implementations">2.3. 内置的资源实现</a></li>
+<li><a href="#resources-resourceloader">2.4. ResourceLoader 接口</a></li>
+<li><a href="#resources-resourceloaderaware">2.5. ResourceLoaderAware 接口</a></li>
+<li><a href="#resources-as-dependencies">2.6. 资源依赖</a></li>
+<li><a href="#resources-app-ctx">2.7. 应用上下文和资源路径</a></li>
 </ul>
 </li>
-<li><a href="#validation">3. Validation, Data Binding, and Type Conversion</a>
+<li><a href="#validation">3. 验证、数据绑定和类型转换</a>
 <ul class="sectlevel2">
-<li><a href="#validation-introduction">3.1. Introduction</a></li>
-<li><a href="#validator">3.2. Validation using Spring&#8217;s Validator interface</a></li>
-<li><a href="#validation-conversion">3.3. Resolving codes to error messages</a></li>
-<li><a href="#beans-beans">3.4. Bean manipulation and the BeanWrapper</a></li>
-<li><a href="#core-convert">3.5. Spring Type Conversion</a></li>
-<li><a href="#format">3.6. Spring Field Formatting</a></li>
-<li><a href="#format-configuring-formatting-globaldatetimeformat">3.7. Configuring a global date &amp; time format</a></li>
-<li><a href="#validation-beanvalidation">3.8. Spring Validation</a></li>
+<li><a href="#validation-introduction">3.1. 简介</a></li>
+<li><a href="#validator">3.2. 使用 Spring 对的Validator 接口来进行数据验证</a></li>
+<li><a href="#validation-conversion">3.3. 从解析代码到错误信息</a></li>
+<li><a href="#beans-beans">3.4. Bean 操作和 BeanWrapper</a></li>
+<li><a href="#core-convert">3.5. Spring 类型转换</a></li>
+<li><a href="#format">3.6. Spring 字段格式化</a></li>
+<li><a href="#format-configuring-formatting-globaldatetimeformat">3.7. 配置全局日期和时间格式</a></li>
+<li><a href="#validation-beanvalidation">3.8. Spring 验证</a></li>
 </ul>
 </li>
-<li><a href="#expressions">4. Spring Expression Language (SpEL)</a>
+<li><a href="#expressions">4. Spring 表达式语言 (SpEL)</a>
 <ul class="sectlevel2">
-<li><a href="#expressions-intro">4.1. Introduction</a></li>
-<li><a href="#expressions-features">4.2. Feature Overview</a></li>
-<li><a href="#expressions-evaluation">4.3. Expression Evaluation using Spring&#8217;s Expression Interface</a></li>
-<li><a href="#expressions-beandef">4.4. Expression support for defining bean definitions</a></li>
-<li><a href="#expressions-language-ref">4.5. Language Reference</a></li>
-<li><a href="#expressions-example-classes">4.6. Classes used in the examples</a></li>
+<li><a href="#expressions-intro">4.1. 简介</a></li>
+<li><a href="#expressions-features">4.2. 功能概述</a></li>
+<li><a href="#expressions-evaluation">4.3. 使用 Spring 表达式接口进行表达式运算</a></li>
+<li><a href="#expressions-beandef">4.4. bean 定义的表达式支持</a></li>
+<li><a href="#expressions-language-ref">4.5. 语言引用</a></li>
+<li><a href="#expressions-example-classes">4.6. 例子用用到的类</a></li>
 </ul>
 </li>
-<li><a href="#aop">5. Aspect Oriented Programming with Spring</a>
+<li><a href="#aop">5. 使用 Spring 进行面向切面编程</a>
 <ul class="sectlevel2">
-<li><a href="#aop-introduction">5.1. Introduction</a></li>
-<li><a href="#aop-ataspectj">5.2. @AspectJ support</a></li>
-<li><a href="#aop-schema">5.3. Schema-based AOP support</a></li>
-<li><a href="#aop-choosing">5.4. Choosing which AOP declaration style to use</a></li>
-<li><a href="#aop-mixing-styles">5.5. Mixing aspect types</a></li>
-<li><a href="#aop-proxying">5.6. Proxying mechanisms</a></li>
-<li><a href="#aop-aspectj-programmatic">5.7. Programmatic creation of @AspectJ Proxies</a></li>
-<li><a href="#aop-using-aspectj">5.8. Using AspectJ with Spring applications</a></li>
-<li><a href="#aop-resources">5.9. Further Resources</a></li>
+<li><a href="#aop-introduction">5.1. 接见</a></li>
+<li><a href="#aop-ataspectj">5.2. @AspectJ 支持</a></li>
+<li><a href="#aop-schema">5.3. 基于 Schema 的 AOP 支持</a></li>
+<li><a href="#aop-choosing">5.4. 选择使用哪种 AOP 声明样式</a></li>
+<li><a href="#aop-mixing-styles">5.5. 混合切面类型</a></li>
+<li><a href="#aop-proxying">5.6. 代理机制</a></li>
+<li><a href="#aop-aspectj-programmatic">5.7. 编程创建 @AspectJ 代理</a></li>
+<li><a href="#aop-using-aspectj">5.8. 在 Spring 应用中使用 AspectJ</a></li>
+<li><a href="#aop-resources">5.9. 更多资源</a></li>
 </ul>
 </li>
 <li><a href="#aop-api">6. Spring AOP APIs</a>
 <ul class="sectlevel2">
-<li><a href="#aop-api-introduction">6.1. Introduction</a></li>
-<li><a href="#aop-api-pointcuts">6.2. Pointcut API in Spring</a></li>
-<li><a href="#aop-api-advice">6.3. Advice API in Spring</a></li>
-<li><a href="#aop-api-advisor">6.4. Advisor API in Spring</a></li>
-<li><a href="#aop-pfb">6.5. Using the ProxyFactoryBean to create AOP proxies</a></li>
-<li><a href="#aop-concise-proxy">6.6. Concise proxy definitions</a></li>
-<li><a href="#aop-prog">6.7. Creating AOP proxies programmatically with the ProxyFactory</a></li>
-<li><a href="#aop-api-advised">6.8. Manipulating advised objects</a></li>
-<li><a href="#aop-autoproxy">6.9. Using the "auto-proxy" facility</a></li>
-<li><a href="#aop-targetsource">6.10. Using TargetSources</a></li>
-<li><a href="#aop-extensibility">6.11. Defining new Advice types</a></li>
-<li><a href="#aop-api-resources">6.12. Further resources</a></li>
+<li><a href="#aop-api-introduction">6.1. 简介</a></li>
+<li><a href="#aop-api-pointcuts">6.2. Spring 中的切点（Pointcut） API</a></li>
+<li><a href="#aop-api-advice">6.3. Spring 中的通知（Advice） API</a></li>
+<li><a href="#aop-api-advisor">6.4. Spring 中的通知者（Advisor） 的 API</a></li>
+<li><a href="#aop-pfb">6.5. 使用 ProxyFactoryBean 创建 AOP 代理</a></li>
+<li><a href="#aop-concise-proxy">6.6. 精简的代理定义</a></li>
+<li><a href="#aop-prog">6.7. 使用 ProxyFactory 编程创建爱你 AOP 代理</a></li>
+<li><a href="#aop-api-advised">6.8. 操作被通知对象</a></li>
+<li><a href="#aop-autoproxy">6.9. 使用自动代理（"auto-proxy"）功能</a></li>
+<li><a href="#aop-targetsource">6.10. 使用 TargetSources</a></li>
+<li><a href="#aop-extensibility">6.11. 定义新的通知（Advice）类型 </a></li>
+<li><a href="#aop-api-resources">6.12. 耕作资源</a></li>
 </ul>
 </li>
-<li><a href="#null-safety">7. Null-safety</a>
+<li><a href="#null-safety">7. Null 安全（NPE空指针异常）</a>
 <ul class="sectlevel2">
-<li><a href="#use-cases">7.1. Use cases</a></li>
-<li><a href="#jsr-305-meta-annotations">7.2. JSR 305 meta-annotations</a></li>
+<li><a href="#use-cases">7.1. 使用用例</a></li>
+<li><a href="#jsr-305-meta-annotations">7.2. JSR 305 元注解</a></li>
 </ul>
 </li>
 </ul>
@@ -114,66 +114,40 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This part of the reference documentation covers all of those technologies that are
-absolutely integral to the Spring Framework.</p>
+<p>参考文档的这个部分的涵盖了 Spring 框架中所有最重要的技术。</p>
 </div>
 <div class="paragraph">
-<p>Foremost amongst these is the Spring Framework&#8217;s Inversion of Control (IoC) container. A
-thorough treatment of the Spring Framework&#8217;s IoC container is closely followed by
-comprehensive coverage of Spring&#8217;s Aspect-Oriented Programming (AOP) technologies. The
-Spring Framework has its own AOP framework, which is conceptually easy to understand,
-and which successfully addresses the 80% sweet spot of AOP requirements in Java
-enterprise programming.</p>
+<p>这其中重中之重是 Spring 框架的控制反转（IoC）容器。对 Spring 框架的 IoC 容器的彻底处理是紧随其后
+  的 Spring 的面向切面编程（AOP）技术的全面覆盖。Spring 框架有它自己的 AOP 框架，它在概念上很容易理解，
+  而且它在 Java 企业级开发中成功的以最佳方式解决了80%的 AOP 需求点。</p>
 </div>
 <div class="paragraph">
-<p>Coverage of Spring&#8217;s integration with AspectJ (currently the richest - in terms of
-features - and certainly most mature AOP implementation in the Java enterprise space) is
-also provided.</p>
+<p>它还提供了Spring 集成 AspectJ (目前在Java企业开发届最丰富的 - 从功能的角度 - 当然也是最成熟的 AOP 实现) 的覆盖。</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="beans"><a class="anchor" href="#beans"></a>1. The IoC container</h2>
+<h2 id="beans"><a class="anchor" href="#beans"></a>1. IoC 容器</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="beans-introduction"><a class="anchor" href="#beans-introduction"></a>1.1. Introduction to the Spring IoC container and beans</h3>
+<h3 id="beans-introduction"><a class="anchor" href="#beans-introduction"></a>1.1. Spring IoC 容器和 beans 介绍</h3>
 <div class="paragraph">
-<p>This chapter covers the Spring Framework implementation of the Inversion of Control
-(IoC) <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup> principle. IoC
-is also known as <em>dependency injection</em> (DI). It is a process whereby objects define
-their dependencies, that is, the other objects they work with, only through constructor
-arguments, arguments to a factory method, or properties that are set on the object
-instance after it is constructed or returned from a factory method. The container then
-<em>injects</em> those dependencies when it creates the bean. This process is fundamentally
-the inverse, hence the name <em>Inversion of Control</em> (IoC), of the bean itself
-controlling the instantiation or location of its dependencies by using direct
-construction of classes, or a mechanism such as the <em>Service Locator</em> pattern.</p>
+<p>本章涵盖了所有控制反转（IoC）<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>原则的 Spring 框架实现。IoC 也被称为
+<em>依赖注入</em>（DI）。这是对象定义它们依赖关系的一个过程，即，与它们一起运作的其他对象，只有通过构造器参数、传递参数给工厂方法，或者在对象实例构造完成或工厂方法返回对象实例之后才能设置对象属性。然后当创建bean时，容器再将那些依赖对象<em>注入</em>进去。 这个过程从根本上颠倒了bean本身通过使用类的直接构建或者通过一种机制例如<em>服务定位</em> 模式来控制依赖对象的实例化或定位，因此叫做<em>控制反转</em>（IoC）。</p>
 </div>
 <div class="paragraph">
-<p>The <code>org.springframework.beans</code> and <code>org.springframework.context</code> packages are the basis
-for Spring Framework&#8217;s IoC container. The
+<p><code>org.springframework.beans</code> 和 <code>org.springframework.context</code> 包是 Spring 框架 IoC 容器的基础。
 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/BeanFactory.html"><code>BeanFactory</code></a>
-interface provides an advanced configuration mechanism capable of managing any type of
-object.
+接口提供了一种能管理任何类型对象的高级配置机制。
 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"><code>ApplicationContext</code></a>
-is a sub-interface of <code>BeanFactory</code>. It adds easier integration with Spring&#8217;s AOP
-features; message resource handling (for use in internationalization), event
-publication; and application-layer specific contexts such as the <code>WebApplicationContext</code>
-for use in web applications.</p>
+是 <code>BeanFactory</code> 的一个子接口。 它更容易与以下功能集成：Spring 的AOP功能；消息资源处理（用于国际化）；事件发布；应用层特定上下文如 <code>WebApplicationContext</code> 在Web应用中的使用。</p>
 </div>
 <div class="paragraph">
-<p>In short, the <code>BeanFactory</code> provides the configuration framework and basic
-functionality, and the <code>ApplicationContext</code> adds more enterprise-specific functionality.
-The <code>ApplicationContext</code> is a complete superset of the <code>BeanFactory</code>, and is used
-exclusively in this chapter in descriptions of Spring&#8217;s IoC container. For more
-information on using the <code>BeanFactory</code> instead of the <code>ApplicationContext,</code> refer to
-<a href="#beans-beanfactory">The BeanFactory</a>.</p>
+<p>总之， <code>BeanFactory</code> 提供了配置框架和基本功能， <code>ApplicationContext</code> 添加了更多企业级专用功能。 <code>ApplicationContext</code> 是 <code>BeanFactory</code> 的一个全面超集, 在本章专门用来描述 Spring 的 IoC 容器。想要了解更多有关用 <code>BeanFactory</code> 代替 <code>ApplicationContext</code> 的信息，请参考<a href="#beans-beanfactory">The BeanFactory</a>。</p>
 </div>
 <div class="paragraph">
-<p>In Spring, the objects that form the backbone of your application and that are managed
-by the Spring IoC <em>container</em> are called <em>beans</em>. A bean is an object that is
-instantiated, assembled, and otherwise managed by a Spring IoC container. Otherwise, a
-bean is simply one of many objects in your application. Beans, and the <em>dependencies</em>
+<p>在 Spring 中，构成应用程序主干并由 Spring IoC <em>容器</em>管理的对象称为 <em>beans</em>。
+  bean是由 Spring IoC 容器实例化、组装或者管理的对象。否则，bean仅仅只是应用程序中许多对象中的一个。Beans, and the <em>dependencies</em>
 among them, are reflected in the <em>configuration metadata</em> used by a container.</p>
 </div>
 </div>
