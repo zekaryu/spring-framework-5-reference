@@ -52,7 +52,7 @@
 <div class="paragraph">
 <p>"Spring" 这个术语在不同的上下文中有不同的含义。它可以被用来代指 Spring 框架项目本身，
 也就是 Spring 万物之始。 随着时间的推移，在 Spring 框架项目基础之上的其他 Spring 项目纷纷应运而生。
-大多数情况下，当人们谈到 “Spring” 的时候他们指的是 Spring 的整个项目家族。本参考文档讲重点研究基础：
+大多数情况下，当人们谈到 “Spring” 的时候他们指的是 Spring 的整个项目家族。本参考文档将重点研究基础：
 Spring Framework（Spring 框架）本身.</p>
 </div>
 <div class="paragraph">
@@ -73,7 +73,7 @@ Spring Framework（Spring 框架）本身.</p>
 <h2 id="history-of-spring-and-the-spring-framework"><a class="anchor" href="#history-of-spring-and-the-spring-framework"></a>2. Spring 和 Spring 框架的历史</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Spring 作为对早期 <a href="https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition">J2EE</a> 规范复杂性的回应诞生于2003年。虽然一些人认为 Java EE 和 Spring 会产生竞争，而事实上，Spring 是 Java EE 的补充。
+<p>Spring 诞生于2003年，目的是为了简化早期 <a href="https://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition">J2EE</a> 规范的复杂性。虽然一些人认为 Java EE 和 Spring 会产生竞争，而事实上，Spring 是 Java EE 的补充。
 Spring 的编程模型并不满足 Java EE 平台规范; 相反，它集成了一些自选规范，这些规范是从 Java EE 伞（EE umbrella？不知道怎么翻译）中精心挑选的:</p>
 </div>
 <div class="ulist">
@@ -106,12 +106,12 @@ Spring 的编程模型并不满足 Java EE 平台规范; 相反，它集成了�
 </div>
 <div class="paragraph">
 <p>Spring框架也支持依赖注入（<a href="https://www.jcp.org/en/jsr/detail?id=330">JSR 330</a>） 
-和 Common Annotations（<a href="https://jcp.org/en/jsr/detail?id=250">JSR 250</a>）规范，
+和 通用注解（<a href="https://jcp.org/en/jsr/detail?id=250">JSR 250</a>）规范，
 这些都可以被应用开发者选择用来取代 Spring 框架提供的 Spring 规范机制。</p>
 </div>
 <div class="paragraph">
-<p>截至 Spring Framework 5.0, Spring 需要至少 Java EE 7 的支持（比如： Servlet 3.1+, JPA 2.1+）- 与此同时，在运行时环境，，Spring 在Java EE 8（比如： Servlet 4.0, JSON Binding API）级别提供了更新的API
-接口的开箱即用集成。这使得 Spring 保持了与例如Tomcat 8 和 9，WebSphere 9，和 JBoss EAP 7 的完全兼容。</p>
+<p>截至 Spring Framework 5.0, Spring 最低要求 Java EE 7 版本的支持（比如： Servlet 3.1+, JPA 2.1+）- 与此同时，在运行时环境，Spring 能与在Java EE 8（比如： Servlet 4.0, JSON Binding API）级别提供了更新的API
+接口实现开箱即用集成。这使得 Spring 保持了与例如Tomcat 8 和 9，WebSphere 9，和 JBoss EAP 7 这些容器的完全兼容。</p>
 </div>
 <div class="paragraph">
 <p>随着时间的推移，Java EE 在应用开发中的角色也在演变。 在 Java EE 和 Spring 的早期，
@@ -136,43 +136,35 @@ Spring Security, Spring Data, Spring Cloud, Spring Batch。记住，每个项目
 <div class="ulist">
 <ul>
 <li>
-<p>在每一层级都提供选择。Spring lets you defer design decisions as late as possible.
-For example, you can switch persistence providers through configuration without changing
-your code. The same is true for many other infrastructure concerns and integration with
-third-party APIs.</p>
+<p>在每一层级都提供可选项。Spring 允许你尽可能延迟决定设计策略。比如，你可以再不重构你代码的情况下
+ 通过配置轻松切换持久化provider（个人觉得provider不翻译更直接，这里的provider可以是orm框架mybatis, hibernate 等等）。对于很多其他基础架构上的考虑和第三方 API 的集成也是如此。</p>
 </li>
 <li>
-<p>Accommodate diverse perspectives. Spring embraces flexibility and is not opinionated
-about how things should be done. It supports a wide range of application needs with
-different perspectives.</p>
+<p>适应多种应用视角。Spring 具有高度的灵活性，而不是死板地规定某个任务必须如何完成。它以不同的应用视角
+ 支持广泛的应用需求。</p>
 </li>
 <li>
-<p>Maintain strong backward compatibility. Spring’s evolution has been carefully managed
-to force few breaking changes between versions. Spring supports a carefully chosen range
-of JDK versions and third-party libraries to facilitate maintenance of applications and
-libraries that depend on Spring.</p>
+<p>保持强大的向后兼容特性。 Spring 一直在精心的管理下不断发展，不同的版本之间几乎没有破坏性的变化，
+也就是说保持了版本之间的高度兼容。Spring 支持一系列精心挑选的JDK 版本和第三方库，以便于维护依赖于 Spring 的应用和库。</p>
 </li>
 <li>
-<p>Care about API design. The Spring team puts a lot of thought and time into making APIs
-that are intuitive and that hold up across many versions and many years.</p>
+<p>重视 API 设计. Spring 开发团队投入了大量时间精力来设计 API，使得它们更直观更容易理解并且可以在
+  很多版本中保持长年不变。</p>
 </li>
 <li>
-<p>Set high standards for code quality. The Spring Framework puts a strong emphasis on
-meaningful, current, and accurate Javadoc. It is one of very few projects that can claim
-clean code structure with no circular dependencies between packages.</p>
+<p>高标准的代码质量。Spring Framework 非常强调有意义的、即时的和精确的 Javadoc 文档。Spring 是一种
+  代码结构干净简洁，包之间没有循环依赖的项目，具有这种特性的项目是很少见的。</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="feedback-and-contributions"><a class="anchor" href="#feedback-and-contributions"></a>4. Feedback and Contributions</h2>
+<h2 id="feedback-and-contributions"><a class="anchor" href="#feedback-and-contributions"></a>4. 反馈和贡献</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>For how-to questions or diagnosing or debugging issues, we suggest using StackOverflow,
-and we have a <a href="https://spring.io/questions">questions page</a> that lists the suggested tags to use.
-If you&#8217;re fairly certain that there is a problem in the Spring Framework or would like
-to suggest a feature, please use the <a href="https://jira.spring.io/browse/spr">JIRA issue tracker</a>.</p>
+<p>对于 how-to 问题或者诊断、调试问题，我们建议读者使用 StackOverflow，我们也来提供了一个专用的<a href="https://spring.io/questions">问题页面</a>，上面列出了建议使用的标签。
+  如果你非常确定 Spring 框架存在某个问题，或者简要建议添加某个功能，请使用<a href="https://jira.spring.io/browse/spr">JIRA 问题跟踪</a> 。</p>
 </div>
 <div class="paragraph">
 <p>If you have a solution in mind or a suggested fix, you can submit a pull request on
