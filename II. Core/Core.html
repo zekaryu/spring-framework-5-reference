@@ -991,149 +991,80 @@ PetStoreService service = context.getBean(<span class="string"><span class="deli
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>ApplicationContext</code> supports constructor-based and setter-based DI for the beans it
-manages. It also supports setter-based DI after some dependencies have already been
-injected through the constructor approach. You configure the dependencies in the form of
-a <code>BeanDefinition</code>, which you use in conjunction with <code>PropertyEditor</code> instances to
-convert properties from one format to another. However, most Spring users do not work
-with these classes directly (i.e., programmatically) but rather with XML <code>bean</code>
-definitions, annotated components (i.e., classes annotated with <code>@Component</code>,
-<code>@Controller</code>, etc.), or <code>@Bean</code> methods in Java-based <code>@Configuration</code> classes. These
-sources are then converted internally into instances of <code>BeanDefinition</code> and used to
-load an entire Spring IoC container instance.</p>
+<p><code>ApplicationContext</code> 对它管理的 bean 支持基于构造器的依赖注入和基于 setter 的依赖注入。它还支持在一些依赖已经通过构造器方式注入以后，再用基于 seter 的方式进行依赖注入。使用 <code>BeanDefinition</code> 形式进行依赖配置，结合 <code>PropertyEditor</code> 实例可以对属性的格式进行转换。不过，大多数 Spring 用户不直接操作这些类(比如，以编程方式)，而是使用XML的 <code>bean</code> 定义，组件注解（比如：使用了<code>@Component</code>，<code>@Controller</code> 等注解的类），或者对带有 <code>@Configuration</code> 注解的 Java 类使用 <code>@Bean</code> 方法。然后这些在内部转换为 <code>BeanDefinition</code> 的实例且被用来加载到整个 Spring IoC 容器实例。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">Constructor-based or setter-based DI?</div>
+<div class="title">使用基于构造器的依赖注入还是基于 setter 的依赖注入？</div>
 <div class="paragraph">
-<p>Since you can mix constructor-based and setter-based DI, it is a good rule of thumb to
-use constructors for <em>mandatory dependencies</em> and setter methods or configuration methods
-for <em>optional dependencies</em>. Note that use of the <a href="#beans-required-annotation">@Required</a>
-annotation on a setter method can be used to make the property a required dependency.</p>
+<p>由于你可以混合使用基于构造器的依赖注入还是基于 setter 的依赖注入，有经验的做法是将构造器用于配置 <em>强制依赖项</em>，将 setter 方法用于配置 <em>可选依赖项</em>。注入在 setter 方法使用 <a href="#beans-required-annotation">@Required</a> 注解会使得这个属性被检查是否注入的必要依赖项。</p>
 </div>
 <div class="paragraph">
-<p>The Spring team generally advocates constructor injection as it enables one to implement
-application components as <em>immutable objects</em> and to ensure that required dependencies
-are not <code>null</code>. Furthermore constructor-injected components are always returned to client
-(calling) code in a fully initialized state. As a side note, a large number of constructor
-arguments is a <em>bad code smell</em>, implying that the class likely has too many
-responsibilities and should be refactored to better address proper separation of concerns.</p>
+<p>Spring 团队通常提倡使用构造器注入，因为它可以使得应用组件成为 <em>不可变对象</em>，且可以确保所需的依赖不为 <code>null</code>。而且基于构造器注入的组件总是会以一个已经完全初始化好的状态返回给客户端（调用）代码。附注，含有大量构造器参数的代码是一种很不好的代码风格，这意味着这个类可能包含太多的职责了，应该对它进行重构以更好进行职责分离。</p>
 </div>
 <div class="paragraph">
-<p>Setter injection should primarily only be used for optional dependencies that can be
-assigned reasonable default values within the class. Otherwise, not-null checks must be
-performed everywhere the code uses the dependency. One benefit of setter injection is that
-setter methods make objects of that class amenable to reconfiguration or re-injection
-later. Management through <a href="integration.html#jmx">JMX MBeans</a> is therefore a compelling
-use case for setter injection.</p>
+<p>如果对可选的依赖项提供合理的默认值，那么建议只采用基于 Setter 的注入。否则必须对每处使用依赖项的代码都必须进行非空检查。setter 注入的一个好处是 setter 方法使得类的对象实例很容易再配置或者再注入。<a href="integration.html#jmx">JMX MBeans</a> 的管理就是 setter 注入的一个极佳的例子。
 </div>
 <div class="paragraph">
-<p>Use the DI style that makes the most sense for a particular class. Sometimes, when dealing
-with third-party classes for which you do not have the source, the choice is made for you.
-For example, if a third-party class does not expose any setter methods, then constructor
-injection may be the only available form of DI.</p>
+<p>对具体类应该使用最适合它的依赖注入方式。有时候，当遇到没有源码的第三方类时，它已经为了做好了选择。例如，如果一个第三方类没有暴露任何 setter 方法，那么用构造器注入进行依赖注入就是你唯一的选择了。</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-dependency-resolution"><a class="anchor" href="#beans-dependency-resolution"></a>Dependency resolution process</h5>
+<h5 id="beans-dependency-resolution"><a class="anchor" href="#beans-dependency-resolution"></a>依赖解析过程</h5>
 <div class="paragraph">
-<p>The container performs bean dependency resolution as follows:</p>
+<p>容器进行 bean 依赖解析的步骤如下：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The <code>ApplicationContext</code> is created and initialized with configuration metadata that
-describes all the beans. Configuration metadata can be specified via XML, Java code, or
-annotations.</p>
+<p>根据描述所有 bean 的配置元数据创建并初始化 <code>ApplicationContext</code>。配置元数据可以是XML，Java 代码，或者注解。</p>
 </li>
 <li>
-<p>For each bean, its dependencies are expressed in the form of properties, constructor
-arguments, or arguments to the static-factory method if you are using that instead of
-a normal constructor. These dependencies are provided to the bean, <em>when the bean is
-actually created</em>.</p>
+<p>对于每一个 bean，它的依赖项会以属性，构造器参数，或者静态工厂方法（如果你用静态工厂方法代替普通构造器）参数。这些依赖项会在 <em>bean 真正被创建的时候</em> 提供给 bean。</p>
 </li>
 <li>
-<p>Each property or constructor argument is an actual definition of the value to set, or
-a reference to another bean in the container.</p>
+<p>每一个属性或者构造器参数其实都是根据实际定义set的值或者是对容器中另一个 bean 的引用。</p>
 </li>
 <li>
-<p>Each property or constructor argument which is a value is converted from its specified
-format to the actual type of that property or constructor argument. By default Spring
-can convert a value supplied in string format to all built-in types, such as <code>int</code>,
-<code>long</code>, <code>String</code>, <code>boolean</code>, etc.</p>
+<p>每一个属性或者构造器参数都会从它们的指定形式转换成那个属性或者构造器参数的实际类型。默认情况下，Spring
+能将 string 类型的值转换为所有内建类型，比如 <code>int</code>，<code>long</code>，<code>String</code>，<code>boolean</code>，等等。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The Spring container validates the configuration of each bean as the container is created.
-However, the bean properties themselves are not set until the bean <em>is actually created</em>.
-Beans that are singleton-scoped and set to be pre-instantiated (the default) are created
-when the container is created. Scopes are defined in <a href="#beans-factory-scopes">Bean scopes</a>. Otherwise,
-the bean is created only when it is requested. Creation of a bean potentially causes a
-graph of beans to be created, as the bean&#8217;s dependencies and its dependencies'
-dependencies (and so on) are created and assigned. Note that resolution mismatches among
-those dependencies may show up late, i.e. on first creation of the affected bean.</p>
+<p>Spring 容器被创建以后会验证每个 bean 的配置。不过 bean 的属性直到 bean <em>被真正创建</em> 才会被设置。那些被设置为需要预实例化（默认设置）的单例 bean  会在容器创建之后创建。作用域在 <a href="#beans-factory-scopes">Bean scopes</a> 中定义。否则，只有在被请求是 bean 才会被创建。bean 的创建可能会导致它的依赖项、他的依赖的依赖项（以此类推）创建和赋值。注意依赖关系之间的解析匹配错误可能会在之后出现，即，受影响的 bean 第一次创建的时候。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">Circular dependencies</div>
+<div class="title">循环依赖</div>
 <div class="paragraph">
-<p>If you use predominantly constructor injection, it is possible to create an unresolvable
-circular dependency scenario.</p>
+<p>如果你使用构造器注入，可能会出现无法处理的循环依赖的情况。</p>
 </div>
 <div class="paragraph">
-<p>For example: Class A requires an instance of class B through constructor injection, and
-class B requires an instance of class A through constructor injection. If you configure
-beans for classes A and B to be injected into each other, the Spring IoC container
-detects this circular reference at runtime, and throws a
-<code>BeanCurrentlyInCreationException</code>.</p>
+<p>例如：类需要通过构造器注入B类的实例，B类需要通过构造器注入A类的实例。如果你为A类和B类相互注入对方的实例，Spring IoC 容器会在运行时检测到循环引用，然后抛出 <code>BeanCurrentlyInCreationException</code> 异常。</p>
 </div>
 <div class="paragraph">
-<p>One possible solution is to edit the source code of some classes to be configured by
-setters rather than constructors. Alternatively, avoid constructor injection and use
-setter injection only. In other words, although it is not recommended, you can configure
-circular dependencies with setter injection.</p>
+<p>一个解决方案是修改某个类的源代码使其通过 setter 而不是构造器注入。或者，避免使用构造器注入，仅用 setter 注入。换句话说你可以用 setter 注入来处理循环依赖，虽然不推荐这么做。</p>
 </div>
 <div class="paragraph">
-<p>Unlike the <em>typical</em> case (with no circular dependencies), a circular dependency
-between bean A and bean B forces one of the beans to be injected into the other prior to
-being fully initialized itself (a classic chicken/egg scenario).</p>
+<p>与 <em>通常情况</em> （不含循环依赖）不同，bean A 和 bean B 之间的循环依赖迫使其中一个 bean 在完全初始化之前就注入到另一个 bean 中（经典的先有鸡还是先有蛋的问题）。</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>You can generally trust Spring to do the right thing. It detects configuration problems,
-such as references to non-existent beans and circular dependencies, at container
-load-time. Spring sets properties and resolves dependencies as late as possible, when
-the bean is actually created. This means that a Spring container which has loaded
-correctly can later generate an exception when you request an object if there is a
-problem creating that object or one of its dependencies. For example, the bean throws an
-exception as a result of a missing or invalid property. This potentially delayed
-visibility of some configuration issues is why <code>ApplicationContext</code> implementations by
-default pre-instantiate singleton beans. At the cost of some upfront time and memory to
-create these beans before they are actually needed, you discover configuration issues
-when the <code>ApplicationContext</code> is created, not later. You can still override this default
-behavior so that singleton beans will lazy-initialize, rather than be pre-instantiated.</p>
+<p>你可以信任 Spring 会正确解决这个问题。它会在加载时检测配置问题，如对不存在的 bean 的引用和循环依赖。Spring 会在 bean 被真正创建后尽可能晚地设置 bean 的属性和解析 bean 之间的依赖关系。这意味着对于已经正确加载的 Spring 容器，当你之后向容器请求一个对象时，如果创建这个对象或者它的至少一个依赖项出现问题，那么容器还是会抛出异常。例如，bean 可能会因为缺少属性值或者属性值无效而抛出异常。这个对某些配置问题潜在的延迟可见性问题正是为什么 <code>ApplicationContext</code> 默认实现单例 bean 预实例化的原因。在这些 bean 真正被需要之前，当 <code>ApplicationContext</code> 创建的时候会花费一些时间和内存使得你能够尽早发现配置问题，而不是在 bean 被请求之后。当然你仍然可以覆盖这个默认行为而把 bean 设置成懒加载模式而不是预实例化模式。</p>
 </div>
 <div class="paragraph">
-<p>If no circular dependencies exist, when one or more collaborating beans are being
-injected into a dependent bean, each collaborating bean is <em>totally</em> configured prior
-to being injected into the dependent bean. This means that if bean A has a dependency on
-bean B, the Spring IoC container completely configures bean B prior to invoking the
-setter method on bean A. In other words, the bean is instantiated (if not a
-pre-instantiated singleton), its dependencies are set, and the relevant lifecycle
-methods (such as a <a href="#beans-factory-lifecycle-initializingbean">configured init method</a>
-or the <a href="#beans-factory-lifecycle-initializingbean">InitializingBean callback method</a>)
-are invoked.</p>
+<p>如果不存在循环依赖，那么当一个或多个协作 bean 被注入到依赖它们的 bean 时，每个协作 bean 都会在被注入之前 <em>完全</em> 配置好。这意味着如果 bean A 依赖 bean B，那么 Spring IoC 会在调用 bean A 的 setter 将 bean B 注入之前先将 bean B 完全配置好。换句话说，当一个 bean 完成实例化（如果不是一个预实例化模式的单例 bean），那么久说明它所有的依赖项都配设置好了，相关的生命周期方法（如 <a href="#beans-factory-lifecycle-initializingbean">配置初始化方法</a> 或者 <a href="#beans-factory-lifecycle-initializingbean">初始化 bean 回调方法</a>）也已经被调用了。
+</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-some-examples"><a class="anchor" href="#beans-some-examples"></a>Examples of dependency injection</h5>
+<h5 id="beans-some-examples"><a class="anchor" href="#beans-some-examples"></a>依赖注入举例</h5>
 <div class="paragraph">
-<p>The following example uses XML-based configuration metadata for setter-based DI. A small
-part of a Spring XML configuration file specifies some bean definitions:</p>
+<p>下面的例子使用基于XML的配置元数据来配置基于 setter 的依赖注入。Spring XML 配置文件的其中一小部分详述了一些 bean 定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
