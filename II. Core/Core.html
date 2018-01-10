@@ -1108,8 +1108,7 @@ PetStoreService service = context.getBean(<span class="string"><span class="deli
 </div>
 </div>
 <div class="paragraph">
-<p>In the preceding example, setters are declared to match against the properties specified
-in the XML file. The following example uses constructor-based DI:</p>
+<p>在前面个的例子中，setter 方法声明与XML文件中具体指定的属性匹配。下面的例子使用基于构造器的依赖注入：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1149,12 +1148,10 @@ in the XML file. The following example uses constructor-based DI:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The constructor arguments specified in the bean definition will be used as arguments to
-the constructor of the <code>ExampleBean</code>.</p>
+<p>bean 定义中指定的构造器参数会被作为 <code>ExampleBean</code> 构造器参数使用。</p>
 </div>
 <div class="paragraph">
-<p>Now consider a variant of this example, where instead of using a constructor, Spring is
-told to call a <code>static</code> factory method to return an instance of the object:</p>
+<p>现在考虑这个例子的一个变形，Spring 被告知调用 <code>静态</code> 工厂方法而不使用构造器来返回这个对象实例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1191,29 +1188,19 @@ told to call a <code>static</code> factory method to return an instance of the o
 </div>
 </div>
 <div class="paragraph">
-<p>Arguments to the <code>static</code> factory method are supplied via <code>&lt;constructor-arg/&gt;</code> elements,
-exactly the same as if a constructor had actually been used. The type of the class being
-returned by the factory method does not have to be of the same type as the class that
-contains the <code>static</code> factory method, although in this example it is. An instance
-(non-static) factory method would be used in an essentially identical fashion (aside
-from the use of the <code>factory-bean</code> attribute instead of the <code>class</code> attribute), so
-details will not be discussed here.</p>
+<p>通过 <code>&lt;constructor-arg/&gt;</code> 元素向 <code>静态</code> 工厂方法提供参数，这与使用构造器注入配置一模一样。工厂方法返回的对象的类类型不必与包含此 <code>静态</code> 工厂方法的类类型一致，虽然在这个例子中它们是一样的。实例（非静态）工厂方法的使用本质上完全一样（除了使用 <code>factory-bean</code> 属性代替<code>class</code> 属性之外），所以其细节不在这里讨论了。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="beans-factory-properties-detailed"><a class="anchor" href="#beans-factory-properties-detailed"></a>1.4.2. 依赖和配置详情</h4>
 <div class="paragraph">
-<p>如前一节所述，你可以讲 bean 的属性和构造器参数定义为对其他托管 bean （协作者）的引用，或者定义为内联值。Spring&#8217;s XML-based configuration metadata supports sub-element types within its
-<code>&lt;property/&gt;</code> and <code>&lt;constructor-arg/&gt;</code> elements for this purpose.</p>
+<p>如前一节所述，你可以将 bean 的属性和构造器参数定义为对其他托管 bean （协作者）的引用，或者定义为内联值。为了实现这个功能，Spring 的基于XML的配置元数据在它的 <code>&lt;property/&gt;</code> 和 <code>&lt;constructor-arg/&gt;</code> 元素中支持子元素类型。</p>
 </div>
 <div class="sect4">
-<h5 id="beans-value-element"><a class="anchor" href="#beans-value-element"></a>Straight values (primitives, Strings, and so on)</h5>
+<h5 id="beans-value-element"><a class="anchor" href="#beans-value-element"></a>直接值（基本类型，String类型，等等）。</h5>
 <div class="paragraph">
-<p>The <code>value</code> attribute of the <code>&lt;property/&gt;</code> element specifies a property or constructor
-argument as a human-readable string representation. Spring&#8217;s
-<a href="#core-convert-ConversionService-API">conversion service</a> is used to convert these
-values from a <code>String</code> to the actual type of the property or argument.</p>
+<p><code>&lt;property/&gt;</code> 元素的 <code>value</code> 属性指定了一个属性或构造器参数作为可读的字符串表示。Spring 的 <a href="#core-convert-ConversionService-API">转换服务</a> 将这些值从 <code>String</code> 转成属性或参数的真实类型。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1227,8 +1214,7 @@ values from a <code>String</code> to the actual type of the property or argument
 </div>
 </div>
 <div class="paragraph">
-<p>The following example uses the <a href="#beans-p-namespace">p-namespace</a> for even more succinct
-XML configuration.</p>
+<p>下面的例子为了更简洁的XML配置使用了<a href="#beans-p-namespace">p-namespace</a>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1249,14 +1235,10 @@ XML configuration.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The preceding XML is more succinct; however, typos are discovered at runtime rather than
-design time, unless you use an IDE such as <a href="http://www.jetbrains.com/idea/">IntelliJ
-IDEA</a> or the <a href="https://spring.io/tools/sts">Spring Tool Suite</a> (STS)
-that support automatic property completion when you create bean definitions. Such IDE
-assistance is highly recommended.</p>
+<p>上面的XML更加简洁；不过，其中的拼写错误是在运行时发现而不是在编写设计的时候，除非你使用像<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> 或者 <a href="https://spring.io/tools/sts">Spring Tool Suite</a> (STS) 这样在创建 bean 定义的时候有自动属性补全功能的IDE。我们非常推荐这样的IDE辅助功能。</p>
 </div>
 <div class="paragraph">
-<p>You can also configure a <code>java.util.Properties</code> instance as:</p>
+<p>你还可以这样配置 <code>java.util.Properties</code> 实例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1274,17 +1256,12 @@ assistance is highly recommended.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The Spring container converts the text inside the <code>&lt;value/&gt;</code> element into a
-<code>java.util.Properties</code> instance by using the JavaBeans <code>PropertyEditor</code> mechanism. This
-is a nice shortcut, and is one of a few places where the Spring team do favor the use of
-the nested <code>&lt;value/&gt;</code> element over the <code>value</code> attribute style.</p>
+<p>Spring 容器通过 JavaBeans 的 <code>PropertyEditor</code> 机制将 <code>&lt;value/&gt;</code> 元素内的文本转换成 <code>java.util.Properties</code> 实例。这是个很好的快捷方式，也是为数不多的几个 Spring 团队更愿意使用嵌入的 <code>&lt;value/&gt;</code> 元素而不是 <code>value</code> 属性风格的地方。</p>
 </div>
 <div class="sect5">
-<h6 id="beans-idref-element"><a class="anchor" href="#beans-idref-element"></a>The idref element</h6>
+<h6 id="beans-idref-element"><a class="anchor" href="#beans-idref-element"></a>idref 元素</h6>
 <div class="paragraph">
-<p>The <code>idref</code> element is simply an error-proof way to pass the <em>id</em> (string value - not
-a reference) of another bean in the container to a <code>&lt;constructor-arg/&gt;</code> or <code>&lt;property/&gt;</code>
-element.</p>
+<p><code>idref</code> 元素是在容器中将 <em>id</em> （字符串--不是引用）传递到 <code>&lt;constructor-arg/&gt;</code> 或者 <code>&lt;property/&gt;</code> 的一种简单的错误检测方式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1298,8 +1275,7 @@ element.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The above bean definition snippet is <em>exactly</em> equivalent (at runtime) to the
-following snippet:</p>
+<p>上面的 bean 定义片段与下面的片段 <em>完全</em> 相等（在运行时）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1311,13 +1287,7 @@ following snippet:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The first form is preferable to the second, because using the <code>idref</code> tag allows the
-container to validate <em>at deployment time</em> that the referenced, named bean actually
-exists. In the second variation, no validation is performed on the value that is passed
-to the <code>targetName</code> property of the <code>client</code> bean. Typos are only discovered (with most
-likely fatal results) when the <code>client</code> bean is actually instantiated. If the <code>client</code>
-bean is a <a href="#beans-factory-scopes">prototype</a> bean, this typo and the resulting exception
-may only be discovered long after the container is deployed.</p>
+<p>第一种配置形式优于第二种，因为 <code>idref</code> 标签允许容器 <em>在部署阶段</em> 验证被引用的，被命名的 bean 是否真实存在。在第二种形式中，传递给 <code>client</code> bean 的 <code>targetName</code> 属性的值不会被验证。拼写错误只有当 <code>client</code> bean 真正实例化完成之后才会被发现（最可能的致命后果）。如果 <code>client</code> bean 是一个 <a href="#beans-factory-scopes">原型</a> bean，拼写错误和产生的异常可能只有在容器部署很长时间之后才会被发现。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1327,40 +1297,25 @@ may only be discovered long after the container is deployed.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>local</code> attribute on the <code>idref</code> element is no longer supported in the 4.0 beans xsd
-since it does not provide value over a regular <code>bean</code> reference anymore. Simply change
-your existing <code>idref local</code> references to <code>idref bean</code> when upgrading to the 4.0 schema.</p>
+<p><code>idref</code> 元素的 <code>local</code> 属性在4.0 beans xsd 中不再被支持，因为它不再为 <code>bean</code> 引用提供值。当升级到 4.0 模式的时候，你可以轻松将 <code>idref local</code> 引用改成  <code>idref bean</code> 引用。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>A common place (at least in versions earlier than Spring 2.0) where the <code>&lt;idref/&gt;</code> element
-brings value is in the configuration of <a href="#aop-pfb-1">AOP interceptors</a> in a
-<code>ProxyFactoryBean</code> bean definition. Using <code>&lt;idref/&gt;</code> elements when you specify the
-interceptor names prevents you from misspelling an interceptor id.</p>
+<p><code>ProxyFactoryBean</code> bean 定义中的 <a href="#aop-pfb-1">AOP 拦截器</a> 配置是 <code>&lt;idref/&gt;</code> 元素传递值常见的地方（至少在 Spring 2.0 以前的版本中）。在指定拦截器名字的时候使用 <code>&lt;idref/&gt;</code> 元素可以防止误拼写拦截器id。</p>
 </div>
 </div>
 </div>
-<div class="sect4">
-<h5 id="beans-ref-element"><a class="anchor" href="#beans-ref-element"></a>References to other beans (collaborators)</h5>
+<div class="sect4">-/-/---
+<h5 id="beans-ref-element"><a class="anchor" href="#beans-ref-element"></a>对其他 bean 的引用（协作者）</h5>
 <div class="paragraph">
-<p>The <code>ref</code> element is the final element inside a <code>&lt;constructor-arg/&gt;</code> or <code>&lt;property/&gt;</code>
-definition element. Here you set the value of the specified property of a bean to be a
-reference to another bean (a collaborator) managed by the container. The referenced bean
-is a dependency of the bean whose property will be set, and it is initialized on demand
-as needed before the property is set. (If the collaborator is a singleton bean, it may
-be initialized already by the container.) All references are ultimately a reference to
-another object. Scoping and validation depend on whether you specify the id/name of the
-other object through the <code>bean</code>, <code>local,</code> or <code>parent</code> attributes.</p>
+<p><code>ref</code> 元素是 <code>&lt;constructor-arg/&gt;</code> 或者 <code>&lt;property/&gt;</code>
+定义元素的最终元素。在这个元素中，设置 bean 的指定属性值，值为对容器管理的另一个 bean （一个协作者）的引用。被引用 bean 是这个 bean 的一个依赖，这个 bean 的属性需要被设置，而且在属性设置之前会根据需要对其进行初始化。（如果协作者是一个单例 bean，它有可能已经被容器初始化。）所有引用最终都是对另一个对象的引用。作用域和验证功能取决于你是否通过对象的 <code>bean</code>, <code>local,</code> 或者 <code>parent</code> 属性指定它的 id/name。</p>
 </div>
 <div class="paragraph">
-<p>Specifying the target bean through the <code>bean</code> attribute of the <code>&lt;ref/&gt;</code> tag is the most
-general form, and allows creation of a reference to any bean in the same container or
-parent container, regardless of whether it is in the same XML file. The value of the
-<code>bean</code> attribute may be the same as the <code>id</code> attribute of the target bean, or as one of
-the values in the <code>name</code> attribute of the target bean.</p>
+<p>通过 <code>&lt;ref/&gt;</code> 标签的 bean 属性指定目标 bean 是最普遍的形式，这允许你在统一容器或父容器中创建对任何 bean 的引用，不论它是否在同一个XML文件中。 <code>bean</code> 属性的值可能与目标 bean 的 <code>id</code> 属性相同，或者是目标 bean 的多个 <code>name</code> 属性之一。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1368,13 +1323,7 @@ the values in the <code>name</code> attribute of the target bean.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Specifying the target bean through the <code>parent</code> attribute creates a reference to a bean
-that is in a parent container of the current container. The value of the <code>parent</code>
-attribute may be the same as either the <code>id</code> attribute of the target bean, or one of the
-values in the <code>name</code> attribute of the target bean, and the target bean must be in a
-parent container of the current one. You use this bean reference variant mainly when you
-have a hierarchy of containers and you want to wrap an existing bean in a parent
-container with a proxy that will have the same name as the parent bean.</p>
+<p>通过 <code>parent</code> 属性指定目标 bean 会创建一个对当前容器的父容器中 bean 的引用。 <code>parent</code> 属性的值可能与目标 bean 的 <code>id</code> 属性相同，或者与目标 bean 的多个 <code>name</code> 属性其中之一相同，且目标 bean 必须位于当前容器的父容器中。当你有多个层次划分的容器或者需要将某个父容器中已存在的 bean 包装成与它同名的代理 bean 的时候，可以使用此 bean 引用变量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1404,9 +1353,7 @@ container with a proxy that will have the same name as the parent bean.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>local</code> attribute on the <code>ref</code> element is no longer supported in the 4.0 beans xsd
-since it does not provide value over a regular <code>bean</code> reference anymore. Simply change
-your existing <code>ref local</code> references to <code>ref bean</code> when upgrading to the 4.0 schema.</p>
+<p><code>ref</code> 元素的 <code>local</code> 属性在 4.0 beans xsd 中不再被支持，因为它在再为 <code>bean</code> 引用提供值。当升级到 4.0 模式的时候，你可以轻松将 <code>idref local</code> 引用改成  <code>idref bean</code> 引用。</p>
 </div>
 </td>
 </tr>
@@ -1414,10 +1361,9 @@ your existing <code>ref local</code> references to <code>ref bean</code> when up
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-inner-beans"><a class="anchor" href="#beans-inner-beans"></a>Inner beans</h5>
+<h5 id="beans-inner-beans"><a class="anchor" href="#beans-inner-beans"></a>内部 bean</h5>
 <div class="paragraph">
-<p>A <code>&lt;bean/&gt;</code> element inside the <code>&lt;property/&gt;</code> or <code>&lt;constructor-arg/&gt;</code> elements defines a
-so-called <em>inner bean</em>.</p>
+<p>在 <code>&lt;property/&gt;</code> 或者 <code>&lt;constructor-arg/&gt;</code> 元素中定义的 bean 称为 <em>内部 bean</em> 。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1433,26 +1379,16 @@ so-called <em>inner bean</em>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>An inner bean definition does not require a defined id or name; if specified, the container
-does not use such a value as an identifier. The container also ignores the <code>scope</code> flag on
-creation: Inner beans are <em>always</em> anonymous and they are <em>always</em> created with the outer
-bean. It is <em>not</em> possible to inject inner beans into collaborating beans other than into
-the enclosing bean or to access them independently.</p>
+<p>内部 bean 定义不要求定义 id 或 name；即使指定了，容器也不会用它来作为标识符。容器也会在创建时忽略 <code>scope</code> 标志：内部 bean <em>总是</em> 匿名的，且 <em>总是 </em>由外部 bean 创建的。除了被注入到封闭的 bean 中或者单独访问它们，不可能将内部 bean 注入到协作 bean 中。</p>
 </div>
 <div class="paragraph">
-<p>As a corner case, it is possible to receive destruction callbacks from a custom scope, e.g.
-for a request-scoped inner bean contained within a singleton bean: The creation of the inner
-bean instance will be tied to its containing bean, but destruction callbacks allow it to
-participate in the request scope&#8217;s lifecycle. This is not a common scenario; inner beans
-typically simply share their containing bean&#8217;s scope.</p>
+<p>一种很少见到的情况是，有可能从自定义作用域中收到销毁回调方法，例如对于一个包含在单例 bean 中的 request 作用域内部 bean 来说：内部 bean 的创建过程会与包含它的 bean 绑定在一起，但销毁回调方法允许它参与到 request 域的生命周期中。这并不是一个常见的应用场景；内部 bean 的作用域通常跟包含它的 bean 作用域一样。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-collection-elements"><a class="anchor" href="#beans-collection-elements"></a>Collections</h5>
+<h5 id="beans-collection-elements"><a class="anchor" href="#beans-collection-elements"></a>集合</h5>
 <div class="paragraph">
-<p>In the <code>&lt;list/&gt;</code>, <code>&lt;set/&gt;</code>, <code>&lt;map/&gt;</code>, and <code>&lt;props/&gt;</code> elements, you set the properties
-and arguments of the Java <code>Collection</code> types <code>List</code>, <code>Set</code>, <code>Map</code>, and <code>Properties</code>,
-respectively.</p>
+<p>在<code>&lt;list/&gt;</code>, <code>&lt;set/&gt;</code>, <code>&lt;map/&gt;</code>, 和 <code>&lt;props/&gt;</code> 元素中，分别对应设置 Java <code>Collection</code> 类型的 <code>List</code>, <code>Set</code>, <code>Map</code>, and <code>Properties</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1490,8 +1426,7 @@ respectively.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>The value of a map key or value, or a set value, can also again be any of the
-following elements:</em></p>
+<p><em>map类型的key或者value，set类型的value值可以是以下元素的任意一种：</em></p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1499,22 +1434,15 @@ following elements:</em></p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="beans-collection-elements-merging"><a class="anchor" href="#beans-collection-elements-merging"></a>Collection merging</h6>
+<h6 id="beans-collection-elements-merging"><a class="anchor" href="#beans-collection-elements-merging"></a>集合合并</h6>
 <div class="paragraph">
-<p>The Spring container also supports the <em>merging</em> of collections. An application
-developer can define a parent-style <code>&lt;list/&gt;</code>, <code>&lt;map/&gt;</code>, <code>&lt;set/&gt;</code> or <code>&lt;props/&gt;</code> element,
-and have child-style <code>&lt;list/&gt;</code>, <code>&lt;map/&gt;</code>, <code>&lt;set/&gt;</code> or <code>&lt;props/&gt;</code> elements inherit and
-override values from the parent collection. That is, the child collection&#8217;s values are
-the result of merging the elements of the parent and child collections, with the child&#8217;s
-collection elements overriding values specified in the parent collection.</p>
+<p>Spring 容器还支持集合的 <em>合并</em>。应用开发者可以定义父集合类型的 <code>&lt;list/&gt;</code>，<code>&lt;map/&gt;</code>，<code>&lt;set/&gt;</code> 或 <code>&lt;props/&gt;</code> 元素，也可以定义能够继承和覆盖服集合元素值的子类型集合元素 <code>&lt;list/&gt;</code>，<code>&lt;map/&gt;</code>，<code>&lt;set/&gt;</code> 或 <code>&lt;props/&gt;</code>。也就是说，子类型集合的值是合并父类型集合元素和子类型集合元素的结果，其中子类型集合元素覆盖父类型集合中指定的值。</p>
 </div>
 <div class="paragraph">
-<p><em>This section on merging discusses the parent-child bean mechanism. Readers unfamiliar
-with parent and child bean definitions may wish to read the
-<a href="#beans-child-bean-definitions">relevant section</a> before continuing.</em></p>
+<p><em>关于合并的这节讨论了父-子 bean 的机制。对父-子 bean 定义不熟悉的读者在继续下面的学习之前可以去阅读 <a href="#beans-child-bean-definitions">相关章节</a>。</em></p>
 </div>
 <div class="paragraph">
-<p>The following example demonstrates collection merging:</p>
+<p>下面的例子展示了集合的合并：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1522,8 +1450,8 @@ with parent and child bean definitions may wish to read the
         <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">parent</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">abstract</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">example.ComplexObject</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
                 <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">adminEmails</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
                         <span class="tag">&lt;props&gt;</span>
-                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">administrator</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4c2d28212522253f383e2d38233e0c29342d213c2029622f2321">[email&#160;protected]</a><span class="tag">&lt;/prop&gt;</span>
-                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">support</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2c2a2f2f302d2b1f3a273e322f333a713c3032">[email&#160;protected]</a><span class="tag">&lt;/prop&gt;</span>
+                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">administrator</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4c2d28212522253f383e2d38233e0c29342d213c2029622f2321">administrator@example.com</a><span class="tag">&lt;/prop&gt;</span>
+                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">support</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2c2a2f2f302d2b1f3a273e322f333a713c3032">support@example.com</a><span class="tag">&lt;/prop&gt;</span>
                         <span class="tag">&lt;/props&gt;</span>
                 <span class="tag">&lt;/property&gt;</span>
         <span class="tag">&lt;/bean&gt;</span>
@@ -1531,8 +1459,8 @@ with parent and child bean definitions may wish to read the
                 <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">adminEmails</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
                         <span class="comment">&lt;!-- the merge is specified on the child collection definition --&gt;</span>
                         <span class="tag">&lt;props</span> <span class="attribute-name">merge</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">true</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">sales</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2251434e475162475a434f524e470c414d4f">[email&#160;protected]</a><span class="tag">&lt;/prop&gt;</span>
-                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">support</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="295a5c5959465b5d694c51484459454c074a46075c42">[email&#160;protected]</a><span class="tag">&lt;/prop&gt;</span>
+                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">sales</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2251434e475162475a434f524e470c414d4f">sales@example.com</a><span class="tag">&lt;/prop&gt;</span>
+                                <span class="tag">&lt;prop</span> <span class="attribute-name">key</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">support</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="295a5c5959465b5d694c51484459454c074a46075c42">support@example.co.uk</a><span class="tag">&lt;/prop&gt;</span>
                         <span class="tag">&lt;/props&gt;</span>
                 <span class="tag">&lt;/property&gt;</span>
         <span class="tag">&lt;/bean&gt;</span>
@@ -1540,53 +1468,32 @@ with parent and child bean definitions may wish to read the
 </div>
 </div>
 <div class="paragraph">
-<p>Notice the use of the <code>merge=true</code> attribute on the <code>&lt;props/&gt;</code> element of the
-<code>adminEmails</code> property of the <code>child</code> bean definition. When the <code>child</code> bean is resolved
-and instantiated by the container, the resulting instance has an <code>adminEmails</code>
-<code>Properties</code> collection that contains the result of the merging of the child&#8217;s
-<code>adminEmails</code> collection with the parent&#8217;s <code>adminEmails</code> collection.</p>
+<p>请注意 <code>child</code> bean 定义中 <code>adminEmails</code> 属性的 <code>&lt;props/&gt;</code> 元素使用了 <code>merge=true</code> 属性。当容器解析并实例化 <code>child</code> bean 的时候，由此产生的实例包含一个 <code>adminEmails</code> <code>Properties</code> 集合，这个集合是 child <code>adminEmails</code> 集合和 parent <code>adminEmails</code> 集合合并的结果。</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4120252c282f2832353320352e337c20252c282f2832353320352e33012439202c312d246f222e2c">[email&#160;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2b1a3aea7b1ffb1a3aea7b182a7baa3afb2aea7eca1adaf">[email&#160;protected]</a>
-<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="60131510100f12145d131510100f1214200518010d100c054e030f4e150b">[email&#160;protected]</a></pre>
+<pre>administrator=administrator@example.com
+sales=sales@example.com
+support=support@example.co.uk</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The child <code>Properties</code> collection&#8217;s value set inherits all property elements from the
-parent <code>&lt;props/&gt;</code>, and the child&#8217;s value for the <code>support</code> value overrides the value in
-the parent collection.</p>
+<p>child <code>Properties</code> 集合中的值继承了parent <code>&lt;props/&gt;</code> 的所有 property 元素，而 child 的 <code>support</code> 值覆盖了 parent 集合中的值。</p>
 </div>
 <div class="paragraph">
-<p>This merging behavior applies similarly to the <code>&lt;list/&gt;</code>, <code>&lt;map/&gt;</code>, and <code>&lt;set/&gt;</code>
-collection types. In the specific case of the <code>&lt;list/&gt;</code> element, the semantics
-associated with the <code>List</code> collection type, that is, the notion of an <code>ordered</code>
-collection of values, is maintained; the parent&#8217;s values precede all of the child list&#8217;s
-values. In the case of the <code>Map</code>, <code>Set</code>, and <code>Properties</code> collection types, no ordering
-exists. Hence no ordering semantics are in effect for the collection types that underlie
-the associated <code>Map</code>, <code>Set</code>, and <code>Properties</code> implementation types that the container
-uses internally.</p>
+<p><code>&lt;list/&gt;</code>, <code>&lt;map/&gt;</code>，和 <code>&lt;set/&gt;</code>集合类型中的合并与上面类似。对于特定的 <code>&lt;list/&gt;</code> 元素，语义与 <code>List</code> 集合类型相关，即，保留集合的<code>有序性</code>；父集合的值先于子集合中的所有值。对于 <code>Map</code>, <code>Set</code>，和 <code>Properties</code> 集合类型，不存在有序性。因此，对于容器内部使用的与 <code>Map</code>, <code>Set</code>，和 <code>Properties</code> 实现相关的集合类型，排序语义是无效的。</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="beans-collection-merge-limitations"><a class="anchor" href="#beans-collection-merge-limitations"></a>Limitations of collection merging</h6>
+<h6 id="beans-collection-merge-limitations"><a class="anchor" href="#beans-collection-merge-limitations"></a>集合合并的局限性</h6>
 <div class="paragraph">
-<p>You cannot merge different collection types (such as a <code>Map</code> and a <code>List</code>), and if you
-do attempt to do so an appropriate <code>Exception</code> is thrown. The <code>merge</code> attribute must be
-specified on the lower, inherited, child definition; specifying the <code>merge</code> attribute on
-a parent collection definition is redundant and will not result in the desired merging.</p>
+<p>不能合并不同的集合类型（如 <code>Map</code> 和 <code>List</code>），如果你视图这么做，那么程序将会抛出相应的 <code>异常</code>。<code>merge</code> 属性必须在更低级别的，继承的，自定义中指定；在父集合定义中指定 <code>merge</code> 属性是冗余的，而且不会进行你想要的合并。</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="beans-collection-elements-strongly-typed"><a class="anchor" href="#beans-collection-elements-strongly-typed"></a>Strongly-typed collection</h6>
+<h6 id="beans-collection-elements-strongly-typed"><a class="anchor" href="#beans-collection-elements-strongly-typed"></a>强类型集合</h6>
 <div class="paragraph">
-<p>With the introduction of generic types in Java 5, you can use strongly typed collections.
-That is, it is possible to declare a <code>Collection</code> type such that it can only contain
-<code>String</code> elements (for example). If you are using Spring to dependency-inject a
-strongly-typed <code>Collection</code> into a bean, you can take advantage of Spring&#8217;s
-type-conversion support such that the elements of your strongly-typed <code>Collection</code>
-instances are converted to the appropriate type prior to being added to the <code>Collection</code>.</p>
+<p>随着 Java 5 中泛型的引入，你可以使用强类型集合。也就是说，你可以声明一个只能包含 <code>String</code> 元素（举个例子）的 <code>Collection</code> 类型。如果你使用 Spring 的依赖注入将强类型 <code>Collection</code> 注入到 bean 中，你可以利用 Spring 的类型转换支持，在将元素添加在 <code>Collection</code> 之前，将强类型 <code>Collection</code> 实例转换为适当的类型。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1616,20 +1523,14 @@ instances are converted to the appropriate type prior to being added to the <cod
 </div>
 </div>
 <div class="paragraph">
-<p>When the <code>accounts</code> property of the <code>foo</code> bean is prepared for injection, the generics
-information about the element type of the strongly-typed <code>Map&lt;String, Float&gt;</code> is
-available by reflection. Thus Spring&#8217;s type conversion infrastructure recognizes the
-various value elements as being of type <code>Float</code>, and the string values <code>9.99, 2.75</code>, and
-<code>3.99</code> are converted into an actual <code>Float</code> type.</p>
+<p>当 <code>foo</code> bean 的 <code>accounts</code> 属性准备注入时，可以通过反射获得强类型 <code>Map&lt;String, Float&gt;</code> 的元素类型信息。这样 Spring 的类型转换底层模块就能将各种不同的值元素识别为 <code>Float</code> 类型，将字符串值 <code>9.99, 2.75</code>，和 <code>3.99</code> 转换成真正的 <code>Float</code> 类型。</p>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-null-element"><a class="anchor" href="#beans-null-element"></a>Null and empty string values</h5>
+<h5 id="beans-null-element"><a class="anchor" href="#beans-null-element"></a>Null和空字符串值</h5>
 <div class="paragraph">
-<p>Spring treats empty arguments for properties and the like as empty <code>Strings</code>. The
-following XML-based configuration metadata snippet sets the email property to the empty
-<code>String</code> value ("").</p>
+<p>Spring 将属性的空参数都处理为空字符串（empty <code>Strings</code>）。下面基于XML的配置元数据片段将电子邮件属性设置为空字符串 <code>String</code> 值（""）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1639,7 +1540,7 @@ following XML-based configuration metadata snippet sets the email property to th
 </div>
 </div>
 <div class="paragraph">
-<p>The preceding example is equivalent to the following Java code:</p>
+<p>前面的例子与下面的Java代码是等价的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1647,7 +1548,7 @@ following XML-based configuration metadata snippet sets the email property to th
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>&lt;null/&gt;</code> element handles <code>null</code> values. For example:</p>
+<p><code>&lt;null/&gt;</code> 元素处理 <code>null</code> 值。例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1659,7 +1560,7 @@ following XML-based configuration metadata snippet sets the email property to th
 </div>
 </div>
 <div class="paragraph">
-<p>The above configuration is equivalent to the following Java code:</p>
+<p>上面的配置与下面的Java代码等价：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1668,20 +1569,15 @@ following XML-based configuration metadata snippet sets the email property to th
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-p-namespace"><a class="anchor" href="#beans-p-namespace"></a>XML shortcut with the p-namespace</h5>
+<h5 id="beans-p-namespace"><a class="anchor" href="#beans-p-namespace"></a>使用 p-namespace 的XML简化配置</h5>
 <div class="paragraph">
-<p>The p-namespace enables you to use the <code>bean</code> element&#8217;s attributes, instead of nested
-<code>&lt;property/&gt;</code> elements, to describe your property values and/or collaborating beans.</p>
+<p>p-namespace 可以让你 <code>bean</code> 元素的属性而不是嵌套 <code>&lt;property/&gt;</code> 元素来描述属性值和/或协作 bean。</p>
 </div>
 <div class="paragraph">
-<p>Spring supports extensible configuration formats <a href="appendix.html#xsd-configuration">with namespaces</a>,
-which are based on an XML Schema definition. The <code>beans</code> configuration format discussed in this
-chapter is defined in an XML Schema document. However, the p-namespace is not defined in
-an XSD file and exists only in the core of Spring.</p>
+<p>Spring 支持含有 <a href="appendix.html#xsd-configuration">命名空间</a> 的扩展配置，命名空间是基于XML Schema 定义的。本章讨论的 <code>beans</code> 配置形势是在XML Schema 文件中定义的。但是 p-namespace 不在XSD文件中定义而只存在于 Spring core 中。</p>
 </div>
 <div class="paragraph">
-<p>The following example shows two XML snippets that resolve to the same result: The first
-uses standard XML format and the second uses the p-namespace.</p>
+<p>下面的例子给出了两个解析结果相同的XML片段：第一个使用标准XML形势，第二个使用了 p-namespace。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1692,23 +1588,19 @@ uses standard XML format and the second uses the p-namespace.</p>
                 <span class="content">http://www.springframework.org/schema/beans/spring-beans.xsd</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
 
         <span class="tag">&lt;bean</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">classic</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">com.example.ExampleBean</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-                <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="72141d1d321013005c111d1f">[email&#160;protected]</a></span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+                <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">email</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">foo@bar.com</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
         <span class="tag">&lt;/bean&gt;</span>
 
         <span class="tag">&lt;bean</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">p-namespace</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">com.example.ExampleBean</span><span class="delimiter">&quot;</span></span>
-                <span class="attribute-name">p:email</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5d3dadaf5d7d4c79bd6dad8">[email&#160;protected]</a></span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+                <span class="attribute-name">p:email</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">foo@bar.com</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
 <span class="tag">&lt;/beans&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The example shows an attribute in the p-namespace called email in the bean definition.
-This tells Spring to include a property declaration. As previously mentioned, the
-p-namespace does not have a schema definition, so you can set the name of the attribute
-to the property name.</p>
+<p>这个例子显示在 bean 定义中p-namespace 中有个一个叫 email 的属性。这会告知 Spring 包含一个 property 声明。如前面所述，p-namespace 没有 schema 定义，因此你可以将特性值名（attribute）设到属性值（property）上。</p>
 </div>
 <div class="paragraph">
-<p>This next example includes two more bean definitions that both have a reference to
-another bean:</p>
+<p>下面的例子包括两个 bean 定义，它们都引用了另一个 bean：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1735,13 +1627,7 @@ another bean:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, this example includes not only a property value using the p-namespace,
-but also uses a special format to declare property references. Whereas the first bean
-definition uses <code>&lt;property name="spouse" ref="jane"/&gt;</code> to create a reference from bean
-<code>john</code> to bean <code>jane</code>, the second bean definition uses <code>p:spouse-ref="jane"</code> as an
-attribute to do the exact same thing. In this case <code>spouse</code> is the property name,
-whereas the <code>-ref</code> part indicates that this is not a straight value but rather a
-reference to another bean.</p>
+<p>正如你所见，这个例子不仅包含使用 p-namespace 的属性值，还使用了一种特殊形式来声明属性值引用。第一个 bean 定义使用 <code>&lt;property name="spouse" ref="jane"/&gt;</code> 来创建从 bean <code>john</code> 到 bean <code>jane</code> 的引用，而第二个 bean 定义将 <code>p:spouse-ref="jane"</code> 作为一个特性值使用来定义从 bean <code>john</code> 到 bean <code>jane</code> 的引用。在这个例子中，<code>spouse</code> 是属性名，而 <code>-ref</code> 部分表示这不是一个直接值而是一个对其他 bean 的引用。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1751,11 +1637,7 @@ reference to another bean.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The p-namespace is not as flexible as the standard XML format. For example, the format
-for declaring property references clashes with properties that end in <code>Ref</code>, whereas the
-standard XML format does not. We recommend that you choose your approach carefully and
-communicate this to your team members, to avoid producing XML documents that use all
-three approaches at the same time.</p>
+<p>p-namespace 不像标准XML形式那么灵活。例如，声明属性引用的形式会与以 <code>Ref</code> 结尾的属性冲突，而标准XML形式并不会。我们建议你谨慎选择使用哪种形式并及时与你的团队沟通，以避免输出同时使用三种配置形式的XML文档。</p>
 </div>
 </td>
 </tr>
@@ -1763,14 +1645,12 @@ three approaches at the same time.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-c-namespace"><a class="anchor" href="#beans-c-namespace"></a>XML shortcut with the c-namespace</h5>
+<h5 id="beans-c-namespace"><a class="anchor" href="#beans-c-namespace"></a>使用 c-namespace 的XML简化配置</h5>
 <div class="paragraph">
-<p>Similar to the <a href="#beans-p-namespace">XML shortcut with the p-namespace</a>, the <em>c-namespace</em>, newly introduced in Spring
-3.1, allows usage of inlined attributes for configuring the constructor arguments rather
-then nested <code>constructor-arg</code> elements.</p>
+<p>与 <a href="#beans-p-namespace">使用 p-namespace 的XML简化配置</a>类似，<em>c-namespace</em> 在 Spring 3.1中被引入，它允许使用内联属性配置构造器参数而不是嵌套的 <code>constructor-arg</code> 元素。</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s review the examples from <a href="#beans-constructor-injection">Constructor-based dependency injection</a> with the <code>c:</code> namespace:</p>
+<p>回顾一下 <a href="#beans-constructor-injection">基于构造器的依赖注入</a> 中使用的 <code>c:</code> 命名空间：/p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1797,15 +1677,10 @@ then nested <code>constructor-arg</code> elements.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>c:</code> namespace uses the same conventions as the <code>p:</code> one (trailing <code>-ref</code> for bean
-references) for setting the constructor arguments by their names. And just as well, it
-needs to be declared even though it is not defined in an XSD schema (but it exists
-inside the Spring core).</p>
+<p><code>c:</code> 命名空间使用与 <code>p:</code> 命名空间相同的协议，通过名字（如果是 bean 引用添加 <code>-ref</code> 后缀）设置构造器参数。同样，它也需要被声明，虽然它不在XSD Schema 中定义（但是存在于 Spring core 中）。</p>
 </div>
 <div class="paragraph">
-<p>For the rare cases where the constructor argument names are not available (usually if
-the bytecode was compiled without debugging information), one can use fallback to the
-argument indexes:</p>
+<p>对于无法使用构造函数参数名称的罕见情况（通常如果字节码编译没有调试信息），可以降级使用参数索引：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1821,26 +1696,20 @@ argument indexes:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Due to the XML grammar, the index notation requires the presence of the leading <code>_</code> as
-XML attribute names cannot start with a number (even though some IDE allow it).</p>
+<p>由于XML语法的要求，索引前面需要加上 <code>_</code> 下划线前缀，因为XML是属性名不能以数字开头（即使某些IDE允许）。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In practice, the constructor resolution
-<a href="#beans-factory-ctor-arguments-resolution">mechanism</a> is quite efficient in matching
-arguments so unless one really needs to, we recommend using the name notation
-through-out your configuration.</p>
+<p>在实践中，构造器解析 <a href="#beans-factory-ctor-arguments-resolution">机制</a> 在匹配参数方面非常高效，所以如无必要，我们建议在所有配置中都使用名称符号。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-compound-property-names"><a class="anchor" href="#beans-compound-property-names"></a>Compound property names</h5>
+<h5 id="beans-compound-property-names"><a class="anchor" href="#beans-compound-property-names"></a>复合属性名</h5>
 <div class="paragraph">
-<p>You can use compound or nested property names when you set bean properties, as long as
-all components of the path except the final property name are not <code>null</code>. Consider the
-following bean definition.</p>
+<p>当设置 bean 属性时，你可以使用复合或者嵌套的属性名，只要路径中除了最后的属性名所有其他部分都不为 <code>null</code>。考虑以下 bean 定义。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1850,24 +1719,14 @@ following bean definition.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>foo</code> bean has a <code>fred</code> property, which has a <code>bob</code> property, which has a <code>sammy</code>
-property, and that final <code>sammy</code> property is being set to the value <code>123</code>. In order for
-this to work, the <code>fred</code> property of <code>foo</code>, and the <code>bob</code> property of <code>fred</code> must not be
-<code>null</code> after the bean is constructed, or a <code>NullPointerException</code> is thrown.</p>
+<p> <code>foo</code> bean 有一个 <code>fred</code> 属性， <code>fred</code> 有一个 <code>bob</code>属性， <code>bob</code> 属性有一个 <code>sammy</code> 属性，最后的 <code>sammy</code> 属性设置值为 <code>123</code>。为了成功这样配置，<code>foo</code> 的 <code>fred</code> 属性和 <code>fred</code> 的 <code>bob</code> 属性在 bean 创建之后必须是非 <code>null</code> 的，否则会抛出 <code>NullPointerException</code> 异常。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-factory-dependson"><a class="anchor" href="#beans-factory-dependson"></a>1.4.3. Using depends-on</h4>
+<h4 id="beans-factory-dependson"><a class="anchor" href="#beans-factory-dependson"></a>1.4.3. 使用 depends-on</h4>
 <div class="paragraph">
-<p>If a bean is a dependency of another that usually means that one bean is set as a
-property of another. Typically you accomplish this with the <a href="#beans-ref-element"><code>&lt;ref/&gt;</code>
-element</a> in XML-based configuration metadata. However, sometimes dependencies between
-beans are less direct; for example, a static initializer in a class needs to be
-triggered, such as database driver registration. The <code>depends-on</code> attribute can
-explicitly force one or more beans to be initialized before the bean using this element
-is initialized. The following example uses the <code>depends-on</code> attribute to express a
-dependency on a single bean:</p>
+<p>如果一个 bean 是另一个 bean 的依赖项，那么这通常意味着这个 bean 被设置为另一个 bean 的属性。通常使用基于XML的配置元数据的 <a href="#beans-ref-element"><code>&lt;ref/&gt;</code> 元素</a> 来实现。但有时 bean 之间的依赖是间接的；例如，类中的静态初始化程序需要被如数据库驱动注册这样的"bean"触发。<code>depends-on</code> 特性可以显式强制一个或多个 bean 在他的使用者 bean 初始化之前完成初始化。下面的例子使用 <code>depends-on</code> 特性表示对单个 bean 的依赖：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1876,9 +1735,7 @@ dependency on a single bean:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To express a dependency on multiple beans, supply a list of bean names as the value of
-the <code>depends-on</code> attribute, with commas, whitespace and semicolons, used as valid
-delimiters:</p>
+<p>为了表示对多个 bean 的依赖关系，你需要提供一个 bean 名字列表作为 <code>depends-on</code> 特性的值，中间用逗号，空格或者分号隔开，作为有效的分隔符：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1898,11 +1755,7 @@ delimiters:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>depends-on</code> attribute in the bean definition can specify both an initialization
-time dependency and, in the case of <a href="#beans-factory-scopes-singleton">singleton</a> beans
-only, a corresponding destroy time dependency. Dependent beans that define a
-<code>depends-on</code> relationship with a given bean are destroyed first, prior to the given bean
-itself being destroyed. Thus <code>depends-on</code> can also control shutdown order.</p>
+<p>Bean 定义中的 <code>depends-on</code> 特性既可以指定初始化时依赖也可以指定仅对 <a href="#beans-factory-scopes-singleton">单例</a> bean 有效的销毁时依赖。依赖 bean 定义了一个于给定 bean 之间 的 <code>depends-on</code> 关系，依赖 bean 会在给定 bean 销毁之前先行销毁。因此 <code>depends-on</code> 还可以控制shutdown的顺序。</p>
 </div>
 </td>
 </tr>
@@ -1910,20 +1763,12 @@ itself being destroyed. Thus <code>depends-on</code> can also control shutdown o
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-factory-lazy-init"><a class="anchor" href="#beans-factory-lazy-init"></a>1.4.4. Lazy-initialized beans</h4>
+<h4 id="beans-factory-lazy-init"><a class="anchor" href="#beans-factory-lazy-init"></a>1.4.4. 懒加载 bean</h4>
 <div class="paragraph">
-<p>By default, <code>ApplicationContext</code> implementations eagerly create and configure all
-<a href="#beans-factory-scopes-singleton">singleton</a> beans as part of the initialization
-process. Generally, this pre-instantiation is desirable, because errors in the
-configuration or surrounding environment are discovered immediately, as opposed to hours
-or even days later. When this behavior is <em>not</em> desirable, you can prevent
-pre-instantiation of a singleton bean by marking the bean definition as
-lazy-initialized. A lazy-initialized bean tells the IoC container to create a bean
-instance when it is first requested, rather than at startup.</p>
+<p>默认情况下，<code>ApplicationContext</code> 接口的各种实现以一种“饥渴”态度将所有 <a href="#beans-factory-scopes-singleton">单例</a> bean 作为初始化过程的一部分进行创建和配置。一般来说，这种预实例化是可取的，因为配置或者周围环境中的错误会被立即发现，而不是几小时后甚至几天后才发现。当这种行为 <em>不</em> 必要时，你可以通过将此单例 bean 定义标记为“懒加载”来防止它被预实例化。配置为懒加载的 bean 会告知 IoC 容器在第一次被请求是才创建对象，而不是在应用程序启动时。</p>
 </div>
 <div class="paragraph">
-<p>In XML, this behavior is controlled by the <code>lazy-init</code> attribute on the <code>&lt;bean/&gt;</code>
-element; for example:</p>
+<p>在 XML 配置中，懒加载行为通过对 <code>&lt;bean/&gt;</code> 元素的 <code>lazy-init</code> 特性的控制来实现；例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1932,19 +1777,13 @@ element; for example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When the preceding configuration is consumed by an <code>ApplicationContext</code>, the bean named
-<code>lazy</code> is not eagerly pre-instantiated when the <code>ApplicationContext</code> is starting up,
-whereas the <code>not.lazy</code> bean is eagerly pre-instantiated.</p>
+<p>在 <code>ApplicationContext</code> 读入上面的配置后，<code>ApplicationContext</code> 启动时名字为 <code>lazy</code> 的 bean 不会进行预实例化，而名字为 <code>not.lazy</code> 的 bean 就会进行预实例化。</p>
 </div>
 <div class="paragraph">
-<p>However, when a lazy-initialized bean is a dependency of a singleton bean that is
-<em>not</em> lazy-initialized, the <code>ApplicationContext</code> creates the lazy-initialized bean at
-startup, because it must satisfy the singleton&#8217;s dependencies. The lazy-initialized bean
-is injected into a singleton bean elsewhere that is not lazy-initialized.</p>
+<p>不过，当一个懒加载 bean 是另一个 <em>非</em> 懒加载单例 bean 的依赖的时候，<code>ApplicationContext</code> 还是会在启动阶段创建此懒加载 bean，因为它必须满足成为这些单例 bean 依赖的要求。懒加载 bean 会被注入到在某处的其他非懒加载的单例 bean 中。</p>
 </div>
 <div class="paragraph">
-<p>You can also control lazy-initialization at the container level by using the
-<code>default-lazy-init</code> attribute on the <code>&lt;beans/&gt;</code> element; for example:</p>
+<p>你也可以在容器级别使用 <code>&lt;beans/&gt;</code> 元素的 <code>default-lazy-init</code> 特性控制懒加载特性；例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1955,157 +1794,108 @@ is injected into a singleton bean elsewhere that is not lazy-initialized.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-factory-autowire"><a class="anchor" href="#beans-factory-autowire"></a>1.4.5. Autowiring collaborators</h4>
+<h4 id="beans-factory-autowire"><a class="anchor" href="#beans-factory-autowire"></a>1.4.5. 自动装配协作者</h4>
 <div class="paragraph">
-<p>The Spring container can <em>autowire</em> relationships between collaborating beans. You can
-allow Spring to resolve collaborators (other beans) automatically for your bean by
-inspecting the contents of the <code>ApplicationContext</code>. Autowiring has the following
-advantages:</p>
+<p>Spring 容器可以 <em>自动装配</em> 协作 bean 之间的关系。你可以允许 Spring 通过检查 <code>ApplicationContext</code> 的内容来为你的 bean 自动解析它的协作者（其他 bean）。自动装备具有以下优势：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Autowiring can significantly reduce the need to specify properties or constructor
-arguments. (Other mechanisms such as a bean template
-<a href="#beans-child-bean-definitions">discussed elsewhere in this chapter</a> are also valuable
-in this regard.)</p>
+<p>自动装配可以显著减少需要指定的属性或者构造器参数。（其他机制例如 <a href="#beans-child-bean-definitions">本章其它地方</a> 讨论过的 bean 模板在这方面也很有价值。）</p>
 </li>
 <li>
-<p>Autowiring can update a configuration as your objects evolve. For example, if you need
-to add a dependency to a class, that dependency can be satisfied automatically without
-you needing to modify the configuration. Thus autowiring can be especially useful
-during development, without negating the option of switching to explicit wiring when
-the code base becomes more stable.</p>
+<p>自动装配可以在对象变化时更新配置。例如，如果你需要增加一个类的依赖项，依赖项会满足自动装配需求而不需要你去修改配置。因此自动装配在开发阶段尤其有用，而且在基础代码更加稳定时可以切换为显式装配。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>When using XML-based configuration metadata <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>, you specify autowire
-mode for a bean definition with the <code>autowire</code> attribute of the <code>&lt;bean/&gt;</code> element. The
-autowiring functionality has four modes. You specify autowiring <em>per</em> bean and thus
-can choose which ones to autowire.</p>
+<p>在使用基于 XML 的配置元数据时<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup>，你可以通过 <code>&lt;bean/&gt;</code> 元素的 <code>autowire</code> 特性为一个 bean 定义指定自动装配模式。自动装配功能有四种模式。 你可以单独指定每个 bean 的自动装配模式且选择自动装配那些 bean。</p>
 </div>
 <table id="beans-factory-autowiring-modes-tbl" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. Autowiring modes</caption>
+<caption class="title">Table 2. 自动装配模式</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Mode</th>
-<th class="tableblock halign-left valign-top">Explanation</th>
+<th class="tableblock halign-left valign-top">模式</th>
+<th class="tableblock halign-left valign-top">对应解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">(Default) No autowiring. Bean references must be defined via a <code>ref</code> element. Changing
-the default setting is not recommended for larger deployments, because specifying
-collaborators explicitly gives greater control and clarity. To some extent, it
-documents the structure of a system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">（默认） 不自动装配。Bean 引用必须通过 <code>ref</code> 元素来定义。更改默认配置不推荐用于较大的部署，因为显示指定协作者更易控制且更清晰。从某种程度上说，它记录了系统的结构。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">byName</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autowiring by property name. Spring looks for a bean with the same name as the
-property that needs to be autowired. For example, if a bean definition is set to
-autowire by name, and it contains a <em>master</em> property (that is, it has a
-<em>setMaster(..)</em> method), Spring looks for a bean definition named <code>master</code>, and uses
-it to set the property.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">通过属性名称自动装配。Spring 寻找与需要自动装配的属性同名的 bean。例如，如果一个 bean 被设置为通过名称自动装配，且它有一个 <em>master</em> 属性（也就是说，它有一个 <em>setMaster(..)</em> 方法），Spring 会寻找名为 <code>master</code> 的 bean 定义，并用它来设置属性值。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">byType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Allows a property to be autowired if exactly one bean of the property type exists in
-the container. If more than one exists, a fatal exception is thrown, which indicates
-that you may not use <em>byType</em> autowiring for that bean. If there are no matching
-beans, nothing happens; the property is not set.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果容器中恰有一个某属性类型的 bean，那么就允许属性通过类型自动装配这个 bean。如果此类型的 bean 不止一个，那么就会抛出致命异常，说明你不能使用 <em>byType</em> 来自动装配那个 bean。如果没有匹配到 bean，则不会有任何错误产生；属性也不会被设置。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">constructor</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Analogous to <em>byType</em>, but applies to constructor arguments. If there is not exactly
-one bean of the constructor argument type in the container, a fatal error is raised.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">与 <em>byType</em> 类似，但适用于构造器参数。如果容器中没有与此构造器参数匹配的 bean，就会抛出致命异常。 </p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>With <em>byType</em> or <em>constructor</em> autowiring mode, you can wire arrays and
-typed-collections. In such cases <em>all</em> autowire candidates within the container that
-match the expected type are provided to satisfy the dependency. You can autowire
-strongly-typed Maps if the expected key type is <code>String</code>. An autowired Maps values will
-consist of all bean instances that match the expected type, and the Maps keys will
-contain the corresponding bean names.</p>
+<p>使用 <em>byType</em> 或者 <em>constructor</em> 自动装配模式，你可以装配数组和类型确定的集合。在这些情况下，容器内 <em>所有</em> 匹配期望类型的自动装配候选都会被提供以满足依赖性。如果期望的键类型是 <code>String</code>，你可以自动装配强类型的 Map。所有匹配期望类型的 Map 值组成所有 bean 实例，所有对应的 bean 名称组成这些 Map 的键。</p>
 </div>
 <div class="paragraph">
-<p>You can combine autowire behavior with dependency checking, which is performed after
-autowiring completes.</p>
+<p>你可以讲依赖检查与自动装配结合起来，依赖检查会在自动装配完成后进行。</p>
 </div>
 <div class="sect4">
-<h5 id="beans-autowired-exceptions"><a class="anchor" href="#beans-autowired-exceptions"></a>Limitations and disadvantages of autowiring</h5>
+<h5 id="beans-autowired-exceptions"><a class="anchor" href="#beans-autowired-exceptions"></a>自动装配的局限性的劣势</h5>
 <div class="paragraph">
-<p>Autowiring works best when it is used consistently across a project. If autowiring is
-not used in general, it might be confusing to developers to use it to wire only one or
-two bean definitions.</p>
+<p>当自动装配在整个工程中一致使用时其效果最好。如果普遍情况没有使用自动装配，仅仅在一两个 bean 定义中使用自动装配可能会让开发者感到困惑。</p>
 </div>
 <div class="paragraph">
-<p>Consider the limitations and disadvantages of autowiring:</p>
+<p>思考一下自动装配的局限性的劣势：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Explicit dependencies in <code>property</code> and <code>constructor-arg</code> settings always override
-autowiring. You cannot autowire so-called <em>simple</em> properties such as primitives,
-<code>Strings</code>, and <code>Classes</code> (and arrays of such simple properties). This limitation is
-by-design.</p>
+<p><code>property</code> 和 <code>constructor-arg</code> 的显式设置总是会覆盖自动装配。 你不能自动装配所谓的  <em>简单</em> 属性如原子类型，<code>Strings</code>，和 <code>Classes</code>（以及这些简单类型的数组）。这是设计上的限制。</p>
 </li>
 <li>
-<p>Autowiring is less exact than explicit wiring. Although, as noted in the above table,
-Spring is careful to avoid guessing in case of ambiguity that might have unexpected
-results, the relationships between your Spring-managed objects are no longer
-documented explicitly.</p>
+<p>自动装配比显式装配更具有不确定性。如上表所述，尽管 Spring 可以小心地尽量避免对有可能导致无法预料结果的歧义性情况进行猜测，但 Spring 管理的对象之间的关系已经不再被显示的记录。</p>
 </li>
 <li>
-<p>Wiring information may not be available to tools that may generate documentation from
-a Spring container.</p>
+<p>对于 Spring 容器中用于生成文档的工具来说，装配信息可能不能被获取。</p>
 </li>
 <li>
-<p>Multiple bean definitions within the container may match the type specified by the
-setter method or constructor argument to be autowired. For arrays, collections, or
-Maps, this is not necessarily a problem. However for dependencies that expect a single
-value, this ambiguity is not arbitrarily resolved. If no unique bean definition is
-available, an exception is thrown.</p>
+<p>容器中的多个 bean 定义可能会匹配 setter 方法或者构造器参数指定的需要自动装配的类型。对于数组，集合或者 Map 来说，这不一定是个问题。不过对于期望单个值的依赖项而言，这种歧义性并不能被随意消除。如果没有一个唯一 bean 被匹配到，那么将会抛出异常。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>In the latter scenario, you have several options:</p>
+<p>在后面的场景中，你有几个选择：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Abandon autowiring in favor of explicit wiring.</p>
+<p>抛弃自动装配而支持显式装配。</p>
 </li>
 <li>
-<p>Avoid autowiring for a bean definition by setting its <code>autowire-candidate</code> attributes
-to <code>false</code> as described in the next section.</p>
+<p>像下一节描述的那样通过设置 bean 定义的 <code>autowire-candidate</code> 特性为 <code>false</code> 来避免自动装配。</p>
 </li>
 <li>
-<p>Designate a single bean definition as the <em>primary</em> candidate by setting the
-<code>primary</code> attribute of its <code>&lt;bean/&gt;</code> element to <code>true</code>.</p>
+<p>通过设置 <code>&lt;bean/&gt;</code> 元素的 <code>primary</code> 特性为 <code>true</code> 来指定某个 bean 定义为 <em>主</em> 候选 bean。</p>
 </li>
 <li>
-<p>Implement the more fine-grained control available
-with annotation-based configuration, as described in <a href="#beans-annotation-config">Annotation-based container configuration</a>.</p>
+<p>通过基于注解的配置来实现更多细粒度的控制，如 <a href="#beans-annotation-config">基于注解的容器配置</a> 中所描述的。</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-autowire-candidate"><a class="anchor" href="#beans-factory-autowire-candidate"></a>Excluding a bean from autowiring</h5>
+<h5 id="beans-factory-autowire-candidate"><a class="anchor" href="#beans-factory-autowire-candidate"></a>将某个 bean 排除出自动装配</h5>
 <div class="paragraph">
-<p>On a per-bean basis, you can exclude a bean from autowiring. In Spring&#8217;s XML format, set
-the <code>autowire-candidate</code> attribute of the <code>&lt;bean/&gt;</code> element to <code>false</code>; the container
-makes that specific bean definition unavailable to the autowiring infrastructure
-(including annotation style configurations such as <a href="#beans-autowired-annotation"><code>@Autowired</code></a>).</p>
+<p>基于对每个 bean 都操作的策略，你可以把某个 bean 排除出自动装配。在 Spring 的XML形式中，将 <code>&lt;bean/&gt;</code> 元素的 <code>autowire-candidate</code> 特性设置为 <code>false</code>；容器会使得此指定的 bean 定义对于自动装配基础模块不可用（包括注解风格的配置如 <a href="#beans-autowired-annotation"><code>@Autowired</code></a>）。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2115,50 +1905,28 @@ makes that specific bean definition unavailable to the autowiring infrastructure
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>autowire-candidate</code> attribute is designed to only affect type-based autowiring.
-It does not affect explicit references by name, which will get resolved even if the
-specified bean is not marked as an autowire candidate. As a consequence, autowiring
-by name will nevertheless inject a bean if the name matches.</p>
+<p><code>autowire-candidate</code> 特性被设计成只对基于类型的自动装配产生影响。它不会影响基于名称装配的显式引用。结果就是，基于名称的自动装配仍然会将名称匹配的 bean 注入进去。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>You can also limit autowire candidates based on pattern-matching against bean names. The
-top-level <code>&lt;beans/&gt;</code> element accepts one or more patterns within its
-<code>default-autowire-candidates</code> attribute. For example, to limit autowire candidate status
-to any bean whose name ends with <em>Repository,</em> provide a value of *Repository. To
-provide multiple patterns, define them in a comma-separated list. An explicit value of
-<code>true</code> or <code>false</code> for a bean definitions <code>autowire-candidate</code> attribute always takes
-precedence, and for such beans, the pattern matching rules do not apply.</p>
+<p>你也可以根据 bean 名称的匹配模式限制自动装配的候选 bean。顶层 <code>&lt;beans/&gt;</code> 元素的 <code>default-autowire-candidates</code> 特性接受一个或多个模式。例如，为了限制任何以 <em>Repository</em> 结尾的自动装配候选 bean，可以提供一个 *Repository 值。对于多个模式，可以定义一个逗号为分隔符的列表。对 bean 定义的 <code>autowire-candidate</code> 特性显示设置的值 <code>true</code> 或者 <code>false</code> 优先级最高，对于这些 bean 来说，模式匹配规则不起作用。</p>
 </div>
 <div class="paragraph">
-<p>These techniques are useful for beans that you never want to be injected into other
-beans by autowiring. It does not mean that an excluded bean cannot itself be configured
-using autowiring. Rather, the bean itself is not a candidate for autowiring other beans.</p>
+<p>对于那些你不想要通过自动装配注入到其它 bean 的 bean 来说，这些技术是很有用的。这不是说某个被排除的 bean 自身不能通过自动装配来进行配置。更确切地说，这个 bean 本身就不是一个为了自动装配到其它 bean 的候选 bean。
+</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-factory-method-injection"><a class="anchor" href="#beans-factory-method-injection"></a>1.4.6. Method injection</h4>
+<h4 id="beans-factory-method-injection"><a class="anchor" href="#beans-factory-method-injection"></a>1.4.6. 方法注入</h4>
 <div class="paragraph">
-<p>In most application scenarios, most beans in the container are
-<a href="#beans-factory-scopes-singleton">singletons</a>. When a singleton bean needs to
-collaborate with another singleton bean, or a non-singleton bean needs to collaborate
-with another non-singleton bean, you typically handle the dependency by defining one
-bean as a property of the other. A problem arises when the bean lifecycles are
-different. Suppose singleton bean A needs to use non-singleton (prototype) bean B,
-perhaps on each method invocation on A. The container only creates the singleton bean A
-once, and thus only gets one opportunity to set the properties. The container cannot
-provide bean A with a new instance of bean B every time one is needed.</p>
+<p>在大多数应用场景中，容器中大部分 bean 都是 <a href="#beans-factory-scopes-singleton">单例 bean</a>。当一个单例 bean 需要与其他单例 bean 协作时，或者当一个非单例 bean 需要与其他非单例 bean 协作时，你通常通过将一个 bean 定义为另一个 bean 的属性来达到这种依赖关系。但是当 bean 的生命周期不同时问题就出现了。假设单例 bean A 需要使用（可能 A 中每个方法的调用都会使用）非单例（原型） bean B。容器只会创建单例 bean A 一次，所以只有一次设置 A 的属性的机会。容器无法在每次需要的时候向 bean A 提供一个 bean B 的新实例。</p>
 </div>
 <div class="paragraph">
-<p>A solution is to forego some inversion of control. You can <a href="#beans-factory-aware">make
-bean A aware of the container</a> by implementing the <code>ApplicationContextAware</code> interface,
-and by <a href="#beans-factory-client">making a getBean("B") call to the container</a> ask for (a
-typically new) bean B instance every time bean A needs it. The following is an example
-of this approach:</p>
+<p>这个问题的一种解决方案是放弃一些控制反转。你可以通过让 bean A 实现 <code>ApplicationContextAware</code> 接口使它能 <a href="#beans-factory-aware">感知容器</a>，然后当每次 bean A 需要 bean B 的时候通过 <a href="#beans-factory-client">对容器调用 getBean("B") 方法</a> 请求（通常是新得）bean B 的实例。下面是使用这个方法的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2195,27 +1963,19 @@ of this approach:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The preceding is not desirable, because the business code is aware of and coupled to the
-Spring Framework. Method Injection, a somewhat advanced feature of the Spring IoC
-container, allows this use case to be handled in a clean fashion.</p>
+<p>前面的例子其实是不可取的，因为它将业务代码与 Spring 框架耦合起来了，并且业务代码能感知 Spring 框架。作为 Spring IoC 某种程度上的高级特性，方法注入就用了一种简洁的方式处理这个问题。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>You can read more about the motivation for Method Injection in
-<a href="https://spring.io/blog/2004/08/06/method-injection/">this blog entry</a>.</p>
+<p>你可以在 <a href="https://spring.io/blog/2004/08/06/method-injection/">这个博客</a> 中了解跟多关于犯法注入的动机。</p>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lookup-method-injection"><a class="anchor" href="#beans-factory-lookup-method-injection"></a>Lookup method injection</h5>
+<h5 id="beans-factory-lookup-method-injection"><a class="anchor" href="#beans-factory-lookup-method-injection"></a>查找方法注入</h5>
 <div class="paragraph">
-<p>Lookup method injection is the ability of the container to override methods on
-<em>container managed beans</em>, to return the lookup result for another named bean in the
-container. The lookup typically involves a prototype bean as in the scenario described
-in the preceding section. The Spring Framework implements this method injection by using
-bytecode generation from the CGLIB library to generate dynamically a subclass that
-overrides the method.</p>
+<p>查找方法注入是容器的一种覆盖 <em>其管理的 bean</em> 中的方法的能力，它可以返回容器中对另一个命名 bean 的查找结果。 查找通常会涉及原型 bean，如前一小节描述的场景中那样。Spring 框架通过使用 GBLIB 库实现这个方法注入，CGLIB 库的字节码生成功能会动态生成一个覆盖这个方法的子类。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2227,22 +1987,16 @@ overrides the method.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>For this dynamic subclassing to work, the class that the Spring bean container will
-subclass cannot be <code>final</code>, and the method to be overridden cannot be <code>final</code> either.</p>
+<p>为了使这个动态子类正常工作，这个被 Spring bean 容器子类化的类不能是 <code>final</code> 的，且那些会被覆盖的方法也不能是 <code>final</code> 的。</p>
 </li>
 <li>
-<p>Unit-testing a class that has an <code>abstract</code> method requires you to subclass the class
-yourself and to supply a stub implementation of the <code>abstract</code> method.</p>
+<p>对一个含有 <code>abstract</code> 方法的类进行单元测试，要求你对这个类进行子类化，并且还要提供这个 <code>abstract</code> 方法的 stub 实现。</p>
 </li>
 <li>
-<p>Concrete methods are also necessary for component scanning which requires concrete
-classes to pick up.</p>
+<p>对于要求获得具体类的组建扫描，具体方法也是必要的。</p>
 </li>
 <li>
-<p>A further key limitation is that lookup methods won&#8217;t work with factory methods and
-in particular not with <code>@Bean</code> methods in configuration classes, since the container
-is not in charge of creating the instance in that case and therefore cannot create
-a runtime-generated subclass on the fly.</p>
+<p>另一个关键限制是查找方法不适用于工厂方法，特别是不适用于配置类中的 <code>@Bean</code> 方法，因为容器并不负责在这种情况下创建实例，因此也不能在如此快速的过程中创建一个子在运行时生成的子类。</p>
 </li>
 </ul>
 </div>
@@ -2251,10 +2005,7 @@ a runtime-generated subclass on the fly.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>Looking at the <code>CommandManager</code> class in the previous code snippet, you see that the
-Spring container will dynamically override the implementation of the <code>createCommand()</code>
-method. Your <code>CommandManager</code> class will not have any Spring dependencies, as can be
-seen in the reworked example:</p>
+<p>看一下前一个代码片段中的 <code>CommandManager</code> 类，可以看到 Spring 容器会动态地覆盖 <code>createCommand()</code> 方法的实现。<code>CommandManager</code> 类将不会有任何 Spring 依赖，重写的例子如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2278,8 +2029,7 @@ seen in the reworked example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the client class containing the method to be injected (the <code>CommandManager</code> in this
-case), the method to be injected requires a signature of the following form:</p>
+<p>客户类包含要被注入的方法（这个例子中是 <code>CommandManager</code>），将要被注入的方法需要以下格式的签名：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2287,9 +2037,7 @@ case), the method to be injected requires a signature of the following form:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If the method is <code>abstract</code>, the dynamically-generated subclass implements the method.
-Otherwise, the dynamically-generated subclass overrides the concrete method defined in
-the original class. For example:</p>
+<p>如果这个方法是 <code>abstract</code>的，那么动态生成的子类会实现这个方法。否则，动态生成的子类会覆盖原始类中定义的具体方法。例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2305,15 +2053,10 @@ the original class. For example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The bean identified as <em>commandManager</em> calls its own method <code>createCommand()</code>
-whenever it needs a new instance of the <em>myCommand</em> bean. You must be careful to deploy
-the <code>myCommand</code> bean as a prototype, if that is actually what is needed. If it is
-as a <a href="#beans-factory-scopes-singleton">singleton</a>, the same instance of the <code>myCommand</code>
-bean is returned each time.</p>
+<p>当 <em>commandManager</em> bean 在任何需要 <em>myCommand</em> bean 的实例时，它都会调用自己的 <code>createCommand()</code> 方法。如果确实需要的话，你必须仔细将 <code>myCommand</code> bean 作为原型 bean 来部署。如果它是作为 <a href="#beans-factory-scopes-singleton">原型</a> bean 部署的，那么每次都会返回同一个 <code>myCommand</code> 实例。</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, within the annotation-based component model, you may declare a lookup
-method through the <code>@Lookup</code> annotation:</p>
+<p>另一种选择，在基于注解的组件模型中，你可以通过 <code>@Lookup</code> 注解声明一个查找方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2331,8 +2074,7 @@ method through the <code>@Lookup</code> annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Or, more idiomatically, you may rely on the target bean getting resolved against the
-declared return type of the lookup method:</p>
+<p>再或者，还有一种更地道的方式，你可以依靠被解析的目标 bean 的查找方法的声明返回类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2350,10 +2092,7 @@ declared return type of the lookup method:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that you will typically declare such annotated lookup methods with a concrete
-stub implementation, in order for them to be compatible with Spring&#8217;s component
-scanning rules where abstract classes get ignored by default. This limitation does not
-apply in case of explicitly registered or explicitly imported bean classes.</p>
+<p>需要注意的是对于使用注解的这些方法，你需要提供他们的基础实现，以便兼容 Spring 的组件扫描规则，因为 Spring 的组件扫描规则默认会忽略抽象类。不过对于显式注册或者显式导入的 bean 类没有这个限制。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2363,12 +2102,10 @@ apply in case of explicitly registered or explicitly imported bean classes.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Another way of accessing differently scoped target beans is an <code>ObjectFactory</code>/
-<code>Provider</code> injection point. Check out <a href="#beans-factory-scopes-other-injection">Scoped beans as dependencies</a>.</p>
+<p>另一种可以访问不同作用域的目标 bean  是通过 <code>ObjectFactory</code>/<code>Provider</code> 注入点。查看 <a href="#beans-factory-scopes-other-injection">Scoped beans as dependencies</a>。</p>
 </div>
 <div class="paragraph">
-<p>The interested reader may also find the <code>ServiceLocatorFactoryBean</code> (in the
-<code>org.springframework.beans.factory.config</code> package) to be of use.</p>
+<p>感兴趣的读者可能会发现 <code>ServiceLocatorFactoryBean</code> (在 <code>org.springframework.beans.factory.config</code> 包中) 使用的就是这种方法。</p>
 </div>
 </td>
 </tr>
@@ -2376,16 +2113,12 @@ apply in case of explicitly registered or explicitly imported bean classes.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-arbitrary-method-replacement"><a class="anchor" href="#beans-factory-arbitrary-method-replacement"></a>Arbitrary method replacement</h5>
+<h5 id="beans-factory-arbitrary-method-replacement"><a class="anchor" href="#beans-factory-arbitrary-method-replacement"></a>任意方法替换</h5>
 <div class="paragraph">
-<p>A less useful form of method injection than lookup method injection is the ability to
-replace arbitrary methods in a managed bean with another method implementation. Users
-may safely skip the rest of this section until the functionality is actually needed.</p>
+<p>对 bean 中任意方法替换的能力是另一种相比查找方法注入更少使用的方法注入形式，这种能力能将被管理 bean 的任意方法替换为另一个方法实现。用户可以安全跳过本小节剩余部分直到真正用到这个功能的时候再来看。</p>
 </div>
 <div class="paragraph">
-<p>With XML-based configuration metadata, you can use the <code>replaced-method</code> element to
-replace an existing method implementation with another, for a deployed bean. Consider
-the following class, with a method computeValue, which we want to override:</p>
+<p>在基于XML的配置元数据中，对于一个已经部署的 bean，你可以使用 <code>replaced-method</code> 元素将现有的方法实现替换为其他方法实现。考虑下面的类，有一个我们想要覆盖的 computeValue 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2400,8 +2133,7 @@ the following class, with a method computeValue, which we want to override:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A class implementing the <code>org.springframework.beans.factory.support.MethodReplacer</code>
-interface provides the new method definition.</p>
+<p>实现了 <code>org.springframework.beans.factory.support.MethodReplacer</code> 接口的类提供了一个新的方法定义。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2421,8 +2153,7 @@ interface provides the new method definition.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The bean definition to deploy the original class and specify the method override would
-look like this:</p>
+<p>部署的原始类及其指定要覆盖的方法的 bean 定义如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2437,12 +2168,7 @@ look like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can use one or more contained <code>&lt;arg-type/&gt;</code> elements within the <code>&lt;replaced-method/&gt;</code>
-element to indicate the method signature of the method being overridden. The signature
-for the arguments is necessary only if the method is overloaded and multiple variants
-exist within the class. For convenience, the type string for an argument may be a
-substring of the fully qualified type name. For example, the following all match
-<code>java.lang.String</code>:</p>
+<p>你可以在 <code>&lt;replaced-method/&gt;</code> 元素中使用一个或者多个 <code>&lt;arg-type/&gt;</code> 元素来区别需要覆盖的方法的方法签名。只有在类中进行了方法重载且有多个重载变形的时候，参数的签名才是必需的。方便起见，string类型的参数可能是全限定名的一个子串。例如，下面所有形式都能匹配 <code>java.lang.String</code>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2452,9 +2178,7 @@ Str</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Because the number of arguments is often enough to distinguish between each possible
-choice, this shortcut can save a lot of typing, by allowing you to type only the
-shortest string that will match an argument type.</p>
+<p>因为参数的数量经常已经足够区分每个可能的选择，这个允许给出匹配参数类型的最短字符串的快捷方式会让你少打很多字。</p>
 </div>
 </div>
 </div>
