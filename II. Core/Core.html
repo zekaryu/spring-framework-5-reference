@@ -3235,20 +3235,10 @@ internationalization)</p></td>
 <div class="sect2">
 <h3 id="beans-child-bean-definitions"><a class="anchor" href="#beans-child-bean-definitions"></a>1.7. Bean definition inheritance</h3>
 <div class="paragraph">
-<p>A bean definition can contain a lot of configuration information, including constructor
-arguments, property values, and container-specific information such as initialization
-method, static factory method name, and so on. A child bean definition inherits
-configuration data from a parent definition. The child definition can override some
-values, or add others, as needed. Using parent and child bean definitions can save a lot
-of typing. Effectively, this is a form of templating.</p>
+<p>Bean 定义中可以包含很多配置信息，包括构造器参数，属性值，容器相关的特定信息如初始化方法，静态工厂方法名等等。子定义会继承父定义的配置数据。子定义可以按需覆盖一些值，或者添加一些其他值。使用父子 bean 定义会重用很多代码，节省很多打字时间。实际上，这也是模板的一种形式。</p>
 </div>
 <div class="paragraph">
-<p>If you work with an <code>ApplicationContext</code> interface programmatically, child bean
-definitions are represented by the <code>ChildBeanDefinition</code> class. Most users do not work
-with them on this level, instead configuring bean definitions declaratively in something
-like the <code>ClassPathXmlApplicationContext</code>. When you use XML-based configuration
-metadata, you indicate a child bean definition by using the <code>parent</code> attribute,
-specifying the parent bean as the value of this attribute.</p>
+<p>如果你以编程方式使用 <code>ApplicationContext</code> 接口，那么子 bean 定义就可以通过<code>ChildBeanDefinition</code> 类来表示。大多数用于不会在这个层级使用它们，而是在某种像 <code>ClassPathXmlApplicationContext</code> 这样的组件中以声明的方式配置 bean 定义。当你是用基于XML的配置元数据时，你可以使用 <code>parent</code> 特性来表示这是个子 bean 定义，父 bean 就被指定为这个特性的值。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3267,24 +3257,16 @@ specifying the parent bean as the value of this attribute.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A child bean definition uses the bean class from the parent definition if none is
-specified, but can also override it. In the latter case, the child bean class must be
-compatible with the parent, that is, it must accept the parent&#8217;s property values.</p>
+<p>如果子 bean 定义没有指定，那么它就会使用父定义中的 bean 定义，而且子定义还可以覆盖符定义。在后一种情况下，子定义必须与父定义兼容，也就是它必须接受父定义的属性值。</p>
 </div>
 <div class="paragraph">
-<p>A child bean definition inherits scope, constructor argument values, property values, and
-method overrides from the parent, with the option to add new values. Any scope, initialization
-method, destroy method, and/or <code>static</code> factory method settings that you specify will
-override the corresponding parent settings.</p>
+<p>子 bean 定义会从父定义中继承作用域，构造器参数值，属性值，可以覆盖父定义中的方法，可以增加添加新值的选择。任何你指定的作用域，初始化方法，销毁方法，和/或 <code>静态</code> 工厂方法设置都将会覆盖相应的父定义中的配置。</p>
 </div>
 <div class="paragraph">
-<p>The remaining settings are <em>always</em> taken from the child definition: <em>depends on</em>,
-<em>autowire mode</em>, <em>dependency check</em>, <em>singleton</em>, <em>lazy init</em>.</p>
+<p>其他剩下的设置 <em>都是</em> 从子定义获取的：<em>依赖</em>，<em>自动装配模式</em>，<em>依赖项检测</em>，<em>单例</em>，<em>懒加载</em>。</p>
 </div>
 <div class="paragraph">
-<p>The preceding example explicitly marks the parent bean definition as abstract by using
-the <code>abstract</code> attribute. If the parent definition does not specify a class, explicitly
-marking the parent bean definition as <code>abstract</code> is required, as follows:</p>
+<p>前面的例子显式地通过 <code>abstract</code> 特性将父 bean 定义标记为抽象的。如果父定义没有指定具体的类，那么将父 bean 定义标记为 <code>abstract</code> 是必须的，如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3301,14 +3283,7 @@ marking the parent bean definition as <code>abstract</code> is required, as foll
 </div>
 </div>
 <div class="paragraph">
-<p>The parent bean cannot be instantiated on its own because it is incomplete, and it is
-also explicitly marked as <code>abstract</code>. When a definition is <code>abstract</code> like this, it is
-usable only as a pure template bean definition that serves as a parent definition for
-child definitions. Trying to use such an <code>abstract</code> parent bean on its own, by referring
-to it as a ref property of another bean or doing an explicit <code>getBean()</code> call with the
-parent bean id, returns an error. Similarly, the container&#8217;s internal
-<code>preInstantiateSingletons()</code> method ignores bean definitions that are defined as
-abstract.</p>
+<p>父 bean 定义不能仅仅靠它自己实例化，因为它是不完整的，而且显式地被标记为 <code>抽象的</code>。如果某个定义是<code>abstract</code>，那么它只能作为一个纯净的 bean 定义模板，也就是专门为子定义服务的父定义。如果你试图通过将它作为另一个 bean 的引用属性值来单独使用这样一个 <code>abstract</code> 父 bena，或者用这个父 bean id 显式地调用<code>getBean()</code>，那么程序将会返回一个错误。类似地，容器内部的 <code>preInstantiateSingletons()</code> 方法也会忽略抽象 bean 定义。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3318,11 +3293,7 @@ abstract.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>ApplicationContext</code> pre-instantiates all singletons by default. Therefore, it is
-important (at least for singleton beans) that if you have a (parent) bean definition
-which you intend to use only as a template, and this definition specifies a class, you
-must make sure to set the <em>abstract</em> attribute to <em>true</em>, otherwise the application
-context will actually (attempt to) pre-instantiate the <code>abstract</code> bean.</p>
+<p><code>ApplicationContext</code> 默认预实例化所有单例 bean。因此，如果你有一个已经指定了一个具体的类（父）bean 定义，且你只想要将它作为一个模板，那么你必须确保将它的 <em>abstract</em> 特性设置成 <em>true</em>（至少对于单例 bean 这是很重要的），否则应用上下文会（试图）预实例化这个 <code>abstract</code> bean。</p>
 </div>
 </td>
 </tr>
