@@ -2722,14 +2722,11 @@ beanFactory.registerScope(<span class="string"><span class="delimiter">&quot;</s
 </div>
 </div>
 <div class="sect2">
-<h3 id="beans-factory-nature"><a class="anchor" href="#beans-factory-nature"></a>1.6. Customizing the nature of a bean</h3>
+<h3 id="beans-factory-nature"><a class="anchor" href="#beans-factory-nature"></a>1.6. 对 bean 的性质进行自定义</h3>
 <div class="sect3">
-<h4 id="beans-factory-lifecycle"><a class="anchor" href="#beans-factory-lifecycle"></a>1.6.1. Lifecycle callbacks</h4>
+<h4 id="beans-factory-lifecycle"><a class="anchor" href="#beans-factory-lifecycle"></a>1.6.1. 生命周期回调</h4>
 <div class="paragraph">
-<p>To interact with the container&#8217;s management of the bean lifecycle, you can implement the
-Spring <code>InitializingBean</code> and <code>DisposableBean</code> interfaces. The container calls
-<code>afterPropertiesSet()</code> for the former and <code>destroy()</code> for the latter to allow the bean
-to perform certain actions upon initialization and destruction of your beans.</p>
+<p>为了能与容器对 bean 生命周期管理交互，你可以实现 <code>InitializingBean</code> 和 <code>DisposableBean</code> 接口。容器在初始化 bean 时会调用 <code>InitializingBean</code> 的 <code>afterPropertiesSet()</code> 方法，在销毁 bean 时会调用 <code>DisposableBean</code> 的 <code>destroy()</code>方法。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2739,40 +2736,28 @@ to perform certain actions upon initialization and destruction of your beans.</p
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The JSR-250 <code>@PostConstruct</code> and <code>@PreDestroy</code> annotations are generally considered best
-practice for receiving lifecycle callbacks in a modern Spring application. Using these
-annotations means that your beans are not coupled to Spring specific interfaces. For
-details see <a href="#beans-postconstruct-and-predestroy-annotations">@PostConstruct and @PreDestroy</a>.</p>
+<p>JSR-250 的 <code>@PostConstruct</code> 和 <code>@PreDestroy</code> 注解通常被认为是在现代 Spring 应用中接收声明周期回调的最佳实践。使用这些注解意味着你的 bean 与特定的 Spring 接口不再耦合在一起了。关于细节参见<a href="#beans-postconstruct-and-predestroy-annotations">@PostConstruct 和 @PreDestroy</a>。</p>
 </div>
 <div class="paragraph">
-<p>If you don&#8217;t want to use the JSR-250 annotations but you are still looking to remove
-coupling consider the use of init-method and destroy-method object definition metadata.</p>
+<p>如果你不想使用 JSR-250 注解但仍寻求消除耦合，那么可以考虑使用 init-method 和 destroy-method 对象定义元数据。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Internally, the Spring Framework uses <code>BeanPostProcessor</code> implementations to process any
-callback interfaces it can find and call the appropriate methods. If you need custom
-features or other lifecycle behavior Spring does not offer out-of-the-box, you can
-implement a <code>BeanPostProcessor</code> yourself. For more information, see
-<a href="#beans-factory-extension">Container Extension Points</a>.</p>
+<p>在 Spring 内部，Spring 框架使用 <code>BeanPostProcessor</code> 实现来处理任何它能发现的回调接口并调用合适的方法。如果你需要自定义 Spring 不能提供的开箱即用的功能或其他生命周期行为，你可以自己实现一个 <code>BeanPostProcessor</code> 接口。关于更多信息，参见 <a href="#beans-factory-extension">容器扩展点</a>。</p>
 </div>
 <div class="paragraph">
-<p>In addition to the initialization and destruction callbacks, Spring-managed objects may
-also implement the <code>Lifecycle</code> interface so that those objects can participate in the
-startup and shutdown process as driven by the container&#8217;s own lifecycle.</p>
+<p>除了初始化回调方法和销毁毁掉方法，Spring 管理的对象也可以实现 <code>Lifecycle</code> 接口以便这些对象能参与到容器自身生命周期驱动的启动和关闭过程。</p>
 </div>
 <div class="paragraph">
-<p>The lifecycle callback interfaces are described in this section.</p>
+<p>这小节描述了生命周期回调的接口。</p>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lifecycle-initializingbean"><a class="anchor" href="#beans-factory-lifecycle-initializingbean"></a>Initialization callbacks</h5>
+<h5 id="beans-factory-lifecycle-initializingbean"><a class="anchor" href="#beans-factory-lifecycle-initializingbean"></a>初始化回调</h5>
 <div class="paragraph">
-<p>The <code>org.springframework.beans.factory.InitializingBean</code> interface allows a bean to
-perform initialization work after all necessary properties on the bean have been set by
-the container. The <code>InitializingBean</code> interface specifies a single method:</p>
+<p><code>org.springframework.beans.factory.InitializingBean</code> 接口允许 bean 在容器对它设置完所有必须属性之后执行初始化工作。<code>InitializingBean</code> 接口指定了一个方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2780,13 +2765,7 @@ the container. The <code>InitializingBean</code> interface specifies a single me
 </div>
 </div>
 <div class="paragraph">
-<p>It is recommended that you do not use the <code>InitializingBean</code> interface because it
-unnecessarily couples the code to Spring. Alternatively, use
-the <a href="#beans-postconstruct-and-predestroy-annotations"><code>@PostConstruct</code></a> annotation or
-specify a POJO initialization method. In the case of XML-based configuration metadata,
-you use the <code>init-method</code> attribute to specify the name of the method that has a void
-no-argument signature. With Java config, you use the <code>initMethod</code> attribute of <code>@Bean</code>,
-see <a href="#beans-java-lifecycle-callbacks">Receiving lifecycle callbacks</a>. For example, the following:</p>
+<p>建议你不要使用 <code>InitializingBean</code> 接口，因为它将代码与 Spring 进行了不必要的耦合。作为替代方法，你可以使用 <a href="#beans-postconstruct-and-predestroy-annotations"><code>@PostConstruct</code></a> 注解或者指定一个 POJO 初始化方法。对于基于XML的配置元数据，你可以使用 <code>init-method</code> 特性来指定一个返回值为 void 的无入参方法的方法名。对于 Java 配置，你可以使用 <code>@Bean</code> 的 <code>initMethod</code> 特性，参见 <a href="#beans-java-lifecycle-callbacks">接收声明周期回调</a>。 例如，下面的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2804,7 +2783,7 @@ see <a href="#beans-java-lifecycle-callbacks">Receiving lifecycle callbacks</a>.
 </div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;is exactly the same as&#8230;&#8203;</p>
+<p>&#8230;&#8203;等价于&#8230;&#8203;</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2822,15 +2801,13 @@ see <a href="#beans-java-lifecycle-callbacks">Receiving lifecycle callbacks</a>.
 </div>
 </div>
 <div class="paragraph">
-<p>but does not couple the code to Spring.</p>
+<p>但没有将代码与 Spring 耦合起来。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lifecycle-disposablebean"><a class="anchor" href="#beans-factory-lifecycle-disposablebean"></a>Destruction callbacks</h5>
+<h5 id="beans-factory-lifecycle-disposablebean"><a class="anchor" href="#beans-factory-lifecycle-disposablebean"></a>销毁回调</h5>
 <div class="paragraph">
-<p>Implementing the <code>org.springframework.beans.factory.DisposableBean</code> interface allows a
-bean to get a callback when the container containing it is destroyed. The
-<code>DisposableBean</code> interface specifies a single method:</p>
+<p>实现 <code>org.springframework.beans.factory.DisposableBean</code> 接口允许 bean 在包含它的容器销毁时得到一个回调方法。<code>DisposableBean</code> 接口指定了一个方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2838,13 +2815,7 @@ bean to get a callback when the container containing it is destroyed. The
 </div>
 </div>
 <div class="paragraph">
-<p>It is recommended that you do not use the <code>DisposableBean</code> callback interface because it
-unnecessarily couples the code to Spring. Alternatively, use
-the <a href="#beans-postconstruct-and-predestroy-annotations"><code>@PreDestroy</code></a> annotation or
-specify a generic method that is supported by bean definitions. With XML-based
-configuration metadata, you use the <code>destroy-method</code> attribute on the <code>&lt;bean/&gt;</code>.
-With Java config, you use the <code>destroyMethod</code> attribute of <code>@Bean</code>, see
-<a href="#beans-java-lifecycle-callbacks">Receiving lifecycle callbacks</a>. For example, the following definition:</p>
+<p>建议你不要使用 <code>DisposableBean</code> 接口，因为它将代码与 Spring 进行了不必要的耦合。作为替代方法，你可以使用 <a href="#beans-postconstruct-and-predestroy-annotations"><code>@PreDestroy</code></a> 接口或者指定一个 bean 定义支持的通用方法。对于基于XML的配置元数据，你可以使用 <code>&lt;bean/&gt;</code> 元素的 <code>destroy-method</code> 特性。对于 Java 配置，你可以使用 <code>@Bean</code> 的 <code>destroyMethod</code> 特性，参见 <a href="#beans-java-lifecycle-callbacks">接收声明周期回调</a>。例如，下面的定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2862,7 +2833,7 @@ With Java config, you use the <code>destroyMethod</code> attribute of <code>@Bea
 </div>
 </div>
 <div class="paragraph">
-<p>is exactly the same as:</p>
+<p>等价于：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2880,7 +2851,7 @@ With Java config, you use the <code>destroyMethod</code> attribute of <code>@Bea
 </div>
 </div>
 <div class="paragraph">
-<p>but does not couple the code to Spring.</p>
+<p>但没有将代码与 Spring 耦合起来。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2890,14 +2861,8 @@ With Java config, you use the <code>destroyMethod</code> attribute of <code>@Bea
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>destroy-method</code> attribute of a <code>&lt;bean&gt;</code> element can be assigned a special
-<code>(inferred)</code> value which instructs Spring to automatically detect a public <code>close</code> or
-<code>shutdown</code> method on the specific bean class (any class that implements
-<code>java.lang.AutoCloseable</code> or <code>java.io.Closeable</code> would therefore match). This special
-<code>(inferred)</code> value can also be set on the <code>default-destroy-method</code> attribute of a
-<code>&lt;beans&gt;</code> element to apply this behavior to an entire set of beans (see
-<a href="#beans-factory-lifecycle-default-init-destroy-methods">Default initialization and destroy methods</a>). Note that this is the
-default behavior with Java config.</p>
+<p><code>&lt;bean&gt;</code> 元素的 <code>destroy-method</code> 特性会被赋予一个特殊值 <code>(inferred)</code>，它会引导 Spring 自动检测指定 bean 类的公有 <code>close</code> 或者
+<code>shutdown</code> 方法（可以匹配任何实现 <code>java.lang.AutoCloseable</code> 或者 <code>java.io.Closeable</code> 的类）。为了将此行为应用到一个完整的 bean 集合中，这个特殊<code>(inferred)</code> 值也可以被设置到 <code>&lt;beans&gt;</code> 元素的 <code>default-destroy-method</code> 特性上（参见 <a href="#beans-factory-lifecycle-default-init-destroy-methods">默认初始化和销毁方法</a>）。注意着也是 Java 配置的默认行为。</p>
 </div>
 </td>
 </tr>
@@ -2905,28 +2870,15 @@ default behavior with Java config.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lifecycle-default-init-destroy-methods"><a class="anchor" href="#beans-factory-lifecycle-default-init-destroy-methods"></a>Default initialization and destroy methods</h5>
+<h5 id="beans-factory-lifecycle-default-init-destroy-methods"><a class="anchor" href="#beans-factory-lifecycle-default-init-destroy-methods"></a> 默认初始化和销毁方法</h5>
 <div class="paragraph">
-<p>When you write initialization and destroy method callbacks that do not use the
-Spring-specific <code>InitializingBean</code> and <code>DisposableBean</code> callback interfaces, you
-typically write methods with names such as <code>init()</code>, <code>initialize()</code>, <code>dispose()</code>, and so
-on. Ideally, the names of such lifecycle callback methods are standardized across a
-project so that all developers use the same method names and ensure consistency.</p>
+<p>如果你不使用 Spring 指定的 <code>InitializingBean</code> 和 <code>DisposableBean</code> 回调接口编写初始化和销毁方法回调，你可以编写名为 <code>init()</code>，<code>initialize()</code>，<code>dispose()</code> 等等这样的方法。这些生命周期回调方法的名字应该在从整个工程中都是标准化的，这样所有开发者都能使用同样的方法名也能保证一致性。</p>
 </div>
 <div class="paragraph">
-<p>You can configure the Spring container to <code>look</code> for named initialization and destroy
-callback method names on <em>every</em> bean. This means that you, as an application
-developer, can write your application classes and use an initialization callback called
-<code>init()</code>, without having to configure an <code>init-method="init"</code> attribute with each bean
-definition. The Spring IoC container calls that method when the bean is created (and in
-accordance with the standard lifecycle callback contract described previously). This
-feature also enforces a consistent naming convention for initialization and destroy
-method callbacks.</p>
+<p>你可以对 Spring 容器进行配置，使它能查找每个 bean 的初始化和销毁回调方法。这意味着作为一个应用开发者，你可以编写你自己的应用类并使用名为 <code>init()</code> 的初始化回调方法，而不必在每个 bean 定义真配置一个 <code>init-method="init"</code> 特性。Spring IoC 容器会在 bean 创建的时候告诉那个方法（按照前面描述的标准生命周期回调约定）。这个特性也强迫初始化和销毁方法回调的命名规则必须有一致性约束。</p>
 </div>
 <div class="paragraph">
-<p>Suppose that your initialization callback methods are named <code>init()</code> and destroy
-callback methods are named <code>destroy()</code>. Your class will resemble the class in the
-following example.</p>
+<p>假设你的初始化回调方法名为 <code>init()</code>，销毁回调方法名为 <code>destroy()</code>。你的类会与下面例子类似。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2959,43 +2911,24 @@ following example.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The presence of the <code>default-init-method</code> attribute on the top-level <code>&lt;beans/&gt;</code> element
-attribute causes the Spring IoC container to recognize a method called <code>init</code> on beans
-as the initialization method callback. When a bean is created and assembled, if the bean
-class has such a method, it is invoked at the appropriate time.</p>
+<p>位于顶层 <code>&lt;beans/&gt;</code> 元素的 <code>default-init-method</code> 特性会让 Spring IoC 容器将 bean 中名为 <code>init</code> 的方法识别为初始化回调方法。当 bean 被创建和装配的时候，如果它又这么一个方法，那么它将会在适当的时候被调用。</p>
 </div>
 <div class="paragraph">
-<p>You configure destroy method callbacks similarly (in XML, that is) by using the
-<code>default-destroy-method</code> attribute on the top-level <code>&lt;beans/&gt;</code> element.</p>
+<p>类似的，你可以在顶层 <code>&lt;beans/&gt;</code> 元素的 <code>default-destroy-method</code> 特性（在XML中）中配置销毁方法回调。</p>
 </div>
 <div class="paragraph">
-<p>Where existing bean classes already have callback methods that are named at variance
-with the convention, you can override the default by specifying (in XML, that is) the
-method name using the <code>init-method</code> and <code>destroy-method</code> attributes of the <code>&lt;bean/&gt;</code>
-itself.</p>
+<p>在现有 bean 类已经有不符合命名规范的回调方法的情况下，你可以（在XML中）通过在 <code>&lt;bean/&gt;</code> 的 <code>init-method</code> 和 <code>destroy-method</code> 特性中方法名来覆盖默行为。</p>
 </div>
 <div class="paragraph">
-<p>The Spring container guarantees that a configured initialization callback is called
-immediately after a bean is supplied with all dependencies. Thus the initialization
-callback is called on the raw bean reference, which means that AOP interceptors and so
-forth are not yet applied to the bean. A target bean is fully created <em>first</em>,
-<em>then</em> an AOP proxy (for example) with its interceptor chain is applied. If the target
-bean and the proxy are defined separately, your code can even interact with the raw
-target bean, bypassing the proxy. Hence, it would be inconsistent to apply the
-interceptors to the init method, because doing so would couple the lifecycle of the
-target bean with its proxy/interceptors and leave strange semantics when your code
-interacts directly to the raw target bean.</p>
+<p> Spring 容器保证一旦 bean 被提供所有依赖项后，它就会立即执行配置的初始化回调。因此初始化回调会在原始 bean 引用上调用，这意味着这个时候 AOP 拦截器等还不能应用到这个 bean 中。首先目标 bean 被完整创建出来，然后才会应用带有拦截器链的 AOP 代理（举个例子）。如果目标 bean 和代理分别被独立定义了，那么你的的代码甚至能绕过代理直接与原始目标 bean 进行交互。因此将拦截器应用到初始化方法上可能会导致不一致性，因为这么做会使目标 bean 的生命周期与它的代理/拦截器互相耦合，且当你的代码与原始目标 bean 交互时导致出现奇怪的语义。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lifecycle-combined-effects"><a class="anchor" href="#beans-factory-lifecycle-combined-effects"></a>Combining lifecycle mechanisms</h5>
+<h5 id="beans-factory-lifecycle-combined-effects"><a class="anchor" href="#beans-factory-lifecycle-combined-effects"></a>结合生命周期机制</h5>
 <div class="paragraph">
-<p>As of Spring 2.5, you have three options for controlling bean lifecycle behavior: the
-<a href="#beans-factory-lifecycle-initializingbean"><code>InitializingBean</code></a> and
-<a href="#beans-factory-lifecycle-disposablebean"><code>DisposableBean</code></a> callback interfaces; custom
-<code>init()</code> and <code>destroy()</code> methods; and the
-<a href="#beans-postconstruct-and-predestroy-annotations"><code>@PostConstruct</code> and <code>@PreDestroy</code>
-annotations</a>. You can combine these mechanisms to control a given bean.</p>
+<p>从 Spring 2.5 开始，你有三个选择来控制 bean 的声明周期行为：<a href="#beans-factory-lifecycle-initializingbean"><code>InitializingBean</code></a> 和
+<a href="#beans-factory-lifecycle-disposablebean"><code>DisposableBean</code></a> 回调接口；自定义
+<code>init()</code> 和 <code>destroy()</code> 方法；<a href="#beans-postconstruct-and-predestroy-annotations"><code>@PostConstruct</code> 和 <code>@PreDestroy</code> 注解</a>。你可以将这些机制结合起来控制一个给定的 bean。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3005,55 +2938,49 @@ annotations</a>. You can combine these mechanisms to control a given bean.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If multiple lifecycle mechanisms are configured for a bean, and each mechanism is
-configured with a different method name, then each configured method is executed in the
-order listed below. However, if the same method name is configured - for example,
-<code>init()</code> for an initialization method - for more than one of these lifecycle mechanisms,
-that method is executed once, as explained in the preceding section.</p>
+<p>如果一个 bean 配置了多种生命周期机制，且每种机制都配置了不同的方法名，那么每个配置的方法都会按下表所列的顺序分别执行。但是，如果不同机制配置了相同的方法名——例如，在不止一个生命周期机制中配置了同名的初始化方法 <code>init()</code> ——那么这个方法就会像前一小节说的那样只执行一次。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Multiple lifecycle mechanisms configured for the same bean, with different
-initialization methods, are called as follows:</p>
+<p>对于同一个 bean，配置了多个声明周期，并有不同的初始化方法，那么他们的调用顺序如下：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Methods annotated with <code>@PostConstruct</code></p>
+<p>有 <code>@PostConstruct</code> 注解的方法</p>
 </li>
 <li>
-<p><code>afterPropertiesSet()</code> as defined by the <code>InitializingBean</code> callback interface</p>
+<p><code>InitializingBean</code> 回调接口定义的 <code>afterPropertiesSet()</code> 方法</p>
 </li>
 <li>
-<p>A custom configured <code>init()</code> method</p>
+<p>自定义的 <code>init()</code> 方法</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Destroy methods are called in the same order:</p>
+<p>销毁方法也以相同的顺序调用：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Methods annotated with <code>@PreDestroy</code></p>
+<p>有 <code>@PreDestroy</code> 注解的方法</p>
 </li>
 <li>
-<p><code>destroy()</code> as defined by the <code>DisposableBean</code> callback interface</p>
+<p><code>DisposableBean</code> 回调接口定义的 <code>destroy()</code> 方法</p>
 </li>
 <li>
-<p>A custom configured <code>destroy()</code> method</p>
+<p>自定义的 <code>destroy()</code> 方法</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lifecycle-processor"><a class="anchor" href="#beans-factory-lifecycle-processor"></a>Startup and shutdown callbacks</h5>
+<h5 id="beans-factory-lifecycle-processor"><a class="anchor" href="#beans-factory-lifecycle-processor"></a>启动和关闭回调方法</h5>
 <div class="paragraph">
-<p>The <code>Lifecycle</code> interface defines the essential methods for any object that has its own
-lifecycle requirements (e.g. starts and stops some background process):</p>
+<p><code>Lifecycle</code> 接口为任何有用它自己生命周期需求的对象定义了一些必备的基本方法（例如开始和停止某个后台处理过程）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3068,10 +2995,7 @@ lifecycle requirements (e.g. starts and stops some background process):</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Any Spring-managed object may implement that interface. Then, when the
-<code>ApplicationContext</code> itself receives start and stop signals, e.g. for a stop/restart
-scenario at runtime, it will cascade those calls to all <code>Lifecycle</code> implementations
-defined within that context. It does this by delegating to a <code>LifecycleProcessor</code>:</p>
+<p>任何 Spring 管理的对象都可以实现那个接口。当 <code>ApplicationContext</code> 本身接收到开始和停止信号时，例如运行时的停止/重启场景，它会级联调用所有上下文中定义的 <code>Lifecycle</code> 实现。这个功能是通过将 <code>LifecycleProcessor</code> 作为委托来完成的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3084,9 +3008,7 @@ defined within that context. It does this by delegating to a <code>LifecycleProc
 </div>
 </div>
 <div class="paragraph">
-<p>Notice that the <code>LifecycleProcessor</code> is itself an extension of the <code>Lifecycle</code>
-interface. It also adds two other methods for reacting to the context being refreshed
-and closed.</p>
+<p>注意 <code>LifecycleProcessor</code> 本身是 <code>Lifecycle</code> 接口的继承接口。另外它还添加了另外两个方法来响应上下文的刷新和关闭。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -3096,27 +3018,14 @@ and closed.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Note that the regular <code>org.springframework.context.Lifecycle</code> interface is just a plain
-contract for explicit start/stop notifications and does NOT imply auto-startup at context
-refresh time. Consider implementing <code>org.springframework.context.SmartLifecycle</code> instead
-for fine-grained control over auto-startup of a specific bean (including startup phases).
-Also, please note that stop notifications are not guaranteed to come before destruction:
-On regular shutdown, all <code>Lifecycle</code> beans will first receive a stop notification before
-the general destruction callbacks are being propagated; however, on hot refresh during a
-context&#8217;s lifetime or on aborted refresh attempts, only destroy methods will be called.</p>
+<p>注意常规的 <code>org.springframework.context.Lifecycle</code> 接口只是一个显式的开始/停止通知的协议，并不意味着上下文刷新时的自动启动。考虑实现 <code>org.springframework.context.SmartLifecycle</code> 接口而不是通过指定 bean 的自动启动来进行细粒度的控制(包括启动阶段)。还要注意的是停止通知并不保证一定会在销毁之前到来：在正常关闭的时候，所有 <code>Lifecycle</code> bean 会在通用销毁回调传递之前首先收到停止通知；但是对于上下文生命周期的热刷新和取消刷新尝试，只有调用销毁方法。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The order of startup and shutdown invocations can be important. If a "depends-on"
-relationship exists between any two objects, the dependent side will start <em>after</em> its
-dependency, and it will stop <em>before</em> its dependency. However, at times the direct
-dependencies are unknown. You may only know that objects of a certain type should start
-prior to objects of another type. In those cases, the <code>SmartLifecycle</code> interface defines
-another option, namely the <code>getPhase()</code> method as defined on its super-interface,
-<code>Phased</code>.</p>
+<p>启动和关闭调用的顺序是很重要的。如果任何两个对象之间存在一个依赖关系，那么依赖方会在它的依赖项之后启动，且会在它的依赖项之前停止。但是，有时候直接依赖关系是未知的。你可能只知道某个类型的对象应该在另一个类型的对象之前启动。在那种情况下，<code>SmartLifecycle</code> 定义了另一种选择，即在它的父接口 <code>Phased</code> 中定义了 <code>getPhase()</code> 方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3137,27 +3046,10 @@ another option, namely the <code>getPhase()</code> method as defined on its supe
 </div>
 </div>
 <div class="paragraph">
-<p>When starting, the objects with the lowest phase start first, and when stopping, the
-reverse order is followed. Therefore, an object that implements <code>SmartLifecycle</code> and
-whose <code>getPhase()</code> method returns <code>Integer.MIN_VALUE</code> would be among the first to start
-and the last to stop. At the other end of the spectrum, a phase value of
-<code>Integer.MAX_VALUE</code> would indicate that the object should be started last and stopped
-first (likely because it depends on other processes to be running). When considering the
-phase value, it&#8217;s also important to know that the default phase for any "normal"
-<code>Lifecycle</code> object that does not implement <code>SmartLifecycle</code> would be 0. Therefore, any
-negative phase value would indicate that an object should start before those standard
-components (and stop after them), and vice versa for any positive phase value.</p>
+<p>启动的时候，最低 phase 的对象先启动，停止的时候，正好相反，最高 phase 的对象先停止。因此对于一个实现了 <code>SmartLifecycle</code> 接口的对象，如果它的 <code>getPhase()</code> 方法返回 <code>Integer.MIN_VALUE</code>，那么它就会最先启动，最后停止。在 phase 范围的另一端，一个 <code>Integer.MAX_VALUE</code> 值表明对象应该最后启动，最先停止（可能是因为它依赖其他正在运行的进程）。当考虑 phase 值的设定时，还有一点很重要，那就是说任何没有实现 <code>SmartLifecycle</code> 接口的“正常”对象的 phase 默认值是0。因此，任何为负值的 phase 值意味着此对象应该在标准组件启动之前启动（在它们停止之后停止）；当phase 为正值的时候刚好相反。</p>
 </div>
 <div class="paragraph">
-<p>As you can see the stop method defined by <code>SmartLifecycle</code> accepts a callback. Any
-implementation <em>must</em> invoke that callback&#8217;s <code>run()</code> method after that implementation&#8217;s
-shutdown process is complete. That enables asynchronous shutdown where necessary since
-the default implementation of the <code>LifecycleProcessor</code> interface,
-<code>DefaultLifecycleProcessor</code>, will wait up to its timeout value for the group of objects
-within each phase to invoke that callback. The default per-phase timeout is 30 seconds.
-You can override the default lifecycle processor instance by defining a bean named
-"lifecycleProcessor" within the context. If you only want to modify the timeout, then
-defining the following would be sufficient:</p>
+<p>正如你所见，<code>SmartLifecycle</code> 定义的 stop 方法接收一个回调。任何实现在实现的关闭进程完成之后都必须调用那个回调的 <code>run()</code> 方法。这使得在需要是可以进行异步关闭，因为 <code>LifecycleProcessor</code> 接口的默认实现 <code>DefaultLifecycleProcessor</code> 会为一组对象的每个阶段等待直到超时，然后调用回调方法。默认的每个阶段的超时时间是30秒。你可以通过在上下文中定一个名为“lifecycleProcessor”的 bean 来覆盖默认的生命周期处理器（lifecycle processor）实例。如果你只是想修改超时值，那么下面的定义就足够了：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3168,23 +3060,11 @@ defining the following would be sufficient:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As mentioned, the <code>LifecycleProcessor</code> interface defines callback methods for the
-refreshing and closing of the context as well. The latter will simply drive the shutdown
-process as if <code>stop()</code> had been called explicitly, but it will happen when the context is
-closing. The 'refresh' callback on the other hand enables another feature of
-<code>SmartLifecycle</code> beans. When the context is refreshed (after all objects have been
-instantiated and initialized), that callback will be invoked, and at that point the
-default lifecycle processor will check the boolean value returned by each
-<code>SmartLifecycle</code> object&#8217;s <code>isAutoStartup()</code> method. If "true", then that object will be
-started at that point rather than waiting for an explicit invocation of the context&#8217;s or
-its own <code>start()</code> method (unlike the context refresh, the context start does not happen
-automatically for a standard context implementation). The "phase" value as well as any
-"depends-on" relationships will determine the startup order in the same way as described
-above.</p>
+<p>如上面提到的，<code>LifecycleProcessor</code> 接口为上下文的刷新和关闭也定义了回调。后者会简单地驱动关闭进程就像显式调用了 <code>stop()</code> 方法，但它只会在上下文关闭的时候执行。另一方面，refresh 回调使 <code>SmartLifecycle</code> bean 的另一个特性可用。回调会在上下文刷新的时候（在所有对象实例化和初始化完成之后）被调用，默认生命周期处理器会在那个时间点检查每个 <code>SmartLifecycle</code> 对象的 <code>isAutoStartup()</code> 方法返回的布尔值。如果返回的是“true”，那么对象就会立即启动而不是等待上下文的显式调用或者它自己的 <code>start()</code> 方法（与上下文刷新不同，对于一个标准的上下文实现，它的启动不会自动发生）。与依赖关系一样，“phase” 值也会以前面描述的相同方式来决定启动顺序。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-shutdown"><a class="anchor" href="#beans-factory-shutdown"></a>Shutting down the Spring IoC container gracefully in non-web applications</h5>
+<h5 id="beans-factory-shutdown"><a class="anchor" href="#beans-factory-shutdown"></a>在非web应用中优雅地关闭 Spring IoC 容器</h5>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -3193,24 +3073,17 @@ above.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This section applies only to non-web applications. Spring&#8217;s web-based
-<code>ApplicationContext</code> implementations already have code in place to shut down the Spring
-IoC container gracefully when the relevant web application is shut down.</p>
+<p>本节只适用于非 web 应用。Spring 的基于web的 code>ApplicationContext</code> 实现已经有相关代码来处理当相关的web应用关闭时，如何优雅地关闭 Spring IoC 容器。h</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If you are using Spring&#8217;s IoC container in a non-web application environment; for
-example, in a rich client desktop environment; you register a shutdown hook with the
-JVM. Doing so ensures a graceful shutdown and calls the relevant destroy methods on your
-singleton beans so that all resources are released. Of course, you must still configure
-and implement these destroy callbacks correctly.</p>
+<p>如果你正在一个非web应用环境中使用 Spring IoC 容器；例如，在一个富客户端桌面环境中；你可以在 JVM 中注册一个关闭 hook。这么做保证了一次优雅的关闭且会调用所有单例 bean 的相关销毁方法以便释放所有资源。当然你仍然必须正确配置和实现这些销毁回调方法。</p>
 </div>
 <div class="paragraph">
-<p>To register a shutdown hook, you call the <code>registerShutdownHook()</code> method that is
-declared on the <code>ConfigurableApplicationContext</code> interface:</p>
+<p>为注册一个关闭 hook，你可以调用 <code>ConfigurableApplicationContext</code> 接口中声明的 <code>registerShutdownHook()</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3235,11 +3108,9 @@ declared on the <code>ConfigurableApplicationContext</code> interface:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-factory-aware"><a class="anchor" href="#beans-factory-aware"></a>1.6.2. ApplicationContextAware and BeanNameAware</h4>
+<h4 id="beans-factory-aware"><a class="anchor" href="#beans-factory-aware"></a>1.6.2. ApplicationContextAware 和 BeanNameAware</h4>
 <div class="paragraph">
-<p>When an <code>ApplicationContext</code> creates an object instance that implements the
-<code>org.springframework.context.ApplicationContextAware</code> interface, the instance is provided
-with a reference to that <code>ApplicationContext</code>.</p>
+<p>当 <code>ApplicationContext</code> 创建了一个实现了 <code>org.springframework.context.ApplicationContextAware</code> 接口的对象实例，这个实例会拥有一个指向那个 <code>ApplicationContext</code> 的引用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3250,33 +3121,13 @@ with a reference to that <code>ApplicationContext</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Thus beans can manipulate programmatically the <code>ApplicationContext</code> that created them,
-through the <code>ApplicationContext</code> interface, or by casting the reference to a known
-subclass of this interface, such as <code>ConfigurableApplicationContext</code>, which exposes
-additional functionality. One use would be the programmatic retrieval of other beans.
-Sometimes this capability is useful; however, in general you should avoid it, because it
-couples the code to Spring and does not follow the Inversion of Control style, where
-collaborators are provided to beans as properties. Other methods of the
-<code>ApplicationContext</code> provide access to file resources, publishing application events, and
-accessing a <code>MessageSource</code>. These additional features are described in
-<a href="#context-introduction">Additional Capabilities of the ApplicationContext</a></p>
+<p>因此 bean 可以通过 <code>ApplicationContext</code> 接口，或者通过将这个接口（如暴露额外功能的 <code>ConfigurableApplicationContext</code>）强转成它已知子类的引用来以编码方式操控创建它们的 <code>ApplicationContext</code>。这种能力的其中一个用途是可以以编程方式对其他 bean 进行检索。有时候这种能力很有用；但是一般情况下你应该避免使用它，因为它将代码与 Spring  合起来了，而且也没有遵守控制反转风格，在控制反转中协作者是作为属性提供给 bean 的。<code>ApplicationContext</code> 的其他方法有提供文件资源访问的，发布应用事件的，访问 <code>MessageSource</code> 的。这些额外特性在 <a href="#context-introduction">ApplicationContext 的额外能力</a> 描述。</p>
 </div>
 <div class="paragraph">
-<p>As of Spring 2.5, autowiring is another alternative to obtain reference to the
-<code>ApplicationContext</code>. The "traditional" <code>constructor</code> and <code>byType</code> autowiring modes (as
-described in <a href="#beans-factory-autowire">Autowiring collaborators</a>) can provide a dependency of type
-<code>ApplicationContext</code> for a constructor argument or setter method parameter,
-respectively. For more flexibility, including the ability to autowire fields and
-multiple parameter methods, use the new annotation-based autowiring features. If you do,
-the <code>ApplicationContext</code> is autowired into a field, constructor argument, or method
-parameter that is expecting the <code>ApplicationContext</code> type if the field, constructor, or
-method in question carries the <code>@Autowired</code> annotation. For more information, see
-<a href="#beans-autowired-annotation">@Autowired</a>.</p>
+<p>从Spring 2.5 开始，自动装备成为另一种获取 <code>ApplicationContext</code> 引用的备用选择。“传统的”  <code>constructor</code> 和 <code>byType</code> 自动装配模式（如 <a href="#beans-factory-autowire">自动装配协作者</a> 中描述的那样) 可以分别为构造器实参和 setter 方法形参提供 <code>ApplicationContext</code> 类型的依赖项。使用新的基于注解的自动装配特性会更加具有灵活性，包括自动装配域的能力和自动装配多参数方法的能力。如果你这么做，那么 <code>ApplicationContext</code> 就会被自动装配到域中，构造器实参或方法形参中，如果此问题中的域，构造器实参或方法形参都期望获得 <code>ApplicationContext</code> 类型以依赖并带有 <code>@Autowired</code> 注解。更多信息，参见 <a href="#beans-autowired-annotation">@Autowired</a>。</p>
 </div>
 <div class="paragraph">
-<p>When an <code>ApplicationContext</code> creates a class that implements the
-<code>org.springframework.beans.factory.BeanNameAware</code> interface, the class is provided with
-a reference to the name defined in its associated object definition.</p>
+<p>当 <code>ApplicationContext</code> 创建了一个实现了 <code>org.springframework.beans.factory.BeanNameAware</code> 接口的类，这个类会拥有与它相关的对象定义中定义的名称的引用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3287,22 +3138,16 @@ a reference to the name defined in its associated object definition.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The callback is invoked after population of normal bean properties but before an
-initialization callback such as <code>InitializingBean</code> <em>afterPropertiesSet</em> or a custom
-init-method.</p>
+<p>这个回调会在很多正常 bean 属性设置之后，但是在如 <code>InitializingBean</code> 的 <em>afterPropertiesSet</em> 或者自定义 init-method 这样的初始化调用之前被调用。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aware-list"><a class="anchor" href="#aware-list"></a>1.6.3. Other Aware interfaces</h4>
+<h4 id="aware-list"><a class="anchor" href="#aware-list"></a>1.6.3. 其他 Aware 接口</h4>
 <div class="paragraph">
-<p>Besides <code>ApplicationContextAware</code> and <code>BeanNameAware</code> discussed above, Spring offers a
-range of <code>Aware</code> interfaces that allow beans to indicate to the container that they
-require a certain <em>infrastructure</em> dependency. The most important <code>Aware</code> interfaces
-are summarized below - as a general rule, the name is a good indication of the
-dependency type:</p>
+<p>除了上面讨论的 <code>ApplicationContextAware</code> 和 <code>BeanNameAware</code>，Spring 还提供了一系列 <code>Aware</code> 接口，这些接口允许 bean 向表明他们需要一个确定的基础结构依赖项。下面总结了一些最重要的 <code>Aware</code> 接口 —— 作为通用规则，依赖项的名字是推断他们是什么类型依赖的一个很好的依据：</p>
 </div>
 <table id="beans-factory-nature-aware-list" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 4. Aware interfaces</caption>
+<caption class="title">Table 4. Aware 接口</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -3310,9 +3155,9 @@ dependency type:</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Injected Dependency</th>
-<th class="tableblock halign-left valign-top">Explained in&#8230;&#8203;</th>
+<th class="tableblock halign-left valign-top">名字</th>
+<th class="tableblock halign-left valign-top">注入的依赖项</th>
+<th class="tableblock halign-left valign-top">具体解释入口</th>
 </tr>
 </thead>
 <tbody>
@@ -3383,9 +3228,7 @@ internationalization)</p></td>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Note again that usage of these interfaces ties your code to the Spring API and does not
-follow the Inversion of Control style. As such, they are recommended for infrastructure
-beans that require programmatic access to the container.</p>
+<p>再次提醒注意，对这些接口的使用将会使你的代码与 Spring API 绑定在一起，而且这不符合控制反转风格。因此，建议只对那些需要以编程方式访问容器的基础结构 bean 使用这种方式。</p>
 </div>
 </div>
 </div>
