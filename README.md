@@ -19,3 +19,9 @@ Chinese verion of Spring Framework 5 Reference Documentation (https://docs.sprin
 #### 编写参考
 
 https://github.com/waylau/spring-framework-4-reference
+
+### 关于html网而言太大，github打不开：
+
+您可以直接将github上html文件的url链接复制到 [html预览入口](http://htmlpreview.github.com/)的输入框中，如下
+
+![htmlpreview](howtopreviewhtml.png)
