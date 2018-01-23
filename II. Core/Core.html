@@ -2924,7 +2924,7 @@ beanFactory.registerScope(<span class="string"><span class="delimiter">&quot;</s
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-factory-lifecycle-combined-effects"><a class="anchor" href="#beans-factory-lifecycle-combined-effects"></a>结合生命周期机制</h5>
+<h5 id="beans-factory-lifecycle-combined-effects"><a class="anchor" href="#beans-factory-lifecycle-combined-effects"></a>组合生命周期机制</h5>
 <div class="paragraph">
 <p>从 Spring 2.5 开始，你有三个选择来控制 bean 的声明周期行为：<a href="#beans-factory-lifecycle-initializingbean"><code>InitializingBean</code></a> 和
 <a href="#beans-factory-lifecycle-disposablebean"><code>DisposableBean</code></a> 回调接口；自定义
@@ -3717,47 +3717,21 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="beans-annotation-config"><a class="anchor" href="#beans-annotation-config"></a>1.9. Annotation-based container configuration</h3>
+<h3 id="beans-annotation-config"><a class="anchor" href="#beans-annotation-config"></a>1.9. 基于注解的容器配置</h3>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">Are annotations better than XML for configuring Spring?</div>
+<div class="title">注解配置 Spring 比 XML 配置更好吗？</div>
 <div class="paragraph">
-<p>The introduction of annotation-based configurations raised the question of whether this
-approach is 'better' than XML. The short answer is <em>it depends</em>. The long answer is
-that each approach has its pros and cons, and usually it is up to the developer to
-decide which strategy suits them better. Due to the way they are defined, annotations
-provide a lot of context in their declaration, leading to shorter and more concise
-configuration. However, XML excels at wiring up components without touching their source
-code or recompiling them. Some developers prefer having the wiring close to the source
-while others argue that annotated classes are no longer POJOs and, furthermore, that the
-configuration becomes decentralized and harder to control.</p>
+<p>基于注解的配置引出了这样一个问题：这种方式是否比XML配置更好。给个简短的答案那就是 <em>那得看情况</em>（废话，老外也学会辩证唯物了？）。长一点的回答是每种方式都有它的有优缺点，通常由开发者决定更适合的策略。由于他们不同的定义方式，注解会在声明中提供很多少下文，导致配置更精简。但是，在不接触源码或者重新编译的情况下装配组件方面，XML更有优势。一些开发者更倾向于装配配置更接近于源代码，而另一些人认为带有注解的类已经不再是 POJO 类了，此外，这使得配置变得去中心化和更难以控制。</p>
 </div>
 <div class="paragraph">
-<p>No matter the choice, Spring can accommodate both styles and even mix them together.
-It&#8217;s worth pointing out that through its <a href="#beans-java">JavaConfig</a> option, Spring allows
-annotations to be used in a non-invasive way, without touching the target components
-source code and that in terms of tooling, all configuration styles are supported by the
-<a href="https://spring.io/tools/sts">Spring Tool Suite</a>.</p>
+<p>无论你怎么选择，Spring 能同事适应这两种风格，甚至你可以将它们混合使用。值得说明的是，Spring 通过其 <a href="#beans-java">JavaConfig</a> 选项允许注解以一种非入侵的方式被使用，而不用接触目标组件的源代码，也不涉及哪些工具，所有的配置风格都由 <a href="https://spring.io/tools/sts">Spring Tool Suite</a> 支持。</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>An alternative to XML setups is provided by annotation-based configuration which rely on
-the bytecode metadata for wiring up components instead of angle-bracket declarations.
-Instead of using XML to describe a bean wiring, the developer moves the configuration
-into the component class itself by using annotations on the relevant class, method, or
-field declaration. As mentioned in <a href="#beans-factory-extension-bpp-examples-rabpp">Example: The RequiredAnnotationBeanPostProcessor</a>, using
-a <code>BeanPostProcessor</code> in conjunction with annotations is a common means of extending the
-Spring IoC container. For example, Spring 2.0 introduced the possibility of enforcing
-required properties with the <a href="#beans-required-annotation">@Required</a> annotation. Spring
-2.5 made it possible to follow that same general approach to drive Spring&#8217;s dependency
-injection. Essentially, the <code>@Autowired</code> annotation provides the same capabilities as
-described in <a href="#beans-factory-autowire">Autowiring collaborators</a> but with more fine-grained control and wider
-applicability. Spring 2.5 also added support for JSR-250 annotations such as
-<code>@PostConstruct</code>, and <code>@PreDestroy</code>. Spring 3.0 added support for JSR-330 (Dependency
-Injection for Java) annotations contained in the javax.inject package such as <code>@Inject</code>
-and <code>@Named</code>. Details about those annotations can be found in the
-<a href="#beans-standard-annotations">relevant section</a>.</p>
+<p>基于注解的配置是一种可以代替 XML 设置的方式，它依赖于字节码元数据来装配组件，而不是用尖括号声明。 开发者通过将注解配置在相关类，方法或者字段声明上，将配置移动到组件类本身中，一次代替用XML描述 bean 的装配。正如
+  <a href="#beans-factory-extension-bpp-examples-rabpp">Example: The RequiredAnnotationBeanPostProcessor</a> 里描述的，使用 <code>BeanPostProcessor</code> 与注解结合是扩展 Spring IoC 容器的常+用方式。例如，Spring 2.0 引入了强制需求属性值的 <a href="#beans-required-annotation">@Required</a> 注解。Spring 2.5 使以同样的通用方式驱动 Spring 的依赖注入变为可能。本质上讲，<code>@Autowired</code> 注解提供了与 <a href="#beans-factory-autowire">自动装配协作者</a> 中描述的同样的能力，但是它具有更细粒度的控制能力和更广泛的适用性。Spring 2.5 还增加了对 JSR-250 注解的支持，如 <code>@PostConstruct</code> 和 <code>@PreDestroy</code>。Spring 3.0 增加了对包含在 javax.inject 包中的 JSR-330 （Java 的依赖注入）注解的支持，如 <code>@Inject</code> 和 <code>@Named</code>。更多这些注解的细节参见 <a href="#beans-standard-annotations">相关章节</a>。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3767,17 +3741,14 @@ and <code>@Named</code>. Details about those annotations can be found in the
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Annotation injection is performed <em>before</em> XML injection, thus the latter
-configuration will override the former for properties wired through both approaches.</p>
+<p>注解注入在XML注入之前执行，因此对于通过两种方式装配的属性，XML配置会覆盖注解配置。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>As always, you can register them as individual bean definitions, but they can also be
-implicitly registered by including the following tag in an XML-based Spring
-configuration (notice the inclusion of the <code>context</code> namespace):</p>
+<p>与以往一样，您可以将它们注册为单独的 bean 定义，也可以通过在基于XML的 Spring 配置（注意 <code>context</code> 命名空间的引入）中包含以下标记进行隐式注册：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3796,12 +3767,12 @@ configuration (notice the inclusion of the <code>context</code> namespace):</p>
 </div>
 </div>
 <div class="paragraph">
-<p>(The implicitly registered post-processors include
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/annotation/AutowiredAnnotationBeanPostProcessor.html"><code>AutowiredAnnotationBeanPostProcessor</code></a>,
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor.html"><code>CommonAnnotationBeanPostProcessor</code></a>,
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/orm/jpa/support/PersistenceAnnotationBeanPostProcessor.html"><code>PersistenceAnnotationBeanPostProcessor</code></a>,
-as well as the aforementioned
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/annotation/RequiredAnnotationBeanPostProcessor.html"><code>RequiredAnnotationBeanPostProcessor</code></a>.)</p>
+<p>（隐式注册的 post-processors 包括
+<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/annotation/AutowiredAnnotationBeanPostProcessor.html"><code>AutowiredAnnotationBeanPostProcessor</code></a>，
+<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor.html"><code>CommonAnnotationBeanPostProcessor</code></a>，
+<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/orm/jpa/support/PersistenceAnnotationBeanPostProcessor.html"><code>PersistenceAnnotationBeanPostProcessor</code></a>，
+以及前面提到的
+<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/annotation/RequiredAnnotationBeanPostProcessor.html"><code>RequiredAnnotationBeanPostProcessor</code></a>。）</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3811,11 +3782,7 @@ as well as the aforementioned
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>&lt;context:annotation-config/&gt;</code> only looks for annotations on beans in the same
-application context in which it is defined. This means that, if you put
-<code>&lt;context:annotation-config/&gt;</code> in a <code>WebApplicationContext</code> for a <code>DispatcherServlet</code>,
-it only checks for <code>@Autowired</code> beans in your controllers, and not your services. See
-<a href="web.html#mvc-servlet">The DispatcherServlet</a> for more information.</p>
+<p><code>&lt;context:annotation-config/&gt;</code> 只会对定义它的应用上下文中的 bean 进行注解查找。这意味着，如果你为 <code>DispatcherServlet</code> 在 <code>WebApplicationContext</code> 中配置了 <code>&lt;context:annotation-config/&gt;</code>，它只会在你的控制器中检测带有 <code>@Autowired</code> 的 bean，而不会检测服务层。更多细节参见 <a href="web.html#mvc-servlet">DispatcherServlet</a>。</p>
 </div>
 </td>
 </tr>
@@ -3824,8 +3791,7 @@ it only checks for <code>@Autowired</code> beans in your controllers, and not yo
 <div class="sect3">
 <h4 id="beans-required-annotation"><a class="anchor" href="#beans-required-annotation"></a>1.9.1. @Required</h4>
 <div class="paragraph">
-<p>The <code>@Required</code> annotation applies to bean property setter methods, as in the following
-example:</p>
+<p><code>@Required</code> 注解应用于属性的 setter 方法，如下面的例子所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3843,13 +3809,7 @@ example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This annotation simply indicates that the affected bean property must be populated at
-configuration time, through an explicit property value in a bean definition or through
-autowiring. The container throws an exception if the affected bean property has not been
-populated; this allows for eager and explicit failure, avoiding <code>NullPointerException</code>s
-or the like later on. It is still recommended that you put assertions into the bean
-class itself, for example, into an init method. Doing so enforces those required
-references and values even when you use the class outside of a container.</p>
+<p>这个注解简单明了地表明受影响的 bean 属性（也就是被注解配置的 bean 属性）必须在配置阶段通过 bean 定义中显式的属性值或者通过自动装配进行设置。如果受影响的 bean 属性没有设置，容器会抛出异常；这相当于它具有快速失败特性，从而避免出现 <code>NullPointerException</code> 或者之后出现此类其他异常。不过我们仍然建议你在 bean 类本身内部加入断言，例如，在初始化方法中。这么做可以强制那些引用和值成功配置，甚至你都可以在容器外部使用它们也不用担心出现异常。</p>
 </div>
 </div>
 <div class="sect3">
@@ -3862,15 +3822,14 @@ references and values even when you use the class outside of a container.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>JSR 330&#8217;s <code>@Inject</code> annotation can be used in place of Spring&#8217;s <code>@Autowired</code> annotation
-in the examples below. See <a href="#beans-standard-annotations">here</a> for more details.</p>
+<p>下面的一些例子使用了 JSR 330 的 <code>@Inject</code> 注解代替  Spring 的 <code>@Autowired</code> 注解。更多细节参见 <a href="#beans-standard-annotations">这里</a>。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>You can apply the <code>@Autowired</code> annotation to constructors:</p>
+<p>可以将 <code>@Autowired</code> 注解用于构造器：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3895,18 +3854,14 @@ in the examples below. See <a href="#beans-standard-annotations">here</a> for mo
 </td>
 <td class="content">
 <div class="paragraph">
-<p>As of Spring Framework 4.3, an <code>@Autowired</code> annotation on such a constructor is
-no longer necessary if the target bean only defines one constructor to begin with.
-However, if several constructors are available, at least one must be annotated to
-teach the container which one to use.</p>
+<p>从 Spring Framework 4.3 开始，如果目标 bean 只定义了一个构造器，那么在这样的构造器上配置 <code>@Autowired</code> 就变得不再必要。但如果有好几个构造器可用，那么至少有一个需要被注解以便告诉容器使用哪一个。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>As expected, you can also apply the <code>@Autowired</code> annotation to "traditional" setter
-methods:</p>
+<p>不出所料，你还可以将 <code>@Autowired</code> 注解应用于“传统的” setter 方法： </p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3924,8 +3879,7 @@ methods:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also apply the annotation to methods with arbitrary names and/or multiple
-arguments:</p>
+<p>你还可以将注解应用到具有任何名字的方法和/或多个参数上：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3947,7 +3901,7 @@ arguments:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can apply <code>@Autowired</code> to fields as well and even mix it with constructors:</p>
+<p>也可以将 <code>@Autowired</code> 应用于字段上，甚至于构造器混合使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -3975,26 +3929,17 @@ arguments:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Make sure that your target components (e.g. <code>MovieCatalog</code>, <code>CustomerPreferenceDao</code>)
-are consistently declared by the type that you are using for your <code>@Autowired</code>-annotated
-injection points. Otherwise injection may fail due to no type match found at runtime.</p>
+<p>确保你在使用 <code>@Autowired</code> 注解注入的点的时候，对目标组件（例如， <code>MovieCatalog</code>，<code>CustomerPreferenceDao</code>）的类型声明的一致性。否则注入可能会由于在运行时找不到类型匹配而失败。</p>
 </div>
 <div class="paragraph">
-<p>For XML-defined beans or component classes found through a classpath scan, the container
-usually knows the concrete type upfront. However, for <code>@Bean</code> factory methods, you need
-to make sure that the declared return type is sufficiently expressive. For components
-implementing several interfaces or for components potentially referred to by their
-implementation type, consider declaring the most specific return type on your factory
-method (at least as specific as required by the injection points referring to your bean).</p>
+<p>对于通过类路径扫描到的基于XML定义的 bean 或者 组件类，容器通常都会预先知道它们的实际类型。不过对于 <code>@Bean</code> 工厂方法，你需要确保声明的返回类型足够表达对象本身的信息。对于实现多个接口的组件或者可能被它们的实现类类型所引用的组件，考虑在工厂方法中声明符合要求的最具体的返回烈性。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>It is also possible to provide <em>all</em> beans of a particular type from the
-<code>ApplicationContext</code> by adding the annotation to a field or method that expects an array
-of that type:</p>
+<p>通过给期望获得数组类型的字段或方法添加注解，也可以从 <code>ApplicationContext</code> 中获得此特定类型的所有 bean：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4008,7 +3953,7 @@ of that type:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The same applies for typed collections:</p>
+<p>这同样适用于集合类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4033,18 +3978,14 @@ of that type:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Your beans can implement the <code>org.springframework.core.Ordered</code> interface or either use
-the <code>@Order</code> or standard <code>@Priority</code> annotation if you want items in the array or list
-to be sorted into a specific order.</p>
+<p>如果你希望数组或列表中的项按特定顺序排列，你可以让你的 bean 实现 <code>org.springframework.core.Ordered</code> 接口或者使用 <code>@Order</code> 或者标准 <code>@Priority</code> 注解。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Even typed Maps can be autowired as long as the expected key type is <code>String</code>. The Map
-values will contain all beans of the expected type, and the keys will contain the
-corresponding bean names:</p>
+<p>甚至类型化的 Map 也能被自动装配，只要它的 key 是 <code>String</code> 类型的。Map 的所有 value 会包括所有期望类型的 bean，所有的 key 都包括对应的 bean 名字。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4062,9 +4003,7 @@ corresponding bean names:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>By default, the autowiring fails whenever <em>zero</em> candidate beans are available; the
-default behavior is to treat annotated methods, constructors, and fields as
-indicating <em>required</em> dependencies. This behavior can be changed as demonstrated below.</p>
+<p>默认情况下，如果没有候选bean 是可用的，那么自动装配就会失败；默认行为将带有注解的方法，构造器，字段作为已经指明了 <em>required</em> 的依赖项。可以通过下面展示的方式改变这种行为。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4089,28 +4028,18 @@ indicating <em>required</em> dependencies. This behavior can be changed as demon
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Only <em>one annotated constructor per-class</em> can be marked as <em>required</em>, but multiple
-non-required constructors can be annotated. In that case, each is considered among the
-candidates and Spring uses the <em>greediest</em> constructor whose dependencies can be
-satisfied, that is the constructor that has the largest number of arguments.</p>
+<p>每个类只有一个被注解构造器可以用 <em>required</em> 标记，不过可以注解多个非必须的构造器。在那种情况下，每个构造器都在候选之列，且 Spring 会使用那个满足依赖的 <em>最贪婪</em> 的构造器，也就是那个入参最多的构造器。</p>
 </div>
 <div class="paragraph">
-<p><code>@Autowired&#8217;s <em>required</em> attribute is recommended over the `@Required</code> annotation.
-The <em>required</em> attribute indicates that the property is not required for autowiring
-purposes, the property is ignored if it cannot be autowired. <code>@Required</code>, on the other
-hand, is stronger in that it enforces the property that was set by any means supported
-by the container. If no value is injected, a corresponding exception is raised.</p>
+  <p><code>相比于直接使用 @Required 注解，我们更建议你使用 @Autowired 的 <em>required</em> 特性</code>。<em>required</em> 特性表示对于自动装配此属性是不必须的，如果它不能被自动装配，那它就会被忽略。另一方面，<code>@Required</code> 的语义会更强，它强制由容器支持的任何方式都必须设置这个属性。如果没有值被注入，就会抛出相应异常。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>You can also use <code>@Autowired</code> for interfaces that are well-known resolvable
-dependencies: <code>BeanFactory</code>, <code>ApplicationContext</code>, <code>Environment</code>, <code>ResourceLoader</code>,
-<code>ApplicationEventPublisher</code>, and <code>MessageSource</code>. These interfaces and their extended
-interfaces, such as <code>ConfigurableApplicationContext</code> or <code>ResourcePatternResolver</code>, are
-automatically resolved, with no special setup necessary.</p>
+<p>你还可以将 <code>@Autowired</code> 用于那些众所周知的可解析依赖接口： <code>BeanFactory</code>，<code>ApplicationContext</code>，<code>Environment</code>，<code>ResourceLoader</code>，
+<code>ApplicationEventPublisher</code>，和 <code>MessageSource</code>。这些接口和它们的扩展类（如 <code>ConfigurableApplicationContext</code> 或者 <code>ResourcePatternResolver</code>）可以被自动解析，而不需要特殊的设置。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4134,10 +4063,7 @@ automatically resolved, with no special setup necessary.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p><code>@Autowired</code>, <code>@Inject</code>, <code>@Resource</code>, and <code>@Value</code> annotations are handled by Spring
-<code>BeanPostProcessor</code> implementations which in turn means that you <em>cannot</em> apply these
-annotations within your own <code>BeanPostProcessor</code> or <code>BeanFactoryPostProcessor</code> types (if
-any). These types must be 'wired up' explicitly via XML or using a Spring <code>@Bean</code> method.</p>
+<p><code>@Autowired</code>，<code>@Inject</code>，<code>@Resource</code>，和 <code>@Value</code> 注解都是由 Spring <code>BeanPostProcessor</code> 实现处理的，这反过来意味着在你自己的 <code>BeanPostProcessor</code> 或 <code>BeanFactoryPostProcessor</code> 类型中你不能使用这些注解（如果有的话）。这些类型必须显式地通过XML或者通过使用 Spring <code>@Bean</code> 方法来 ‘wired up’。</p>
 </div>
 </td>
 </tr>
@@ -4145,18 +4071,12 @@ any). These types must be 'wired up' explicitly via XML or using a Spring <code>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-autowired-annotation-primary"><a class="anchor" href="#beans-autowired-annotation-primary"></a>1.9.3. Fine-tuning annotation-based autowiring with @Primary</h4>
+<h4 id="beans-autowired-annotation-primary"><a class="anchor" href="#beans-autowired-annotation-primary"></a>1.9.3. 使用 @Primary 对基于注解的自动装配进行微调</h4>
 <div class="paragraph">
-<p>Because autowiring by type may lead to multiple candidates, it is often necessary to have
-more control over the selection process. One way to accomplish this is with Spring&#8217;s
-<code>@Primary</code> annotation. <code>@Primary</code> indicates that a particular bean should be given
-preference when multiple beans are candidates to be autowired to a single-valued
-dependency. If exactly one 'primary' bean exists among the candidates, it will be the
-autowired value.</p>
+<p>因为根据类型自动装配会出现有多个候选的问题，所以常常需要对这个选择过程进行更多的控制。其中一种方式是采用 Spring 的 <code>@Primary</code> 注解。<code>@Primary</code> 表示当一个单值依赖项具有多个候选 bean 时，某个指定的 bean 具有更高的优先级。如果刚好一个‘primary’ bean 存在于候选中，那么它就会是那个被自动装配的值。</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s assume we have the following configuration that defines <code>firstMovieCatalog</code> as the
-<em>primary</em> <code>MovieCatalog</code>.</p>
+<p>下设如下配置将 <code>firstMovieCatalog</code> 定义为 <em>primary</em> <code>MovieCatalog</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4175,8 +4095,7 @@ autowired value.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>With such configuration, the following <code>MovieRecommender</code> will be autowired with the
-<code>firstMovieCatalog</code>.</p>
+<p>根据这个配置，下面的 <code>MovieRecommender</code> 将会自动装配 <code>firstMovieCatalog</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4190,7 +4109,7 @@ autowired value.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The corresponding bean definitions appear as follows.</p>
+<p>对应的 bean 定义如下。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4220,13 +4139,9 @@ autowired value.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-autowired-annotation-qualifiers"><a class="anchor" href="#beans-autowired-annotation-qualifiers"></a>1.9.4. Fine-tuning annotation-based autowiring with qualifiers</h4>
+<h4 id="beans-autowired-annotation-qualifiers"><a class="anchor" href="#beans-autowired-annotation-qualifiers"></a>1.9.4. 使用 @qualifier 对基于注解的自动装配进行微调</h4>
 <div class="paragraph">
-<p><code>@Primary</code> is an effective way to use autowiring by type with several instances when one
-primary candidate can be determined. When more control over the selection process is
-required, Spring&#8217;s <code>@Qualifier</code> annotation can be used. You can associate qualifier values
-with specific arguments, narrowing the set of type matches so that a specific bean is
-chosen for each argument. In the simplest case, this can be a plain descriptive value:</p>
+<p>当自动装配过程中有多个实例需要确定其中一个主要候选时，<code>@Primary</code> 是一种按类型自动装配的有效方式。 如果对这个选择过程需要更多的控制时，可以使用 Spring 的 <code>@Qualifier</code> 注解。为了将类型匹配集合收窄到每个参数对应一个特定的 bean ，你可以将 qualifier 的值与特定的值关联起来。最简单的情况下，这可以是一个纯描述的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4241,8 +4156,7 @@ chosen for each argument. In the simplest case, this can be a plain descriptive 
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@Qualifier</code> annotation can also be specified on individual constructor arguments or
-method parameters:</p>
+<p><code>@Qualifier</code> 注解也可以配置构造器参数或者方法参数上：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4264,8 +4178,7 @@ method parameters:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The corresponding bean definitions appear as follows. The bean with qualifier value
-"main" is wired with the constructor argument that is qualified with the same value.</p>
+<p>对应的 bean 定义如下。限定符值为 “main” 的 bean 会通过和它具有相同值的构造器参数装配起来。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4298,24 +4211,10 @@ method parameters:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For a fallback match, the bean name is considered a default qualifier value. Thus you
-can define the bean with an id "main" instead of the nested qualifier element, leading
-to the same matching result. However, although you can use this convention to refer to
-specific beans by name, <code>@Autowired</code> is fundamentally about type-driven injection with
-optional semantic qualifiers. This means that qualifier values, even with the bean name
-fallback, always have narrowing semantics within the set of type matches; they do not
-semantically express a reference to a unique bean id. Good qualifier values are "main"
-or "EMEA" or "persistent", expressing characteristics of a specific component that are
-independent from the bean <code>id</code>, which may be auto-generated in case of an anonymous bean
-definition like the one in the preceding example.</p>
+<p>对于匹配的回退，bean 名字会被作为默认的限定值。因此你可以定义一个 id 为“main”的 bean 来代替嵌套的限定符元素，匹配结果是一样的。不过，尽管你可以使用这个约定来根据名字引用特定的 bean，但是从根本上讲，<code>@Autowired</code> 是使用可选语义限定符进行类型驱动注入的。这意味着限定符的值，即使退化到 bean 的名字，也总是会从语义上收窄匹配集合；他们没有从语义上将引用表示为最一个唯一 bean id 的引用。像“main”或者“EMEA”或者“persistent”这样的就算是好的限定符值，他们表达了独立于 bean <code>id</code> 的特定组件的特性，即使前面例子中像这个 bean 一样的匿名bean会自动生成 id。</p>
 </div>
 <div class="paragraph">
-<p>Qualifiers also apply to typed collections, as discussed above, for example, to
-<code>Set&lt;MovieCatalog&gt;</code>. In this case, all matching beans according to the declared
-qualifiers are injected as a collection. This implies that qualifiers do not have to be
-unique; they rather simply constitute filtering criteria. For example, you can define
-multiple <code>MovieCatalog</code> beans with the same qualifier value "action", all of which would
-be injected into a <code>Set&lt;MovieCatalog&gt;</code> annotated with <code>@Qualifier("action")</code>.</p>
+<p>如上面讨论的，限定符也可用于类型化的集合上，比如 <code>Set&lt;MovieCatalog&gt;</code>。在这个例子中，根据声明限定符匹配的所有 bean 会以集合形式被注入。这暗示了限定符不一定是要唯一的；它们只是简单地构成过滤规则。例如，你可以定义多个具有同一个限定符值“action”的 code>MovieCatalog</code> bean，所有这些 bean 都会被注入到带有 <code>@Qualifier("action")</code> 注解的 <code>Set&lt;MovieCatalog&gt;</code> 中。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -4325,49 +4224,22 @@ be injected into a <code>Set&lt;MovieCatalog&gt;</code> annotated with <code>@Qu
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you intend to express annotation-driven injection by name, do not primarily use
-<code>@Autowired</code>, even if is technically capable of referring to a bean name through
-<code>@Qualifier</code> values. Instead, use the JSR-250 <code>@Resource</code> annotation, which is
-semantically defined to identify a specific target component by its unique name, with
-the declared type being irrelevant for the matching process. <code>@Autowired</code> has rather
-different semantics: After selecting candidate beans by type, the specified String
-qualifier value will be considered within those type-selected candidates only, e.g.
-matching an "account" qualifier against beans marked with the same qualifier label.</p>
+<p>如果你想通过名字表示注解驱动注入，不要以使用 <code>@Autowired</code> 为主，即使在技术上能够通过 <code>@Qualifier</code> 值来引用 bean 名字。相反，你应该使用 JSR-250 <code>@Resource</code> 注解，它在语义上被定义为根据组件唯一的名字来定位一个特定目标组件，声明的类型与匹配过称无关。<code>@Autowired</code> 则具有不同的语义：在根据类型选择候选 bean 之后，这个特定的 String 限定符值被认为只在被选类型的候选 bena 中，例如，在具有相同限定符标签的 bean 中匹配一个“account”限定符。</p>
 </div>
 <div class="paragraph">
-<p>For beans that are themselves defined as a collection/map or array type, <code>@Resource</code>
-is a fine solution, referring to the specific collection or array bean by unique name.
-That said, as of 4.3, collection/map and array types can be matched through Spring&#8217;s
-<code>@Autowired</code> type matching algorithm as well, as long as the element type information
-is preserved in <code>@Bean</code> return type signatures or collection inheritance hierarchies.
-In this case, qualifier values can be used to select among same-typed collections,
-as outlined in the previous paragraph.</p>
+<p>对于那些本身被定义为集合/map 或者数组类型的 bean 来说，<code>@Resource</code> 是个很好的解决方案，适用于根据唯一名字区分的特定集合或者数组。也就是说，从 Spring 4.3 起，集合/map 或者数组类也可以通过 Spring 的 <code>@Autowired</code> 类型匹配算法，只要元素的类型信息在 <code>@Bean</code> 的返回类型签名或者集合继承家族中保存了。在这种情况下，限定符值可以用来在相同类型的集合中区分，如前一段概括的那样。</p>
 </div>
 <div class="paragraph">
-<p>As of 4.3, <code>@Autowired</code> also considers self references for injection, i.e. references
-back to the bean that is currently injected. Note that self injection is a fallback;
-regular dependencies on other components always have precedence. In that sense, self
-references do not participate in regular candidate selection and are therefore in
-particular never primary; on the contrary, they always end up as lowest precedence.
-In practice, use self references as a last resort only, e.g. for calling other methods
-on the same instance through the bean&#8217;s transactional proxy: Consider factoring out
-the affected methods to a separate delegate bean in such a scenario. Alternatively,
-use <code>@Resource</code> which may obtain a proxy back to the current bean by its unique name.</p>
+<p>从 Spring 4.3 开始，<code>@Autowired</code> 也支持自我引用注入，例如，将当前注入的 bean 引用返回给 bean 自己。注入自我注入只是一个备用方案；对其他组件的正常依赖总是优先考虑的。在那个意义上，自我引用并不会参与到正常的候选选择且因此也不会成为主要方式；相反，他们具有最低优先级。在实践中，自我引用只是最后的手段，例如，通过bean的事务代理调用同一实例的其它方法：在考虑抽取受影响方法来隔离代理 bean 的场景中。或者，使用 <code>@Resource</code> 来根据 bean 的唯一名字将当前 bean 的代理返回给当前 bean。</p>
 </div>
 <div class="paragraph">
-<p><code>@Autowired</code> applies to fields, constructors, and multi-argument methods, allowing for
-narrowing through qualifier annotations at the parameter level. By contrast, <code>@Resource</code>
-is supported only for fields and bean property setter methods with a single argument.
-As a consequence, stick with qualifiers if your injection target is a constructor or a
-multi-argument method.</p>
-</div>
+<p><code>@Autowired</code> 可以应用于字段，构造器，多参数方法，这会在参数级别通过限定符注解缩减候选项，相比之下， <code>@Resource</code> 只支持字段和 bean 属性单参数 setter 方法。因此，如果你的注入目标是构造器或者多参数方法，必须使用限定符。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>You can create your own custom qualifier annotations. Simply define an annotation and
-provide the <code>@Qualifier</code> annotation within your definition:</p>
+<p>你可以创建你自己的自定义限定符注解。简单定义一个注解，在你自己的定义中提供 @Qualifier 注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4381,7 +4253,7 @@ provide the <code>@Qualifier</code> annotation within your definition:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then you can provide the custom qualifier on autowired fields and parameters:</p>
+<p>然后你就可以在自动装配的字段和参数上使用这个自定义限定符了：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4403,12 +4275,7 @@ provide the <code>@Qualifier</code> annotation within your definition:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Next, provide the information for the candidate bean definitions. You can add
-<code>&lt;qualifier/&gt;</code> tags as sub-elements of the <code>&lt;bean/&gt;</code> tag and then specify the <code>type</code> and
-<code>value</code> to match your custom qualifier annotations. The type is matched against the
-fully-qualified class name of the annotation. Or, as a convenience if no risk of
-conflicting names exists, you can use the short class name. Both approaches are
-demonstrated in the following example.</p>
+<p>接下来，提供候选 bean 定义的信息。你可以在 <code>&lt;bean/&gt;</code> 标签中添加 <code>&lt;qualifier/&gt;</code> 作为子元素，然后指定 <code>type</code> 和 <code>value</code> 以匹配你的自定义限定符注解。类型通过注解的全限定类名来匹配。或者，如果没有名字冲突的风险，使用短类名更加方便。两种方式都在下面的例子中呈现了。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4439,15 +4306,10 @@ demonstrated in the following example.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In <a href="#beans-classpath-scanning">Classpath scanning and managed components</a>, you will see an annotation-based alternative to
-providing the qualifier metadata in XML. Specifically, see <a href="#beans-scanning-qualifiers">Providing qualifier metadata with annotations</a>.</p>
+<p>在 <a href="#beans-classpath-scanning">类路径扫描和被管理的组件</a> 中，你会看到一种代替在XML中提供限定符元数据的基于注解的方法。特别参见 <a href="#beans-scanning-qualifiers">使用注解提供限定符元数据</a>。</p>
 </div>
 <div class="paragraph">
-<p>In some cases, it may be sufficient to use an annotation without a value. This may be
-useful when the annotation serves a more generic purpose and can be applied across
-several different types of dependencies. For example, you may provide an <em>offline</em>
-catalog that would be searched when no Internet connection is available. First define
-the simple annotation:</p>
+<p>在某些情况下，可能使用不带值的注解就够用了。这在为了某个更加通用的目的使用注解时会非常有用，而且可以应用于多个夸类型的依赖项上。例如，当因特网不可用时，你可能会想要提供一个 <em>offline</em> 目录供搜索。首先定义一个简单的注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4460,7 +4322,7 @@ the simple annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Then add the annotation to the field or property to be autowired:</p>
+<p>然后将这个注解添加到要被自动装配的字段或者属性上：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4475,7 +4337,7 @@ the simple annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Now the bean definition only needs a qualifier <code>type</code>:</p>
+<p>现在，bean 定义至于要一个限定符类型 <code>type</code> 就够了：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4486,11 +4348,7 @@ the simple annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can also define custom qualifier annotations that accept named attributes in
-addition to or instead of the simple <code>value</code> attribute. If multiple attribute values are
-then specified on a field or parameter to be autowired, a bean definition must match
-<em>all</em> such attribute values to be considered an autowire candidate. As an example,
-consider the following annotation definition:</p>
+<p>你可以自定义一个接受额外命名特性或者代替这个简单 <code>value</code> 特性的限定符注解。如果要被自动注入的字段或者参数指定了多个值，那么 bean 定义必须匹配所有这些被当做自动装配选项的特性值。考虑下面的注解定义例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4507,7 +4365,7 @@ consider the following annotation definition:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In this case <code>Format</code> is an enum:</p>
+<p>这个例子中，<code>Format</code> 是一个枚举类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4517,8 +4375,7 @@ consider the following annotation definition:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The fields to be autowired are annotated with the custom qualifier and include values
-for both attributes: <code>genre</code> and <code>format</code>.</p>
+<p>要自动装配的字段都用自定义限定符注解了，且包含了两个属性的值：<code>genre</code> 和 <code>format</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4545,12 +4402,7 @@ for both attributes: <code>genre</code> and <code>format</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, the bean definitions should contain matching qualifier values. This example
-also demonstrates that bean <em>meta</em> attributes may be used instead of the
-<code>&lt;qualifier/&gt;</code> sub-elements. If available, the <code>&lt;qualifier/&gt;</code> and its attributes take
-precedence, but the autowiring mechanism falls back on the values provided within the
-<code>&lt;meta/&gt;</code> tags if no such qualifier is present, as in the last two bean definitions in
-the following example.</p>
+<p>最后，bean 定义应该包括所有匹配的限定符值。这个例子还展示了 bean 的 <em>meta</em> 特性可以用来代替 <code>&lt;qualifier/&gt;</code> 子元素。如果 <code>&lt;qualifier/&gt;</code> 可用，它和它的特性优先级更高，但是如果没有这样限定符，那么自动装配机制会将 <code>&lt;meta/&gt;</code> 标签中的值作为备用，如下面例子中后面两个 bean 的定义。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4598,11 +4450,9 @@ the following example.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-generics-as-qualifiers"><a class="anchor" href="#beans-generics-as-qualifiers"></a>1.9.5. Using generics as autowiring qualifiers</h4>
+<h4 id="beans-generics-as-qualifiers"><a class="anchor" href="#beans-generics-as-qualifiers"></a>1.9.5. 将泛型作为自动装配限定符使用</h4>
 <div class="paragraph">
-<p>In addition to the <code>@Qualifier</code> annotation, it is also possible to use Java generic types
-as an implicit form of qualification. For example, suppose you have the following
-configuration:</p>
+<p>除了 <code>@Qualifier</code> 注解，也可以使用 Java 泛型类型作为限定符的一种隐式方式。例如，假设有如下配置：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4622,9 +4472,8 @@ configuration:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Assuming that beans above implement a generic interface, i.e. <code>Store&lt;String&gt;</code> and
-<code>Store&lt;Integer&gt;</code>, you can <code>@Autowire</code> the <code>Store</code> interface and the <em>generic</em> will
-be used as a qualifier:</p>
+<p>假设上面的 bean 实现了一个泛型接口，例如 <code>Store&lt;String&gt;</code> 和
+<code>Store&lt;Integer&gt;</code>，你可以 <code>@Autowire</code> <code>Store</code> 接口，<em>泛型</em> 就会被当做限定符使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4636,7 +4485,7 @@ be used as a qualifier:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Generic qualifiers also apply when autowiring Lists, Maps and Arrays:</p>
+<p>泛型限定符也适用于在自动装配 Lists，Maps 和 Arrays 时：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4652,8 +4501,7 @@ be used as a qualifier:</p>
 <div class="paragraph">
 <p>The
 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/annotation/CustomAutowireConfigurer.html"><code>CustomAutowireConfigurer</code></a>
-is a <code>BeanFactoryPostProcessor</code> that enables you to register your own custom qualifier
-annotation types even if they are not annotated with Spring&#8217;s <code>@Qualifier</code> annotation.</p>
+是一个 <code>BeanFactoryPostProcessor</code>，它使你可以注册你自己的自定义限定符注解类型，即使他们没有使用 Spring <code>@Qualifier</code> 注解。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4668,40 +4516,32 @@ annotation types even if they are not annotated with Spring&#8217;s <code>@Quali
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>AutowireCandidateResolver</code> determines autowire candidates by:</p>
+<p><code>AutowireCandidateResolver</code> 通过以下方式决定自动装配的候选项：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>the <code>autowire-candidate</code> value of each bean definition</p>
+<p>每个 bean 定义的 <code>autowire-candidate</code> 值</p>
 </li>
 <li>
-<p>any <code>default-autowire-candidates</code> pattern(s) available on the <code>&lt;beans/&gt;</code> element</p>
+<p><code>&lt;beans/&gt;</code> 元素任意可用的 <code>default-autowire-candidates</code> 模式</p>
 </li>
 <li>
-<p>the presence of <code>@Qualifier</code> annotations and any custom annotations registered
-with the <code>CustomAutowireConfigurer</code></p>
+<p> <code>@Qualifier</code> 注解和任何在 <code>CustomAutowireConfigurer</code> 注册的自定义注解</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>When multiple beans qualify as autowire candidates, the determination of a "primary" is
-the following: if exactly one bean definition among the candidates has a <code>primary</code>
-attribute set to <code>true</code>, it will be selected.</p>
+<p>当多个 bean 都有资格成为自动装配候选 bean 时，“primary” bean 的决定规则如下：如果候选项中恰好有一个 bean 定义有一个设置为 <code>true</code> 的 <code>primary</code> 特性，它就会被选为 “primary” bean。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="beans-resource-annotation"><a class="anchor" href="#beans-resource-annotation"></a>1.9.7. @Resource</h4>
 <div class="paragraph">
-<p>Spring also supports injection using the JSR-250 <code>@Resource</code> annotation on fields or
-bean property setter methods. This is a common pattern in Java EE 5 and 6, for example
-in JSF 1.2 managed beans or JAX-WS 2.0 endpoints. Spring supports this pattern for
-Spring-managed objects as well.</p>
+<p>Spring 也支持对字段或者 bean 属性 setter 方法使用 JSR-250 <code>@Resource</code> 注解。这在Java EE 5和6中的一种常见模式，例如在 JSF 1.2 管理的 bean 或者 JAX-WS 2.0 端点。Spring 对它自己管理的对象也支持这种模式。</p>
 </div>
 <div class="paragraph">
-<p><code>@Resource</code> takes a name attribute, and by default Spring interprets that value as the
-bean name to be injected. In other words, it follows <em>by-name</em> semantics, as
-demonstrated in this example:</p>
+<p><code>@Resource</code> 接受一个名称特性，默认情况下，Spring 将该值理解为要注入的 bean 的名字。换句话说，它遵循 <em>根据名字注入</em> 的语义，如本例所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4717,10 +4557,7 @@ demonstrated in this example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If no name is specified explicitly, the default name is derived from the field name or
-setter method. In case of a field, it takes the field name; in case of a setter method,
-it takes the bean property name. So the following example is going to have the bean with
-name "movieFinder" injected into its setter method:</p>
+<p>如果没有显式指定名字，默认名字就会从字段名或者 setter 方法获取。如果是字段，就接受字段名；如果是 setter 方法，就接受 bean 属性名。所以下面的例子将把名为“movieFinder”的 bean 注入到它的 setter 方法中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4743,29 +4580,17 @@ name "movieFinder" injected into its setter method:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The name provided with the annotation is resolved as a bean name by the
-<code>ApplicationContext</code> of which the <code>CommonAnnotationBeanPostProcessor</code> is aware. The
-names can be resolved through JNDI if you configure Spring&#8217;s
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/jndi/support/SimpleJndiBeanFactory.html"><code>SimpleJndiBeanFactory</code></a>
-explicitly. However, it is recommended that you rely on the default behavior and simply
-use Spring&#8217;s JNDI lookup capabilities to preserve the level of indirection.</p>
+<p>被注解的名字被有 <code>CommonAnnotationBeanPostProcessor</code> 感知能力的 <code>ApplicationContext</code> 解析成为 bean 的名字。如果你显式地配置了 Spring 的 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/jndi/support/SimpleJndiBeanFactory.html"><code>SimpleJndiBeanFactory</code></a>，则这些名字可以通过 JNDI 被解析。不过还是建议你依赖默认行为，简单实用 Spring 的 JNDI 查找功能来保持间接级别。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In the exclusive case of <code>@Resource</code> usage with no explicit name specified, and similar
-to <code>@Autowired</code>, <code>@Resource</code> finds a primary type match instead of a specific named bean
-and resolves well-known resolvable dependencies: the <code>BeanFactory</code>,
-<code>ApplicationContext</code>, <code>ResourceLoader</code>, <code>ApplicationEventPublisher</code>, and <code>MessageSource</code>
-interfaces.</p>
+<p>在使用 <code>@Resource</code> 而没有显式指定名字的情况下，与 <code>@Autowired</code> 类似，<code>@Resource</code> 会找到主要类型类匹配而不是特定的被命名 bean，并且解析已知的可解析依赖： <code>BeanFactory</code>，<code>ApplicationContext</code>，<code>ResourceLoader</code>，<code>ApplicationEventPublisher</code>，和 <code>MessageSource</code> 接口。</p>
 </div>
 <div class="paragraph">
-<p>Thus in the following example, the <code>customerPreferenceDao</code> field first looks for a bean
-named customerPreferenceDao, then falls back to a primary type match for the type
-<code>CustomerPreferenceDao</code>. The "context" field is injected based on the known resolvable
-dependency type <code>ApplicationContext</code>.</p>
+<p>因此在下面的例子中，<code>customerPreferenceDao</code> 字段首先查找名为 customerPreferenceDao 的 bean，然后退化到查找 <code>CustomerPreferenceDao</code> 类型的 primary 类型匹配。“context” 字段是基于已知可解析依赖类型 <code>ApplicationContext</code> 注入的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4788,16 +4613,9 @@ dependency type <code>ApplicationContext</code>.</p>
 <div class="sect3">
 <h4 id="beans-postconstruct-and-predestroy-annotations"><a class="anchor" href="#beans-postconstruct-and-predestroy-annotations"></a>1.9.8. @PostConstruct and @PreDestroy</h4>
 <div class="paragraph">
-<p>The <code>CommonAnnotationBeanPostProcessor</code> not only recognizes the <code>@Resource</code> annotation
-but also the JSR-250 <em>lifecycle</em> annotations. Introduced in Spring 2.5, the support
-for these annotations offers yet another alternative to those described in
-<a href="#beans-factory-lifecycle-initializingbean">initialization callbacks</a> and
-<a href="#beans-factory-lifecycle-disposablebean">destruction callbacks</a>. Provided that the
-<code>CommonAnnotationBeanPostProcessor</code> is registered within the Spring
-<code>ApplicationContext</code>, a method carrying one of these annotations is invoked at the same
-point in the lifecycle as the corresponding Spring lifecycle interface method or
-explicitly declared callback method. In the example below, the cache will be
-pre-populated upon initialization and cleared upon destruction.</p>
+<p><code>CommonAnnotationBeanPostProcessor</code> 不仅能识别 <code>@Resource</code> 注解，也能识别 JSR-250 <em>生命周期</em> 注解。对在 Spring 2.5 引入的这些注解的支持，也提供了另一种可以代替在
+<a href="#beans-factory-lifecycle-initializingbean">初始化回调</a> 和
+<a href="#beans-factory-lifecycle-disposablebean">销毁回调</a> 中描述的那些方法的注解。假设在 Spring 中注册 <code>CommonAnnotationBeanPostProcessor</code>，携带这些注解其中之一的方法所谓对应的 Spring 生命周期接口方法或者显式声明的回调方法在生命周期的同一点被调用。在下面的例子中，缓存在在初始化的时候被预先填充，会在销毁的时候被清除。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4823,8 +4641,7 @@ pre-populated upon initialization and cleared upon destruction.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>For details about the effects of combining various lifecycle mechanisms, see
-<a href="#beans-factory-lifecycle-combined-effects">Combining lifecycle mechanisms</a>.</p>
+<p>关于各种生命周期机制组合的细节，参见<a href="#beans-factory-lifecycle-combined-effects">组合生命周期机制</a>。</p>
 </div>
 </td>
 </tr>
