@@ -4650,20 +4650,9 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="beans-classpath-scanning"><a class="anchor" href="#beans-classpath-scanning"></a>1.10. Classpath scanning and managed components</h3>
+<h3 id="beans-classpath-scanning"><a class="anchor" href="#beans-classpath-scanning"></a>1.10. 类路径扫描和被管理的组件</h3>
 <div class="paragraph">
-<p>Most examples in this chapter use XML to specify the configuration metadata that produces
-each <code>BeanDefinition</code> within the Spring container. The previous section
-(<a href="#beans-annotation-config">Annotation-based container configuration</a>) demonstrates how to provide a lot of the configuration
-metadata through source-level annotations. Even in those examples, however, the "base"
-bean definitions are explicitly defined in the XML file, while the annotations only drive
-the dependency injection. This section describes an option for implicitly detecting the
-<em>candidate components</em> by scanning the classpath. Candidate components are classes that
-match against a filter criteria and have a corresponding bean definition registered with
-the container. This removes the need to use XML to perform bean registration; instead you
-can use annotations (for example <code>@Component</code>), AspectJ type expressions, or your own
-custom filter criteria to select which classes will have bean definitions registered with
-the container.</p>
+<p>本章大多数示例都是用XML来指定在 Spring 容器中生成的每个 <code>BeanDefinition</code> 的配置元数据。前一小节（<a href="#beans-annotation-config">基于注解的配置</a>）展示了如果通过源代码级别的注解提供大量配置元数据。但是，即使在哪些示例中，"基本"的 bean 定义也是在XML文件中显式定义的，注解只是驱动依赖注入。本小节描述了一种通过类路径扫描隐式检测候选组件的方法。候选组件是符合过滤规则的类，且在容器中注册有响应的 bean 定义。这消除了使用XML来执行 bean 注册的需要；相反，你可以使用注解（例如 <code>@Component</code>），AspectJ 类型表达式，或者你自己的自定义过滤规则来选择将哪些类作为 bean 定义注册到容器中。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -4673,46 +4662,26 @@ the container.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Starting with Spring 3.0, many features provided by the Spring JavaConfig project are
-part of the core Spring Framework. This allows you to define beans using Java rather
-than using the traditional XML files. Take a look at the <code>@Configuration</code>, <code>@Bean</code>,
-<code>@Import</code>, and <code>@DependsOn</code> annotations for examples of how to use these new features.</p>
+<p>Spring 3.0 开始，Spring JavaConfig 项目提供的许多功能都成为 Spring 框架核心的一部分。这使得你可以使用 Java 来定义 bean 而不是传统的XML文件。参见 <code>@Configuration</code>，<code>@Bean</code>，<code>@Import</code>，和 <code>@DependsOn</code> 注解的示例，了解如何使用这些新功能。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="beans-stereotype-annotations"><a class="anchor" href="#beans-stereotype-annotations"></a>1.10.1. @Component and further stereotype annotations</h4>
+<h4 id="beans-stereotype-annotations"><a class="anchor" href="#beans-stereotype-annotations"></a>1.10.1. @Component 以及更多 stereotype 注解</h4>
 <div class="paragraph">
-<p>The <code>@Repository</code> annotation is a marker for any class that fulfills the role or
-<em>stereotype</em> of a repository (also known as Data Access Object or DAO). Among the uses
-of this marker is the automatic translation of exceptions as described in
-<a href="data-access.html#orm-exception-translation">Exception translation</a>.</p>
+<p><code>@Repository</code> 注解是任何实现数据存储角色或者原型的标记（也被称为数据访问对象或者 DAO）。这个注解的用法是自动异常翻译，如 <a href="data-access.html#orm-exception-translation">4.2.2 Exception translation</a> 中所述。</p>
 </div>
 <div class="paragraph">
-<p>Spring provides further stereotype annotations: <code>@Component</code>, <code>@Service</code>, and
-<code>@Controller</code>. <code>@Component</code> is a generic stereotype for any Spring-managed component.
-<code>@Repository</code>, <code>@Service</code>, and <code>@Controller</code> are specializations of <code>@Component</code> for
-more specific use cases, for example, in the persistence, service, and presentation
-layers, respectively. Therefore, you can annotate your component classes with
-<code>@Component</code>, but by annotating them with <code>@Repository</code>, <code>@Service</code>, or <code>@Controller</code>
-instead, your classes are more properly suited for processing by tools or associating
-with aspects. For example, these stereotype annotations make ideal targets for
-pointcuts. It is also possible that <code>@Repository</code>, <code>@Service</code>, and <code>@Controller</code> may
-carry additional semantics in future releases of the Spring Framework. Thus, if you are
-choosing between using <code>@Component</code> or <code>@Service</code> for your service layer, <code>@Service</code> is
-clearly the better choice. Similarly, as stated above, <code>@Repository</code> is already
-supported as a marker for automatic exception translation in your persistence layer.</p>
+<p>Spring 提供了更多的 stereotype 注解：<code>@Component</code>，<code>@Service</code>，<code>@Controller</code>。<code>@Component</code> 是任何受 Spring 管理组件的通用形式。<code>@Repository</code>，<code>@Service</code>，和<code>@Controller</code> 是 对 <code>@Component</code> 的更具体的特殊化，分别对应持久层，服务层和展示层。因此，你可以用 <code>@Component</code> 来注解你的组件类，但是如果你用 <code>@Repository</code>，<code>@Service</code>，或者 <code>@Controller</code> 来代替 <code>@Component</code> 的话，你的类将更适合于被各种工具处理，或者更适合于在具体切面之间的关联。例如，这些 stereotype 注解为切入点提供了理想的目标。<code>@Repository</code>，<code>@Service</code>，和 <code>@Controller</code> 也可能在 Spring 框架以后的版本中携带额外的语义。因此，如果你正在你的服务层使用
+<code>@Component</code> 还是 <code>@Service</code> 选择，<code>@Service</code> 明显是更好的选择。同样，如上所述，作为一个标记，<code>@Repository</code> 已经被支持在你的持久层中进行自动异常翻译。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-meta-annotations"><a class="anchor" href="#beans-meta-annotations"></a>1.10.2. Meta-annotations</h4>
+<h4 id="beans-meta-annotations"><a class="anchor" href="#beans-meta-annotations"></a>1.10.2. 元注解</h4>
 <div class="paragraph">
-<p>Many of the annotations provided by Spring can be used as <em>meta-annotations</em> in your
-own code. A meta-annotation is simply an annotation that can be applied to another
-annotation. For example, the <code>@Service</code> annotation mentioned above is meta-annotated with
-<code>@Component</code>:</p>
+<p>Spring 提供的许多注解都可以在你自己的代码中当做元注解使用。元注释仅仅就是是一个可以用于另一个注解的注解。例如，上面提到的 <code>@Service</code> 注解就是被 <code>@Component</code> 进行元注解的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4727,16 +4696,10 @@ annotation. For example, the <code>@Service</code> annotation mentioned above is
 </div>
 </div>
 <div class="paragraph">
-<p>Meta-annotations can also be combined to create <em>composed annotations</em>. For example,
-the <code>@RestController</code> annotation from Spring MVC is <em>composed</em> of <code>@Controller</code> and
-<code>@ResponseBody</code>.</p>
+<p>元注解还可以被结合使用来创建 <em>组合注解</em>。例如，Spring MVC 的 <code>@RestController</code> 注解就是由 <code>@Controller</code> 和 <code>@ResponseBody</code> 结合创建的。</p>
 </div>
 <div class="paragraph">
-<p>In addition, composed annotations may optionally redeclare attributes from
-meta-annotations to allow user customization. This can be particularly useful when you
-want to only expose a subset of the meta-annotation&#8217;s attributes. For example, Spring&#8217;s
-<code>@SessionScope</code> annotation hardcodes the scope name to <code>session</code> but still allows
-customization of the <code>proxyMode</code>.</p>
+<p>此外，组合注解可以选择性地重新声明元注解属性来允许用户实现自定义操作。当你只想暴露元注解属性的一部分子集时，这会特别有用。例如，Spring 的 <code>@SessionScope</code> 注解将作用域名硬编码为 <code>session</code> 但仍然允许对 <code>proxyMode</code> 的自定义。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4757,7 +4720,7 @@ customization of the <code>proxyMode</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><code>@SessionScope</code> can then be used without declaring the <code>proxyMode</code> as follows:</p>
+<p>然后使用 <code>@SessionScope</code> 的时候就不用声明 <code>proxyMode</code> 了，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4769,7 +4732,7 @@ customization of the <code>proxyMode</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Or with an overridden value for the <code>proxyMode</code> as follows:</p>
+<p>或者为 <code>proxyMode</code> 赋一个覆盖的值，如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4781,15 +4744,13 @@ customization of the <code>proxyMode</code>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For further details, consult the <a href="appendix.html#annotation-programming-model">Spring Annotation Programming Model</a>.</p>
+<p>关于更多细节，咨询<a href="appendix.html#annotation-programming-model">Spring 注解编程模型</a>。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-scanning-autodetection"><a class="anchor" href="#beans-scanning-autodetection"></a>1.10.3. Automatically detecting classes and registering bean definitions</h4>
+<h4 id="beans-scanning-autodetection"><a class="anchor" href="#beans-scanning-autodetection"></a>1.10.3. 自动检测类和注册 bean 定义</h4>
 <div class="paragraph">
-<p>Spring can automatically detect stereotyped classes and register corresponding
-<code>BeanDefinition</code>s with the <code>ApplicationContext</code>. For example, the following two classes
-are eligible for such autodetection:</p>
+<p>Spring 能自动检测 stereotyped 类并将相应的 <code>BeanDefinition</code> 注册到 <code>ApplicationContext</code>。例如，一下两个类都可以使用这种自动检测：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4814,10 +4775,7 @@ are eligible for such autodetection:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To autodetect these classes and register the corresponding beans, you need to add
-<code>@ComponentScan</code> to your <code>@Configuration</code> class, where the <code>basePackages</code> attribute
-is a common parent package for the two classes. (Alternatively, you can specify a
-comma/semicolon/space-separated list that includes the parent package of each class.)</p>
+<p>为了自动检测这些类且注册相应的 bean，你需要将 <code>@ComponentScan</code> 添加到你的 <code>@Configuration</code> 类中，其中 <code>basePackages</code> 特性是这两个类的公共父包。（或者，你可以指定由一个逗号/分号/空格分隔的包括每个类的父包的列表。）</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4836,15 +4794,14 @@ comma/semicolon/space-separated list that includes the parent package of each cl
 </td>
 <td class="content">
 <div class="paragraph">
-<p>for concision, the above may have used the <code>value</code> attribute of the
-annotation, i.e. <code>@ComponentScan("org.example")</code></p>
+<p>为了简介起见，上面的配置可以使用注解的 <code>value</code> 特性，例如 <code>@ComponentScan("org.example")</code></p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The following is an alternative using XML</p>
+<p>下面是使用XML的替代方法</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4870,9 +4827,7 @@ annotation, i.e. <code>@ComponentScan("org.example")</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The use of <code>&lt;context:component-scan&gt;</code> implicitly enables the functionality of
-<code>&lt;context:annotation-config&gt;</code>. There is usually no need to include the
-<code>&lt;context:annotation-config&gt;</code> element when using <code>&lt;context:component-scan&gt;</code>.</p>
+<p>对 <code>&lt;context:component-scan&gt;</code> 的使用隐式地启用了<code>&lt;context:annotation-config&gt;</code> 的功能。当使用 <code>&lt;context:component-scan&gt;</code> 是，通常不需要包含 <code>&lt;context:annotation-config&gt;</code> 元素。</p>
 </div>
 </td>
 </tr>
@@ -4886,22 +4841,15 @@ annotation, i.e. <code>@ComponentScan("org.example")</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The scanning of classpath packages requires the presence of corresponding directory
-entries in the classpath. When you build JARs with Ant, make sure that you do <em>not</em>
-activate the files-only switch of the JAR task. Also, classpath directories may not
-get exposed based on security policies in some environments, e.g. standalone apps on
-JDK 1.7.0_45 and higher (which requires 'Trusted-Library' setup in your manifests; see
-<a href="https://stackoverflow.com/questions/19394570/java-jre-7u45-breaks-classloader-getresources" class="bare">http://stackoverflow.com/questions/19394570/java-jre-7u45-breaks-classloader-getresources</a>).</p>
+<p>对类路径包的扫描要求类路径中存在相应的目录入口。当你使用 Ant 构建 JAR 时，确保不要激活 JAR 任务的 files-only 开关。此外，在某些环境中，基于安全策略类路径目录可能不会暴露出来，例如， JDK 1.7.0_45 及更高版本上的独立应用程序（这需要在你的 manifest 中设置可信库‘Trusted-Library’；参见<a href="https://stackoverflow.com/questions/19394570/java-jre-7u45-breaks-classloader-getresources" class="bare">http://stackoverflow.com/questions/19394570/java-jre-7u45-breaks-classloader-getresources</a>）。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Furthermore, the <code>AutowiredAnnotationBeanPostProcessor</code> and
-<code>CommonAnnotationBeanPostProcessor</code> are both included implicitly when you use the
-component-scan element. That means that the two components are autodetected <em>and</em>
-wired together - all without any bean configuration metadata provided in XML.</p>
+<p>而且，当你使用 component-scan 元素时，<code>AutowiredAnnotationBeanPostProcessor</code> 和
+<code>CommonAnnotationBeanPostProcessor</code> 都是隐式包含的。这意味着这两个组件会被自动检测且装配在一起——所有这些都在没有XML提供任何 bean 配置元数据的情况下实现。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -4911,9 +4859,7 @@ wired together - all without any bean configuration metadata provided in XML.</p
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You can disable the registration of <code>AutowiredAnnotationBeanPostProcessor</code> and
-<code>CommonAnnotationBeanPostProcessor</code> by including the <em>annotation-config</em> attribute
-with a value of false.</p>
+<p>你可以通过将 <em>annotation-config</em>  特性的值设置为 false 来禁用<code>AutowiredAnnotationBeanPostProcessor</code> 和 <code>CommonAnnotationBeanPostProcessor</code> 。</p>
 </div>
 </td>
 </tr>
@@ -4921,18 +4867,12 @@ with a value of false.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-scanning-filters"><a class="anchor" href="#beans-scanning-filters"></a>1.10.4. Using filters to customize scanning</h4>
+<h4 id="beans-scanning-filters"><a class="anchor" href="#beans-scanning-filters"></a>1.10.4. 使用过滤器来自定义扫描</h4>
 <div class="paragraph">
-<p>By default, classes annotated with <code>@Component</code>, <code>@Repository</code>, <code>@Service</code>,
-<code>@Controller</code>, or a custom annotation that itself is annotated with <code>@Component</code> are the
-only detected candidate components. However, you can modify and extend this behavior
-simply by applying custom filters. Add them as <em>includeFilters</em> or <em>excludeFilters</em>
-parameters of the <code>@ComponentScan</code> annotation (or as <em>include-filter</em> or <em>exclude-filter</em>
-sub-elements of the <code>component-scan</code> element). Each filter element requires the <code>type</code>
-and <code>expression</code> attributes. The following table describes the filtering options.</p>
+<p>默认情况下，使用 <code>@Component</code>，<code>@Repository</code>，<code>@Service</code>，<code>@Controller</code>，或者本身使用 <code>@Component</code> 注解的自定义注解是唯一被检测到的候选组件。不过，你只需应用自定义过滤器即可修改和扩展此行为。将它们添加为 <code>@ComponentScan</code> 注解的 <em>includeFilters</em> 或者 <em>excludeFilters</em> 参数（或者作为<code>@ComponentScan</code> 元素的 <em>include-filter</em> 或者 <em>exclude-filter</em> 的子元素）。每个过滤器元素都需要 <code>type</code> 和 <code>expression</code> 特性。下表介绍了过滤选项。</p>
 </div>
 <table id="beans-scanning-filters-tbl" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 5. Filter Types</caption>
+<caption class="title">Table 5. 过滤类型</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -4940,42 +4880,41 @@ and <code>expression</code> attributes. The following table describes the filter
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Filter Type</th>
-<th class="tableblock halign-left valign-top">Example Expression</th>
-<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">过滤类型</th>
+<th class="tableblock halign-left valign-top">示例表达式</th>
+<th class="tableblock halign-left valign-top">描述</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">annotation (default)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">annotation （默认）</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.example.SomeAnnotation</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An annotation to be present at the type level in target components.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">目标组件中呈现的类型级别的注解。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">assignable</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.example.SomeClass</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A class (or interface) that the target components are assignable to (extend/implement).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">可以被目标组件赋值（或者继承/实现）的类（或者接口）。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">aspectj</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.example..*Service+</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">An AspectJ type expression to be matched by the target components.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个由目标组件匹配的 AspectJ 类型表达式。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">regex</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org\.example\.Default.*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A regex expression to be matched by the target components class names.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">由目标组件类名称匹配的正则表达式。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">custom</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.example.MyTypeFilter</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A custom implementation of the <code>org.springframework.core.type .TypeFilter</code> interface.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>org.springframework.core.type.TypeFilter</code> 接口的自定义实现。</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The following example shows the configuration ignoring all <code>@Repository</code> annotations
-and using "stub" repositories instead.</p>
+<p>以下示例展示了忽略所有 <code>@Repository</code> 注解的配置，改用“stub” repository。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -4989,7 +4928,7 @@ and using "stub" repositories instead.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and the equivalent using XML</p>
+<p>使用XML的等价配置如下</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5011,10 +4950,7 @@ and using "stub" repositories instead.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You can also disable the default filters by setting <code>useDefaultFilters=false</code> on the annotation or
-providing <code>use-default-filters="false"</code> as an attribute of the <code>&lt;component-scan/&gt;</code> element. This
-will in effect disable automatic detection of classes annotated with <code>@Component</code>, <code>@Repository</code>,
-<code>@Service</code>, <code>@Controller</code>, or <code>@Configuration</code>.</p>
+<p>你也可以通过在注解中设置 <code>useDefaultFilters=false</code> 或者在 <code>&lt;component-scan/&gt;</code> 元素中设置 <code>use-default-filters="false"</code> 来禁用默认过滤器。这会禁用对带有 <code>@Component</code>，<code>@Repository</code>，<code>@Service</code>，<code>@Controller</code>，或者 <code>@Configuration</code> 注解类的自动检测。</p>
 </div>
 </td>
 </tr>
@@ -5022,11 +4958,9 @@ will in effect disable automatic detection of classes annotated with <code>@Comp
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-factorybeans-annotations"><a class="anchor" href="#beans-factorybeans-annotations"></a>1.10.5. Defining bean metadata within components</h4>
+<h4 id="beans-factorybeans-annotations"><a class="anchor" href="#beans-factorybeans-annotations"></a>1.10.5. 在组件中定义 bean 元数据</h4>
 <div class="paragraph">
-<p>Spring components can also contribute bean definition metadata to the container. You do
-this with the same <code>@Bean</code> annotation used to define bean metadata within <code>@Configuration</code>
-annotated classes. Here is a simple example:</p>
+<p>Spring 组件也可以将 bean 定义元数据提供给容器。你可以使用这同一个 <code>@Bean</code> 注解来定义 <code>@Configuration</code> 注解类中的 bean 元数据。下面是个简单的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5046,12 +4980,7 @@ annotated classes. Here is a simple example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This class is a Spring component that has application-specific code contained in its
-<code>doWork()</code> method. However, it also contributes a bean definition that has a factory
-method referring to the method <code>publicInstance()</code>. The <code>@Bean</code> annotation identifies the
-factory method and other bean definition properties, such as a qualifier value through
-the <code>@Qualifier</code> annotation. Other method level annotations that can be specified are
-<code>@Scope</code>, <code>@Lazy</code>, and custom qualifier annotations.</p>
+<p>这是一个 Spring 组件类，他的 <code>doWork()</code> 方法中包含了与应用相关的业务代码。它还提供了一个具有指向 <code>publicInstance()</code> 工厂方法的 bean 定义。<code>@Bean</code> 注解通过 <code>@Qualifier</code> 注解来标识工厂方法和其他 bean 定义属性，如限定符值。其他可以指定的方法级注解有 <code>@Scope</code>，<code>@Lazy</code>，和自定义限定符注解。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -5061,17 +4990,14 @@ the <code>@Qualifier</code> annotation. Other method level annotations that can 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In addition to its role for component initialization, the <code>@Lazy</code> annotation may also be
-placed on injection points marked with <code>@Autowired</code> or <code>@Inject</code>. In this context, it
-leads to the injection of a lazy-resolution proxy.</p>
+<p>除了用于组件初始化的角色之外，<code>@Lazy</code> 注解还可以用在标记 <code>@Autowired</code> 或者 <code>@Inject</code> 的注入点上。在这种上下文中，它会注入一个懒解析代理。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Autowired fields and methods are supported as previously discussed, with additional
-support for autowiring of <code>@Bean</code> methods:</p>
+<p>如前所述，注解支持自动装配的字段和方法，另外还支持 <code>@Bean</code> 方法的自动装配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5111,22 +5037,10 @@ support for autowiring of <code>@Bean</code> methods:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The example autowires the <code>String</code> method parameter <code>country</code> to the value of the <code>Age</code>
-property on another bean named <code>privateInstance</code>. A Spring Expression Language element
-defines the value of the property through the notation <code>#{ &lt;expression&gt; }</code>. For <code>@Value</code>
-annotations, an expression resolver is preconfigured to look for bean names when
-resolving expression text.</p>
+<p>该示例将另一个名为 <code>privateInstance</code> 的 bean 的 <code>Age</code> 属性值自动装配到<code>String</code> 方法参数 <code>country</code> 中。属性的值通过 Spring 表达式的 <code>#{ &lt;expression&gt; }</code> 符号来定义。对于 <code>@Value</code> 注解，表达式解析器会被预先配置以便它在解析表达式文本是查找 bean 的名字。</p>
 </div>
 <div class="paragraph">
-<p>As of Spring Framework 4.3, you may also declare a factory method parameter of type
-<code>InjectionPoint</code> (or its more specific subclass <code>DependencyDescriptor</code>) in order to
-access the requesting injection point that triggers the creation of the current bean.
-Note that this will only apply to the actual creation of bean instances, not to the
-injection of existing instances. As a consequence, this feature makes most sense for
-beans of prototype scope. For other scopes, the factory method will only ever see the
-injection point which triggered the creation of a new bean instance in the given scope:
-for example, the dependency that triggered the creation of a lazy singleton bean.
-Use the provided injection point metadata with semantic care in such scenarios.</p>
+<p>从 Spring Framework 4.3 开始，你还可以声明一个 <code>InjectionPoint</code> 类型的工厂方法参数（或者 <code>DependencyDescriptor</code> 更具体的子类），以便访问触发创建当前 bean 的请求注入点。注意这只适用于实际的 bean 实例创建，而不适用于现有实例的注入。因此，这个特性对原型作用域 bean 来说是很有意义的。对于其他作用域来说，工厂方法将只会看到触发在给定作用域内创建新的 bean 实例的注入点：例如，触发创建懒加载单例 bean 的依赖项。Use the provided injection point metadata with semantic care in such scenarios（？？）</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5141,17 +5055,7 @@ Use the provided injection point metadata with semantic care in such scenarios.<
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@Bean</code> methods in a regular Spring component are processed differently than their
-counterparts inside a Spring <code>@Configuration</code> class. The difference is that <code>@Component</code>
-classes are not enhanced with CGLIB to intercept the invocation of methods and fields.
-CGLIB proxying is the means by which invoking methods or fields within <code>@Bean</code> methods
-in <code>@Configuration</code> classes creates bean metadata references to collaborating objects;
-such methods are <em>not</em> invoked with normal Java semantics but rather go through the
-container in order to provide the usual lifecycle management and proxying of Spring
-beans even when referring to other beans via programmatic calls to <code>@Bean</code> methods.
-In contrast, invoking a method or field in an <code>@Bean</code> method within a plain <code>@Component</code>
-class <em>has</em> standard Java semantics, with no special CGLIB processing or other
-constraints applying.</p>
+<p>对常规 Spring 组件的 <code>@Bean</code> 方法的处理方式与 Spring <code>@Configuration</code> 类中对应方法的处理方式是不同的。不同之处在于 <code>@Component</code> 类不使用GGLIB来拦截方法和字段的调用。CGLIB 代理是通过在 <code>@Configuration</code> 类中的 <code>@Bean</code> 方法中调用方法或字段来创建对协作对象的 bean 元数据引用；此类方法不是用普通 Java 语义调用的，而是通过容器来提供对 Spring bean 常用的生命周期管理和代理，甚至当通过编程方式调用 <code>@Bean</code> 方法来引用其它 bean 的时候。相比之下，在一个具有标准 Java 语义的普通 <code>@Component</code> 类的 <code>@Bean</code> 方法中调用方法和字段，不会有特殊的 CGLIB 树立和其他约束条件。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -5161,40 +5065,20 @@ constraints applying.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You may declare <code>@Bean</code> methods as <code>static</code>, allowing for them to be called without
-creating their containing configuration class as an instance. This makes particular
-sense when defining post-processor beans, e.g. of type <code>BeanFactoryPostProcessor</code> or
-<code>BeanPostProcessor</code>, since such beans will get initialized early in the container
-lifecycle and should avoid triggering other parts of the configuration at that point.</p>
+<p>您可以将 <code>@Bean</code> 方法声明为 <code>static</code>，从而允许在不创建包含它们的配置类实例的情况下也可以调用它们。这在定义 post-processor bean 如 <code>BeanFactoryPostProcessor</code> 或者
+  <code>BeanPostProcessor</code> 时特别有用，因为这类 bean 会在容器的早期生命周期就被初始化，并且会会在那一刻避免触发配置的其它部分。</p>
 </div>
 <div class="paragraph">
-<p>Note that calls to static <code>@Bean</code> methods will never get intercepted by the container,
-not even within <code>@Configuration</code> classes (see above). This is due to technical
-limitations: CGLIB subclassing can only override non-static methods. As a consequence,
-a direct call to another <code>@Bean</code> method will have standard Java semantics, resulting
-in an independent instance being returned straight from the factory method itself.</p>
+<p>注意对静态 <code>@Bean</code> 方法的调用永远不会被容器拦截，即使在 <code>@Configuration</code> 类中也是如此（参见上文）。这是由于技术上的限制：CGLIB 子类只能覆盖非静态方法。因此，对另一个 <code>@Bean</code> 的直接调用会产生标准 Java 语义，结果就是工厂方法本身直接返回一个独立的实例。</p>
 </div>
 <div class="paragraph">
-<p>The Java language visibility of <code>@Bean</code> methods does not have an immediate impact on
-the resulting bean definition in Spring&#8217;s container. You may freely declare your
-factory methods as you see fit in non-<code>@Configuration</code> classes and also for static
-methods anywhere. However, regular <code>@Bean</code> methods in <code>@Configuration</code> classes need
-to be overridable, i.e. they must not be declared as <code>private</code> or <code>final</code>.</p>
+<p><code>@Bean</code> 方法对于 Java 语言的可见性不会对 Spring 容器中 bean 的定义结果产生直接的影响。就像你可以在非 <code>@Configuration</code> 类任何地方看到的，你可以自由地声明工厂方法，静态方法也一样。 但是，<code>@Configuration</code>类中常规的 <code>@Bean</code> 方法需要被覆盖，比如，它们不能被声明为 <code>private</code> 或是 <code>final</code> 的。</p>
 </div>
 <div class="paragraph">
-<p><code>@Bean</code> methods will also be discovered on base classes of a given component or
-configuration class, as well as on Java 8 default methods declared in interfaces
-implemented by the component or configuration class. This allows for a lot of
-flexibility in composing complex configuration arrangements, with even multiple
-inheritance being possible through Java 8 default methods as of Spring 4.2.</p>
+<p><code>@Bean</code> 方法会在给定组件或者是配置类的基类上，以及 Java 8 中被组件或者配置类实现的接口的默认方法上见到。这为构建复杂的配置布局提供了很大的灵活性，甚至从 Spring 4.2 起，通过 Java 8 实现多重继承也是可能的。</p>
 </div>
 <div class="paragraph">
-<p>Finally, note that a single class may hold multiple <code>@Bean</code> methods for the same
-bean, as an arrangement of multiple factory methods to use depending on available
-dependencies at runtime. This is the same algorithm as for choosing the "greediest"
-constructor or factory method in other configuration scenarios: The variant with
-the largest number of satisfiable dependencies will be picked at construction time,
-analogous to how the container selects between multiple <code>@Autowired</code> constructors.</p>
+<p>最后，注意同一个类可能会为同一个 bean 持有多个 <code>@Bean</code> 办法，这是根据运行时可用依赖关系来使用多个工厂方法的一种布局。这与在其他配置场景中选择“最贪婪的”构造器或工厂方法的算法相同：容器将会在构建时选择具有最多可满足依赖项的那个，类似于容器如何在多个 <code>@Autowired</code> 构造器中进行选择。</p>
 </div>
 </td>
 </tr>
@@ -5202,19 +5086,12 @@ analogous to how the container selects between multiple <code>@Autowired</code> 
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-scanning-name-generator"><a class="anchor" href="#beans-scanning-name-generator"></a>1.10.6. Naming autodetected components</h4>
+<h4 id="beans-scanning-name-generator"><a class="anchor" href="#beans-scanning-name-generator"></a>1.10.6. 自动检测组件的命名</h4>
 <div class="paragraph">
-<p>When a component is autodetected as part of the scanning process, its bean name is
-generated by the <code>BeanNameGenerator</code> strategy known to that scanner. By default, any
-Spring stereotype annotation (<code>@Component</code>, <code>@Repository</code>, <code>@Service</code>, and
-<code>@Controller</code>) that contains a <em>name</em> <code>value</code> will thereby provide that name to the
-corresponding bean definition.</p>
+<p>当组件作为扫描过程的一部分被自动检测时，它的 bean 名字会有该扫描器已知的 <code>BeanNameGenerator</code> 策略生成。默认情况下，Spring 的任何包含 <em>name</em> <code>value</code> 的 stereotype 注解（<code>@Component</code>，<code>@Repository</code>，<code>@Service</code>，和 <code>@Controller</code>）都会将此 name 作为名字提供给相应的 bean 定义。</p>
 </div>
 <div class="paragraph">
-<p>If such an annotation contains no <em>name</em> <code>value</code> or for any other detected component (such
-as those discovered by custom filters), the default bean name generator returns the
-uncapitalized non-qualified class name. For example, if the following two components
-were detected, the names would be <code>myMovieLister</code> and <code>movieFinderImpl</code>:</p>
+<p>如果此类注解不包含任何 <em>name</em> <code>value</code> 或者对于其他任何检测到的组件（如自定义过滤器发现的那些），那么默认的 bean 名字生成器会返回一个小写字母开头的非限定类名。例如，如果一下两个组件被检测到，他们的名字将会是 <code>myMovieLister</code> 和 <code>movieFinderImpl</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5240,11 +5117,7 @@ were detected, the names would be <code>myMovieLister</code> and <code>movieFind
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you do not want to rely on the default bean-naming strategy, you can provide a custom
-bean-naming strategy. First, implement the
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/support/BeanNameGenerator.html"><code>BeanNameGenerator</code></a>
-interface, and be sure to include a default no-arg constructor. Then, provide the
-fully-qualified class name when configuring the scanner:</p>
+<p>如果你不想依赖默认的 bean 命名策略，你可以提供一个自定义 bean 命名策略。首先，实现 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/beans/factory/support/BeanNameGenerator.html"><code>BeanNameGenerator</code></a> 接口，并且确保实现包含一个默认的无参构造器。然后，在配置扫描器的时候提供全限定类名：</p>
 </div>
 </td>
 </tr>
@@ -5268,18 +5141,13 @@ fully-qualified class name when configuring the scanner:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As a general rule, consider specifying the name with the annotation whenever other
-components may be making explicit references to it. On the other hand, the
-auto-generated names are adequate whenever the container is responsible for wiring.</p>
+<p>一般规则就是：只要当其他组件可能正在对其进行显式引用时，考虑用注解指定名字。另一方面，只要是容器负责装配，那么自动生成的名字就足够满足使用了。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-scanning-scope-resolver"><a class="anchor" href="#beans-scanning-scope-resolver"></a>1.10.7. Providing a scope for autodetected components</h4>
+<h4 id="beans-scanning-scope-resolver"><a class="anchor" href="#beans-scanning-scope-resolver"></a>1.10.7. 提供自动检测组件的作用域</h4>
 <div class="paragraph">
-<p>As with Spring-managed components in general, the default and most common scope for
-autodetected components is <code>singleton</code>. However, sometimes you need a different scope
-which can be specified via the <code>@Scope</code> annotation. Simply provide the name of the scope
-within the annotation:</p>
+<p>与一般的 Spring 管理的组件一样，自动检测组件的默认和最常见的作用域是 <code>singleton</code>。但是，有时候你会需要通过 <code>@Scope</code> 注解来指定其他不同的作用域。只需在注解中提供作用域名即可：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5291,7 +5159,7 @@ within the annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For details on web-specific scopes, see <a href="#beans-factory-scopes-other">Request, session, application, and WebSocket scopes</a>.</p>
+<p>关于与 web 有关的特定作用域，参见 <a href="#beans-factory-scopes-other">Request, session, application 和 WebSocket 作用域</a>。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -5301,11 +5169,7 @@ within the annotation:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>To provide a custom strategy for scope resolution rather than relying on the
-annotation-based approach, implement the
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/ScopeMetadataResolver.html"><code>ScopeMetadataResolver</code></a>
-interface, and be sure to include a default no-arg constructor. Then, provide the
-fully-qualified class name when configuring the scanner:</p>
+<p>要为作用域解析提供一个自定义策略而不依赖基于注解的方式，需要实现 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/ScopeMetadataResolver.html"><code>ScopeMetadataResolver</code></a> 接口，并且确保实现中有一个默认的无参构造器。然后，在配置扫描器的时候提供全限定类名：</p>
 </div>
 </td>
 </tr>
@@ -5329,11 +5193,7 @@ fully-qualified class name when configuring the scanner:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When using certain non-singleton scopes, it may be necessary to generate proxies for the
-scoped objects. The reasoning is described in <a href="#beans-factory-scopes-other-injection">Scoped beans as dependencies</a>.
-For this purpose, a <em>scoped-proxy</em> attribute is available on the component-scan
-element. The three possible values are: no, interfaces, and targetClass. For example,
-the following configuration will result in standard JDK dynamic proxies:</p>
+<p>在使用某些非单例作用域时，可能需要为作用域对象生成代理。原因在 <a href="#beans-factory-scopes-other-injection">作为依赖项的作用域 bean</a> 中阐述了。为此，component-scan 元素提供了可用的 <em>scoped-proxy</em> 特性。三个可选的值是：no，interfaces 和 targetClass。例如，下面的配置会最终产生标准 JDK 动态代理：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5354,17 +5214,9 @@ the following configuration will result in standard JDK dynamic proxies:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-scanning-qualifiers"><a class="anchor" href="#beans-scanning-qualifiers"></a>1.10.8. Providing qualifier metadata with annotations</h4>
+<h4 id="beans-scanning-qualifiers"><a class="anchor" href="#beans-scanning-qualifiers"></a>1.10.8. 限定符元数据注解</h4>
 <div class="paragraph">
-<p>The <code>@Qualifier</code> annotation is discussed in <a href="#beans-autowired-annotation-qualifiers">Fine-tuning annotation-based autowiring with qualifiers</a>.
-The examples in that section demonstrate the use of the <code>@Qualifier</code> annotation and
-custom qualifier annotations to provide fine-grained control when you resolve autowire
-candidates. Because those examples were based on XML bean definitions, the qualifier
-metadata was provided on the candidate bean definitions using the <code>qualifier</code> or <code>meta</code>
-sub-elements of the <code>bean</code> element in the XML. When relying upon classpath scanning for
-autodetection of components, you provide the qualifier metadata with type-level
-annotations on the candidate class. The following three examples demonstrate this
-technique:</p>
+<p><code>@Qualifier</code> 已经在 <a href="#beans-autowired-annotation-qualifiers">使用 @qualifier 对基于注解的自动装配进行微调</a> 讨论过了。本节中的示例演示在你解析自动装配候选项时如何通过 <code>@Qualifier</code> 注解和自定义限定符来实现细粒度控制。因为这些例子都是基于 XML bean 定义的，所以提供给候选 bean 定义的限定符元数据在这里也是通过使用 XML 中 <code>bean</code> 元素的 <code>qualifier</code> 或者 <code>元</code> 子元素来实现的。当你用类路径扫描来对组件进行自动检测时，就在候选类上配置类型级别的限定符元数据注解。以下三个例子展示了这种技术：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5401,10 +5253,7 @@ technique:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>As with most annotation-based alternatives, keep in mind that the annotation metadata is
-bound to the class definition itself, while the use of XML allows for multiple beans
-<em>of the same type</em> to provide variations in their qualifier metadata, because that
-metadata is provided per-instance rather than per-class.</p>
+<p>与大多数基于注解的代替方案一样，记住注解元数据是与类定义本身绑定在一起的，而XML中的注解允许多个相同类型的  bean 提供其限定符元数据的变体，因为这种情况下，元数据是与每个实例一一对应的，而不是与每个类一一对应。</p>
 </div>
 </td>
 </tr>
@@ -5412,17 +5261,12 @@ metadata is provided per-instance rather than per-class.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-scanning-index"><a class="anchor" href="#beans-scanning-index"></a>1.10.9. Generating an index of candidate components</h4>
+<h4 id="beans-scanning-index"><a class="anchor" href="#beans-scanning-index"></a>1.10.9. 生成候选组件的索引</h4>
 <div class="paragraph">
-<p>While classpath scanning is very fast, it is possible to improve the startup performance
-of large applications by creating a static list of candidates at compilation time. In this
-mode, <em>all modules</em> of the application must use this mechanism as, when the
-<code>ApplicationContext</code> detects such index, it will automatically use it rather than scanning
-the classpath.</p>
+<p>虽然类路径扫描速度非常快，但通过在编译时创建静态候选列表，可以提高大型应用程序的启动性能。在这种模式下，应用程序的所有模块都必须使用这种机制，当 <code>ApplicationContext</code> 检测到这样的索引时，它将自动使用这个索引而不是扫描类路径。</p>
 </div>
 <div class="paragraph">
-<p>To generate the index, simply add an additional dependency to each module that contains
-components that are target for component scan directives:</p>
+<p>要生成索引，只需向每个包含组件扫描指令的目标组件的模块添加一个附加依赖项即可：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5437,7 +5281,7 @@ components that are target for component scan directives:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Or, using Gradle:</p>
+<p>或者，对于 Gradle：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5447,8 +5291,7 @@ components that are target for component scan directives:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>That process will generate a <code>META-INF/spring.components</code> file that is going to be
-included in the jar.</p>
+<p>此过程将生成会被包含在这个 jar 文件中的 <code>META-INF/spring.components</code> 文件。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -5458,9 +5301,7 @@ included in the jar.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When working with this mode in your IDE, the <code>spring-context-indexer</code> must be registered
-as an annotation processor to make sure the index is up to date when candidate components
-are updated.</p>
+<p>当在你的IDE中使用这个模式是，必须将 <code>spring-context-indexer</code> 注册为注解处理器，以确保候选组件更新时索引是最新的（不过时）。</p>
 </div>
 </td>
 </tr>
@@ -5474,12 +5315,7 @@ are updated.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The index is enabled automatically when a <code>META-INF/spring.components</code> is found on the
-classpath. If an index is partially available for some libraries (or use cases) but
-couldn&#8217;t be built for the whole application, you can fallback to a regular classpath
-arrangement (i.e. as no index was present at all) by setting <code>spring.index.ignore</code> to
-<code>true</code>, either as a system property or in a <code>spring.properties</code> file at the root of the
-classpath.</p>
+<p>当在类路径上找到 <code>META-INF/spring.components</code> 时，索引会自动启动。如果索引对于某些库（或者某些用例）是部分可用的，而不是对整个应用可用，那么你可以通过将作为系统属性的或者在类路径根目录的 <code>spring.properties</code>文件中的 <code>spring.index.ignore</code> 设置为 <code>true</code> 来回退到使用常规的类路径布局（例如，完全没有索引）。</p>
 </div>
 </td>
 </tr>
