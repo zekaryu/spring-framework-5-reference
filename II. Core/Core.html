@@ -5324,11 +5324,9 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="beans-standard-annotations"><a class="anchor" href="#beans-standard-annotations"></a>1.11. Using JSR 330 Standard Annotations</h3>
+<h3 id="beans-standard-annotations"><a class="anchor" href="#beans-standard-annotations"></a>1.11. 使用 JSR 330 标准注解</h3>
 <div class="paragraph">
-<p>Starting with Spring 3.0, Spring offers support for JSR-330 standard annotations
-(Dependency Injection). Those annotations are scanned in the same way as the Spring
-annotations. You just need to have the relevant jars in your classpath.</p>
+<p>从 Spring 3.0 开始，Spring 提供对 JSR-330 标准注解（依赖注入）的支持。这些注解的扫描方式与 Spring 注解相同。你只需要在你的类路径中添加相关的 jar 包就行了。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -5338,10 +5336,8 @@ annotations. You just need to have the relevant jars in your classpath.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you are using Maven, the <code>javax.inject</code> artifact is available in the standard Maven
-repository (
-<a href="https://repo1.maven.org/maven2/javax/inject/javax.inject/1/">http://repo1.maven.org/maven2/javax/inject/javax.inject/1/</a>).
-You can add the following dependency to your file pom.xml:</p>
+<p>如果您正在使用Maven，则可以在标准Maven存储库（http://repo1.maven.org/maven2/javax/inject/javax.inject/1/）中使用 <code>javax.inject</code> artifact。你可以将以下依赖项添加到你的pom.xml 文件中：
+</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5357,9 +5353,9 @@ You can add the following dependency to your file pom.xml:</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="beans-inject-named"><a class="anchor" href="#beans-inject-named"></a>1.11.1. Dependency Injection with @Inject and @Named</h4>
+<h4 id="beans-inject-named"><a class="anchor" href="#beans-inject-named"></a>1.11.1. 用 @Inject 和 @Named 进行依赖注入</h4>
 <div class="paragraph">
-<p>Instead of <code>@Autowired</code>, <code>@javax.inject.Inject</code> may be used as follows:</p>
+<p>可以使用 <code>@javax.inject.Inject</code> 来代替 <code>@Autowired</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5382,10 +5378,7 @@ You can add the following dependency to your file pom.xml:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As with <code>@Autowired</code>, it is possible to use <code>@Inject</code> at the field level, method level
-and constructor-argument level. Furthermore, you may declare your injection point as a
-<code>Provider</code>, allowing for on-demand access to beans of shorter scopes or lazy access to
-other beans through a <code>Provider.get()</code> call. As a variant of the example above:</p>
+<p>与 <code>@Autowired</code> 一样，你可以在字段级别，方法级别和构造器参数级别使用 <code>@Inject</code>。 此外，你可以将注入点声明为 <code>Provider</code>，允许按需访问较短作用域的 bean，或者通过 <code>Provider.get()</code> 调用对其他 bean 的惰性访问。作为以上示例的一个变体：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5409,8 +5402,7 @@ other beans through a <code>Provider.get()</code> call. As a variant of the exam
 </div>
 </div>
 <div class="paragraph">
-<p>If you would like to use a qualified name for the dependency that should be injected,
-you should use the <code>@Named</code> annotation as follows:</p>
+<p>如果你想为应该注入的依赖项使用限定名，则应该按如下方式使用 <code>@Named</code> 注释</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5432,10 +5424,9 @@ you should use the <code>@Named</code> annotation as follows:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-named"><a class="anchor" href="#beans-named"></a>1.11.2. @Named and @ManagedBean: standard equivalents to the @Component annotation</h4>
+<h4 id="beans-named"><a class="anchor" href="#beans-named"></a>1.11.2. @Named 和 @ManagedBean: @Component 注解的标准等价注解</h4>
 <div class="paragraph">
-<p>Instead of <code>@Component</code>, <code>@javax.inject.Named</code> or <code>javax.annotation.ManagedBean</code> may be
-used as follows:</p>
+<p><code>@javax.inject.Named</code> 或者 <code>javax.annotation.ManagedBean</code> 可以用来代替 <code>@Component</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5457,8 +5448,7 @@ used as follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>It is very common to use <code>@Component</code> without specifying a name for the component.
-<code>@Named</code> can be used in a similar fashion:</p>
+<p>使用 <code>@Component</code> 而不指定组件的名称是很常见的。<code>@Named</code> 可以以类似的方式使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5480,8 +5470,7 @@ used as follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When using <code>@Named</code> or <code>@ManagedBean</code>, it is possible to use component scanning in the
-exact same way as when using Spring annotations:</p>
+<p>当使用 <code>@Named</code> 或 <code>@ManagedBean</code> 时，可以像使用 Spring 注解一样使用组件扫描：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5500,9 +5489,7 @@ exact same way as when using Spring annotations:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In contrast to <code>@Component</code>, the JSR-330 <code>@Named</code> and the JSR-250 <code>ManagedBean</code>
-annotations are not composable. Please use Spring&#8217;s stereotype model for building custom
-component annotations.</p>
+<p>与 <code>@Component</code> 相比，JSR-330 <code>@Named</code> 和 JSR-250 code>ManagedBean</code> 注解是不可组合的。 请使用 Spring 的 stereotype 模型来构建自定义组件注解。</p>
 </div>
 </td>
 </tr>
@@ -5510,13 +5497,12 @@ component annotations.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-standard-annotations-limitations"><a class="anchor" href="#beans-standard-annotations-limitations"></a>1.11.3. Limitations of JSR-330 standard annotations</h4>
+<h4 id="beans-standard-annotations-limitations"><a class="anchor" href="#beans-standard-annotations-limitations"></a>1.11.3.JSR-330 标准注解的局限性</h4>
 <div class="paragraph">
-<p>When working with standard annotations, it is important to know that some significant
-features are not available as shown in the table below:</p>
+<p>当你使用标准注解时，重要的是要知道下表中所示的一些重要特性是不可用的：</p>
 </div>
 <table id="annotations-comparison" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 6. Spring component model elements vs. JSR-330 variants</caption>
+<caption class="title">Table 6. Spring 组件模型元素 vs. JSR-330 变体</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -5526,58 +5512,49 @@ features are not available as shown in the table below:</p>
 <tr>
 <th class="tableblock halign-left valign-top">Spring</th>
 <th class="tableblock halign-left valign-top">javax.inject.*</th>
-<th class="tableblock halign-left valign-top">javax.inject restrictions / comments</th>
+<th class="tableblock halign-left valign-top">javax.inject 限制 / 注释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Autowired</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Inject</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Inject</code> has no 'required' attribute; can be used with Java 8&#8217;s <code>Optional</code> instead.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>@Inject</code> 没有 ‘required’ 特性；可以用 Java 8 的 <code>Optional</code> 代替。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Component</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Named / @ManagedBean</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSR-330 does not provide a composable model, just a way to identify named components.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSR-330 不提供可组合模型，只是别名命名组件的一种方法。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Scope("singleton")</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Singleton</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The JSR-330 default scope is like Spring&#8217;s <code>prototype</code>. However, in order to keep it
-consistent with Spring&#8217;s general defaults, a JSR-330 bean declared in the Spring
-container is a <code>singleton</code> by default. In order to use a scope other than <code>singleton</code>,
-you should use Spring&#8217;s <code>@Scope</code> annotation. <code>javax.inject</code> also provides a
-<a href="http://download.oracle.com/javaee/6/api/javax/inject/Scope.html">@Scope</a> annotation.
-Nevertheless, this one is only intended to be used for creating your own annotations.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSR-330 的默认作用域就像 Spring 的 <code>prototype</code> 原型作用域。但是，为了保持与 Spring 的一般默认值一致，Spring 容器中声明的 JSR-330 bean 默认是 code>singleton</code> 单例。为了使用除 <code>singleton</code> 单例之外的作用域，您应该使用 Spring 的 <code>@Scope</code> 注解。<code>javax.inject</code> 还提供了 <a href="http://download.oracle.com/javaee/6/api/javax/inject/Scope.html">@Scope</a> 注解。 不过，这只是为了用来创建自己的注释。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Qualifier</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Qualifier / @Named</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.inject.Qualifier</code> is just a meta-annotation for building custom qualifiers.
-Concrete String qualifiers (like Spring&#8217;s <code>@Qualifier</code> with a value) can be associated
-through <code>javax.inject.Named</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.inject.Qualifier</code> 只是用来构建自定义限定符的元注解。具体的字符串限定符（如 Spring 的具有值的 <code>@Qualifier</code> ）可以通过 <code>javax.inject.Named</code> 关联。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Value</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no equivalent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无等价注解</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Required</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no equivalent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无等价注解</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Lazy</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no equivalent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无等价注解</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">ObjectFactory</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Provider</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.inject.Provider</code> is a direct alternative to Spring&#8217;s <code>ObjectFactory</code>,
-just with a shorter <code>get()</code> method name. It can also be used in combination with
-Spring&#8217;s <code>@Autowired</code> or with non-annotated constructors and setter methods.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javax.inject.Provider</code> 是 Spring 的 <code>ObjectFactory</code> 的一个直接替代者，只不过它使用一个较短的 <code>get()</code> 方法名。它也可以与 Spring 的 <code>@Autowired</code> 或者带有非注解构造器和setter 方法结合使用。</p></td>
 </tr>
 </tbody>
 </table>
