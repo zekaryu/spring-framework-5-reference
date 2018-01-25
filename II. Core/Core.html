@@ -5563,23 +5563,15 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <div class="sect2">
 <h3 id="beans-java"><a class="anchor" href="#beans-java"></a>1.12. 基于 Java 代码的容器配置</h3>
 <div class="sect3">
-<h4 id="beans-java-basic-concepts"><a class="anchor" href="#beans-java-basic-concepts"></a>1.12.1. Basic concepts: @Bean and @Configuration</h4>
+<h4 id="beans-java-basic-concepts"><a class="anchor" href="#beans-java-basic-concepts"></a>1.12.1. 基本概念: @Bean 和 @Configuration</h4>
 <div class="paragraph">
-<p>The central artifacts in Spring&#8217;s new Java-configuration support are
-<code>@Configuration</code>-annotated classes and <code>@Bean</code>-annotated methods.</p>
+<p>Spring 新的 Java 配置支持中的中心构件是 <code>@Configuration</code> 注解的类和 <code>@Bean</code> 注解的方法。</p>
 </div>
 <div class="paragraph">
-<p>The <code>@Bean</code> annotation is used to indicate that a method instantiates, configures and
-initializes a new object to be managed by the Spring IoC container. For those familiar
-with Spring&#8217;s <code>&lt;beans/&gt;</code> XML configuration the <code>@Bean</code> annotation plays the same role as
-the <code>&lt;bean/&gt;</code> element. You can use <code>@Bean</code> annotated methods with any Spring
-<code>@Component</code>, however, they are most often used with <code>@Configuration</code> beans.</p>
+<p><code>@Bean</code> 注解用于表示一个用来实例化，配置和初始化一个新的对象的方法，对象是由 Spring IoC 容器管理的。对于那些熟悉 Spring 的 <code>&lt;beans/&gt;</code> XML配置的人来说，<code>@Bean</code> 注解和 <code>&lt;bean/&gt;</code> 元素具有相同的作用。你可以对任何 Spring <code>@Component</code> 使用 <code>@Bean</code> 注解的方法，但是它们通常和 <code>@Configuration</code> bean 一起使用。</p>
 </div>
 <div class="paragraph">
-<p>Annotating a class with <code>@Configuration</code> indicates that its primary purpose is as a
-source of bean definitions. Furthermore, <code>@Configuration</code> classes allow inter-bean
-dependencies to be defined by simply calling other <code>@Bean</code> methods in the same class.
-The simplest possible <code>@Configuration</code> class would read as follows:</p>
+<p>用 <code>@Configuration</code> 注解的类表明它的主要目的是作为 bean 定义的来源。此外，<code>@Configuration</code> 类允许通过简单地调用同一个类中的其他@Bean方法来定义 bean 之间的依赖关系。最简单的 <code>@Configuration</code> 类将如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5594,7 +5586,7 @@ The simplest possible <code>@Configuration</code> class would read as follows:</
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>AppConfig</code> class above would be equivalent to the following Spring <code>&lt;beans/&gt;</code> XML:</p>
+<p>上面的 <code>AppConfig</code> 类将等同于下面的 Spring <code>&lt;beans/&gt;</code> XML：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5605,57 +5597,37 @@ The simplest possible <code>@Configuration</code> class would read as follows:</
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">Full @Configuration vs 'lite' @Beans mode?</div>
+<div class="title">Full @Configuration vs ‘lite’ @Beans 模式？</div>
 <div class="paragraph">
-<p>When <code>@Bean</code> methods are declared within classes that are <em>not</em> annotated with
-<code>@Configuration</code> they are referred to as being processed in a 'lite' mode. For example,
-bean methods declared in a <code>@Component</code> or even in a <em>plain old class</em> will be
-considered 'lite'.</p>
+<p>当 <code>@Bean</code> 方法在没有使用 <code>@Configuration</code> 注释的类中声明时，它们被称为在“lite”模式下处理。例如，<code>@Component</code> 中声明的 bean 方法或者一个普通的旧类中的 bean 方法将被视为“lite”。</p>
 </div>
 <div class="paragraph">
-<p>Unlike full <code>@Configuration</code>, lite <code>@Bean</code> methods cannot easily declare inter-bean
-dependencies. Usually one <code>@Bean</code> method should not invoke another <code>@Bean</code> method when
-operating in 'lite' mode.</p>
+<p>与 full <code>@Configuration</code> 不同，lite @Bean <code>@Bean</code> 方法不能轻易地声明 bean 间的依赖关系。通常，一个 <code>@Bean</code> 方法在'lite'模式下运行时不应该调用另一个 <code>@Bean</code> 方法。</p>
 </div>
 <div class="paragraph">
-<p>Only using <code>@Bean</code> methods within <code>@Configuration</code> classes is a recommended approach of
-ensuring that 'full' mode is always used. This will prevent the same <code>@Bean</code> method from
-accidentally being invoked multiple times and helps to reduce subtle bugs that can be
-hard to track down when operating in 'lite' mode.</p>
+<p>仅在 <code>@Configuration</code> 类中使用 <code>@Bean</code> 方法是确保始终使用“full”模式的推荐方法。 这将防止同一个 <code>@Bean</code> 方法被意外调用多次，并有助于减少在“lite”模式下操作时难以追踪的细微错误。</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>@Bean</code> and <code>@Configuration</code> annotations will be discussed in depth in the sections
-below. First, however, we&#8217;ll cover the various ways of creating a spring container using
-Java-based configuration.</p>
+<p><code>@Bean</code> 和 <code>@Configuration</code> 注解将在下面的章节中深入讨论。首先，我们将介绍使用基于Java的配置创建 Spring 容器的各种方法。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-java-instantiating-container"><a class="anchor" href="#beans-java-instantiating-container"></a>1.12.2. Instantiating the Spring container using AnnotationConfigApplicationContext</h4>
+<h4 id="beans-java-instantiating-container"><a class="anchor" href="#beans-java-instantiating-container"></a>1.12.2. 使用 AnnotationConfigApplicationContext 创建 Spring 容器</h4>
 <div class="paragraph">
-<p>The sections below document Spring&#8217;s <code>AnnotationConfigApplicationContext</code>, new in Spring
-3.0. This versatile <code>ApplicationContext</code> implementation is capable of accepting not only
-<code>@Configuration</code> classes as input, but also plain <code>@Component</code> classes and classes
-annotated with JSR-330 metadata.</p>
+<p>下面的章节介绍了 Spring 3.0 的新特性————<code>AnnotationConfigApplicationContext</code>。这种多功能的 <code>ApplicationContext</code> 实现不仅可以接受作为输入的 <code>@Configuration</code> 类，还可以接受用 JSR-330 元数据注解的类和普通的 <code>@Component</code> 类。</p>
 </div>
 <div class="paragraph">
-<p>When <code>@Configuration</code> classes are provided as input, the <code>@Configuration</code> class itself
-is registered as a bean definition, and all declared <code>@Bean</code> methods within the class
-are also registered as bean definitions.</p>
+<p>当用 <code>@Configuration</code> 类作为输入时，<code>@Configuration</code> 类本身会被注册成为一个 bean 定义，且类中所有声明为 <code>@Bean</code> 的方法也会被注册为 bean 定义。</p>
 </div>
 <div class="paragraph">
-<p>When <code>@Component</code> and JSR-330 classes are provided, they are registered as bean
-definitions, and it is assumed that DI metadata such as <code>@Autowired</code> or <code>@Inject</code> are
-used within those classes where necessary.</p>
+<p>当用 <code>@Component</code> 注解类和 JSR-330 类作为输入时，它们被注册为 bean 定义，且假定在必要时这些类中使用了 DI 元数据（例如 <code>@Autowired</code> 或 <code>@Inject</code>）。 </p>
 </div>
 <div class="sect4">
-<h5 id="beans-java-instantiating-container-contstructor"><a class="anchor" href="#beans-java-instantiating-container-contstructor"></a>Simple construction</h5>
+<h5 id="beans-java-instantiating-container-contstructor"><a class="anchor" href="#beans-java-instantiating-container-contstructor"></a>简单构建</h5>
 <div class="paragraph">
-<p>In much the same way that Spring XML files are used as input when instantiating a
-<code>ClassPathXmlApplicationContext</code>, <code>@Configuration</code> classes may be used as input when
-instantiating an <code>AnnotationConfigApplicationContext</code>. This allows for completely
-XML-free usage of the Spring container:</p>
+<p>在实例化 <code>AnnotationConfigApplicationContext</code> 时，<code>@Configuration</code> 类可以作为输入参数使用，这与实例化 <code>ClassPathXmlApplicationContext</code> 时使用 Spring XML 文件的方式大致相同。 这使得 Spring 容器可以完全无需使用 XML：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5667,9 +5639,7 @@ XML-free usage of the Spring container:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As mentioned above, <code>AnnotationConfigApplicationContext</code> is not limited to working only
-with <code>@Configuration</code> classes. Any <code>@Component</code> or JSR-330 annotated class may be supplied
-as input to the constructor. For example:</p>
+<p>如上所述，<code>AnnotationConfigApplicationContext</code> 不仅限于可以使用 <code>@Configuration</code> 类。 任何 <code>@Component</code> 或 JSR-330 注解类都可以作为输入提供给构造器。 例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5681,16 +5651,13 @@ as input to the constructor. For example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The above assumes that <code>MyServiceImpl</code>, <code>Dependency1</code> and <code>Dependency2</code> use Spring
-dependency injection annotations such as <code>@Autowired</code>.</p>
+<p>上面假设 <code>MyServiceImpl</code>，<code>Dependency1</code> 和 <code>Dependency2</code> 使用 Spring 依赖注入注解，例如 <code>@Autowired</code> 。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-instantiating-container-register"><a class="anchor" href="#beans-java-instantiating-container-register"></a>Building the container programmatically using register(Class&lt;?&gt;&#8230;&#8203;)</h5>
+<h5 id="beans-java-instantiating-container-register"><a class="anchor" href="#beans-java-instantiating-container-register"></a>以编程方式使用 register(Class&lt;?&gt;&#8230;&#8203;) 来构建容器</h5>
 <div class="paragraph">
-<p>An <code>AnnotationConfigApplicationContext</code> may be instantiated using a no-arg constructor
-and then configured using the <code>register()</code> method. This approach is particularly useful
-when programmatically building an <code>AnnotationConfigApplicationContext</code>.</p>
+<p><code>AnnotationConfigApplicationContext</code> 可以使用无参数构造器实例化，然后使用 register() 方法进行配置。以编程方式构建 <code>AnnotationConfigApplicationContext</code> 时，此方法特别有用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5708,7 +5675,7 @@ when programmatically building an <code>AnnotationConfigApplicationContext</code
 <div class="sect4">
 <h5 id="beans-java-instantiating-container-scan"><a class="anchor" href="#beans-java-instantiating-container-scan"></a>Enabling component scanning with scan(String&#8230;&#8203;)</h5>
 <div class="paragraph">
-<p>To enable component scanning, just annotate your <code>@Configuration</code> class as follows:</p>
+<p>要启用组件扫描，只需按如下方式注解你的 <code>@Configuration</code> 类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5727,8 +5694,7 @@ when programmatically building an <code>AnnotationConfigApplicationContext</code
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Experienced Spring users will be familiar with the XML declaration equivalent from
-Spring&#8217;s <code>context:</code> namespace</p>
+<p>有经验的 Spring 用户会很熟悉下面等价的使用 Spring context:namespace 的XML声明</p>
 </div>
 <div class="listingblock">
 <div class="content">
