@@ -5571,7 +5571,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <p><code>@Bean</code> 注解用于表示一个用来实例化，配置和初始化一个新的对象的方法，对象是由 Spring IoC 容器管理的。对于那些熟悉 Spring 的 <code>&lt;beans/&gt;</code> XML配置的人来说，<code>@Bean</code> 注解和 <code>&lt;bean/&gt;</code> 元素具有相同的作用。你可以对任何 Spring <code>@Component</code> 使用 <code>@Bean</code> 注解的方法，但是它们通常和 <code>@Configuration</code> bean 一起使用。</p>
 </div>
 <div class="paragraph">
-<p>用 <code>@Configuration</code> 注解的类表明它的主要目的是作为 bean 定义的来源。此外，<code>@Configuration</code> 类允许通过简单地调用同一个类中的其他@Bean方法来定义 bean 之间的依赖关系。最简单的 <code>@Configuration</code> 类将如下所示：</p>
+<p>用 <code>@Configuration</code> 注解的类表明它的主要目的是作为 bean 定义的来源。此外，<code>@Configuration</code> 类允许通过简单地调用同一个类中的其他 @Bean 方法来定义 bean 之间的依赖关系。最简单的 <code>@Configuration</code> 类将如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5673,7 +5673,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-instantiating-container-scan"><a class="anchor" href="#beans-java-instantiating-container-scan"></a>Enabling component scanning with scan(String&#8230;&#8203;)</h5>
+<h5 id="beans-java-instantiating-container-scan"><a class="anchor" href="#beans-java-instantiating-container-scan"></a>使用 scan(String&#8230;&#8203;) 启用组建扫描</h5>
 <div class="paragraph">
 <p>要启用组件扫描，只需按如下方式注解你的 <code>@Configuration</code> 类：</p>
 </div>
@@ -5708,10 +5708,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </table>
 </div>
 <div class="paragraph">
-<p>In the example above, the <code>com.acme</code> package will be scanned, looking for any
-<code>@Component</code>-annotated classes, and those classes will be registered as Spring bean
-definitions within the container. <code>AnnotationConfigApplicationContext</code> exposes the
-<code>scan(String&#8230;&#8203;)</code> method to allow for the same component-scanning functionality:</p>
+<p>在上面的示例中，<code>com.acme</code> 包会被扫描，以查找任何 <code>@Component</code> 注解的类，这些类将在容器中注册为 Spring bean 定义。<code>AnnotationConfigApplicationContext</code> 暴露 <code>scan(String&#8230;&#8203;)</code> 方法以允许你使用相同的组件扫描功能：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5731,12 +5728,7 @@ definitions within the container. <code>AnnotationConfigApplicationContext</code
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Remember that <code>@Configuration</code> classes are <a href="#beans-meta-annotations">meta-annotated</a>
-with <code>@Component</code>, so they are candidates for component-scanning! In the example above,
-assuming that <code>AppConfig</code> is declared within the <code>com.acme</code> package (or any package
-underneath), it will be picked up during the call to <code>scan()</code>, and upon <code>refresh()</code> all
-its <code>@Bean</code> methods will be processed and registered as bean definitions within the
-container.</p>
+<p>请记住 <code>@Configuration</code> 类是使用 <code>@Component</code> 进行 <a href="#beans-meta-annotations">元注解</a> 的，所以它们是组件扫描的候选对象！在上面的例子中，假设 <code>AppConfig</code> 是在 <code>com.acme</code> 包（或在它的子包）中声明的，它将在调用 <code>scan()</code> 期间被获取，并且在 <code>refresh()</code> 后，其所有的 <code>@Bean</code> 方法都会被执行且在容器中注册为 bean 定义。</p>
 </div>
 </td>
 </tr>
@@ -5744,14 +5736,9 @@ container.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-instantiating-container-web"><a class="anchor" href="#beans-java-instantiating-container-web"></a>Support for web applications with AnnotationConfigWebApplicationContext</h5>
+<h5 id="beans-java-instantiating-container-web"><a class="anchor" href="#beans-java-instantiating-container-web"></a>使用 AnnotationConfigWebApplicationContext 对 Web 应用程序的支持</h5>
 <div class="paragraph">
-<p>A <code>WebApplicationContext</code> variant of <code>AnnotationConfigApplicationContext</code> is available
-with <code>AnnotationConfigWebApplicationContext</code>. This implementation may be used when
-configuring the Spring <code>ContextLoaderListener</code> servlet listener, Spring MVC
-<code>DispatcherServlet</code>, etc. What follows is a <code>web.xml</code> snippet that configures a typical
-Spring MVC web application. Note the use of the <code>contextClass</code> context-param and
-init-param:</p>
+<p><code>AnnotationConfigApplicationContext</code> 的 <code>WebApplicationContext</code> 变体可用于 <code>AnnotationConfigWebApplicationContext</code>。当配置Spring <code>ContextLoaderListener</code> servlet 监听器，Spring MVC <code>DispatcherServlet</code> 等时，可以使用 <code>AnnotationConfigWebApplicationContext</code>。接下来是配置典型 Spring MVC Web 应用程序的 web.xml 代码片段。注意 <code>contextClass</code> context-param 和 init-param 的使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5809,25 +5796,17 @@ init-param:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-java-bean-annotation"><a class="anchor" href="#beans-java-bean-annotation"></a>1.12.3. Using the @Bean annotation</h4>
+<h4 id="beans-java-bean-annotation"><a class="anchor" href="#beans-java-bean-annotation"></a>1.12.3. 使用 @Bean 注解</h4>
 <div class="paragraph">
-<p><code>@Bean</code> is a method-level annotation and a direct analog of the XML <code>&lt;bean/&gt;</code> element.
-The annotation supports some of the attributes offered by <code>&lt;bean/&gt;</code>, such as:
-<a href="#beans-factory-lifecycle-initializingbean">init-method</a>,
-<a href="#beans-factory-lifecycle-disposablebean">destroy-method</a>,
-<a href="#beans-factory-autowire">autowiring</a> and <code>name</code>.</p>
+<p><code>@Bean</code> 是一个方法级注解且直接模拟XML的 <code>&lt;bean/&gt;</code> 元素。注解支持 <code>&lt;bean/&gt;</code> 提供的一些特性，比如：<a href="#beans-factory-lifecycle-initializingbean">init-method</a>，<a href="#beans-factory-lifecycle-disposablebean">destroy-method</a>，<a href="#beans-factory-autowire">autowiring</a> 和 <code>name</code>。</p>
 </div>
 <div class="paragraph">
-<p>You can use the <code>@Bean</code> annotation in a <code>@Configuration</code>-annotated or in a
-<code>@Component</code>-annotated class.</p>
+<p>你可以在 <code>@Configuration</code> 注解类或 <code>@Component</code> 注解类中使用 <code>@Bean</code> 注解。</p>
 </div>
 <div class="sect4">
-<h5 id="beans-java-declaring-a-bean"><a class="anchor" href="#beans-java-declaring-a-bean"></a>Declaring a bean</h5>
+<h5 id="beans-java-declaring-a-bean"><a class="anchor" href="#beans-java-declaring-a-bean"></a>bean 声明</h5>
 <div class="paragraph">
-<p>To declare a bean, simply annotate a method with the <code>@Bean</code> annotation. You use this
-method to register a bean definition within an <code>ApplicationContext</code> of the type
-specified as the method&#8217;s return value. By default, the bean name will be the same as
-the method name. The following is a simple example of a <code>@Bean</code> method declaration:</p>
+<p>要声明一个 bean，只需使用@Bean注释来注释一个方法即可。 您可以使用此方法在 <code>ApplicationContext</code> 中注册一个类型指定为方法返回类型的bean 定义。默认情况下，这个 bean 的名字和方法名相同。 以下是一个 <code>@Bean</code> 方法声明的简单示例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5842,7 +5821,7 @@ the method name. The following is a simple example of a <code>@Bean</code> metho
 </div>
 </div>
 <div class="paragraph">
-<p>The preceding configuration is exactly equivalent to the following Spring XML:</p>
+<p>上述配置完全等同于以下 Spring XML：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5852,8 +5831,7 @@ the method name. The following is a simple example of a <code>@Bean</code> metho
 </div>
 </div>
 <div class="paragraph">
-<p>Both declarations make a bean named <code>transferService</code> available in the
-<code>ApplicationContext</code>, bound to an object instance of type <code>TransferServiceImpl</code>:</p>
+<p>这两种声明都在 <code>ApplicationContext</code> 中创建了一个名为 <code>transferService</code> 的 bean，它与 TransferServiceImpl 类型的对象实例绑定在一起：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -5861,8 +5839,7 @@ the method name. The following is a simple example of a <code>@Bean</code> metho
 </div>
 </div>
 <div class="paragraph">
-<p>You may also declare your <code>@Bean</code> method with an interface (or base class)
-return type:</p>
+<p>你也可以用接口（或基类）声明你的 <code>@Bean</code> 方法的返回类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5877,13 +5854,7 @@ return type:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>However, this limits the visibility for advance type prediction to the specified
-interface type (<code>TransferService</code>) then, with the full type (<code>TransferServiceImpl</code>)
-only known to the container once the affected singleton bean has been instantiated.
-Non-lazy singleton beans get instantiated according to their declaration order,
-so you may see different type matching results depending on when another component
-tries to match by a non-declared type (such as <code>@Autowired TransferServiceImpl</code>
-which will only resolve once the "transferService" bean has been instantiated).</p>
+<p>但是，这会将提前类型预测的可见性限制为指定的接口类型（<code>TransferService</code>），因为一旦实例化受影响的单例bean，只有容器知道完整类型（<code>TransferServiceImpl</code>）。非懒加载模式的单例 bean 根据它们的声明顺序被实例化，所以你可能会看到不同的类型匹配结果，这取决于另一个组件试图通过一个非声明类型来匹配（比如 code>@Autowired TransferServiceImpl</code>，一旦 “transferService” bean 已经被实例化它才会解析）。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -5893,11 +5864,7 @@ which will only resolve once the "transferService" bean has been instantiated).<
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you consistently refer to your types by a declared service interface, your
-<code>@Bean</code> return types may safely join that design decision. However, for components
-implementing several interfaces or for components potentially referred to by their
-implementation type, it is safer to declare the most specific return type possible
-(at least as specific as required by the injection points referring to your bean).</p>
+<p>如果你始终通过声明的服务接口来引用你的类型，那么你的 <code>@Bean</code> 返回类型可以安全地加入该设计决策。但是，对于实现多个接口的组件或可能由其实现类型引用的组件，声明最具体的可能返回类型（至少与引用您的bean 的注入点要求相同）会更加安全。</p>
 </div>
 </td>
 </tr>
@@ -5905,12 +5872,9 @@ implementation type, it is safer to declare the most specific return type possib
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-dependencies"><a class="anchor" href="#beans-java-dependencies"></a>Bean dependencies</h5>
+<h5 id="beans-java-dependencies"><a class="anchor" href="#beans-java-dependencies"></a>Bean 依赖项</h5>
 <div class="paragraph">
-<p>A <code>@Bean</code> annotated method can have an arbitrary number of parameters describing the
-dependencies required to build that bean. For instance if our <code>TransferService</code>
-requires an <code>AccountRepository</code> we can materialize that dependency via a method
-parameter:</p>
+<p><code>@Bean</code> 注解方法可以有任意数量的参数来描述构建 bean 所需的依赖关系。例如，如果我们的 <code>TransferService</code> 需要一个 <code>AccountRepository</code> ，我们可以通过一个方法参数实现这个依赖：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5925,33 +5889,22 @@ parameter:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The resolution mechanism is pretty much identical to constructor-based dependency
-injection, see <a href="#beans-constructor-injection">the relevant section</a> for more details.</p>
+<p>解析机制与基于构造器的依赖注入非常相似，请参阅 <a href="#beans-constructor-injection">相关章节</a> 了解更多细节。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-lifecycle-callbacks"><a class="anchor" href="#beans-java-lifecycle-callbacks"></a>Receiving lifecycle callbacks</h5>
+<h5 id="beans-java-lifecycle-callbacks"><a class="anchor" href="#beans-java-lifecycle-callbacks"></a>接收生命周期回调</h5>
 <div class="paragraph">
-<p>Any classes defined with the <code>@Bean</code> annotation support the regular lifecycle callbacks
-and can use the <code>@PostConstruct</code> and <code>@PreDestroy</code> annotations from JSR-250, see
-<a href="#beans-postconstruct-and-predestroy-annotations">JSR-250 annotations</a> for further
-details.</p>
+<p>任何使用 <code>@Bean</code> 注解定义的类都支持常规生命周期回调，并且可以使用 JSR-250 中的 <code>@PostConstruct</code> 和 <code>@PreDestroy</code> 注解，请参阅 <a href="#beans-postconstruct-and-predestroy-annotations">JSR-250 annotations</a> 注解以获取更多详细信息。</p>
 </div>
 <div class="paragraph">
-<p>The regular Spring <a href="#beans-factory-nature">lifecycle</a> callbacks are fully supported as
-well. If a bean implements <code>InitializingBean</code>, <code>DisposableBean</code>, or <code>Lifecycle</code>, their
-respective methods are called by the container.</p>
+<p>常规的Spring <a href="#beans-factory-nature">生命周期</a> 回调也被完全支持。如果一个 bean 实现了<code>InitializingBean</code>，<code>DisposableBean</code> 或者 <code>Lifecycle</code>，容器会调用相应的方法。</p>
 </div>
 <div class="paragraph">
-<p>The standard set of <code>*Aware</code> interfaces such as <a href="#beans-beanfactory">BeanFactoryAware</a>,
-<a href="#beans-factory-aware">BeanNameAware</a>,
-<a href="#context-functionality-messagesource">MessageSourceAware</a>,
-<a href="#beans-factory-aware">ApplicationContextAware</a>, and so on are also fully supported.</p>
+<p>  诸如 <a href="#beans-beanfactory">BeanFactoryAware</a>，<a href="#beans-factory-aware">BeanNameAware</a>，<a href="#context-functionality-messagesource">MessageSourceAware</a>，<a href="#beans-factory-aware">ApplicationContextAware</a> 等的 <code>*Aware</code> 接口的标准集合也完全受支持。</p>
 </div>
 <div class="paragraph">
-<p>The <code>@Bean</code> annotation supports specifying arbitrary initialization and destruction
-callback methods, much like Spring XML&#8217;s <code>init-method</code> and <code>destroy-method</code> attributes
-on the <code>bean</code> element:</p>
+<p><code>@Bean</code> 注解支持指定任意的初始化和销毁回调方法，就像 Spring XML bean 元素的  <code>init-method</code> 和 <code>destroy-method</code> 属性一样：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5992,16 +5945,10 @@ on the <code>bean</code> element:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>By default, beans defined using Java config that have a public <code>close</code> or <code>shutdown</code>
-method are automatically enlisted with a destruction callback. If you have a public
-<code>close</code> or <code>shutdown</code> method and you do not wish for it to be called when the container
-shuts down, simply add <code>@Bean(destroyMethod="")</code> to your bean definition to disable the
-default <code>(inferred)</code> mode.</p>
+<p>默认情况下，使用具有 public <code>close</code> 或 <code>shutdown</code> 方法的使用 Java 配置定义的 bean 将自动获得一个销毁回调。如果你有一个public <code>close</code> 或 <code>shutdown</code> 方法，并且你不希望在容器关闭的时候调用它，只需要在你的bean定义中添加@Bean（destroyMethod =“”）来禁用默认<code>（inferred）</code>模式。</p>
 </div>
 <div class="paragraph">
-<p>You may want to do that by default for a resource that you acquire via JNDI as its
-lifecycle is managed outside the application. In particular, make sure to always do it
-for a <code>DataSource</code> as it is known to be problematic on Java EE application servers.</p>
+<p>你可能希望为通过 JNDI 获取的资源默认执行此操作，因为对其生命周期的管理在应用程序之外。尤其是，确保始终对<code>DataSource</code> 执行此操作，因为在 Java EE 应用程序服务器上，这是已知的问题。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6012,20 +5959,14 @@ for a <code>DataSource</code> as it is known to be problematic on Java EE applic
 </div>
 </div>
 <div class="paragraph">
-<p>Also, with <code>@Bean</code> methods, you will typically choose to use programmatic JNDI lookups:
-either using Spring&#8217;s <code>JndiTemplate</code>/<code>JndiLocatorDelegate</code> helpers or straight JNDI
-<code>InitialContext</code> usage, but not the <code>JndiObjectFactoryBean</code> variant which would force
-you to declare the return type as the <code>FactoryBean</code> type instead of the actual target
-type, making it harder to use for cross-reference calls in other <code>@Bean</code> methods that
-intend to refer to the provided resource here.</p>
+<p>此外，在 <code>@Bean</code> 方法中，通常会选择使用编程式 JNDI 查找：使用 Spring 的 <code>JndiTemplate</code>/<code>JndiLocatorDelegate</code> helpers 或直接使用 JNDI <code>InitialContext</code>，而不使用 <code>JndiObjectFactoryBean</code> 变体，因为它会强制你将返回类型声明为 <code>FactoryBean</code> 类型，而不是实际的目标类型，这使得对其他用来引用所提供的资源的 <code>@Bean</code> 方法的交叉引用调用更加困难。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Of course, in the case of <code>Foo</code> above, it would be equally as valid to call the <code>init()</code>
-method directly during construction:</p>
+<p>当然，就上面的 <code>Foo</code> 而言，在构造过程中直接调用 <code>init()</code> 方法同样有效：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6051,8 +5992,7 @@ method directly during construction:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When you work directly in Java, you can do anything you like with your objects and do
-not always need to rely on the container lifecycle!</p>
+<p>当您直接使用 Java 时，您可以对对象进行任何操作，而不总是需要依靠容器的生命周期！</p>
 </div>
 </td>
 </tr>
@@ -6060,16 +6000,14 @@ not always need to rely on the container lifecycle!</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-specifying-bean-scope"><a class="anchor" href="#beans-java-specifying-bean-scope"></a>Specifying bean scope</h5>
+<h5 id="beans-java-specifying-bean-scope"><a class="anchor" href="#beans-java-specifying-bean-scope"></a>指定 bean 作用域</h5>
 <div class="sect5">
-<h6 id="beans-java-available-scopes"><a class="anchor" href="#beans-java-available-scopes"></a>Using the @Scope annotation</h6>
+<h6 id="beans-java-available-scopes"><a class="anchor" href="#beans-java-available-scopes"></a>使用 @Scope 注解</h6>
 <div class="paragraph">
-<p>You can specify that your beans defined with the <code>@Bean</code> annotation should have a
-specific scope. You can use any of the standard scopes specified in the
-<a href="#beans-factory-scopes">Bean Scopes</a> section.</p>
+<p>你可以指定使用 <code>@Bean</code> 注解定义的 bean 应该具有特定的作用域。你可以使用 <a href="#beans-factory-scopes">Bean 作用域</a> 章节中指定的任何标准范围。</p>
 </div>
 <div class="paragraph">
-<p>The default scope is <code>singleton</code>, but you can override this with the <code>@Scope</code> annotation:</p>
+<p>默认作用域是 <code>singleton</code>，但你可以用 <code>@Scope</code> 注解来覆盖它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6086,18 +6024,12 @@ specific scope. You can use any of the standard scopes specified in the
 </div>
 </div>
 <div class="sect5">
-<h6 id="beans-java-scoped-proxy"><a class="anchor" href="#beans-java-scoped-proxy"></a>@Scope and scoped-proxy</h6>
+<h6 id="beans-java-scoped-proxy"><a class="anchor" href="#beans-java-scoped-proxy"></a>@Scope 和作用域代理</h6>
 <div class="paragraph">
-<p>Spring offers a convenient way of working with scoped dependencies through
-<a href="#beans-factory-scopes-other-injection">scoped proxies</a>. The easiest way to create such
-a proxy when using the XML configuration is the <code>&lt;aop:scoped-proxy/&gt;</code> element.
-Configuring your beans in Java with a @Scope annotation offers equivalent support with
-the proxyMode attribute. The default is no proxy ( <code>ScopedProxyMode.NO</code>), but you can
-specify <code>ScopedProxyMode.TARGET_CLASS</code> or <code>ScopedProxyMode.INTERFACES</code>.</p>
+<p>Spring 提供了一个通过 <a href="#beans-factory-scopes-other-injection">作用域代理</a> 来处理作用域依赖的方便方法。使用 XML 配置时创建这种代理的最简单方法是使用 <code>&lt;aop:scoped-proxy/&gt;</code> 元素。在 Java 中配置 bean 的时候使用 @Scope 注解与 proxyMode 特性的支持是等效的。 默认是没有代理（<code>ScopedProxyMode.NO</code>），但您可以指定 <code>ScopedProxyMode.TARGET_CLASS</code> 或 <code>ScopedProxyMode.INTERFACES</code>。</p>
 </div>
 <div class="paragraph">
-<p>If you port the scoped proxy example from the XML reference documentation (see preceding
-link) to our <code>@Bean</code> using Java, it would look like the following:</p>
+<p>如果你将作用域代理示例从 XML 参考文档（请参阅前面的链接）移植到我们使用 Java 的 <code>@Bean</code> 中，它将如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6120,10 +6052,9 @@ link) to our <code>@Bean</code> using Java, it would look like the following:</p
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-customizing-bean-naming"><a class="anchor" href="#beans-java-customizing-bean-naming"></a>Customizing bean naming</h5>
+<h5 id="beans-java-customizing-bean-naming"><a class="anchor" href="#beans-java-customizing-bean-naming"></a>自定义 bean 命名</h5>
 <div class="paragraph">
-<p>By default, configuration classes use a <code>@Bean</code> method&#8217;s name as the name of the
-resulting bean. This functionality can be overridden, however, with the <code>name</code> attribute.</p>
+<p>默认情况下，配置类使用 <code>@Bean</code> 方法的名字作为结果 bean 的名字。不过，这个功能可以通过 <code>name</code> 特性来覆盖。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6139,11 +6070,9 @@ resulting bean. This functionality can be overridden, however, with the <code>na
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-bean-aliasing"><a class="anchor" href="#beans-java-bean-aliasing"></a>Bean aliasing</h5>
+<h5 id="beans-java-bean-aliasing"><a class="anchor" href="#beans-java-bean-aliasing"></a>Bean 别名</h5>
 <div class="paragraph">
-<p>As discussed in <a href="#beans-beanname">Naming beans</a>, it is sometimes desirable to give a single bean
-multiple names, otherwise known as <em>bean aliasing</em>. The <code>name</code> attribute of the <code>@Bean</code>
-annotation accepts a String array for this purpose.</p>
+<p>正如在 <a href="#beans-beanname">bean 的命名</a> 中所讨论的，有时候需要给一个 bena 赋予多个名字，也被称为<em>bean 的别名</em>。为此，<code>@Bean</code> 注解的 <code>name</code> 特性可以接受一个 String 数组。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6159,15 +6088,12 @@ annotation accepts a String array for this purpose.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-bean-description"><a class="anchor" href="#beans-java-bean-description"></a>Bean description</h5>
+<h5 id="beans-java-bean-description"><a class="anchor" href="#beans-java-bean-description"></a>Bean 描述</h5>
 <div class="paragraph">
-<p>Sometimes it is helpful to provide a more detailed textual description of a bean. This can
-be particularly useful when beans are exposed (perhaps via JMX) for monitoring purposes.</p>
+<p>有时候提供一个更详细的 bean 文本描述是很有帮助的。当 bean 被暴露（可能通过JMX）用于监听目的时，这会特别有用。</p>
 </div>
 <div class="paragraph">
-<p>To add a description to a <code>@Bean</code> the
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/Description.html"><code>@Description</code></a>
-annotation can be used:</p>
+<p>要向 <code>@Bean</code> 添加描述，可以使用 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/Description.html"><code>@Description</code></a> 注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6185,18 +6111,14 @@ annotation can be used:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-java-configuration-annotation"><a class="anchor" href="#beans-java-configuration-annotation"></a>1.12.4. Using the @Configuration annotation</h4>
+<h4 id="beans-java-configuration-annotation"><a class="anchor" href="#beans-java-configuration-annotation"></a>1.12.4. 使用 @Configuration 注解</h4>
 <div class="paragraph">
-<p><code>@Configuration</code> is a class-level annotation indicating that an object is a source of
-bean definitions. <code>@Configuration</code> classes declare beans via public <code>@Bean</code> annotated
-methods. Calls to <code>@Bean</code> methods on <code>@Configuration</code> classes can also be used to define
-inter-bean dependencies. See <a href="#beans-java-basic-concepts">Basic concepts: @Bean and @Configuration</a> for a general introduction.</p>
+<p><code>@Configuration</code> 是一个类级别注解，它表明某个对象是某个 bean 定义的来源。<code>@Configuration</code> 类通过 public <code>@Bean</code> 注解方法声明 bean。对 <code>@Configuration</code> 类的 <code>@Bean</code> 方法的调用也可以用来定义 bean 之间的依赖关系。关于基本介绍，参见 <a href="#beans-java-basic-concepts">Basic concepts: @Bean 和 @Configuration</a>。</p>
 </div>
 <div class="sect4">
-<h5 id="beans-java-injecting-dependencies"><a class="anchor" href="#beans-java-injecting-dependencies"></a>Injecting inter-bean dependencies</h5>
+<h5 id="beans-java-injecting-dependencies"><a class="anchor" href="#beans-java-injecting-dependencies"></a>Bean 之间依赖关系的注入</h5>
 <div class="paragraph">
-<p>When <code>@Bean</code>s have dependencies on one another, expressing that dependency is as simple
-as having one bean method call another:</p>
+<p>当 <code>@Bean</code> 之间彼此依赖时，表达这种依赖关系就像调用另一个 bean 方法那样简单：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6216,8 +6138,7 @@ as having one bean method call another:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the example above, the <code>foo</code> bean receives a reference to <code>bar</code> via constructor
-injection.</p>
+<p>在上面的例子中，<code>foo</code> bean通过构造器注入接收到对 <code>bar</code> 的引用。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -6227,9 +6148,7 @@ injection.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This method of declaring inter-bean dependencies only works when the <code>@Bean</code> method is
-declared within a <code>@Configuration</code> class. You cannot declare inter-bean dependencies
-using plain <code>@Component</code> classes.</p>
+<p>这种声明 bean 间依赖关系的方法只有在 <code>@Configuration</code> 类中声明 <code>@Bean</code> 方法时才起作用。你不能用简单的 <code>@Configuration</code> 类声明 bean 间的依赖关系。</p>
 </div>
 </td>
 </tr>
@@ -6237,12 +6156,9 @@ using plain <code>@Component</code> classes.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-method-injection"><a class="anchor" href="#beans-java-method-injection"></a>Lookup method injection</h5>
+<h5 id="beans-java-method-injection"><a class="anchor" href="#beans-java-method-injection"></a>查找方法注入</h5>
 <div class="paragraph">
-<p>As noted earlier, <a href="#beans-factory-method-injection">lookup method injection</a> is an
-advanced feature that you should use rarely. It is useful in cases where a
-singleton-scoped bean has a dependency on a prototype-scoped bean. Using Java for this
-type of configuration provides a natural means for implementing this pattern.</p>
+<p>如前所述，<a href="#beans-factory-method-injection">查找方法注入</a> 是一个高级特性，你应该很少使用它。它在一个单例 bean 对原型 bean 依赖时是有用的。使用 Java 对这种类型进行配置提供了一种自然的方式实现这一模式。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6261,9 +6177,7 @@ type of configuration provides a natural means for implementing this pattern.</p
 </div>
 </div>
 <div class="paragraph">
-<p>Using Java-configuration support , you can create a subclass of <code>CommandManager</code> where
-the abstract <code>createCommand()</code> method is overridden in such a way that it looks up a new
-(prototype) command object:</p>
+<p>使用Java配置支持，您可以创建 <code>CommandManager</code> 的子类，其中抽象 <code>createCommand()</code> 方法被重写，以便查找新的（原型）command 对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6289,9 +6203,9 @@ the abstract <code>createCommand()</code> method is overridden in such a way tha
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-further-information-java-config"><a class="anchor" href="#beans-java-further-information-java-config"></a>Further information about how Java-based configuration works internally</h5>
+<h5 id="beans-java-further-information-java-config"><a class="anchor" href="#beans-java-further-information-java-config"></a>有关基于 Java 的配置如何在内部工作的更多信息</h5>
 <div class="paragraph">
-<p>The following example shows a <code>@Bean</code> annotated method being called twice:</p>
+<p>以下示例显示了一个被调用了两次的 <code>@Bean</code> 注解方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6320,16 +6234,7 @@ the abstract <code>createCommand()</code> method is overridden in such a way tha
 </div>
 </div>
 <div class="paragraph">
-<p><code>clientDao()</code> has been called once in <code>clientService1()</code> and once in <code>clientService2()</code>.
-Since this method creates a new instance of <code>ClientDaoImpl</code> and returns it, you would
-normally expect having 2 instances (one for each service). That definitely would be
-problematic: in Spring, instantiated beans have a <code>singleton</code> scope by default. This is
-where the magic comes in: All <code>@Configuration</code> classes are subclassed at startup-time
-with <code>CGLIB</code>. In the subclass, the child method checks the container first for any
-cached (scoped) beans before it calls the parent method and creates a new instance. Note
-that as of Spring 3.2, it is no longer necessary to add CGLIB to your classpath because
-CGLIB classes have been repackaged under <code>org.springframework.cglib</code> and included directly
-within the spring-core JAR.</p>
+<p><code>clientDao()</code> 在 <code>clientService1()</code> 中被调用一次，在 <code>clientService2()</code> 中也被调用一次。由于此方法创建 <code>ClientDaoImpl</code> 的一个新实例并返回它，通常期望有2个实例（每个 service 一个）。这肯定会有问题：在Spring中，实例化的 bean 默认情况下具有单例 <code>singleton</code> 作用域。下面就是 Spring 魔法所在：所有的 <code>@Configuration</code> 类在 <code>CGLIB</code> 启动时被分类。在子类中，child 方法在调用父方法并创建一个新实例之前首先检查容器是否有缓存的（作用域）bean。请注意，从 Spring 3.2 开始，不再需要将CGLIB添加到类路径中，因为CGLIB类已经在<code>org.springframework.cglib</code> 下重新打包，并直接包含在 Spring-Core JAR 包中。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -6339,8 +6244,7 @@ within the spring-core JAR.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The behavior could be different according to the scope of your bean. We are talking
-about singletons here.</p>
+<p>这种行为可能会根据您的 bean 的作用域而有所不同。我们在这里讨论单例 bean。</p>
 </div>
 </td>
 </tr>
@@ -6354,16 +6258,10 @@ about singletons here.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>There are a few restrictions due to the fact that CGLIB dynamically adds features at
-startup-time, in particular that configuration classes must not be final. However, as
-of 4.3, any constructors are allowed on configuration classes, including the use of
-<code>@Autowired</code> or a single non-default constructor declaration for default injection.</p>
+<p>由于 CGLIB 在启动时动态添加功能，因此有一些限制，特别是配置类不能是 final 的。但是，从 Spring 4.3 开始，任何构造函数都可以在配置类上使用，包括使用 <code>@Autowired</code>或对默认注入使用单个非默认构造器声明。</p>
 </div>
 <div class="paragraph">
-<p>If you prefer to avoid any CGLIB-imposed limitations, consider declaring your <code>@Bean</code>
-methods on non-<code>@Configuration</code> classes, e.g. on plain <code>@Component</code> classes instead.
-Cross-method calls between <code>@Bean</code> methods won&#8217;t get intercepted then, so you&#8217;ll have
-to exclusively rely on dependency injection at the constructor or method level there.</p>
+<p>如果您希望避免任何 CGLIB 限制，请考虑在非 <code>@Configuration</code> 类上声明 <code>@Bean</code> 方法，例如使用简单的 <code>@Component</code> 类。 <code>@Bean</code> 方法之间的跨方法调用将不会被拦截，因此你必须完全依赖于构造器或方法级别的依赖注入。</p>
 </div>
 </td>
 </tr>
@@ -6372,13 +6270,11 @@ to exclusively rely on dependency injection at the constructor or method level t
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-java-composing-configuration-classes"><a class="anchor" href="#beans-java-composing-configuration-classes"></a>1.12.5. Composing Java-based configurations</h4>
+<h4 id="beans-java-composing-configuration-classes"><a class="anchor" href="#beans-java-composing-configuration-classes"></a>1.12.5. 构建基于 Java 的配置</h4>
 <div class="sect4">
-<h5 id="beans-java-using-import"><a class="anchor" href="#beans-java-using-import"></a>Using the @Import annotation</h5>
+<h5 id="beans-java-using-import"><a class="anchor" href="#beans-java-using-import"></a>使用 @Import 注解</h5>
 <div class="paragraph">
-<p>Much as the <code>&lt;import/&gt;</code> element is used within Spring XML files to aid in modularizing
-configurations, the <code>@Import</code> annotation allows for loading <code>@Bean</code> definitions from
-another configuration class:</p>
+<p>就像在 Spring XML 文件中使用 <code>&lt;import/&gt;</code> 元素来帮助实现配置的模块化一样，<code>@Import</code> 注解允许从另一个配置类加载 <code>@Bean</code> 定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6404,8 +6300,7 @@ another configuration class:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Now, rather than needing to specify both <code>ConfigA.class</code> and <code>ConfigB.class</code> when
-instantiating the context, only <code>ConfigB</code> needs to be supplied explicitly:</p>
+<p>现在，在实例化上下文时，不需要同时指定 <code>ConfigA.class</code> 和 <code>ConfigB.class</code>，只需要显式地提供 <code>ConfigB</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6419,9 +6314,7 @@ instantiating the context, only <code>ConfigB</code> needs to be supplied explic
 </div>
 </div>
 <div class="paragraph">
-<p>This approach simplifies container instantiation, as only one class needs to be dealt
-with, rather than requiring the developer to remember a potentially large number of
-<code>@Configuration</code> classes during construction.</p>
+<p>这种方法简化了容器的实例化，因为只有一个类需要处理，而不是要求开发人员在构建过程中记住大量的 <code>@Configuration</code> 类。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -6431,30 +6324,19 @@ with, rather than requiring the developer to remember a potentially large number
 </td>
 <td class="content">
 <div class="paragraph">
-<p>As of Spring Framework 4.2, <code>@Import</code> also supports references to regular component
-classes, analogous to the <code>AnnotationConfigApplicationContext.register</code> method.
-This is particularly useful if you&#8217;d like to avoid component scanning, using a few
-configuration classes as entry points for explicitly defining all your components.</p>
+<p>从Spring Framework 4.2开始，<code>@Import</code> 还支持对常规组件类的引用，类似 <code>AnnotationConfigApplicationContext.register</code> 方法。如果您想避免组件扫描，将一些配置类作为明确定义所有组件的入口点，这个支持特别有用。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect5">
-<h6 id="beans-java-injecting-imported-beans"><a class="anchor" href="#beans-java-injecting-imported-beans"></a>Injecting dependencies on imported @Bean definitions</h6>
+<h6 id="beans-java-injecting-imported-beans"><a class="anchor" href="#beans-java-injecting-imported-beans"></a>被导入的 @Bean 定义的依赖注入</h6>
 <div class="paragraph">
-<p>The example above works, but is simplistic. In most practical scenarios, beans will have
-dependencies on one another across configuration classes. When using XML, this is not an
-issue, per se, because there is no compiler involved, and one can simply declare
-<code>ref="someBean"</code> and trust that Spring will work it out during container initialization.
-Of course, when using <code>@Configuration</code> classes, the Java compiler places constraints on
-the configuration model, in that references to other beans must be valid Java syntax.</p>
+<p>上面的例子可以正常工作，不过是简单的。在大多数实际情况中，bean 将在配置类之间相互依赖。当使用 XML 时，这本身不算是个问题，因为没有涉及到编译器，只需声明 <code>ref="someBean"</code> 并相信 Spring 将在容器初始化期间解决它。当然，在使用 <code>@Configuration</code> 类时，Java 编译器会在配置模型上设置约束，因为对其他 bean 的引用必须是有效的 Java 语法。</p>
 </div>
 <div class="paragraph">
-<p>Fortunately, solving this problem is simple. As <a href="#beans-java-dependencies">we already discussed</a>,
-<code>@Bean</code> method can have an arbitrary number of parameters describing the bean
-dependencies. Let&#8217;s consider a more real-world scenario with several <code>@Configuration</code>
-classes, each depending on beans declared in the others:</p>
+<p>幸运的是，解决这个问题很简单。<a href="#beans-java-dependencies">正如我们已经讨论过的</a>，<code>@Bean</code> 方法可以有任意数量的描述 bean 依赖关系的参数。考虑一个更现实的场景，其中有几个<code>@Configuration</code> 类，每个类都依赖于在其他类中声明的bean：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6495,9 +6377,7 @@ classes, each depending on beans declared in the others:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>There is another way to achieve the same result. Remember that <code>@Configuration</code> classes are
-ultimately just another bean in the container: This means that they can take advantage of
-<code>@Autowired</code> and <code>@Value</code> injection etc just like any other bean!</p>
+<p>还有另一种方法可以达到同样的结果。记住，<code>@Configuration</code> 类最终只是容器中的另外一个 bean：这意味着他们可以像其他任何 bean 一样利用 <code>@Autowired</code>和 <code>@Value</code> 注入等等！</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -6507,16 +6387,10 @@ ultimately just another bean in the container: This means that they can take adv
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Make sure that the dependencies you inject that way are of the simplest kind only. <code>@Configuration</code>
-classes are processed quite early during the initialization of the context and forcing a dependency
-to be injected this way may lead to unexpected early initialization. Whenever possible, resort to
-parameter-based injection as in the example above.</p>
+<p>确保以这种方式注入的依赖关系只是最简单的一种。 <code>@Configuration</code> 类在上下文的初始化过程的很早起就会被处理，而且强制依赖以这种方式被注入可能会导致未预料的早期初始化。只要有可能，就应该像上面的例子那样，采取基于参数的注入。</p>
 </div>
 <div class="paragraph">
-<p>Also, be particularly careful with <code>BeanPostProcessor</code> and <code>BeanFactoryPostProcessor</code> definitions
-via <code>@Bean</code>. Those should usually be declared as <code>static @Bean</code> methods, not triggering the
-instantiation of their containing configuration class. Otherwise, <code>@Autowired</code> and <code>@Value</code> won&#8217;t
-work on the configuration class itself since it is being created as a bean instance too early.</p>
+<p>此外，对 <code>@Bean</code> 注解的 <code>BeanPostProcessor</code> 和 <code>BeanFactoryPostProcessor</code> 定义要特别小心。这些应该通常被声明为 <code>static @Bean</code> 方法，而不是触发其包含的配置类的实例化。否则，<code>@Autowired</code> 和 <code>@Value</code> 将不能在配置类本身上工作，因为它太早就被创建为一个 bean 实例。</p>
 </div>
 </td>
 </tr>
@@ -6578,33 +6452,20 @@ work on the configuration class itself since it is being created as a bean insta
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Constructor injection in <code>@Configuration</code> classes is only supported as of Spring
-Framework 4.3. Note also that there is no need to specify <code>@Autowired</code> if the target
-bean defines only one constructor; in the example above, <code>@Autowired</code> is not necessary
-on the <code>RepositoryConfig</code> constructor.</p>
+<p><code>@Configuration</code> 类中的构造器注入仅在 Spring Framework 4.3 及以上版本中受支持。 另请注意，如果目标 bean 只定义了一个构造器，则不需要指定 <code>@Autowired</code>; 在上面的例子中，<code>RepositoryConfig</code> 的构造器不需要 <code>@Autowired</code>。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="openblock">
-<div class="title"><a id="beans-java-injecting-imported-beans-fq"></a>Fully-qualifying imported beans for ease of navigation</div>
+<div class="title"><a id="beans-java-injecting-imported-beans-fq"></a>便于导航的全限定导入 bean</div>
 <div class="content">
 <div class="paragraph">
-<p>In the scenario above, using <code>@Autowired</code> works well and provides the desired
-modularity, but determining exactly where the autowired bean definitions are declared is
-still somewhat ambiguous. For example, as a developer looking at <code>ServiceConfig</code>, how do
-you know exactly where the <code>@Autowired AccountRepository</code> bean is declared? It&#8217;s not
-explicit in the code, and this may be just fine. Remember that the
-<a href="https://spring.io/tools/sts">Spring Tool Suite</a> provides tooling that
-can render graphs showing how everything is wired up - that may be all you need. Also,
-your Java IDE can easily find all declarations and uses of the <code>AccountRepository</code> type,
-and will quickly show you the location of <code>@Bean</code> methods that return that type.</p>
+<p>在上面的场景中，使用 <code>@Autowired</code> 运行良好，并提供了所需的模块化，但是确定自动装配的 bean 定义的确切位置仍然有些模糊。例如，作为一名开发人员查看一下 <code>ServiceConfig</code>，你如何确切知道 <code>@Autowired AccountRepository</code> bean 的声明位置？这在代码中并不明确，这个例子可能刚好是 OK 的。记住，<a href="https://spring.io/tools/sts">Spring Tool Suite</a> 提供的工具可以渲染拓扑图，显示所有组件是怎么连接起来的 - 这可能就是您所需要的。另外，您的Java IDE可以轻松找到 <code>AccountRepository</code> 类型的所有声明和用法，并且会快速向您显示返回该类型的 <code>@Bean</code> 方法的位置。</p>
 </div>
 <div class="paragraph">
-<p>In cases where this ambiguity is not acceptable and you wish to have direct navigation
-from within your IDE from one <code>@Configuration</code> class to another, consider autowiring the
-configuration classes themselves:</p>
+<p>如果这种歧义是不可接受的，并且你希望从 IDE 中的一个 <code>@Configuration</code> 类直接导航到另一个 <code>@Configuration</code>类，请考虑自动装配配置类本身：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6623,10 +6484,7 @@ configuration classes themselves:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the situation above, it is completely explicit where <code>AccountRepository</code> is defined.
-However, <code>ServiceConfig</code> is now tightly coupled to <code>RepositoryConfig</code>; that&#8217;s the
-tradeoff. This tight coupling can be somewhat mitigated by using interface-based or
-abstract class-based <code>@Configuration</code> classes. Consider the following:</p>
+<p>在上面的情况中，在定义 <code>AccountRepository</code> 的地方非常明确。但是，<code>ServiceConfig</code> 与 <code>RepositoryConfig</code> 就非常紧耦合了;这就是一种妥协。通过使用基于接口的或基于抽象类的 <code>@Configuration</code> 类，可以稍微缓解这种紧密耦合。 考虑以下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6677,36 +6535,22 @@ abstract class-based <code>@Configuration</code> classes. Consider the following
 </div>
 </div>
 <div class="paragraph">
-<p>Now <code>ServiceConfig</code> is loosely coupled with respect to the concrete
-<code>DefaultRepositoryConfig</code>, and built-in IDE tooling is still useful: it will be easy for
-the developer to get a type hierarchy of <code>RepositoryConfig</code> implementations. In this
-way, navigating <code>@Configuration</code> classes and their dependencies becomes no different
-than the usual process of navigating interface-based code.</p>
+<p>现在，<code>ServiceConfig</code> 与具体的 <code>DefaultRepositoryConfig</code> 耦合就比较松散，内置的 IDE 工具仍然有用：开发人员可以轻松获得 <code>RepositoryConfig</code> 实现的类型层次结构。通过这种方式，导航 <code>@Configuration</code> 类及其依赖关系与通常的基于接口的代码导航过程没有区别。</p>
 </div>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-conditional"><a class="anchor" href="#beans-java-conditional"></a>Conditionally include @Configuration classes or @Bean methods</h5>
+<h5 id="beans-java-conditional"><a class="anchor" href="#beans-java-conditional"></a>有条件地包含 @Configuration 类或 @Bean 方法</h5>
 <div class="paragraph">
-<p>It is often useful to conditionally enable or disable a complete <code>@Configuration</code> class,
-or even individual <code>@Bean</code> methods, based on some arbitrary system state. One common
-example of this is to use the <code>@Profile</code> annotation to activate beans only when a specific
-profile has been enabled in the Spring <code>Environment</code> (see <a href="#beans-definition-profiles">Bean definition profiles</a>
-for details).</p>
+<p>根据系统的不同状态，有时候需要有条件地启用或禁用完整的 <code>@Configuration</code> 类，甚至单个的 <code>@Bean</code> 方法。 一个常见的例子是，只有在 Spring <code>Environment</code> 中启用了特定的 profile 时，才使用 <code>@Profile</code> 注释来激活bean（有关详细信息，请参阅 <a href="#beans-definition-profiles"> Bean 定义 profile</a>）。</p>
 </div>
 <div class="paragraph">
-<p>The <code>@Profile</code> annotation is actually implemented using a much more flexible annotation
-called <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/Conditional.html"><code>@Conditional</code></a>.
-The <code>@Conditional</code> annotation indicates specific
-<code>org.springframework.context.annotation.Condition</code> implementations that should be
-consulted before a <code>@Bean</code> is registered.</p>
+<p><code>@Profile</code> 注释实际上是使用一个更为灵活的注解 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/Conditional.html"><code>@Conditional</code></a> 来实现的。<code>@Conditional</code> 注解表示特定的 <code>org.springframework.context.annotation.Condition</code> 实现，它会在<code>@Bean</code> 注册之前被引用参考。</p>
 </div>
 <div class="paragraph">
-<p>Implementations of the <code>Condition</code> interface simply provide a <code>matches(&#8230;&#8203;)</code>
-method that returns <code>true</code> or <code>false</code>. For example, here is the actual
-<code>Condition</code> implementation used for <code>@Profile</code>:</p>
+<p><code>Condition</code> 接口的实现只是提供一个返回 <code>true</code> 或 <code>false</code> 的 <code>matches(&#8230;&#8203;)</code> 方法。例如，下面是用于 <code>@Profile</code> 的某个实际 <code>Condition</code> 实现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6729,40 +6573,25 @@ method that returns <code>true</code> or <code>false</code>. For example, here i
 </div>
 </div>
 <div class="paragraph">
-<p>See the <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/Conditional.html">
-<code>@Conditional</code> javadocs</a> for more detail.</p>
+<p>有关更多详细信息，请参阅<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/annotation/Conditional.html">
+  <code>@Conditional</code> javadocs</a>。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-java-combining"><a class="anchor" href="#beans-java-combining"></a>Combining Java and XML configuration</h5>
+<h5 id="beans-java-combining"><a class="anchor" href="#beans-java-combining"></a>结合 Java 和 XML 配置</h5>
 <div class="paragraph">
-<p>Spring&#8217;s <code>@Configuration</code> class support does not aim to be a 100% complete replacement
-for Spring XML. Some facilities such as Spring XML namespaces remain an ideal way to
-configure the container. In cases where XML is convenient or necessary, you have a
-choice: either instantiate the container in an "XML-centric" way using, for example,
-<code>ClassPathXmlApplicationContext</code>, or in a "Java-centric" fashion using
-<code>AnnotationConfigApplicationContext</code> and the <code>@ImportResource</code> annotation to import XML
-as needed.</p>
+<p>Spring 对 <code>@Configuration</code> 类的支持并不是瞄准要成为 Spring XML 的 100％完全的替代方案这个目标。Spring XML 的命名空间等一些工具仍然是配置容器的理想方法。在使用 XML 更方便或必要的情况下，您可以选择：使用 <code>ClassPathXmlApplicationContext</code> 的“以 XML 配置为中心”的方式实例化容器，或者使用 <code>AnnotationConfigApplicationContext</code> 和用 <code>@ImportResource</code> 注解根据需要导入 XML 的“以Java 代码注解为中心”的方式实例化容器 。</p>
 </div>
 <div class="sect5">
-<h6 id="beans-java-combining-xml-centric"><a class="anchor" href="#beans-java-combining-xml-centric"></a>XML-centric use of @Configuration classes</h6>
+<h6 id="beans-java-combining-xml-centric"><a class="anchor" href="#beans-java-combining-xml-centric"></a>以 XML 配置为中心使用 @Configuration 类</h6>
 <div class="paragraph">
-<p>It may be preferable to bootstrap the Spring container from XML and include
-<code>@Configuration</code> classes in an ad-hoc fashion. For example, in a large existing codebase
-that uses Spring XML, it will be easier to create <code>@Configuration</code> classes on an
-as-needed basis and include them from the existing XML files. Below you&#8217;ll find the
-options for using <code>@Configuration</code> classes in this kind of "XML-centric" situation.</p>
+<p>最好用 XML 配置文件启动 Spring 容器，并以特定方式包含 <code>@Configuration</code> 类。 例如，在使用Spring XML 的大型现有代码库中，根据需要创建 <code>@Configuration</code> 类并将其包含到现有的 XML 文件中会更容易。下面你会看到在这种“以 XML 配置为中心”的情况下使用<code>@Configuration</code> 类的选择。</p>
 </div>
 <div class="openblock">
-<div class="title"><a id="beans-java-combining-xml-centric-declare-as-bean"></a>Declaring @Configuration classes as plain Spring <code>&lt;bean/&gt;</code> elements</div>
+<div class="title"><a id="beans-java-combining-xml-centric-declare-as-bean"></a>将 @Configuration 类声明为普通的 Spring <code>&lt;bean/&gt;</code> 元素。</div>
 <div class="content">
 <div class="paragraph">
-<p>Remember that <code>@Configuration</code> classes are ultimately just bean definitions in the
-container. In this example, we create a <code>@Configuration</code> class named <code>AppConfig</code> and
-include it within <code>system-test-config.xml</code> as a <code>&lt;bean/&gt;</code> definition. Because
-<code>&lt;context:annotation-config/&gt;</code> is switched on, the container will recognize the
-<code>@Configuration</code> annotation and process the <code>@Bean</code> methods declared in <code>AppConfig</code>
-properly.</p>
+<p>记住，<code>@Configuration</code> 类最终只是容器中的 bean 定义。在这个例子中，我们创建了一个名为<code>AppConfig</code> 的 <code>@Configuration</code> 类，并将其作为 <code>&lt;bean/&gt;</code> 定义包含在 <code>system-test-config.xml</code> 中。由于开启了 <code>&lt;context:annotation-config/&gt;</code>，容器将识别 <code>@Configuration</code> 注解 并正确处理在 <code>AppConfig</code> 中声明的@Bean方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6831,11 +6660,7 @@ jdbc.password=</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In <code>system-test-config.xml</code> above, the <code>AppConfig</code> <code>&lt;bean/&gt;</code> does not declare an <code>id</code>
-element. While it would be acceptable to do so, it is unnecessary given that no other
-bean will ever refer to it, and it is unlikely that it will be explicitly fetched from
-the container by name. Likewise with the <code>DataSource</code> bean - it is only ever autowired
-by type, so an explicit bean <code>id</code> is not strictly required.</p>
+<p>在上面的 <code>system-test-config.xml</code> 中，<code>AppConfig</code> <code>&lt;bean/&gt;</code> 没有声明一个 <code>id</code> 元素。这样做是可以接受的，这也没有必要因为其他bean 将不会引用它，并且也不可能让容器通过名字获取它。同样，对于 <code>DataSource</code> bean，它只能通过类型自动装配，所以不需要显式的bean <code>id</code>。/p>
 </div>
 </td>
 </tr>
@@ -6844,15 +6669,10 @@ by type, so an explicit bean <code>id</code> is not strictly required.</p>
 </div>
 </div>
 <div class="openblock">
-<div class="title"><a id="beans-java-combining-xml-centric-component-scan"></a> Using &lt;context:component-scan/&gt; to pick up <code>@Configuration</code> classes</div>
+<div class="title"><a id="beans-java-combining-xml-centric-component-scan"></a> 使用 &lt;context:component-scan/&gt; 来获取 <code>@Configuration</code> 类</div>
 <div class="content">
 <div class="paragraph">
-<p>Because <code>@Configuration</code> is meta-annotated with <code>@Component</code>, <code>@Configuration</code>-annotated
-classes are automatically candidates for component scanning. Using the same scenario as
-above, we can redefine <code>system-test-config.xml</code> to take advantage of component-scanning.
-Note that in this case, we don&#8217;t need to explicitly declare
-<code>&lt;context:annotation-config/&gt;</code>, because <code>&lt;context:component-scan/&gt;</code> enables the same
-functionality.</p>
+<p>因为 <code>@Configuration</code> 是用 <code>@Component</code> 注解的元注解，所以 <code>@Configuration</code> 注解的类会自动成为组件扫描的候选对象。与上面的场景一样，我们可以重新定义 <code>system-test-config.xml</code> 来利用组件扫描带来优势。注意，在这种情况下，我们不需要显式声明 <code>&lt;context:annotation-config/&gt;</code>，因为 <code>&lt;context:component-scan/&gt;</code> 启用了相同的功能。</p>
 </div>
 <div class="paragraph">
 <p><strong>system-test-config.xml</strong>:</p>
@@ -6876,13 +6696,9 @@ functionality.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="beans-java-combining-java-centric"><a class="anchor" href="#beans-java-combining-java-centric"></a>@Configuration class-centric use of XML with @ImportResource</h6>
+<h6 id="beans-java-combining-java-centric"><a class="anchor" href="#beans-java-combining-java-centric"></a>使用 @ImportResource 将 XML 引入到以 @Configuration 类为中心的配置</h6>
 <div class="paragraph">
-<p>In applications where <code>@Configuration</code> classes are the primary mechanism for configuring
-the container, it will still likely be necessary to use at least some XML. In these
-scenarios, simply use <code>@ImportResource</code> and define only as much XML as is needed. Doing
-so achieves a "Java-centric" approach to configuring the container and keeps XML to a
-bare minimum.</p>
+<p>在以 <code>@Configuration</code> 类为配置容器的主要机制的应用程序中，仍然可能有必要使用一些 XML。在这些场景中，只需使用 <code>@ImportResource</code>，并根据需要定义 XML 的数量。这样做既实现了“以Java为中心”的方式来配置容器，又将 XML 的使用保持在最低限度。</p>
 </div>
 <div class="listingblock">
 <div class="content">
