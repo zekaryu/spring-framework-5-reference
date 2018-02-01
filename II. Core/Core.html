@@ -7243,88 +7243,53 @@ sources.addFirst(<span class="keyword">new</span> MyPropertySource());</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="context-introduction"><a class="anchor" href="#context-introduction"></a>1.15. Additional Capabilities of the ApplicationContext</h3>
+<h3 id="context-introduction"><a class="anchor" href="#context-introduction"></a>1.15. ApplicationContext 的其他附加功能</h3>
 <div class="paragraph">
-<p>As was discussed in the chapter introduction, the <code>org.springframework.beans.factory</code>
-package provides basic functionality for managing and manipulating beans, including in a
-programmatic way. The <code>org.springframework.context</code> package adds the
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"><code>ApplicationContext</code></a>
-interface, which extends the <code>BeanFactory</code> interface, in addition to extending other
-interfaces to provide additional functionality in a more <em>application
-framework-oriented style</em>. Many people use the <code>ApplicationContext</code> in a completely
-declarative fashion, not even creating it programmatically, but instead relying on
-support classes such as <code>ContextLoader</code> to automatically instantiate an
-<code>ApplicationContext</code> as part of the normal startup process of a Java EE web application.</p>
+<p>正如本章简介中所讨论的，<code>org.springframework.beans.factory</code> 包提供了用于管理和操作 bean 的基本功能，包括以编程的方式。<code>org.springframework.context</code> 包添加了扩展了 <code>BeanFactory</code> 接口的 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/context/ApplicationContext.html"><code>ApplicationContext</code></a> 接口，并扩展了其他接口，以更多的面向应用程序框架的风格提供附加功能。很多人以完全声明的方式使用 <code>ApplicationContext</code> ，甚至不是以编程方式创建它，而是依赖诸如 <code>ContextLoader</code> 之类的支持类自动实例化 <code>ApplicationContext</code> ，并将它作为 Java EE Web 应用程序正常启动过程的一部分。</p>
 </div>
 <div class="paragraph">
-<p>To enhance <code>BeanFactory</code> functionality in a more framework-oriented style the context
-package also provides the following functionality:</p>
+<p>为了以更加面向框架的风格增强 <code>BeanFactory</code> 功能，上下文包还提供了以下功能：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>Access to messages in i18n-style</em>, through the <code>MessageSource</code> interface.</p>
+<p>通过 <code>MessageSource</code> 接口，<em>以国际化风格访问消息</em>。</p>
 </li>
 <li>
-<p><em>Access to resources</em>, such as URLs and files, through the <code>ResourceLoader</code> interface.</p>
+<p>通过 <code>ResourceLoader</code> 接口 <em>访问资源</em>，例如 URL 和文件。</p>
 </li>
 <li>
-<p><em>Event publication</em> to namely beans implementing the <code>ApplicationListener</code> interface,
-through the use of the <code>ApplicationEventPublisher</code> interface.</p>
+<p>通过使用 <code>ApplicationEventPublisher</code> 接口，将 <em>Event 发布</em> 到实现 <code>ApplicationListener</code> 接口的 bean。</p>
 </li>
 <li>
-<p><em>Loading of multiple (hierarchical) contexts</em>, allowing each to be focused on one
-particular layer, such as the web layer of an application, through the
-<code>HierarchicalBeanFactory</code> interface.</p>
+<p>通过 <code>HierarchicalBeanFactory</code> 接口 <em>加载多个（层次）上下文</em>，允许每个上下文关注一个特定的层，例如应用程序的 web 层。</p>
 </li>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="context-functionality-messagesource"><a class="anchor" href="#context-functionality-messagesource"></a>1.15.1. Internationalization using MessageSource</h4>
+<h4 id="context-functionality-messagesource"><a class="anchor" href="#context-functionality-messagesource"></a>1.15.1. 使用 MessageSource 实现国际化</h4>
 <div class="paragraph">
-<p>The <code>ApplicationContext</code> interface extends an interface called <code>MessageSource</code>, and
-therefore provides internationalization (i18n) functionality. Spring also provides the
-interface <code>HierarchicalMessageSource</code>, which can resolve messages hierarchically.
-Together these interfaces provide the foundation upon which Spring effects message
-resolution. The methods defined on these interfaces include:</p>
+<p><code>ApplicationContext</code> 接口扩展了一个名为 <code>MessageSource</code> 的接口，且提供了国际化（i18n）功能。Spring 还提供了 <code>HierarchicalMessageSource</code> 接口，它可以分层解析消息。这些接口一起为 Spring 消息解析提供了基础。这些接口上定义的方法包括：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>String getMessage(String code, Object[] args, String default, Locale loc)</code>: The basic
-method used to retrieve a message from the <code>MessageSource</code>. When no message is found
-for the specified locale, the default message is used. Any arguments passed in become
-replacement values, using the <code>MessageFormat</code> functionality provided by the standard
-library.</p>
+<p><code>String getMessage(String code, Object[] args, String default, Locale loc)</code>：用于从 <code>MessageSource</code> 中检索消息的基本方法。当找不到指定语言环境的消息时，将使用默认消息。</p>
 </li>
 <li>
-<p><code>String getMessage(String code, Object[] args, Locale loc)</code>: Essentially the same as
-the previous method, but with one difference: no default message can be specified; if
-the message cannot be found, a <code>NoSuchMessageException</code> is thrown.</p>
+<p><code>String getMessage(String code, Object[] args, Locale loc)</code>：基本上与前面的方法相同，但有一点不同：不能指定默认消息; 如果无法找到消息，则抛出 <code>NoSuchMessageException</code> 异常。</p>
 </li>
 <li>
-<p><code>String getMessage(MessageSourceResolvable resolvable, Locale locale)</code>: All properties
-used in the preceding methods are also wrapped in a class named
-<code>MessageSourceResolvable</code>, which you can use with this method.</p>
+<p><code>String getMessage(MessageSourceResolvable resolvable, Locale locale)</code>：前面的方法中使用的所有属性也都包装在一个名为 <code>MessageSourceResolvable</code> 的类中，您可以在该方法中使用它。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>When an <code>ApplicationContext</code> is loaded, it automatically searches for a <code>MessageSource</code>
-bean defined in the context. The bean must have the name <code>messageSource</code>. If such a bean
-is found, all calls to the preceding methods are delegated to the message source. If no
-message source is found, the <code>ApplicationContext</code> attempts to find a parent containing a
-bean with the same name. If it does, it uses that bean as the <code>MessageSource</code>. If the
-<code>ApplicationContext</code> cannot find any source for messages, an empty
-<code>DelegatingMessageSource</code> is instantiated in order to be able to accept calls to the
-methods defined above.</p>
+<p>当一个 <code>ApplicationContext</code> 被加载时，它会自动搜索上下文中定义的 <code>MessageSource</code> bean。该 bean 的名字必须为 <code>messageSource</code>。如果能找到这样一个 bean，所有对前面方法的调用都被委托给这个消息源。如果没有找到消息源，则 <code>ApplicationContext</code> 将尝试查找父容器中包含的同名 bean 。如果找到了这样的 bean，它将使用该 bean 作为 <code>MessageSource</code>。如果 <code>ApplicationContext</code> 找不到任何消息源，就会实例化一个空的 <code>DelegatingMessageSource</code>，以便能够接受对上面定义的方法的调用。</p>
 </div>
 <div class="paragraph">
-<p>Spring provides two <code>MessageSource</code> implementations, <code>ResourceBundleMessageSource</code> and
-<code>StaticMessageSource</code>. Both implement <code>HierarchicalMessageSource</code> in order to do nested
-messaging. The <code>StaticMessageSource</code> is rarely used but provides programmatic ways to
-add messages to the source. The <code>ResourceBundleMessageSource</code> is shown in the following
-example:</p>
+<p>Spring 提供了两个 <code>MessageSource</code> 实现，<code>ResourceBundleMessageSource</code> 和
+  <code>StaticMessageSource</code>。两者都实现了  <code>HierarchicalMessageSource</code> 以进行消息的嵌套传递。 <code>StaticMessageSource</code> 很少使用，但它提供了以编程方式来添加消息到源的功能。以下示例中显示了 <code>ResourceBundleMessageSource</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7343,11 +7308,7 @@ example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the example it is assumed you have three resource bundles defined in your classpath
-called <code>format</code>, <code>exceptions</code> and <code>windows</code>. Any request to resolve a message will be
-handled in the JDK standard way of resolving messages through ResourceBundles. For the
-purposes of the example, assume the contents of two of the above resource bundle files
-are&#8230;&#8203;</p>
+<p>在这个例子中，假设你在你的类路径中定义了三个 resource bundle ，分别叫做 <code>format</code>，<code>exceptions</code> 和 <code>windows</code>。任何解析消息的请求都将以 JDK 标准方式通过 ResourceBundles 解析消息。为了达到这个例子的目的，假设前两个 resource bundle 文件的内容是...</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7362,9 +7323,7 @@ argument.required=The {<span class="integer">0</span>} argument is required.</co
 </div>
 </div>
 <div class="paragraph">
-<p>A program to execute the <code>MessageSource</code> functionality is shown in the next example.
-Remember that all <code>ApplicationContext</code> implementations are also <code>MessageSource</code>
-implementations and so can be cast to the <code>MessageSource</code> interface.</p>
+<p>下一个示例中显示了执行 <code>MessageSource</code> 功能的程序。记住，所有 <code>ApplicationContext</code> 实现也是 <code>MessageSource</code> 实现，因此可以转换为 <code>MessageSource</code>接口。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7376,7 +7335,7 @@ implementations and so can be cast to the <code>MessageSource</code> interface.<
 </div>
 </div>
 <div class="paragraph">
-<p>The resulting output from the above program will be&#8230;&#8203;</p>
+<p>上面这个程序的输出结果应该是这样的...</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -7384,16 +7343,10 @@ implementations and so can be cast to the <code>MessageSource</code> interface.<
 </div>
 </div>
 <div class="paragraph">
-<p>So to summarize, the <code>MessageSource</code> is defined in a file called <code>beans.xml</code>, which
-exists at the root of your classpath. The <code>messageSource</code> bean definition refers to a
-number of resource bundles through its <code>basenames</code> property. The three files that are
-passed in the list to the <code>basenames</code> property exist as files at the root of your
-classpath and are called <code>format.properties</code>, <code>exceptions.properties</code>, and
-<code>windows.properties</code> respectively.</p>
+<p>所以总结一下，<code>MessageSource</code> 被定义在一个名为 <code>beans.xml</code> 的文件中，该文件存在于你的类路径的根目录下。<code>messageSource</code> bean 定义通过其 <code>basenames</code> 属性来引用许多 resource bundle。在列表中传递给 <code>basenames</code> 属性的三个文件存在于类路径的根目录下，分别名为<code>format.properties</code>，<code>exceptions.properties</code>，和 <code>windows.properties</code>。</p>
 </div>
 <div class="paragraph">
-<p>The next example shows arguments passed to the message lookup; these arguments will be
-converted into Strings and inserted into placeholders in the lookup message.</p>
+<p>下一个示例展示了参数用于消息查找; 这些参数将被转换为字符串并插入到查找消息中的占位符中。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7431,7 +7384,7 @@ converted into Strings and inserted into placeholders in the lookup message.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The resulting output from the invocation of the <code>execute()</code> method will be&#8230;&#8203;</p>
+<p>调用 <code>execute()</code> 方法的结果输出将是...</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -7439,17 +7392,10 @@ converted into Strings and inserted into placeholders in the lookup message.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>With regard to internationalization (i18n), Spring&#8217;s various <code>MessageSource</code>
-implementations follow the same locale resolution and fallback rules as the standard JDK
-<code>ResourceBundle</code>. In short, and continuing with the example <code>messageSource</code> defined
-previously, if you want to resolve messages against the British (<code>en-GB</code>) locale, you
-would create files called <code>format_en_GB.properties</code>, <code>exceptions_en_GB.properties</code>, and
-<code>windows_en_GB.properties</code> respectively.</p>
+<p>关于国际化（i18n），Spring 的各种 <code>MessageSource</code> 实现遵循与标准的 JDK <code>ResourceBundle</code>相同的 locale 解析和回退规则。简而言之，继续前面定义的 <code>messageSource</code> 示例，如果要解析 British（en-GB）locale 的消息，则需要分别创建名为 <code>format_en_GB.properties</code>，<code>exceptions_en_GB.properties</code> 和 <code>windows_en_GB.properties</code> 的三个文件。</p>
 </div>
 <div class="paragraph">
-<p>Typically, locale resolution is managed by the surrounding environment of the
-application. In this example, the locale against which (British) messages will be
-resolved is specified manually.</p>
+<p>通常，locale 解析由应用程序的所处的环境决定。在这个例子中，（British）消息将被解析的本地化是手动指定的。</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -7468,7 +7414,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </div>
 </div>
 <div class="paragraph">
-<p>The resulting output from the running of the above program will be&#8230;&#8203;</p>
+<p>运行上面的程序得到的输出结果是...</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -7476,10 +7422,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </div>
 </div>
 <div class="paragraph">
-<p>You can also use the <code>MessageSourceAware</code> interface to acquire a reference to any
-<code>MessageSource</code> that has been defined. Any bean that is defined in an
-<code>ApplicationContext</code> that implements the <code>MessageSourceAware</code> interface is injected with
-the application context&#8217;s <code>MessageSource</code> when the bean is created and configured.</p>
+<p>您还可以使用 <code>MessageSourceAware</code> 接口来获取对已定义的任何 <code>MessageSource</code> 的引用。 任何在实现 <code>MessageSourceAware</code> 接口的 <code>ApplicationContext</code>  中定义的 bean 在被创建和配置的时候都会被应用程序上下文中的 <code>MessageSource</code>注入。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7489,13 +7432,7 @@ the application context&#8217;s <code>MessageSource</code> when the bean is crea
 </td>
 <td class="content">
 <div class="paragraph">
-<p><em>As an alternative to <code>ResourceBundleMessageSource</code>, Spring provides a
-<code>ReloadableResourceBundleMessageSource</code> class. This variant supports the same bundle
-file format but is more flexible than the standard JDK based
-<code>ResourceBundleMessageSource</code> implementation.</em> In particular, it allows for reading
-files from any Spring resource location (not just from the classpath) and supports hot
-reloading of bundle property files (while efficiently caching them in between). Check
-out the <code>ReloadableResourceBundleMessageSource</code> javadocs for details.</p>
+  <p><em>作为 <code>ResourceBundleMessageSource</code> 的替代着，Spring 提供了一个 <code>ReloadableResourceBundleMessageSource</code> 类。这个变体支持相同的 bundle 文件格式，但比标准的基于 JDK 的 <code>ResourceBundleMessageSource</code> 实现更加灵活。</em> 特别是，它允许从任何 Spring 资源路径（而不仅仅是从类路径）读取文件，并支持热重新加载 bundle 属性文件（同时高效地缓存它们之间）。查看 <code>ReloadableResourceBundleMessageSource</code> javadoc 获取详细信息。</p>
 </div>
 </td>
 </tr>
@@ -7503,13 +7440,9 @@ out the <code>ReloadableResourceBundleMessageSource</code> javadocs for details.
 </div>
 </div>
 <div class="sect3">
-<h4 id="context-functionality-events"><a class="anchor" href="#context-functionality-events"></a>1.15.2. Standard and Custom Events</h4>
+<h4 id="context-functionality-events"><a class="anchor" href="#context-functionality-events"></a>1.15.2. 标准事件和自定义事件</h4>
 <div class="paragraph">
-<p>Event handling in the <code>ApplicationContext</code> is provided through the <code>ApplicationEvent</code>
-class and <code>ApplicationListener</code> interface. If a bean that implements the
-<code>ApplicationListener</code> interface is deployed into the context, every time an
-<code>ApplicationEvent</code> gets published to the <code>ApplicationContext</code>, that bean is notified.
-Essentially, this is the standard <em>Observer</em> design pattern.</p>
+<p><code>ApplicationContext</code> 中的事件处理是通过 <code>ApplicationEvent</code> 类和 <code>ApplicationListener</code> 接口提供的。如果一个实现 <code>ApplicationListener</code> 接口的 bean 被部署到上下文中，则每当 <code>ApplicationEvent</code> 发布到 <code>ApplicationContext</code> 时，都会通知该 bean。实质上，这是标准的 <em>Observer</em> 设计模式。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -7519,77 +7452,52 @@ Essentially, this is the standard <em>Observer</em> design pattern.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>As of Spring 4.2, the event infrastructure has been significantly improved and offer
-an <a href="#context-functionality-events-annotation">annotation-based model</a> as well as the
-ability to publish any arbitrary event, that is an object that does not necessarily
-extend from <code>ApplicationEvent</code>. When such an object is published we wrap it in an
-event for you.</p>
+<p>从 Spring 4.2 开始，事件基础架构得到了显着的改进，并提供了 <a href="#context-functionality-events-annotation">基于注解的模型</a> 以及发布任意事件的能力，这个事件对象不一定是 <code>ApplicationEvent</code> 的扩展对象。当这样的事件对象发布时，我们会将它包装在一个事件中再向你提供。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Spring provides the following standard events:</p>
+<p>Spring 提供一下标准事件：</p>
 </div>
 <table id="beans-ctx-events-tbl" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 7. Built-in Events</caption>
+<caption class="title">Table 7. 内置事件</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Event</th>
-<th class="tableblock halign-left valign-top">Explanation</th>
+<th class="tableblock halign-left valign-top">事件</th>
+<th class="tableblock halign-left valign-top">解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ContextRefreshedEvent</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Published when the <code>ApplicationContext</code> is initialized or refreshed, for example,
-using the <code>refresh()</code> method on the <code>ConfigurableApplicationContext</code> interface.
-"Initialized" here means that all beans are loaded, post-processor beans are detected
-and activated, singletons are pre-instantiated, and the <code>ApplicationContext</code> object is
-ready for use. As long as the context has not been closed, a refresh can be triggered
-multiple times, provided that the chosen <code>ApplicationContext</code> actually supports such
-"hot" refreshes. For example, <code>XmlWebApplicationContext</code> supports hot refreshes, but
-<code>GenericApplicationContext</code> does not.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当 <code>ApplicationContext</code> 初始化或刷新时发布，例如在 <code>ConfigurableApplicationContext</code> 接口中使用 <code>refresh()</code> 方法。这里的“初始化”指的是所有 bean 都加载完成，所有 post-processor bean 被检测和激活，所有单例 bean 被预实例化，且 <code>ApplicationContext</code> 处于使用就绪状态。只要上下文没有被关闭，如果所选的 <code>ApplicationContext</code> 实际上支持这种“热”刷新，那么 refresh 就可以被多次触发。例如，<code>XmlWebApplicationContext</code> 支持热刷新，而 <code>GenericApplicationContext</code> 就不支持。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ContextStartedEvent</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Published when the <code>ApplicationContext</code> is started, using the <code>start()</code> method on the
-<code>ConfigurableApplicationContext</code> interface. "Started" here means that all <code>Lifecycle</code>
-beans receive an explicit start signal. Typically this signal is used to restart beans
-after an explicit stop, but it may also be used to start components that have not been
-configured for autostart , for example, components that have not already started on
-initialization.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当 <code>ApplicationContext</code> 启动的时候发布，使用 <code>ConfigurableApplicationContext</code> 接口的 <code>start()</code> 方法。这里的“启动”意思是所有的 <code>Lifecycle</code> bean 接收到显式的启动信号。通常这个信号用于在显式停止后对 bean 的后重新启动，但它也有可能用于启动那些未配置为自动启动的组件，例如在初始化阶段没有启动的组件。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ContextStoppedEvent</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Published when the <code>ApplicationContext</code> is stopped, using the <code>stop()</code> method on the
-<code>ConfigurableApplicationContext</code> interface. "Stopped" here means that all <code>Lifecycle</code>
-beans receive an explicit stop signal. A stopped context may be restarted through a
-<code>start()</code> call.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当 <code>ApplicationContext</code> 停止的时候发布，使用 <code>ConfigurableApplicationContext</code> 接口的 <code>stop()</code> 方法。这里的“停止”意思是所有的 <code>Lifecycle</code> bean 接收到显式的停止信号。已经停止的上下文可以通过对 <code>start()</code> 的调用来重新启动。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ContextClosedEvent</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Published when the <code>ApplicationContext</code> is closed, using the <code>close()</code> method on the
-<code>ConfigurableApplicationContext</code> interface. "Closed" here means that all singleton
-beans are destroyed. A closed context reaches its end of life; it cannot be refreshed
-or restarted.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">当 <code>ApplicationContext</code> 关闭的时候发布，使用 <code>ConfigurableApplicationContext</code> 接口的 <code>close()</code> 方法。这里的“关闭”意思是所有的单例 bean 都被销毁。一个关闭的上下文已经走到其生命的终点；它不能被刷新或者重启。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>RequestHandledEvent</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A web-specific event telling all beans that an HTTP request has been serviced. This
-event is published <em>after</em> the request is complete. This event is only applicable to
-web applications using Spring&#8217;s <code>DispatcherServlet</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">一个特定的 web 相关事件，它告诉所有 bean 已经对某个 HTTP 请求进行服务。这个时间会在这个请求完成 <em>之后</em> 发布。此事件只适用于使用 Spring 的 <code>DispatcherServlet</code> 的 web 应用程序。</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>You can also create and publish your own custom events. This example demonstrates a
-simple class that extends Spring&#8217;s <code>ApplicationEvent</code> base class:</p>
+<p>你也可以创建并发布你的自定义事件。本例演示了一个扩展了 Spring 的 <code>ApplicationEvent</code> 基类的简单类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7609,10 +7517,7 @@ simple class that extends Spring&#8217;s <code>ApplicationEvent</code> base clas
 </div>
 </div>
 <div class="paragraph">
-<p>To publish a custom <code>ApplicationEvent</code>, call the <code>publishEvent()</code> method on an
-<code>ApplicationEventPublisher</code>. Typically this is done by creating a class that implements
-<code>ApplicationEventPublisherAware</code> and registering it as a Spring bean. The following
-example demonstrates such a class:</p>
+<p>要发布自定义 <code>ApplicationEvent</code> ，需要在 <code>ApplicationEventPublisher</code> 上调用 <code>publishEvent()</code> 方法。通常这是通过创建一个实现了 <code>ApplicationEventPublisherAware</code> 的类并将其注册为一个 Spring bean 来完成的。 下面的例子演示了这样一个类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7641,16 +7546,10 @@ example demonstrates such a class:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>At configuration time, the Spring container will detect that <code>EmailService</code> implements
-<code>ApplicationEventPublisherAware</code> and will automatically call
-<code>setApplicationEventPublisher()</code>. In reality, the parameter passed in will be the Spring
-container itself; you&#8217;re simply interacting with the application context via its
-<code>ApplicationEventPublisher</code> interface.</p>
+<p>在配置时，Spring 容器会检测到 <code>EmailService</code> 实现了 <code>ApplicationEventPublisherAware</code> ，并且会自动调用 <code>setApplicationEventPublisher()</code>。实际上，传入的参数是 Spring 容器本身; 你只需通过 <code>ApplicationEventPublisher</code> 接口与应用程序上下文交互即可。</p>
 </div>
 <div class="paragraph">
-<p>To receive the custom <code>ApplicationEvent</code>, create a class that implements
-<code>ApplicationListener</code> and register it as a Spring bean. The following example
-demonstrates such a class:</p>
+<p>要接收自定义的 <code>ApplicationEvent</code>，需要创建一个实现了 <code>ApplicationListener</code> 的类，并将其注册为一个 Spring bean。下面的例子演示了这样一个类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7669,44 +7568,30 @@ demonstrates such a class:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Notice that <code>ApplicationListener</code> is generically parameterized with the type of your
-custom event, <code>BlackListEvent</code>. This means that the <code>onApplicationEvent()</code> method can
-remain type-safe, avoiding any need for downcasting. You may register as many event
-listeners as you wish, but note that by default event listeners receive events
-synchronously. This means the <code>publishEvent()</code> method blocks until all listeners have
-finished processing the event. One advantage of this synchronous and single-threaded
-approach is that when a listener receives an event, it operates inside the transaction
-context of the publisher if a transaction context is available. If another strategy for
-event publication becomes necessary, refer to the javadoc for Spring&#8217;s
-<code>ApplicationEventMulticaster</code> interface.</p>
+<p>注意 <code>ApplicationListener</code> 是用你的自定义事件 <code>BlackListEvent</code> 的类型来泛型参数化的。这意味着 <code>onApplicationEvent()</code> 方法可以保持类型安全，避免任何向下转换的需要。你可以根据需要注册多个事件监听器，但注意默认情况下，事件监听器采用同步方式接收事件。这意味着 <code>publishEvent()</code> 方法将会阻塞，直到所有监听器完成事件处理。这种同步和单线程方法的一个优点是，当某个监听器接收到事件时，如果事务上下文可用，它会发布者的事务上下文内运行。如果需要另一个事件发布策略，请参阅Spring的 <code>ApplicationEventMulticaster</code> 接口的 javadoc。</p>
 </div>
 <div class="paragraph">
-<p>The following example shows the bean definitions used to register and configure each of
-the classes above:</p>
+<p>以下示例展示了用于注册和配置上述每个类的 bean 定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">emailService</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">example.EmailService</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
         <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">blackList</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
                 <span class="tag">&lt;list&gt;</span>
-                        <span class="tag">&lt;value&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3b8bdbca4bdfda0a3b2bebeb6a193b6abb2bea3bfb6fdbca1b4">[email&#160;protected]</a><span class="tag">&lt;/value&gt;</span>
-                        <span class="tag">&lt;value&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d7673726a7333757c7e76786f5d78657c706d717833726f7a">[email&#160;protected]</a><span class="tag">&lt;/value&gt;</span>
-                        <span class="tag">&lt;value&gt;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ce6e3e4e2a2e8e3e9cce9f4ede1fce0e9a2e3feeb">[email&#160;protected]</a><span class="tag">&lt;/value&gt;</span>
+                        <span class="tag">&lt;value&gt;</span>known.spammer@example.org<span class="tag">&lt;/value&gt;</span>
+                        <span class="tag">&lt;value&gt;</span>known.hacker@example.org<span class="tag">&lt;/value&gt;</span>
+                        <span class="tag">&lt;value&gt;</span>john.doe@example.org<span class="tag">&lt;/value&gt;</span>
                 <span class="tag">&lt;/list&gt;</span>
         <span class="tag">&lt;/property&gt;</span>
 <span class="tag">&lt;/bean&gt;</span>
 
 <span class="tag">&lt;bean</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">blackListNotifier</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">class</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">example.BlackListNotifier</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
-        <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">notificationAddress</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="06646a67656d6a6f757246637e676b766a6328697461">[email&#160;protected]</a></span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
+        <span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">notificationAddress</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">value</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">blacklist@example.org</span><span class="delimiter">&quot;</span></span><span class="tag">/&gt;</span>
 <span class="tag">&lt;/bean&gt;</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Putting it all together, when the <code>sendEmail()</code> method of the <code>emailService</code> bean is
-called, if there are any emails that should be blacklisted, a custom event of type
-<code>BlackListEvent</code> is published. The <code>blackListNotifier</code> bean is registered as an
-<code>ApplicationListener</code> and thus receives the <code>BlackListEvent</code>, at which point it can
-notify appropriate parties.</p>
+<p>综合起来，当调用 <code>emailService</code> bean 的 <code>sendEmail()</code> 方法时，如果有任何应该列入黑名单的电子邮件地址，就会发布 <code>BlackListEvent</code> 类型的自定义事件。<code>blackListNotifier</code> bean 被注册为一个 <code>ApplicationListener</code>，并且因此接收到 <code>BlackListEvent</code> ，并同时按需通知各方。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7716,24 +7601,16 @@ notify appropriate parties.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Spring&#8217;s eventing mechanism is designed for simple communication between Spring beans
-within the same application context. However, for more sophisticated enterprise
-integration needs, the separately-maintained
-<a href="https://projects.spring.io/spring-integration/">Spring Integration</a> project provides
-complete support for building lightweight,
-<a href="http://www.enterpriseintegrationpatterns.com">pattern-oriented</a>, event-driven
-architectures that build upon the well-known Spring programming model.</p>
+<p>Spring 的事件机制是为了在同一个应用上下文中的 Spring bean 之间进行简单的通信而设计的。但是，对于更复杂的企业集成需求，独立维护的 <a href="https://projects.spring.io/spring-integration/">Spring Integration</a> 项目提供了完整的支持，以构建基于众所周知的 Spring 编程模型的轻量级，<a href="http://www.enterpriseintegrationpatterns.com">面向模式</a> 的事件驱动体系结构。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect4">
-<h5 id="context-functionality-events-annotation"><a class="anchor" href="#context-functionality-events-annotation"></a>Annotation-based Event Listeners</h5>
+<h5 id="context-functionality-events-annotation"><a class="anchor" href="#context-functionality-events-annotation"></a>基于注解的事件监听器</h5>
 <div class="paragraph">
-<p>As of Spring 4.2, an event listener can be registered on any public method of a managed
-bean via the <code>EventListener</code> annotation. The <code>BlackListNotifier</code> can be rewritten as
-follows:</p>
+<p>从 Spring 4.2 开始，可以通过 <code>EventListener</code> 注解在被托管 bean 的任何公共方法上注册一个事件监听器。<code>BlackListNotifier</code> 可以被重写如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7753,14 +7630,10 @@ follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see above, the method signature once again declares the event type it listens to,
-but this time with a flexible name and without implementing a specific listener interface.
-The event type can also be narrowed through generics as long as the actual event type
-resolves your generic parameter in its implementation hierarchy.</p>
+<p>如上所见，方法签名再次声明了它监听的事件类型，但是这次使用了灵活的名字而并未实现特定的监听器接口。事件类型也可以通过泛型来缩小范围，只要实际事件类型在其实现层次结构中可以解析泛型参数即可。</p>
 </div>
 <div class="paragraph">
-<p>If your method should listen to several events or if you want to define it with no
-parameter at all, the event type(s) can also be specified on the annotation itself:</p>
+<p>如果你的方法需要监听好几个事件，或者如果你想要不带任何参数来定义它，那么也可以在注解本身上指定事件类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7771,13 +7644,10 @@ parameter at all, the event type(s) can also be specified on the annotation itse
 </div>
 </div>
 <div class="paragraph">
-<p>It is also possible to add additional runtime filtering via the <code>condition</code> attribute of the
-annotation that defines a <a href="#expressions"><code>SpEL</code> expression</a> that should match to actually invoke
-the method for a particular event.</p>
+<p>你也可以通过注解的 <code>condition</code>  特性添加额外的运行时过滤，该属性定义了一个 <a href="#expressions"><code>SpEL</code> 表达式</a>，如果该表达式匹配就会调用针对特定事件的这个方法。</p>
 </div>
 <div class="paragraph">
-<p>For instance, our notifier can be rewritten to be only invoked if the <code>test</code> attribute of the
-event is equal to <code>foo</code>:</p>
+<p>例如，我们的通知器可以被重写为仅在事件的 <code>test</code> 特性等于 <code>foo</code> 的时候被调用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7788,11 +7658,10 @@ event is equal to <code>foo</code>:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Each <code>SpEL</code> expression evaluates again a dedicated context. The next table lists the items made
-available to the context so one can use them for conditional event processing:</p>
+<p>每个 <code>SpEL</code>  表达式都会重新评估一个专用的上下文。下表列出了可用于上下文的项目，以便上下文可以将它们用于条件事件处理：</p>
 </div>
 <table id="context-functionality-events-annotation-tbl" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 8. Event SpEL available metadata</caption>
+<caption class="title">Table 8. 事件 SpEL 可用的元数据</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -7801,42 +7670,38 @@ available to the context so one can use them for conditional event processing:</
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Location</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Example</th>
+<th class="tableblock halign-left valign-top">名字</th>
+<th class="tableblock halign-left valign-top">路径</th>
+<th class="tableblock halign-left valign-top">描述</th>
+<th class="tableblock halign-left valign-top">例子</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Event</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">root object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The actual <code>ApplicationEvent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">事件</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根对象</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">实际的 <code>ApplicationEvent</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>#root.event</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Arguments array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">root object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The arguments (as array) used for invoking the target</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">参数数组</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">根对象</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">用于调用目标的参数（数组）</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>#root.args[0]</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Argument name</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">evaluation context</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of any of the method arguments. If for some reason the names are not available
-(e.g. no debug information), the argument names are also available under the <code>#a&lt;#arg&gt;</code>
-where <em>#arg</em> stands for the argument index (starting from 0).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>参数名</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">评估上下文</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">任意方法参数名。如果因某些情况参数名不可用（例如，没有调试信息），参数名在 <code>#a&lt;#arg&gt;</code> 下也是可用的，<em>#arg</em> 代表参数索引（从0开始）。</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>#blEvent</code> or <code>#a0</code> (one can also use <code>#p0</code> or <code>#p&lt;#arg&gt;</code> notation as an alias).</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Note that <code>#root.event</code> allows you to access to the underlying event, even if your method
-signature actually refers to an arbitrary object that was published.</p>
+<p>注意，<code>#root.event</code> 允许您访问基础事件，即使您的方法签名实际上是指已经发布的任意对象。</p>
 </div>
 <div class="paragraph">
-<p>If you need to publish an event as the result of processing another, just change the
-method signature to return the event that should be published, something like:</p>
+<p>如果您需要发布一个作为处理另一个事件的结果事件，只需更改方法签名以返回应该发布的事件，如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7854,23 +7719,19 @@ method signature to return the event that should be published, something like:</
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This feature is not supported for <a href="#context-functionality-events-async">asynchronous
-listeners</a>.
+<a href="#context-functionality-events-async">异步监听器</a> 不支持这个功能。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>This new method will publish a new <code>ListUpdateEvent</code> for every <code>BlackListEvent</code> handled
-by the method above. If you need to publish several events, just return a <code>Collection</code> of
-events instead.</p>
+<p>这个新方法将为每个由上述方法处理的 <code>BlackListEvent</code> 发布一个新的 <code>ListUpdateEvent</code> 。如果您需要发布多个事件，则只需返回事件的 <code>集合</code>。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="context-functionality-events-async"><a class="anchor" href="#context-functionality-events-async"></a>Asynchronous Listeners</h5>
+<h5 id="context-functionality-events-async"><a class="anchor" href="#context-functionality-events-async"></a>异步监听器</h5>
 <div class="paragraph">
-<p>If you want a particular listener to process events asynchronously, simply reuse the
-<a href="integration.html#scheduling-annotation-support-async">regular <code>@Async</code> support</a>:</p>
+<p>如果你希望某个特定的侦听器对事件进行异步处理，只需重用 <a href="integration.html#scheduling-annotation-support-async">常规 <code>@Async</code> 作为支持</a> 即可：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7882,27 +7743,23 @@ events instead.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Be aware of the following limitations when using asynchronous events:</p>
+<p>使用异步事件时请注意以下限制：</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>If the event listener throws an <code>Exception</code> it will not be propagated to the caller,
-check <code>AsyncUncaughtExceptionHandler</code> for more details.</p>
+<p>如果事件监听器抛出 <code>异常</code>，它不会被传播给调用者，请查看 <code>AsyncUncaughtExceptionHandler</code> 以获取更多详细信息。</p>
 </li>
 <li>
-<p>Such event listener cannot send replies. If you need to send another event as the
-result of the processing, inject <code>ApplicationEventPublisher</code> to send the event
-manually.</p>
+<p>这样的事件监听器不能发送回复。如果您需要发送另一个事件作为处理的结果，需要注入 <code>ApplicationEventPublisher</code> 手动发送事件。</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect4">
-<h5 id="context-functionality-events-order"><a class="anchor" href="#context-functionality-events-order"></a>Ordering Listeners</h5>
+<h5 id="context-functionality-events-order"><a class="anchor" href="#context-functionality-events-order"></a>监听器排序</h5>
 <div class="paragraph">
-<p>If you need the listener to be invoked before another one, just add the <code>@Order</code>
-annotation to the method declaration:</p>
+<p>如果你需要某个监听器在另一个监听器之前被调用，只需在方法生命中添加 <code>@Order</code> 注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7915,12 +7772,9 @@ annotation to the method declaration:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="context-functionality-events-generics"><a class="anchor" href="#context-functionality-events-generics"></a>Generic Events</h5>
+<h5 id="context-functionality-events-generics"><a class="anchor" href="#context-functionality-events-generics"></a>泛型事件</h5>
 <div class="paragraph">
-<p>You may also use generics to further define the structure of your event. Consider an
-<code>EntityCreatedEvent&lt;T&gt;</code> where <code>T</code> is the type of the actual entity that got created. You
-can create the following listener definition to only receive <code>EntityCreatedEvent</code> for a
-<code>Person</code>:</p>
+<p>您也可以使用泛型来进一步定义事件的结构。考虑对于 <code>EntityCreatedEvent&lt;T&gt;</code>，其中 <code>T</code> 是创建的实际实体的类型。您可以创建以下侦听器定义用于只接收 <code>Person</code> <code>EntityCreatedEvent</code> 事件：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7931,15 +7785,10 @@ can create the following listener definition to only receive <code>EntityCreated
 </div>
 </div>
 <div class="paragraph">
-<p>Due to type erasure, this will only work if the event that is fired resolves the generic
-parameter(s) on which the event listener filters on (that is something like
-<code>class PersonCreatedEvent extends EntityCreatedEvent&lt;Person&gt; { &#8230;&#8203; }</code>).</p>
+<p>因为类型擦除，只有当被触发的事件正确解析了事件监听器过滤的泛型参数时（这与类PersonCreatedEvent 继承 EntityCreatedEvent <Person> {...}类似）才会有效。</p>
 </div>
 <div class="paragraph">
-<p>In certain circumstances, this may become quite tedious if all events follow the same
-structure (as it should be the case for the event above). In such a case, you can
-implement <code>ResolvableTypeProvider</code> to <em>guide</em> the framework beyond what the runtime
-environment provides:</p>
+<p>在某些情况下，如果所有事件都遵循相同的结构（如上面的事件），则这可能变得非常繁琐。在这种情况下，您可以实现 <code>ResolvableTypeProvider</code> 来引导框架超出运行时环境提供的功能：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7966,8 +7815,7 @@ environment provides:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This works not only for <code>ApplicationEvent</code> but any arbitrary object that you&#8217;d send as
-an event.</p>
+<p>这不仅适用于 <code>ApplicationEvent</code>，而且适用于作为事件发送的任意对象。</p>
 </div>
 </td>
 </tr>
