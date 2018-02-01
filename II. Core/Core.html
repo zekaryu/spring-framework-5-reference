@@ -7213,14 +7213,12 @@ sources.addFirst(<span class="keyword">new</span> MyPropertySource());</code></p
 </div>
 </div>
 <div class="sect2">
-<h3 id="context-load-time-weaver"><a class="anchor" href="#context-load-time-weaver"></a>1.14. Registering a LoadTimeWeaver</h3>
+<h3 id="context-load-time-weaver"><a class="anchor" href="#context-load-time-weaver"></a>1.14. 注册 LoadTimeWeaver</h3>
 <div class="paragraph">
-<p>The <code>LoadTimeWeaver</code> is used by Spring to dynamically transform classes as they are
-loaded into the Java virtual machine (JVM).</p>
+<p>当类被加载到 Java 虚拟机（JVM）的时候，Spring 使用 <code>LoadTimeWeaver</code> 对它们进行动态转换。</p>
 </div>
 <div class="paragraph">
-<p>To enable load-time weaving add the <code>@EnableLoadTimeWeaving</code> to one of your
-<code>@Configuration</code> classes:</p>
+<p>要启用加载时织入，可以将 <code>@EnableLoadTimeWeaving</code> 添加到其中一个 <code>@Configuration</code> 类中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7231,7 +7229,7 @@ loaded into the Java virtual machine (JVM).</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Alternatively for XML configuration use the <code>context:load-time-weaver</code> element:</p>
+<p>或者，对于 XML 配置，使用上下文：<code>context:load-time-weaver</code>元素：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7241,13 +7239,7 @@ loaded into the Java virtual machine (JVM).</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Once configured for the <code>ApplicationContext</code>. Any bean within that <code>ApplicationContext</code>
-may implement <code>LoadTimeWeaverAware</code>, thereby receiving a reference to the load-time
-weaver instance. This is particularly useful in combination with
-<a href="data-access.html#orm-jpa">Spring&#8217;s JPA support</a> where load-time weaving may be necessary
-for JPA class transformation.
-Consult the <code>LocalContainerEntityManagerFactoryBean</code> javadocs for more detail. For more on
-AspectJ load-time weaving, see <a href="#aop-aj-ltw">Load-time weaving with AspectJ in the Spring Framework</a>.</p>
+<p>一旦配置了 <code>ApplicationContext</code>，该 <code>ApplicationContext</code> 中的任何 bean 都可以实现 <code>LoadTimeWeaverAware</code>，从而接收对加载时 weaver 实例的引用。这与 <a href="data-access.html#orm-jpa">Spring 的 JPA 支持</a> 相结合是非常有用的，JPA 类转换可能需要加载时织入。 有关更多详细信息，请参阅 <code>LocalContainerEntityManagerFactoryBean</code> javadoc。有关 AspectJ 加载时织入的更多信息，请参阅 <a href="#aop-aj-ltw">Spring 框架中使用 AspectJ 进行加载时织入</a>。</p>
 </div>
 </div>
 <div class="sect2">
