@@ -7824,50 +7824,27 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </div>
 </div>
 <div class="sect3">
-<h4 id="context-functionality-resources"><a class="anchor" href="#context-functionality-resources"></a>1.15.3. Convenient access to low-level resources</h4>
+<h4 id="context-functionality-resources"><a class="anchor" href="#context-functionality-resources"></a>1.15.3. 方便地访问低级资源</h4>
 <div class="paragraph">
-<p>For optimal usage and understanding of application contexts, users should generally
-familiarize themselves with Spring&#8217;s <code>Resource</code> abstraction, as described in the chapter
-<a href="#resources">Resources</a>.</p>
+<p>为了对应用程序上下文的使用和理解达到最佳效果，用户通常应该熟悉 Spring 的 <code>Resource</code> 抽象，如 <a href="#resources">Resources</a> 一章所述。</p>
 </div>
 <div class="paragraph">
-<p>An application context is a <code>ResourceLoader</code>, which can be used to load <code>Resource</code>s. A
-<code>Resource</code> is essentially a more feature rich version of the JDK class <code>java.net.URL</code>,
-in fact, the implementations of the <code>Resource</code> wrap an instance of <code>java.net.URL</code> where
-appropriate. A <code>Resource</code> can obtain low-level resources from almost any location in a
-transparent fashion, including from the classpath, a filesystem location, anywhere
-describable with a standard URL, and some other variations. If the resource location
-string is a simple path without any special prefixes, where those resources come from is
-specific and appropriate to the actual application context type.</p>
+<p>应用程序上下文也是一个 <code>ResourceLoader</code> ，可以用来加载 <code>Resource</code>。<code>Resource</code> 本质上是 JDK 类 <code>java.net.URL</code> 的一个功能更丰富的版本，实际上，<code>Resource</code> 的实现是在适当的情况下包装了一个 <code>java.net.URL</code> 的实例。<code>Resource</code> 可以以透明的方式从几乎任何位置获取低级资源，包括类路径，文件系统位置，任何可用标准 URL 描述的地方以及其他一些变体。如果资源位置字符串是一个没有任何特殊前缀的简单路径，那么这些资源来自特定且适合于实际应用上下文类型。</p>
 </div>
 <div class="paragraph">
-<p>You can configure a bean deployed into the application context to implement the special
-callback interface, <code>ResourceLoaderAware</code>, to be automatically called back at
-initialization time with the application context itself passed in as the
-<code>ResourceLoader</code>. You can also expose properties of type <code>Resource</code>, to be used to
-access static resources; they will be injected into it like any other properties. You
-can specify those <code>Resource</code> properties as simple String paths, and rely on a special
-JavaBean <code>PropertyEditor</code> that is automatically registered by the context, to convert
-those text strings to actual <code>Resource</code> objects when the bean is deployed.</p>
+<p>你可以配置一个部署到应用程序上下文中的 bean，以实现特殊的回调接口 <code>ResourceLoaderAware</code>，以便它在初始化时自动回调，同时应用程序上下文本身作为 <code>ResourceLoader</code> 传入。你还可以暴露<code>Resource</code> 类型的属性，用于访问静态资源;他们将像其他任何属性一样被注入。您可以将这些 <code>Resource</code> 属性指定为简单的字符串路径，并依靠能被上下文自动注册的特殊 JavaBean <code>PropertyEditor</code> 将这些文本字符串转换为实际的 <code>Resource</code> 对象。</p>
 </div>
 <div class="paragraph">
-<p>The location path or paths supplied to an <code>ApplicationContext</code> constructor are actually
-resource strings, and in simple form are treated appropriately to the specific context
-implementation. <code>ClassPathXmlApplicationContext</code> treats a simple location path as a
-classpath location. You can also use location paths (resource strings) with special
-prefixes to force loading of definitions from the classpath or a URL, regardless of the
-actual context type.</p>
+<p>提供给 <code>ApplicationContext</code> 构造器的位置路径实际上是资源字符串，并以简单的形式被视为特定的上下文实现。<code>ClassPathXmlApplicationContext</code> 将简单的位置路径视为类路径位置。你也可以使用带有特殊前缀的位置路径（资源字符串）来强制从类路径或 URL 中加载定义，无论实际的上下文是什么类型。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="context-create"><a class="anchor" href="#context-create"></a>1.15.4. web应用的简单 ApplicationContext 实例化</h4>
 <div class="paragraph">
-<p>You can create <code>ApplicationContext</code> instances declaratively by using, for example, a
-<code>ContextLoader</code>. Of course you can also create <code>ApplicationContext</code> instances
-programmatically by using one of the <code>ApplicationContext</code> implementations.</p>
+<p>你可以使用例如 <code>ContextLoader</code> 以声明方式创建 <code>ApplicationContext</code> 实例。当然，你也可以通过使用 <code>ApplicationContext</code> 的某个实现以编程方式创建 <code>ApplicationContext</code> 实例。</p>
 </div>
 <div class="paragraph">
-<p>You can register an <code>ApplicationContext</code> using the <code>ContextLoaderListener</code> as follows:</p>
+<p>你可以使用 <code>ContextLoaderListener</code> 注册 <code>ApplicationContext</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7882,49 +7859,22 @@ programmatically by using one of the <code>ApplicationContext</code> implementat
 </div>
 </div>
 <div class="paragraph">
-<p>The listener inspects the <code>contextConfigLocation</code> parameter. If the parameter does not
-exist, the listener uses <code>/WEB-INF/applicationContext.xml</code> as a default. When the
-parameter <em>does</em> exist, the listener separates the String by using predefined
-delimiters (comma, semicolon and whitespace) and uses the values as locations where
-application contexts will be searched. Ant-style path patterns are supported as well.
-Examples are <code>/WEB-INF/*Context.xml</code> for all files with names ending with "Context.xml",
-residing in the "WEB-INF" directory, and <code>/WEB-INF/**/*Context.xml</code>, for all such files
-in any subdirectory of "WEB-INF".</p>
+<p>监听器会检查 <code>contextConfigLocation</code> 参数。如果该参数不存在，那么监听器将 <code>/WEB-INF/applicationContext.xml</code> 作为默认值使用。 当参数确实存在时，监听器使用预定义的分隔符（逗号，分号和空格）分隔字符串，并将这些值作为搜索应用程序上下文的位置。Ant 样式的路径模式也被支持。例如 <code>/WEB-INF/*Context.xml</code> 表示所有以 “Context.xml” 结尾的 “WEB-INF” 目录中的所有文件，<code>/WEB-INF/**/*Context.xml</code> 表示所有 “WEB-INF” 任何子目录中的文件。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="context-deploy-rar"><a class="anchor" href="#context-deploy-rar"></a>1.15.5. Deploying a Spring ApplicationContext as a Java EE RAR file</h4>
+<h4 id="context-deploy-rar"><a class="anchor" href="#context-deploy-rar"></a>1.15.5.将 Spring ApplicationContext 部署为 Java EE RAR 文件</h4>
 <div class="paragraph">
-<p>It is possible to deploy a Spring ApplicationContext as a RAR file, encapsulating the
-context and all of its required bean classes and library JARs in a Java EE RAR deployment
-unit. This is the equivalent of bootstrapping a standalone ApplicationContext, just hosted
-in Java EE environment, being able to access the Java EE servers facilities. RAR deployment
-is more natural alternative to scenario of deploying a headless WAR file, in effect, a WAR
-file without any HTTP entry points that is used only for bootstrapping a Spring
-ApplicationContext in a Java EE environment.</p>
+<p> 你可以将 Spring ApplicationContext 部署为 RAR 文件，只要将上下文及其所有必需的 bean 类和库 JAR 封装在 Java EE RAR 部署单元中即可。这相当于引导了一个独立的 ApplicationContext，只不过它是在 Java EE 环境中托管，能够访问 Java EE 服务器设施。实际上，部署无头 WAR 文件的场景中，如果只是要在 Java EE 环境中引导 Spring ApplicationContext， RAR 部署比不含任何 HTTP 入口的 WAR 文件更为自然。</p>
 </div>
 <div class="paragraph">
-<p>RAR deployment is ideal for application contexts that do not need HTTP entry points but
-rather consist only of message endpoints and scheduled jobs. Beans in such a context can
-use application server resources such as the JTA transaction manager and JNDI-bound JDBC
-DataSources and JMS ConnectionFactory instances, and may also register with the
-platform&#8217;s JMX server - all through Spring&#8217;s standard transaction management and JNDI
-and JMX support facilities. Application components can also interact with the
-application server&#8217;s JCA WorkManager through Spring&#8217;s <code>TaskExecutor</code> abstraction.</p>
+<p>RAR 部署非常适合不需要 HTTP 入口，仅由消息终结点和定时任务组成的应用程序上下文。在这种情况下，bean 可以使用 JTA 事务管理器和 JNDI 绑定的 JDBC DataSources 和 JMS ConnectionFactory 实例等应用服务器资源，也可以通过 Spring 的标准事务管理和 JNDI 及 JMX 支持的工具向平台的 JMX 服务器注册。应用程序组件还可以通过Spring的 <code>TaskExecutor</code> 抽象与应用程序服务器的 JCA WorkManager 进行交互。</p>
 </div>
 <div class="paragraph">
-<p>Check out the javadoc of the
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/jca/context/SpringContextResourceAdapter.html"><code>SpringContextResourceAdapter</code></a>
-class for the configuration details involved in RAR deployment.</p>
+<p>查看 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/jca/context/SpringContextResourceAdapter.html"><code>SpringContextResourceAdapter</code></a> 类的 javadoc，了解 RAR 部署中涉及的配置细节。</p>
 </div>
 <div class="paragraph">
-<p><em>For a simple deployment of a Spring ApplicationContext as a Java EE RAR file:</em> package
-all application classes into a RAR file, which is a standard JAR file with a different
-file extension. Add all required library JARs into the root of the RAR archive. Add a
-"META-INF/ra.xml" deployment descriptor (as shown in <code>SpringContextResourceAdapter</code>s
-javadoc) and the corresponding Spring XML bean definition file(s) (typically
-"META-INF/applicationContext.xml"), and drop the resulting RAR file into your
-application server&#8217;s deployment directory.</p>
+<p><em>对于将 Spring ApplicationContext 简单部署为 Java EE RAR 文件：</em> 将所有应用程序类打包到 RAR 文件中, RAR 文件是具有不同文件扩展名的标准 JAR 文件。将所有必需的 JAR 库添加到 RAR 的归档根目录中。 添加一个 “META-INF/ra.xml” 部署描述符（如 <code>SpringContextResourceAdapter</code> javadoc 中所示）和相应的 Spring XML bean 定义文件（通常为“META-INF/applicationContext.xml”），然后将生成的 RAR 文件丢到到您的应用程序服务器的部署目录即可。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7934,13 +7884,7 @@ application server&#8217;s deployment directory.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Such RAR deployment units are usually self-contained; they do not expose components to
-the outside world, not even to other modules of the same application. Interaction with a
-RAR-based ApplicationContext usually occurs through JMS destinations that it shares with
-other modules. A RAR-based ApplicationContext may also, for example, schedule some jobs,
-reacting to new files in the file system (or the like). If it needs to allow synchronous
-access from the outside, it could for example export RMI endpoints, which of course may
-be used by other application modules on the same machine.</p>
+<p>这种 RAR 部署单位通常是独立的; 它们不会向外界暴露组件，甚至不会暴露给同一应用程序的其他模块。与基于 RAR 的 ApplicationContext 的交互通常通过与其他模块共享的 JMS 目标进行。基于 RAR 的 ApplicationContext 也可以调度一些作业，对文件系统中新增文件（或诸如此类）作出反应。如果需要允许从外部进行同步访问，则可以导出 RMI 端点，这当然也可以被同一机器上的其他应用模块使用。</p>
 </div>
 </td>
 </tr>
