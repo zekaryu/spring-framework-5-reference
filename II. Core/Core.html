@@ -8245,21 +8245,12 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="resources-as-dependencies"><a class="anchor" href="#resources-as-dependencies"></a>2.6. Resources as dependencies</h3>
+<h3 id="resources-as-dependencies"><a class="anchor" href="#resources-as-dependencies"></a>2.6. 作为依赖的资源</h3>
 <div class="paragraph">
-<p>If the bean itself is going to determine and supply the resource path through some sort
-of dynamic process, it probably makes sense for the bean to use the <code>ResourceLoader</code>
-interface to load resources. Consider as an example the loading of a template of some
-sort, where the specific resource that is needed depends on the role of the user. If the
-resources are static, it makes sense to eliminate the use of the <code>ResourceLoader</code>
-interface completely, and just have the bean expose the <code>Resource</code> properties it needs,
-and expect that they will be injected into it.</p>
+<p>如果 bean 本身要通过某种动态的过程来确定和提供资源路径，那么 bean 可能会使用 <code>ResourceLoader</code> 接口来加载资源。考虑加载某种类型的模板，其中需要的特定资源取决于用户的角色。 如果资源是静态的，那么完全消除 <code>ResourceLoader</code> 接口的使用是有意义的，只要让 bean 公开它需要的 <code>Resource</code>属性，并期望它们被注入到 bean 中。</p>
 </div>
 <div class="paragraph">
-<p>What makes it trivial to then inject these properties, is that all application contexts
-register and use a special JavaBeans <code>PropertyEditor</code> which can convert <code>String</code> paths
-to <code>Resource</code> objects. So if <code>myBean</code> has a template property of type <code>Resource</code>, it can
-be configured with a simple string for that resource, as follows:</p>
+<p>使注入这些属性变得微不足道的是所有的应用程序上下文都注册并使用一个特殊的 JavaBeans <code>PropertyEditor</code>，它可以将 <code>String</code>路径转换为 <code>Resource</code> 对象。 因此，如果 <code>myBean</code> 具有 <code>Resource</code> 类型的模板属性，则可以使用该资源的简单字符串进行配置，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8269,15 +8260,10 @@ be configured with a simple string for that resource, as follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the resource path has no prefix, so because the application context itself is
-going to be used as the <code>ResourceLoader</code>, the resource itself will be loaded via a
-<code>ClassPathResource</code>, <code>FileSystemResource</code>, or <code>ServletContextResource</code> (as appropriate)
-depending on the exact type of the context.</p>
+<p>注意资源路径没有前缀，于是因为应用程序上下文本身将被作为 <code>ResourceLoader</code>，所以根据上下文的确切类型，资源本身将通过 <code>ClassPathResource</code>，<code>FileSystemResource</code> 或 <code>ServletContextResource</code>（根据需要）来加载。</p>
 </div>
 <div class="paragraph">
-<p>If there is a need to force a specific <code>Resource</code> type to be used, then a prefix may be
-used. The following two examples show how to force a <code>ClassPathResource</code> and a
-<code>UrlResource</code> (the latter being used to access a filesystem file).</p>
+<p>如果需要强制使用特定的 <code>Resource</code> 类型，则可以使用前缀。以下两个示例显示如何强制 <code>ClassPathResource</code> 和 <code>UrlResource</code>（后者用于访问文件系统文件）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
