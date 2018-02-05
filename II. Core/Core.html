@@ -8131,8 +8131,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 <div class="sect2">
 <h3 id="resources-resourceloader"><a class="anchor" href="#resources-resourceloader"></a>2.4. The ResourceLoader</h3>
 <div class="paragraph">
-<p>The <code>ResourceLoader</code> interface is meant to be implemented by objects that can return
-(i.e. load) <code>Resource</code> instances.</p>
+<p>实现 <code>ResourceLoader</code> 接口的对象会返回 <code>Resource</code> 实例。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8144,14 +8143,10 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>All application contexts implement the <code>ResourceLoader</code> interface, and therefore all
-application contexts may be used to obtain <code>Resource</code> instances.</p>
+<p>所有应用程序上下文都实现了 <code>ResourceLoader</code> 接口，因此所有的应用程序上下文都可以用来获取<code>Resource</code> 实例。</p>
 </div>
 <div class="paragraph">
-<p>When you call <code>getResource()</code> on a specific application context, and the location path
-specified doesn&#8217;t have a specific prefix, you will get back a <code>Resource</code> type that is
-appropriate to that particular application context. For example, assume the following
-snippet of code was executed against a <code>ClassPathXmlApplicationContext</code> instance:</p>
+<p>当你在特定的应用程序上下文中调用 <code>getResource()</code>，并且指定的位置路径没有特定的前缀时，将返回适合该特定应用程序上下文的 <code>Resource</code> 类型。例如，假设下面的代码片段是针对 <code>ClassPathXmlApplicationContext</code> 实例执行的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8159,18 +8154,13 @@ snippet of code was executed against a <code>ClassPathXmlApplicationContext</cod
 </div>
 </div>
 <div class="paragraph">
-<p>What would be returned would be a <code>ClassPathResource</code>; if the same method was executed
-against a <code>FileSystemXmlApplicationContext</code> instance, you&#8217;d get back a
-<code>FileSystemResource</code>. For a <code>WebApplicationContext</code>, you&#8217;d get back a
-<code>ServletContextResource</code>, and so on.</p>
+<p>返回的结果将会是 <code>ClassPathResource</code>; 如果对 <code>FileSystemXmlApplicationContext</code> 实例执行相同的方法，则会返回 <code>FileSystemResource</code>。 对于一个 <code>WebApplicationContext</code>，你会得到一个<code>ServletContextResource</code>，依此类推。</p>
 </div>
 <div class="paragraph">
-<p>As such, you can load resources in a fashion appropriate to the particular application
-context.</p>
+<p>因此，你可以以适合特定应用程序上下文的方式加载资源。</p>
 </div>
 <div class="paragraph">
-<p>On the other hand, you may also force <code>ClassPathResource</code> to be used, regardless of the
-application context type, by specifying the special <code>classpath:</code> prefix:</p>
+<p>另一方面，也可以通过指定特殊的<code>classpath:</code> 前缀来强制使用 <code>ClassPathResource</code>，而不管应用程序的上下文类型如何：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8178,8 +8168,7 @@ application context type, by specifying the special <code>classpath:</code> pref
 </div>
 </div>
 <div class="paragraph">
-<p>Similarly, one can force a <code>UrlResource</code> to be used by specifying any of the standard
-<code>java.net.URL</code> prefixes:</p>
+<p>同样，可以通过指定任何标准的 <code>java.net.URL</code> 前缀来强制使用 <code>UrlResource</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8192,10 +8181,10 @@ application context type, by specifying the special <code>classpath:</code> pref
 </div>
 </div>
 <div class="paragraph">
-<p>The following table summarizes the strategy for converting <code>String</code>s to <code>Resource</code>s:</p>
+<p>下表总结了将 <code>String</code>转换为 <code>Resource</code>的策略：</p>
 </div>
 <table id="resources-resource-strings" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 10. Resource strings</caption>
+<caption class="title">Table 10. 资源字符串</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -8203,31 +8192,31 @@ application context type, by specifying the special <code>classpath:</code> pref
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Prefix</th>
-<th class="tableblock halign-left valign-top">Example</th>
-<th class="tableblock halign-left valign-top">Explanation</th>
+<th class="tableblock halign-left valign-top">前缀</th>
+<th class="tableblock halign-left valign-top">例子</th>
+<th class="tableblock halign-left valign-top">解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">classpath:</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>classpath:com/myapp/config.xml</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Loaded from the classpath.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">从类路径加载。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">file:</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="file:///data/config.xml" class="bare">file:///data/config.xml</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Loaded as a <code>URL</code>, from the filesystem. <sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">从文件系统将资源加载为一个 <code>URL</code>。<sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">http:</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code><a href="http://myserver/logo.png" class="bare">http://myserver/logo.png</a></code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Loaded as a <code>URL</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">加载为 <code>URL</code>。</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">(none)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">无</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>/data/config.xml</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Depends on the underlying <code>ApplicationContext</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">取决于相关 <code>ApplicationContext</code>。</p></td>
 </tr>
 </tbody>
 </table>
