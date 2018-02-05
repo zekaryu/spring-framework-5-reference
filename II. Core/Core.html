@@ -8537,14 +8537,12 @@ ApplicationContext ctx =
 </div>
 </div>
 <div class="sect2">
-<h3 id="validator"><a class="anchor" href="#validator"></a>3.2. Validation using Spring&#8217;s Validator interface</h3>
+<h3 id="validator"><a class="anchor" href="#validator"></a>3.2. 使用 Spring 的 Validator 接口</h3>
 <div class="paragraph">
-<p>Spring features a <code>Validator</code> interface that you can use to validate objects. The
-<code>Validator</code> interface works using an <code>Errors</code> object so that while validating,
-validators can report validation failures to the <code>Errors</code> object.</p>
+<p>Spring 提供了一个可以用来验证对象的 <code>Validator</code> 接口。<code>Validator</code> 接口使用 <code>Errors</code> 对象，以便在验证时验证器可以将验证失败报告给 <code>Errors</code> 对象。</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s consider a small data object:</p>
+<p>考虑一个微小的数据对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8558,23 +8556,20 @@ validators can report validation failures to the <code>Errors</code> object.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>We&#8217;re going to provide validation behavior for the <code>Person</code> class by implementing the
-following two methods of the <code>org.springframework.validation.Validator</code> interface:</p>
+<p>我们将通过实现 <code>org.springframework.validation.Validator</code> 接口的以下两个方法来为 <code>Person</code> 类提供验证行为：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>supports(Class)</code> - Can this <code>Validator</code> validate instances of the supplied <code>Class</code>?</p>
+<p><code>supports(Class)</code> - 这个 <code>Validator</code> 验证器可以验证提供的 <code>Class</code> 类的实例吗？</p>
 </li>
 <li>
-<p><code>validate(Object, org.springframework.validation.Errors)</code> - validates the given object
-and in case of validation errors, registers those with the given <code>Errors</code> object</p>
+<p><code>validate(Object, org.springframework.validation.Errors)</code> - 验证给定的对象，并在验证错误的情况下，注册给定的 <code>Errors</code>对象。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Implementing a <code>Validator</code> is fairly straightforward, especially when you know of the
-<code>ValidationUtils</code> helper class that the Spring Framework also provides.</p>
+<p>实现 <code>Validator</code> 非常简单，特别是当你知道 Spring Framewor k也提供的 <code>ValidationUtils</code> 帮助类。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8600,22 +8595,10 @@ and in case of validation errors, registers those with the given <code>Errors</c
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, the <code>static</code> <code>rejectIfEmpty(..)</code> method on the <code>ValidationUtils</code> class
-is used to reject the <code>'name'</code> property if it is <code>null</code> or the empty string. Have a look
-at the <code>ValidationUtils</code> javadocs to see what functionality it provides besides the
-example shown previously.</p>
+<p>如您所见，当 name 为 <code>null</code> 或空字符串时，<code>ValidationUtils</code> 类上的 <code>static</code> <code>rejectIfEmpty(..)</code> 方法就用于拒绝“name”属性。可以查看 <code>ValidationUtils</code> 的 javadocs 来查看它是如何工作的。</p>
 </div>
 <div class="paragraph">
-<p>While it is certainly possible to implement a single <code>Validator</code> class to validate each
-of the nested objects in a rich object, it may be better to encapsulate the validation
-logic for each nested class of object in its own <code>Validator</code> implementation. A simple
-example of a <em>'rich'</em> object would be a <code>Customer</code> that is composed of two <code>String</code>
-properties (a first and second name) and a complex <code>Address</code> object. <code>Address</code> objects
-may be used independently of <code>Customer</code> objects, and so a distinct <code>AddressValidator</code>
-has been implemented. If you want your <code>CustomerValidator</code> to reuse the logic contained
-within the <code>AddressValidator</code> class without resorting to copy-and-paste, you can
-dependency-inject or instantiate an <code>AddressValidator</code> within your <code>CustomerValidator</code>,
-and use it like so:</p>
+<p>尽管可以实现一个 <code>Validator</code> 类来验证富对象中的每个嵌套对象，但最好是将每个嵌套类对象的验证逻辑封装在自己的 <code>Validator</code> 实现中。一个“富”对象的简单例子是由两个 <code>String</code> 属性（第一个和第二个名字）和一个复杂的 <code>Address</code> 对象组成的 <code>Customer</code>。<code>Address</code> 对象可以独立于  <code>Customer</code>  对象使用，所以一个独特的 <code>AddressValidator</code> 已经被实现。如果你希望你的 <code>CustomerValidator</code> 重复使用 <code>AddressValidator</code> 类中包含的逻辑而无需复制粘贴，则可以在你的 <code>CustomerValidator</code> 中依赖注入或实例化 <code>AddressValidator</code> ，并像下面这样使用它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8657,10 +8640,7 @@ and use it like so:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Validation errors are reported to the <code>Errors</code> object passed to the validator. In case
-of Spring Web MVC you can use <code>&lt;spring:bind/&gt;</code> tag to inspect the error messages, but of
-course you can also inspect the errors object yourself. More information about the
-methods it offers can be found in the javadocs.</p>
+<p>将验证错误报告给传递给验证器的 <code>Errors</code> 对象。 在 Spring Web MVC 的情况下，你可以使用<code>&lt;spring:bind/&gt;</code> 标签检查错误信息，当然你也可以自己检查错误对象。有关它提供的方法的更多信息可以在javadocs中找到。</p>
 </div>
 </div>
 <div class="sect2">
