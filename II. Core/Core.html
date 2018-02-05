@@ -8277,19 +8277,14 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="resources-app-ctx"><a class="anchor" href="#resources-app-ctx"></a>2.7. Application contexts and Resource paths</h3>
+<h3 id="resources-app-ctx"><a class="anchor" href="#resources-app-ctx"></a>2.7. 应用上下文和资源路径</h3>
 <div class="sect3">
-<h4 id="resources-app-ctx-construction"><a class="anchor" href="#resources-app-ctx-construction"></a>2.7.1. Constructing application contexts</h4>
+<h4 id="resources-app-ctx-construction"><a class="anchor" href="#resources-app-ctx-construction"></a>2.7.1. 构建应用上下文</h4>
 <div class="paragraph">
-<p>An application context constructor (for a specific application context type) generally
-takes a string or array of strings as the location path(s) of the resource(s) such as
-XML files that make up the definition of the context.</p>
+<p>应用程序上下文构造器（对于特定的应用程序上下文类型）通常将字符串或字符串数组作为资源（如构成上下文定义的 XML 文件）的位置路径。</p>
 </div>
 <div class="paragraph">
-<p>When such a location path doesn&#8217;t have a prefix, the specific <code>Resource</code> type built from
-that path and used to load the bean definitions, depends on and is appropriate to the
-specific application context. For example, if you create a
-<code>ClassPathXmlApplicationContext</code> as follows:</p>
+<p>当这样的位置路径没有前缀时，从该路径构建并用于加载 bean 定义的特定 <code>Resource</code> 类型取决于并适合于特定的应用程序上下文。 例如，如果您创建一个 <code>ClassPathXmlApplicationContext</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8297,8 +8292,7 @@ specific application context. For example, if you create a
 </div>
 </div>
 <div class="paragraph">
-<p>The bean definitions will be loaded from the classpath, as a <code>ClassPathResource</code> will be
-used. But if you create a <code>FileSystemXmlApplicationContext</code> as follows:</p>
+<p>Bean 定义将从类路径中加载，因为将使用 <code>ClassPathResource</code>。但是，如果您创建一个 <code>FileSystemXmlApplicationContext</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8307,13 +8301,10 @@ used. But if you create a <code>FileSystemXmlApplicationContext</code> as follow
 </div>
 </div>
 <div class="paragraph">
-<p>The bean definition will be loaded from a filesystem location, in this case relative to
-the current working directory.</p>
+<p>Bean 定义将从文件系统位置加载，在这种情况下路径相对于当前工作目录。</p>
 </div>
 <div class="paragraph">
-<p>Note that the use of the special classpath prefix or a standard URL prefix on the
-location path will override the default type of <code>Resource</code> created to load the
-definition. So this <code>FileSystemXmlApplicationContext</code>&#8230;&#8203;</p>
+<p>注意在位置路径中使用特殊的类路径前缀或标准的 URL 前缀将覆盖为加载定义而创建的默认资源的类型。 所以这个 <code>FileSystemXmlApplicationContext</code> ...</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8324,24 +8315,17 @@ definition. So this <code>FileSystemXmlApplicationContext</code>&#8230;&#8203;</
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>will actually load its bean definitions from the classpath. However, it is still a
-<code>FileSystemXmlApplicationContext</code>. If it is subsequently used as a <code>ResourceLoader</code>, any
-unprefixed paths will still be treated as filesystem paths.</p>
+<p>实际上会从类路径中加载它的 bean 定义。但是，它仍然是一个 <code>FileSystemXmlApplicationContext</code>。如果随后将其用作 <code>ResourceLoader</code>，则任何前缀不足的路径仍将被视为文件系统路径。</p>
 </li>
 </ol>
 </div>
 <div class="sect4">
-<h5 id="resources-app-ctx-classpathxml"><a class="anchor" href="#resources-app-ctx-classpathxml"></a>Constructing ClassPathXmlApplicationContext instances - shortcuts</h5>
+<h5 id="resources-app-ctx-classpathxml"><a class="anchor" href="#resources-app-ctx-classpathxml"></a>构建 ClassPathXmlApplicationContext 实例 - 快捷方式</h5>
 <div class="paragraph">
-<p>The <code>ClassPathXmlApplicationContext</code> exposes a number of constructors to enable
-convenient instantiation. The basic idea is that one supplies merely a string array
-containing just the filenames of the XML files themselves (without the leading path
-information), and one <em>also</em> supplies a <code>Class</code>; the <code>ClassPathXmlApplicationContext</code>
-will derive the path information from the supplied class.</p>
+<p><code>ClassPathXmlApplicationContext</code> 公开了许多构造器来实现方便的实例化。其基本思想是只提供一个字符串数组，它只包含 XML 文件本身的文件名（没有前导路径信息），和一个 <code>Class</code>; <code>ClassPathXmlApplicationContext</code> 将从所提供的类中派生路径信息。</p>
 </div>
 <div class="paragraph">
-<p>An example will hopefully make this clear. Consider a directory layout that looks like
-this:</p>
+<p>下面的例子希望能清楚阐释这点。考虑一下这样的目录布局：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -8353,8 +8337,7 @@ this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A <code>ClassPathXmlApplicationContext</code> instance composed of the beans defined in the
-<code>'services.xml'</code> and <code>'daos.xml'</code> could be instantiated like so&#8230;&#8203;</p>
+<p>由 <code>'services.xml'</code> 和 <code>'daos.xml'</code> 中定义的 bean 组成的 <code>ClassPathXmlApplicationContext</code> 实例可以像这样被实例化...</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8363,37 +8346,25 @@ this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Please do consult the <code>ClassPathXmlApplicationContext</code> javadocs for details
-on the various constructors.</p>
+<p>有关各种构造函数的详细信息，请参考 <code>ClassPathXmlApplicationContext</code> javadoc。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="resources-app-ctx-wildcards-in-resource-paths"><a class="anchor" href="#resources-app-ctx-wildcards-in-resource-paths"></a>2.7.2. Wildcards in application context constructor resource paths</h4>
+<h4 id="resources-app-ctx-wildcards-in-resource-paths"><a class="anchor" href="#resources-app-ctx-wildcards-in-resource-paths"></a>2.7.2. 应用上下文构造器资源路径中的通配符</h4>
 <div class="paragraph">
-<p>The resource paths in application context constructor values may be a simple path (as
-shown above) which has a one-to-one mapping to a target Resource, or alternately may
-contain the special "classpath*:" prefix and/or internal Ant-style regular expressions
-(matched using Spring&#8217;s <code>PathMatcher</code> utility). Both of the latter are effectively
-wildcards</p>
+<p>应用程序上下文构造器参数值中的资源路径可以是一个简单的路径（如上所示），它具有到目标资源的一对一映射，或者可以包含特殊的“classpath *：”前缀和/或内部的 Ant 风格的正则表达式（使用 Spring 的 PathMatcher 工具进行匹配）。后者都是有效的通配符。</p>
 </div>
 <div class="paragraph">
-<p>One use for this mechanism is when doing component-style application assembly. All
-components can 'publish' context definition fragments to a well-known location path, and
-when the final application context is created using the same path prefixed via
-<code>classpath*:</code>, all component fragments will be picked up automatically.</p>
+<p>此机制的一个用途是在执行组件式应用程序组装时。所有组件都可以将上下文定义片段“发布”到众所周知的位置路径，并且当最终的应用程序上下文使用通过 <code>classpath*:</code> 前缀的相同路径创建时，所有组件片段将被自动获取。</p>
 </div>
 <div class="paragraph">
-<p>Note that this wildcarding is specific to use of resource paths in application context
-constructors (or when using the <code>PathMatcher</code> utility class hierarchy directly), and is
-resolved at construction time. It has nothing to do with the <code>Resource</code> type itself.
-It&#8217;s not possible to use the <code>classpath*:</code> prefix to construct an actual <code>Resource</code>, as
-a resource points to just one resource at a time.</p>
+<p>注意此通配符是特定于应用程序上下文构造器参数中的资源路径的使用（或直接使用 <code>PathMatcher</code> 工具类分层结构时），并在构建时解析。它与 <code>Resource</code> 类型本身无关。无法使用 <code>classpath*:</code> 前缀来构造实际的 <code>Resource</code>，因为资源一次只能指向一个资源。</p>
 </div>
 <div class="sect4">
-<h5 id="resources-app-ctx-ant-patterns-in-paths"><a class="anchor" href="#resources-app-ctx-ant-patterns-in-paths"></a>Ant-style Patterns</h5>
+<h5 id="resources-app-ctx-ant-patterns-in-paths"><a class="anchor" href="#resources-app-ctx-ant-patterns-in-paths"></a>Ant 风格的 Patterns</h5>
 <div class="paragraph">
-<p>When the path location contains an Ant-style pattern, for example:</p>
+<p>当路径位置包含 Ant 风格 pattern 时，例如：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -8404,47 +8375,25 @@ a resource points to just one resource at a time.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The resolver follows a more complex but defined procedure to try to resolve the
-wildcard. It produces a Resource for the path up to the last non-wildcard segment and
-obtains a URL from it. If this URL is not a <code>jar:</code> URL or container-specific variant
-(e.g. <code>zip:</code> in WebLogic, <code>wsjar</code> in WebSphere, etc.), then a <code>java.io.File</code> is
-obtained from it and used to resolve the wildcard by traversing the filesystem. In the
-case of a jar URL, the resolver either gets a <code>java.net.JarURLConnection</code> from it or
-manually parses the jar URL and then traverses the contents of the jar file to resolve
-the wildcards.</p>
+<p>解析器遵循更复杂但已定义的过程来尝试解析通配符。它为直到最后一个非通配符段的路径生成一个资源，并从中获得一个 URL。如果此 URL 不是 <code>jar:</code> URL 或容器特定的变体（例如，WebLogic中的 <code>zip:</code>，WebSphere 中的 <code>wsjar</code> 等），则从中获取 <code>java.io.File</code>，并通过遍历文件系统来解析通配符。对于jar URL，解析器要么从中获取 <code>java.io.File</code>，要么手动解析jar 的U RL，然后遍历 jar 文件的内容来解析通配符。</p>
 </div>
 <div class="sect5">
-<h6 id="resources-app-ctx-portability"><a class="anchor" href="#resources-app-ctx-portability"></a>Implications on portability</h6>
+<h6 id="resources-app-ctx-portability"><a class="anchor" href="#resources-app-ctx-portability"></a>对于便携性的影响</h6>
 <div class="paragraph">
-<p>If the specified path is already a file URL (either explicitly, or implicitly because
-the base <code>ResourceLoader</code> is a filesystem one, then wildcarding is guaranteed to work in
-a completely portable fashion.</p>
+<p>如果指定的路径已经是文件 URL（无论是显式地还是隐式的，因为基本的 <code>ResourceLoader</code> 是一个文件 <code>ResourceLoader</code>，那么通配符就可以保证以完全便携的方式工作。</p>
 </div>
 <div class="paragraph">
-<p>If the specified path is a classpath location, then the resolver must obtain the last
-non-wildcard path segment URL via a <code>Classloader.getResource()</code> call. Since this is just
-a node of the path (not the file at the end) it is actually undefined (in the
-<code>ClassLoader</code> javadocs) exactly what sort of a URL is returned in this case. In
-practice, it is always a <code>java.io.File</code> representing the directory, where the classpath
-resource resolves to a filesystem location, or a jar URL of some sort, where the
-classpath resource resolves to a jar location. Still, there is a portability concern on
-this operation.</p>
+<p>如果指定的路径是类路径地址，则解析器必须通过 <code>Classloader.getResource()</code> 调用获取最后一个非通配符路径段 URL。由于这只是路径的一个节点（不是最后的文件），所以在这种情况下，究竟返回的是什么样的 URL 实际还未定义（在 <code>ClassLoader</code> 的javadocs中）。在实践中，它始终是代表目录的用于将类路径资源解析为文件系统地址的 <code>java.io.File</code>，或者将类路径资源解析为 jar 地址的某种类型的 jar URL。但是，这个操作仍然存在可移植性问题。</p>
 </div>
 <div class="paragraph">
-<p>If a jar URL is obtained for the last non-wildcard segment, the resolver must be able to
-get a <code>java.net.JarURLConnection</code> from it, or manually parse the jar URL, to be able to
-walk the contents of the jar, and resolve the wildcard. This will work in most
-environments, but will fail in others, and it is strongly recommended that the wildcard
-resolution of resources coming from jars be thoroughly tested in your specific
-environment before you rely on it.</p>
+<p>如果从最后一个非通配符路径段获取了 jar URL，解析器肯定能够从中获得一个 <code>java.net.JarURLConnection</code> ，或者手动解析 jar 的 URL，以便能够遍历 jar 的内容，并解析通配符。这在大多数环境下都能正常工作，但是在其他某些环境下却不能正常工作，强烈建议你在依赖于特定环境的情况下在依赖它之前对来自 jar 的资源进行通配解析并测试通过。</p>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="resources-classpath-wildcards"><a class="anchor" href="#resources-classpath-wildcards"></a>The Classpath*: portability classpath*: prefix</h5>
+<h5 id="resources-classpath-wildcards"><a class="anchor" href="#resources-classpath-wildcards"></a>Classpath*: 可移植 classpath*: 前缀</h5>
 <div class="paragraph">
-<p>When constructing an XML-based application context, a location string may use the
-special <code>classpath*:</code> prefix:</p>
+<p>当构建基于 XML 的应用上下文时，地址字符串可以使用特殊的 <code>classpath*:</code> 前缀：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8453,10 +8402,7 @@ special <code>classpath*:</code> prefix:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This special prefix specifies that all classpath resources that match the given name
-must be obtained (internally, this essentially happens via a
-<code>ClassLoader.getResources(&#8230;&#8203;)</code> call), and then merged to form the final application
-context definition.</p>
+<p>这个特殊的前缀指定所有与给定名称相匹配的类路径资源都必须被获取（在内部，这本质上是通过 <code>ClassLoader.getResources(&#8230;&#8203;)</code> 调用实现的），然后合并以形成最终的应用上下文定义。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -8466,44 +8412,23 @@ context definition.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The wildcard classpath relies on the <code>getResources()</code> method of the underlying
-classloader. As most application servers nowadays supply their own classloader
-implementation, the behavior might differ especially when dealing with jar files. A
-simple test to check if <code>classpath*</code> works is to use the classloader to load a file from
-within a jar on the classpath:
-<code>getClass().getClassLoader().getResources("&lt;someFileInsideTheJar&gt;")</code>. Try this test with
-files that have the same name but are placed inside two different locations. In case an
-inappropriate result is returned, check the application server documentation for
-settings that might affect the classloader behavior.</p>
+<p>通配符类路径依赖于潜在类加载器的 <code>getResources()</code> 方法。由于现在大多数应用程序服务器都提供了自己的类加载器实现，所以在处理 jar 文件时行为可能会有所不同。 检查 <code>classpath*</code> 是否有用的简单测试是使用类加载器从类路径中的 jar 加载文件：<code>getClass().getClassLoader().getResources("&lt;someFileInsideTheJar&gt;")</code>。尝试使用具有相同名称但位于两个不同位置的文件进行此测试。如果返回的结果不正确，请检查应用程序服务器文档以了解可能影响类加载器行为的设置。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The <code>classpath*:</code> prefix can also be combined with a <code>PathMatcher</code> pattern in the
-rest of the location path, for example <code>classpath*:META-INF/*-beans.xml</code>. In this
-case, the resolution strategy is fairly simple: a <code>ClassLoader.getResources()</code> call is
-used on the last non-wildcard path segment to get all the matching resources in the
-class loader hierarchy, and then off each resource the same PathMatcher resolution
-strategy described above is used for the wildcard subpath.</p>
+<p><code>classpath*:</code> 前缀也可以与其他位置路径中的 <code>PathMatcher</code> 模式结合使用，例如  <code>classpath*:META-INF/*-beans.xml</code>。在这种情况下，解析策略相当简单：在最后一个非通配符路径段上使用 <code>ClassLoader.getResources()</code> 调用来获取类加载器层次结构中的所有匹配资源，然后关闭每个资源相同的 PathMatcher 分解策略如上所述用于通配符子路径。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="resources-wildcards-in-path-other-stuff"><a class="anchor" href="#resources-wildcards-in-path-other-stuff"></a>Other notes relating to wildcards</h5>
+<h5 id="resources-wildcards-in-path-other-stuff"><a class="anchor" href="#resources-wildcards-in-path-other-stuff"></a>其他有关通配符的说明</h5>
 <div class="paragraph">
-<p>Please note that <code>classpath*:</code> when combined with Ant-style patterns will only work
-reliably with at least one root directory before the pattern starts, unless the actual
-target files reside in the file system. This means that a pattern like
-<code>classpath*:*.xml</code> will not retrieve files from the root of jar files but rather only
-from the root of expanded directories. This originates from a limitation in the JDK&#8217;s
-<code>ClassLoader.getResources()</code> method which only returns file system locations for a
-passed-in empty string (indicating potential roots to search).</p>
+<p>注意除非实际的目标文件驻留在文件系统中，否则 <code>classpath*:</code> 与 Ant 风格 pattern 结合使用时，在模式启动之前必须保证至少有一个根目录。这意味着像 <code>classpath*:*.xml</code> 这样的模式不会从 jar 文件的根文件中检索文件，而只能从扩展目录的根文件中检索文件。这起源于 JDK 的 <code>ClassLoader.getResources()</code> 方法的限制，该方法只返回传入的空字符串的文件系统位置（指示要搜索的潜在根）。</p>
 </div>
 <div class="paragraph">
-<p>Ant-style patterns with <code>classpath:</code> resources are not guaranteed to find matching
-resources if the root package to search is available in multiple class path locations.
-This is because a resource such as</p>
+<p>带有 <code>classpath:</code> 的 Ant 风格 pattern：如果要在多个类路径位置中使用要搜索的根包，则不保证资源能够找到匹配的资源。 这是因为一个资源如：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -8511,7 +8436,7 @@ This is because a resource such as</p>
 </div>
 </div>
 <div class="paragraph">
-<p>may be in only one location, but when a path such as</p>
+<p>可能只存在一个地址中，但是当一个路径如：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -8519,29 +8444,18 @@ This is because a resource such as</p>
 </div>
 </div>
 <div class="paragraph">
-<p>is used to try to resolve it, the resolver will work off the (first) URL returned by
-<code>getResource("com/mycompany")</code>;. If this base package node exists in multiple
-classloader locations, the actual end resource may not be underneath. Therefore,
-preferably, use " `classpath*:`" with the same Ant-style pattern in such a case, which
-will search all class path locations that contain the root package.</p>
+<p>被用来解析，解析器将处理由<code>getResource("com/mycompany")</code>返回的（第一个）URL。 如果此基础包节点存在于多个类加载器位置中，则实际的最终资源可能不在其下。 因此，最好在这种情况下使用具有相同Ant 风格的“classpath*:”，它将搜索包含根包的所有类路径位置。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="resources-filesystemresource-caveats"><a class="anchor" href="#resources-filesystemresource-caveats"></a>2.7.3. FileSystemResource caveats</h4>
+<h4 id="resources-filesystemresource-caveats"><a class="anchor" href="#resources-filesystemresource-caveats"></a>2.7.3. FileSystemResource 警告</h4>
 <div class="paragraph">
-<p>A <code>FileSystemResource</code> that is not attached to a <code>FileSystemApplicationContext</code> (that
-is, a <code>FileSystemApplicationContext</code> is not the actual <code>ResourceLoader</code>) will treat
-absolute vs. relative paths as you would expect. Relative paths are relative to the
-current working directory, while absolute paths are relative to the root of the
-filesystem.</p>
+<p><code>FileSystemResource</code> 并不依附于 <code>FileSystemApplicationContext</code> （即，
+<code>FileSystemApplicationContext</code> 不是实际的 <code>ResourceLoader</code>），将按你的期望处理绝对路径与相对路径。相对路径相对于当前工作目录，而绝对路径相对于文件系统根目录。</p>
 </div>
 <div class="paragraph">
-<p>For backwards compatibility (historical) reasons however, this changes when the
-<code>FileSystemApplicationContext</code> is the <code>ResourceLoader</code>. The
-<code>FileSystemApplicationContext</code> simply forces all attached <code>FileSystemResource</code> instances
-to treat all location paths as relative, whether they start with a leading slash or not.
-In practice, this means the following are equivalent:</p>
+<p>但是为了向后兼容（历史）原因，当 <code>FileSystemApplicationContext</code> 是 <code>ResourceLoader</code> 时会发生变化。 <code>FileSystemApplicationContext</code> 只是强制所有的 <code>FileSystemResource</code> 实例将所有位置路径视为相对依附得得，无论它们是否以一个前导斜杠开始。在实践中，这意味着以下是等价的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8556,8 +8470,7 @@ In practice, this means the following are equivalent:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As are the following: (Even though it would make sense for them to be different, as one
-case is relative and the other absolute.)</p>
+<p>如下也一样：（尽管他们有所不同，一个是相对路径，一个是绝对路径。）</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8572,9 +8485,7 @@ ctx.getResource(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="paragraph">
-<p>In practice, if true absolute filesystem paths are needed, it is better to forgo the use
-of absolute paths with <code>FileSystemResource</code> / <code>FileSystemXmlApplicationContext</code>, and
-just force the use of a <code>UrlResource</code>, by using the <code>file:</code> URL prefix.</p>
+<p>实际上，如果需要真正的绝对文件系统路径，最好放弃使用<code>FileSystemResource</code> / <code>FileSystemXmlApplicationContext</code> 的绝对路径，并使用 <code>file:</code> URL 前缀强制使用 <code>UrlResource</code>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
