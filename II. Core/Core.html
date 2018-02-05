@@ -8505,58 +8505,35 @@ ApplicationContext ctx =
 </div>
 </div>
 <div class="sect1">
-<h2 id="validation"><a class="anchor" href="#validation"></a>3. Validation, Data Binding, and Type Conversion</h2>
+<h2 id="validation"><a class="anchor" href="#validation"></a>3. 验证，数据绑定和类型转换</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="validation-introduction"><a class="anchor" href="#validation-introduction"></a>3.1. Introduction</h3>
+<h3 id="validation-introduction"><a class="anchor" href="#validation-introduction"></a>3.1. 简介</h3>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">JSR-303/JSR-349 Bean Validation</div>
+<div class="title">JSR-303/JSR-349 Bean 验证</div>
 <div class="paragraph">
-<p>Spring Framework 4.0 supports Bean Validation 1.0 (JSR-303) and Bean Validation 1.1
-(JSR-349) in terms of setup support, also adapting it to Spring&#8217;s <code>Validator</code> interface.</p>
+<p>Spring Framework 4.0 在设置支持方面支持 Bean Validation 1.0（JSR-303）和Bean Validation 1.1（JSR-349），同时也支持Spring <code>Validator</code> 接口。</p>
 </div>
 <div class="paragraph">
-<p>An application can choose to enable Bean Validation once globally, as described in
-<a href="#validation-beanvalidation">Spring Validation</a>, and use it exclusively for all validation needs.</p>
+<p>如<a href="#validation-beanvalidation">Spring 验证</a>中所述，应用程序可以选择全局启用Bean 验证，并专门用于所有验证需求。</p>
 </div>
 <div class="paragraph">
-<p>An application can also register additional Spring <code>Validator</code> instances per
-<code>DataBinder</code> instance, as described in <a href="#validation-binder">Configuring a DataBinder</a>. This may be useful for
-plugging in validation logic without the use of annotations.</p>
+<p>应用程序还可以为每个 <code>DataBinder</code> 实例注册额外的Spring <code>Validator</code> 实例，如 <a href="#validation-binder">配置DataBinder</a> 中所述。这对于不使用注解而插入验证逻辑而可能是有用的。</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>There are pros and cons for considering validation as business logic, and Spring offers
-a design for validation (and data binding) that does not exclude either one of them.
-Specifically validation should not be tied to the web tier, should be easy to localize
-and it should be possible to plug in any validator available. Considering the above,
-Spring has come up with a <code>Validator</code> interface that is both basic and eminently usable
-in every layer of an application.</p>
+<p>作为业务逻辑，验证有一些优点和缺点 Spring 提供了一个包含所有优缺点的验证（和数据绑定）设计。具体的验证不应该绑定到 Web 层，应该易于本地化，应该可以插入任何可用的验证器。考虑到上述情况，Spring 已经提出了一个<code>Validator</code> 接口，这个接口在应用程序的每一层都是基本的和显着的可用的。</p>
 </div>
 <div class="paragraph">
-<p>Data binding is useful for allowing user input to be dynamically bound to the domain
-model of an application (or whatever objects you use to process user input). Spring
-provides the so-called <code>DataBinder</code> to do exactly that. The <code>Validator</code> and the
-<code>DataBinder</code> make up the <code>validation</code> package, which is primarily used in but not
-limited to the MVC framework.</p>
+<p>数据绑定对于允许用户输入动态地绑定到应用程序的域模型（或用于处理用户输入的任何对象）是有用的。Spring 提供了所谓的 <code>DataBinder</code> 来做到这一点。 <code>Validator</code> 和 <code>DataBinder</code> 组成了验证包，主要用于但不限于 MVC 框架。</p>
 </div>
 <div class="paragraph">
-<p>The <code>BeanWrapper</code> is a fundamental concept in the Spring Framework and is used in a lot
-of places. However, you probably will not have the need to use the <code>BeanWrapper</code>
-directly. Because this is reference documentation however, we felt that some explanation
-might be in order. We will explain the <code>BeanWrapper</code> in this chapter since, if you were
-going to use it at all, you would most likely do so when trying to bind data to objects.</p>
+<p><code>BeanWrapper</code> 是 Spring 框架中的一个基本概念，在很多地方都有使用。但是，您可能没有直接使用 <code>BeanWrapper</code> 的需求。因为这是参考文件，所以我们会提供一些解释。我们将在本章中解释 <code>BeanWrapper</code> ，因为如果您打算使用它，那么你很可能将在尝试将数据绑定到对象时使用它。</p>
 </div>
 <div class="paragraph">
-<p>Spring&#8217;s DataBinder and the lower-level BeanWrapper both use PropertyEditors to parse
-and format property values. The <code>PropertyEditor</code> concept is part of the JavaBeans
-specification, and is also explained in this chapter. Spring 3 introduces a
-"core.convert" package that provides a general type conversion facility, as well as a
-higher-level "format" package for formatting UI field values. These new packages may be
-used as simpler alternatives to PropertyEditors, and will also be discussed in this
-chapter.</p>
+<p>Spring 的 DataBinder 和低级别的 BeanWrapper 都使用 PropertyEditors 来解析和格式化属性值。<code>PropertyEditor</code> 是 JavaBeans 规范的一部分，本章也会对此说明。Spring 3 引入了一个“core.convert”包，它提供了一个通用的类型转换工具，以及一个用于格式化 UI 字段值的高级“格式”包。这些新的包可以作为 PropertyEditor 的简单替代品，本章也将对其进行讨论。</p>
 </div>
 </div>
 <div class="sect2">
