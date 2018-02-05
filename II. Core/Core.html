@@ -8222,10 +8222,9 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </table>
 </div>
 <div class="sect2">
-<h3 id="resources-resourceloaderaware"><a class="anchor" href="#resources-resourceloaderaware"></a>2.5. The ResourceLoaderAware interface</h3>
+<h3 id="resources-resourceloaderaware"><a class="anchor" href="#resources-resourceloaderaware"></a>2.5. ResourceLoaderAware 接口</h3>
 <div class="paragraph">
-<p>The <code>ResourceLoaderAware</code> interface is a special marker interface, identifying objects
-that expect to be provided with a <code>ResourceLoader</code> reference.</p>
+<p><code>ResourceLoaderAware</code> 接口是一个特殊的标记接口，用于标识期望通过 <code>ResourceLoader</code> 引用提供的对象。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8236,31 +8235,13 @@ that expect to be provided with a <code>ResourceLoader</code> reference.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When a class implements <code>ResourceLoaderAware</code> and is deployed into an application
-context (as a Spring-managed bean), it is recognized as <code>ResourceLoaderAware</code> by the
-application context. The application context will then invoke the
-<code>setResourceLoader(ResourceLoader)</code>, supplying itself as the argument (remember, all
-application contexts in Spring implement the <code>ResourceLoader</code> interface).</p>
+<p>当一个类实现了 <code>ResourceLoaderAware</code> 并被部署到一个应用上下文（作为一个被Spring 管理的bean）时，它会被应用上下文识别为 <code>ResourceLoaderAware</code>。然后，应用程序上下文将调用 <code>setResourceLoader(ResourceLoader)</code>，并将自身作为参数（请记住，Spring中的所有应用程序上下文实现 <code>ResourceLoader</code> 接口）。</p>
 </div>
 <div class="paragraph">
-<p>Of course, since an <code>ApplicationContext</code> is a <code>ResourceLoader</code>, the bean could also
-implement the <code>ApplicationContextAware</code> interface and use the supplied application
-context directly to load resources, but in general, it&#8217;s better to use the specialized
-<code>ResourceLoader</code> interface if that&#8217;s all that&#8217;s needed. The code would just be coupled
-to the resource loading interface, which can be considered a utility interface, and not
-the whole Spring <code>ApplicationContext</code> interface.</p>
+<p>当然，由于 <code>ApplicationContext</code> 是一个 <code>ResourceLoader</code>，bean 也可以实现 <code>ApplicationContextAware</code> 接口并直接使用提供的应用程序上下文来加载资源，但通常情况下，最好使用专用的 <code>ResourceLoader</code> 接口（如果这么做已经可以满足全部需求）。代码仅仅只是与资源加载接口耦合了，它可以被认为是一个工具接口，而不是整个 Spring <code>ApplicationContext</code> 接口。</p>
 </div>
 <div class="paragraph">
-<p>As of Spring 2.5, you can rely upon autowiring of the <code>ResourceLoader</code> as an alternative
-to implementing the <code>ResourceLoaderAware</code> interface. The "traditional" <code>constructor</code> and
-<code>byType</code> autowiring modes (as described in <a href="#beans-factory-autowire">Autowiring collaborators</a>) are now capable
-of providing a dependency of type <code>ResourceLoader</code> for either a constructor argument or
-setter method parameter respectively. For more flexibility (including the ability to
-autowire fields and multiple parameter methods), consider using the new annotation-based
-autowiring features. In that case, the <code>ResourceLoader</code> will be autowired into a field,
-constructor argument, or method parameter that is expecting the <code>ResourceLoader</code> type as
-long as the field, constructor, or method in question carries the <code>@Autowired</code>
-annotation. For more information, see <a href="#beans-autowired-annotation">@Autowired</a>.</p>
+<p>从 Spring 2.5 开始，您可以依靠 <code>ResourceLoader</code> 的自动装配来替代实现 <code>ResourceLoaderAware</code> 接口。“传统” <code>constructor</code>和 <code>byType</code> 自动装配模式（如<a href="#beans-factory-autowire">自动装配协作者</a> 中所述）现在可以分别为构造器参数或setter 方法参数提供 <code>ResourceLoader</code> 类型的依赖关系。为了获得更大的灵活性（包括自动装配字段和多个参数方法的能力），可以考虑使用新的基于注解的自动装配特性。在这种情况下，只要正在考虑的的字段，构造器或方法携带 <code>@Autowired</code> 注解，<code>ResourceLoader</code> 就会被自动装载到期望得到 <code>ResourceLoader</code> 类型的字段，构造器参数或方法参数中。有关更多信息，请参阅 <a href="#beans-autowired-annotation">@Autowired</a>。</p>
 </div>
 </div>
 <div class="sect2">
