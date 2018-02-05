@@ -7993,19 +7993,12 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="resources"><a class="anchor" href="#resources"></a>2. Resources</h2>
+<h2 id="resources"><a class="anchor" href="#resources"></a>2. 资源</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="resources-introduction"><a class="anchor" href="#resources-introduction"></a>2.1. Introduction</h3>
+<h3 id="resources-introduction"><a class="anchor" href="#resources-introduction"></a>2.1. 简介</h3>
 <div class="paragraph">
-<p>Java&#8217;s standard <code>java.net.URL</code> class and standard handlers for various URL prefixes
-unfortunately are not quite adequate enough for all access to low-level resources. For
-example, there is no standardized <code>URL</code> implementation that may be used to access a
-resource that needs to be obtained from the classpath, or relative to a
-<code>ServletContext</code>. While it is possible to register new handlers for specialized <code>URL</code>
-prefixes (similar to existing handlers for prefixes such as <code>http:</code>), this is generally
-quite complicated, and the <code>URL</code> interface still lacks some desirable functionality,
-such as a method to check for the existence of the resource being pointed to.</p>
+<p>对于不同的 URL 前缀，很不幸 Java 的标准 <code>java.net.URL</code> 类和标准处理器并不足够访问低级资源。例如， 没有标准化的 <code>URL</code> 实现可以用来访问类路径或者 <code>ServletContext</code> 相对路径以便获取资源。尽管可以为专门的 URL 前缀注册新的处理器（类似于诸如 <code>http:</code> 之类的前缀的现有处理器），但这通常相当复杂，并且 URL 接口仍然缺少某些期望的功能，例如检查被指向的资源是否存在。</p>
 </div>
 </div>
 <div class="sect2">
