@@ -8069,98 +8069,62 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="resources-implementations"><a class="anchor" href="#resources-implementations"></a>2.3. Built-in Resource implementations</h3>
+<h3 id="resources-implementations"><a class="anchor" href="#resources-implementations"></a>2.3. 内置资源能实现</h3>
 <div class="paragraph">
-<p>There are a number of <code>Resource</code> implementations that come supplied straight out of the
-box in Spring:</p>
+<p>Spring 中有很多 <code>Resource</code> 实现是开箱即用的：</p>
 </div>
 <div class="sect3">
 <h4 id="resources-implementations-urlresource"><a class="anchor" href="#resources-implementations-urlresource"></a>2.3.1. UrlResource</h4>
 <div class="paragraph">
-<p>The <code>UrlResource</code> wraps a <code>java.net.URL</code>, and may be used to access any object that is
-normally accessible via a URL, such as files, an HTTP target, an FTP target, etc. All
-URLs have a standardized <code>String</code> representation, such that appropriate standardized
-prefixes are used to indicate one URL type from another. This includes <code>file:</code> for
-accessing filesystem paths, <code>http:</code> for accessing resources via the HTTP protocol,
-<code>ftp:</code> for accessing resources via FTP, etc.</p>
+<p><code>UrlResource</code> 包装一个 <code>java.net.URL</code>，可以用来访问通常通过 URL 访问的任何对象，如文件，HTTP 目标，FTP 目标等。所有的 URL 都有一个标准化的 <code>String</code> 表示，使用适当的标准化前缀来表示来区分 URL 类型。这包括用于访问文件系统路径的 <code>file:</code>，http：用于通过HTTP协议访问资源的 <code>http:</code>，用于通过FTP访问资源的 <code>ftp:</code> 等。</p>
 </div>
 <div class="paragraph">
-<p>A <code>UrlResource</code> is created by Java code explicitly using the <code>UrlResource</code> constructor,
-but will often be created implicitly when you call an API method which takes a <code>String</code>
-argument which is meant to represent a path. For the latter case, a JavaBeans
-<code>PropertyEditor</code> will ultimately decide which type of <code>Resource</code> to create. If the path
-string contains a few well-known (to it, that is) prefixes such as <code>classpath:</code>, it will
-create an appropriate specialized <code>Resource</code> for that prefix. However, if it doesn&#8217;t
-recognize the prefix, it will assume the this is just a standard URL string, and will
-create a <code>UrlResource</code>.</p>
+<p><code>UrlResource</code> 是由 Java 代码使用 <code>UrlResource</code> 构造函数显式创建的，但是当你调用一个接受 <code>String</code> 参数的 API 方法时，通常会隐式地创建 <code>UrlResource</code> 来表示路径。对于后一种情况，JavaBean <code>PropertyEditor</code> 会最终将决定创建哪种类型的 <code>Resource</code>。如果路径字符串包含一些众所周知的（就是这样的）前缀，比如 <code>classpath:</code>，它将为该前缀创建适当的专用 <code>Resource</code> 。但是，如果它不能识别前缀，它会认为这只是一个标准的 URL 字符串，并会创建一个 <code>UrlResource</code>。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="resources-implementations-classpathresource"><a class="anchor" href="#resources-implementations-classpathresource"></a>2.3.2. ClassPathResource</h4>
 <div class="paragraph">
-<p>This class represents a resource which should be obtained from the classpath. This uses
-either the thread context class loader, a given class loader, or a given class for
-loading resources.</p>
+<p>这个类代表了一个应该从类路径中获得的资源。这使用线程上下文类加载器，给定的类加载器或给定的类来加载资源。</p>
 </div>
 <div class="paragraph">
-<p>This <code>Resource</code> implementation supports resolution as <code>java.io.File</code> if the class path
-resource resides in the file system, but not for classpath resources which reside in a
-jar and have not been expanded (by the servlet engine, or whatever the environment is)
-to the filesystem. To address this the various <code>Resource</code> implementations always support
-resolution as a <code>java.net.URL</code>.</p>
+<p>如果类路径资源驻留在文件系统中， 而不是驻留在 jar 中且尚未扩展（通过servlet引擎或任何环境）的到文件系统中，则此 <code>Resource</code> 实现支持解析为 <code>java.io.File</code>。 为了解决这个问题，各种资源实现总是支持解析为 <code>java.net.URL</code>。</p>
 </div>
 <div class="paragraph">
-<p>A <code>ClassPathResource</code> is created by Java code explicitly using the <code>ClassPathResource</code>
-constructor, but will often be created implicitly when you call an API method which
-takes a <code>String</code> argument which is meant to represent a path. For the latter case, a
-JavaBeans <code>PropertyEditor</code> will recognize the special prefix <code>classpath:</code> on the string
-path, and create a <code>ClassPathResource</code> in that case.</p>
+<p><code>ClassPathResource</code>  是由 Java 代码使用 <code>ClassPathResource</code> 构造函数显式创建的，但是当你调用一个接受 <code>String</code> 参数的 API 方法时，通常会隐式地创建 <code>ClassPathResource</code> 来表示路径。对于后一种情况，JavaBeans <code>PropertyEditor</code> 将识别字符串路径上的特殊前缀 <code>classpath:</code> 并在此情况下创建一个<code>ClassPathResource</code>。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="resources-implementations-filesystemresource"><a class="anchor" href="#resources-implementations-filesystemresource"></a>2.3.3. FileSystemResource</h4>
 <div class="paragraph">
-<p>This is a <code>Resource</code> implementation for <code>java.io.File</code> handles. It obviously supports
-resolution as a <code>File</code>, and as a <code>URL</code>.</p>
+<p>这是 <code>java.io.File</code> 句柄的 <code>Resource</code> 实现。它显然支持将资源解析为 <code>File</code> 和 <code>URL</code>。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="resources-implementations-servletcontextresource"><a class="anchor" href="#resources-implementations-servletcontextresource"></a>2.3.4. ServletContextResource</h4>
 <div class="paragraph">
-<p>This is a <code>Resource</code> implementation for <code>ServletContext</code> resources, interpreting
-relative paths within the relevant web application&#8217;s root directory.</p>
+<p>这是 <code>ServletContext</code> 资源的 <code>Resource</code> 实现，解释相关 Web 应用程序根目录中的相对路径。</p>
 </div>
 <div class="paragraph">
-<p>This always supports stream access and URL access, but only allows <code>java.io.File</code> access
-when the web application archive is expanded and the resource is physically on the
-filesystem. Whether or not it&#8217;s expanded and on the filesystem like this, or accessed
-directly from the JAR or somewhere else like a DB (it&#8217;s conceivable) is actually
-dependent on the Servlet container.</p>
+<p>它总是支持流访问和 URL 访问，但只有在 Web 应用程序归档文件被扩展并且资源物理上位于文件系统上时才允许 <code>java.io.File</code> 访问。不管它是否被扩展，对于在这样在文件系统上，还是直接从 JAR 或其他地方类似  DB 中访问（可以想象），实际上都依赖于 Servlet 容器。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="resources-implementations-inputstreamresource"><a class="anchor" href="#resources-implementations-inputstreamresource"></a>2.3.5. InputStreamResource</h4>
 <div class="paragraph">
-<p>A <code>Resource</code> implementation for a given <code>InputStream</code>. This should only be used if no
-specific <code>Resource</code> implementation is applicable. In particular, prefer
-<code>ByteArrayResource</code> or any of the file-based <code>Resource</code> implementations where possible.</p>
+<p>给定的 <code>InputStream</code> 的 <code>Resource</code> 实现。只有在没有具体的 <code>Resource</code> 实现适用的情况下才会使用。特殊情况下，如果可能的话，首选 <code>ByteArrayResource</code> 或任何基于文件的 <code>Resource</code> 实现。</p>
 </div>
 <div class="paragraph">
-<p>In contrast to other <code>Resource</code> implementations, this is a descriptor for an <em>already</em>
-opened resource - therefore returning <code>true</code> from <code>isOpen()</code>. Do not use it if you need
-to keep the resource descriptor somewhere, or if you need to read a stream multiple
-times.</p>
+<p>与其他 <code>Resource</code> 实现相比，这表示的是已打开资源的描述符，因此调用 <code>isOpen()</code> 会返回 <code>true</code>。如果您需要将资源描述符保存在某处，或者需要多次读取流，请不要使用它。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="resources-implementations-bytearrayresource"><a class="anchor" href="#resources-implementations-bytearrayresource"></a>2.3.6. ByteArrayResource</h4>
 <div class="paragraph">
-<p>This is a <code>Resource</code> implementation for a given byte array. It creates a
-<code>ByteArrayInputStream</code> for the given byte array.</p>
+<p>这是给定字节数组的 <code>Resource</code> 实现。它为给定的字节数组创建一个 <code>ByteArrayInputStream</code>。</p>
 </div>
 <div class="paragraph">
-<p>It&#8217;s useful for loading content from any given byte array, without having to resort to a
-single-use <code>InputStreamResource</code>.</p>
+<p>它对于从任何给定的字节数组中加载内容是很有用的，可避免求助于一次性的 <code>InputStreamResource</code>。</p>
 </div>
 </div>
 </div>
