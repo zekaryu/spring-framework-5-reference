@@ -54,7 +54,7 @@
 <ul class="sectlevel2">
 <li><a href="#validation-introduction">3.1. 简介</a></li>
 <li><a href="#validator">3.2. 使用 Spring 对的Validator 接口来进行数据验证</a></li>
-<li><a href="#validation-conversion">3.3. 从解析代码到错误信息</a></li>
+<li><a href="#validation-conversion">3.3. 解析代码到对应错误信息</a></li>
 <li><a href="#beans-beans">3.4. Bean 操作和 BeanWrapper</a></li>
 <li><a href="#core-convert">3.5. Spring 类型转换</a></li>
 <li><a href="#format">3.6. Spring 字段格式化</a></li>
@@ -8644,32 +8644,12 @@ ApplicationContext ctx =
 </div>
 </div>
 <div class="sect2">
-<h3 id="validation-conversion"><a class="anchor" href="#validation-conversion"></a>3.3. Resolving codes to error messages</h3>
+<h3 id="validation-conversion"><a class="anchor" href="#validation-conversion"></a>3.3. 解析代码到对应错误信息</h3>
 <div class="paragraph">
-<p>We&#8217;ve talked about databinding and validation. Outputting messages corresponding to
-validation errors is the last thing we need to discuss. In the example we&#8217;ve shown
-above, we rejected the <code>name</code> and the <code>age</code> field. If we&#8217;re going to output the error
-messages by using a <code>MessageSource</code>, we will do so using the error code we&#8217;ve given when
-rejecting the field ('name' and 'age' in this case). When you call (either directly, or
-indirectly, using for example the <code>ValidationUtils</code> class) <code>rejectValue</code> or one of the
-other <code>reject</code> methods from the <code>Errors</code> interface, the underlying implementation will
-not only register the code you&#8217;ve passed in, but also a number of additional error
-codes. What error codes it registers is determined by the <code>MessageCodesResolver</code> that is
-used. By default, the <code>DefaultMessageCodesResolver</code> is used, which for example not only
-registers a message with the code you gave, but also messages that include the field
-name you passed to the reject method. So in case you reject a field using
-<code>rejectValue("age", "too.darn.old")</code>, apart from the <code>too.darn.old</code> code, Spring will
-also register <code>too.darn.old.age</code> and <code>too.darn.old.age.int</code> (so the first will include
-the field name and the second will include the type of the field); this is done as a
-convenience to aid developers in targeting error messages and suchlike.</p>
+<p>我们已经讨论过数据绑定和验证。输出对应于验证错误的消息是我们需要讨论的最后一件事。在上面的例子中，我们拒绝了 <code>name</code> 和 <code>age</code> 字段。如果我们要通过使用 <code>MessageSource</code> 输出错误消息，我们将使用我们在拒绝字段（在这种情况下为“name”和“age”）时给出的错误代码。当你从 <code>Errors</code> 接口调用（直接或者间接使用 <code>ValidationUtils</code> 类）<code>rejectValue</code> 或者其他的 <code>reject</code> 方法时，底层的实现不仅会注册你传入的代码，还会传入一些附加的错误代码。它注册的错误代码由所使用的 <code>MessageCodesResolver</code> 决定。默认情况下，使用 <code>DefaultMessageCodesResolver</code> ，例如，它不仅会使用您提供的代码注册信息，还会使用包含您传递给拒绝方法的字段名的信息。因此，如果您使用<code>rejectValue("age", "too.darn.old")</code> 拒绝了一个字段，除了 <code>too.darn.old</code> 代码，Spring还将注册 <code>too.darn.old.age</code> 和 <code>too.darn.old.age.int</code>（这样第一个将包括字段名称，第二个将包括字段的类型）;这是为了方便开发人员定位错误消息等。</p>
 </div>
 <div class="paragraph">
-<p>More information on the <code>MessageCodesResolver</code> and the default strategy can be found
-online in the javadocs of
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/validation/MessageCodesResolver.html"><code>MessageCodesResolver</code></a>
-and
-<a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/validation/DefaultMessageCodesResolver.html"><code>DefaultMessageCodesResolver</code></a>,
-respectively.</p>
+<p>有关 <code>MessageCodesResolver</code> 和默认策略的更多信息可分别在 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/validation/MessageCodesResolver.html"><code>MessageCodesResolver</code></a> 和 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/validation/DefaultMessageCodesResolver.html"><code>DefaultMessageCodesResolver</code></a> 的 javadoc 中找到。</p>
 </div>
 </div>
 <div class="sect2">
