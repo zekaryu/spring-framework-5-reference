@@ -7895,42 +7895,24 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <div class="sect2">
 <h3 id="beans-beanfactory"><a class="anchor" href="#beans-beanfactory"></a>1.16. The BeanFactory</h3>
 <div class="paragraph">
-<p>The <code>BeanFactory</code> provides the underlying basis for Spring&#8217;s IoC functionality but it is
-only used directly in integration with other third-party frameworks and is now largely
-historical in nature for most users of Spring. The <code>BeanFactory</code> and related interfaces,
-such as <code>BeanFactoryAware</code>, <code>InitializingBean</code>, <code>DisposableBean</code>, are still present in
-Spring for the purposes of backward compatibility with the large number of third-party
-frameworks that integrate with Spring. Often third-party components that can not use
-more modern equivalents such as <code>@PostConstruct</code> or <code>@PreDestroy</code> in order to remain
-compatible with JDK 1.4 or to avoid a dependency on JSR-250.</p>
+<p><code>BeanFactory</code> 为 Spring 的 IoC 功能提供了基础，但是它只能直接用于与其他第三方框架的集成，对Spring 的大多数用户来说，具有悠久的历史。在 Spring 中，<code>BeanFactory</code> 和相关接口（如 <code>BeanFactoryAware</code>，<code>InitializingBean</code>，<code>DisposableBean</code>）仍然存在，目的是向后兼容大量与 Spring 集成的第三方框架。 为了与 JDK 1.4 保持兼容或避免依赖 JSR-250，通常第三方组件不能使用更多的现代的新特性，例如 <code>@PostConstruct</code> 或 <code>@PreDestroy</code>。</p>
 </div>
 <div class="paragraph">
-<p>This section provides additional background into the differences between the
-<code>BeanFactory</code> and <code>ApplicationContext</code> and how one might access the IoC container
-directly through a classic singleton lookup.</p>
+<p>本节提供了 <code>BeanFactory</code> 和 <code>ApplicationContext</code> 之间差异的另一个背景，以及如何通过经典的单例查找直接访问 IoC 容器。</p>
 </div>
 <div class="sect3">
-<h4 id="context-introduction-ctx-vs-beanfactory"><a class="anchor" href="#context-introduction-ctx-vs-beanfactory"></a>1.16.1. BeanFactory or ApplicationContext?</h4>
+<h4 id="context-introduction-ctx-vs-beanfactory"><a class="anchor" href="#context-introduction-ctx-vs-beanfactory"></a>1.16.1. BeanFactory 还是 ApplicationContext？</h4>
 <div class="paragraph">
-<p>Use an <code>ApplicationContext</code> unless you have a good reason for not doing so.</p>
+<p>尽量使用 <code>ApplicationContext</code>，除非你有充分的理由不这样做。</p>
 </div>
 <div class="paragraph">
-<p>Because the <code>ApplicationContext</code> includes all functionality of the <code>BeanFactory</code>, it is
-generally recommended over the <code>BeanFactory</code>, except for a few situations such as in
-embedded applications running on resource-constrained devices where memory consumption
-might be critical and a few extra kilobytes might make a difference. However, for
-most typical enterprise applications and systems, the <code>ApplicationContext</code> is what you
-will want to use. Spring makes <em>heavy</em> use of the <a href="#beans-factory-extension-bpp"><code>BeanPostProcessor</code> extension point</a> (to effect proxying and so on). If you use only a
-plain <code>BeanFactory</code>, a fair amount of support such as transactions and AOP will not take
-effect, at least not without some extra steps on your part. This situation could be
-confusing because nothing is actually wrong with the configuration.</p>
+<p>因为 <code>ApplicationContext</code> 包含了 <code>BeanFactory</code> 的所有功能，所以通常推荐使用 <code>BeanFactory</code>，除了一些情况，例如在资源受限的设备上运行的嵌入式应用程序，这些设备的内存消耗可能很重要，少数多余的 KB 可能就会对系统产生影响。 但是，对于大多数典型的企业应用程序和系统，<code>ApplicationContext</code> 才是你想要使用的。 Spring 会大量使用 <a href="#beans-factory-extension-bpp"><code>BeanPostProcessor</code> 扩展点</a>（以影响代理等等）。如果只使用一个普通的 <code>BeanFactory</code> ，那么在您没有采取额外步骤的情况下，相当数量的功能（如事务和AOP）将不会生效。这种情况可能会令人困惑，因为配置没有任何问题。</p>
 </div>
 <div class="paragraph">
-<p>The following table lists features provided by the <code>BeanFactory</code> and
-<code>ApplicationContext</code> interfaces and implementations.</p>
+<p>下表列出了 <code>BeanFactory</code> 和 <code>ApplicationContext</code> 接口和实现提供的功能。</p>
 </div>
 <table id="context-introduction-ctx-vs-beanfactory-feature-matrix" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 9. Feature Matrix</caption>
+<caption class="title">Table 9. 特性表</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -7938,7 +7920,7 @@ confusing because nothing is actually wrong with the configuration.</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Feature</th>
+<th class="tableblock halign-left valign-top">特性</th>
 <th class="tableblock halign-left valign-top"><code>BeanFactory</code></th>
 <th class="tableblock halign-left valign-top"><code>ApplicationContext</code></th>
 </tr>
@@ -7972,8 +7954,7 @@ confusing because nothing is actually wrong with the configuration.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>To explicitly register a bean post-processor with a <code>BeanFactory</code> implementation,
-you need to write code like this:</p>
+<p>要使用 <code>BeanFactory</code> 实现显式注册 bean post-processor，您需要编写如下代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7988,8 +7969,7 @@ factory.addBeanPostProcessor(postProcessor);
 </div>
 </div>
 <div class="paragraph">
-<p>To explicitly register a <code>BeanFactoryPostProcessor</code> when using a <code>BeanFactory</code>
-implementation, you must write code like this:</p>
+<p>要在使用 <code>BeanFactory</code> 实现时显式注册 <code>BeanFactoryPostProcessor</code>，必须编写如下代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8006,11 +7986,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>In both cases, the explicit registration step is inconvenient, which is one reason why
-the various <code>ApplicationContext</code> implementations are preferred above plain <code>BeanFactory</code>
-implementations in the vast majority of Spring-backed applications, especially when
-using <code>BeanFactoryPostProcessor</code>s and <code>BeanPostProcessor</code>s. These mechanisms implement
-important functionality such as property placeholder replacement and AOP.</p>
+<p>在这两种情况下，显式注册步骤都不方便，这就是为什么各种 <code>ApplicationContext</code> 实现比大多数 Spring 支持的应用程序中的纯 <code>BeanFactory</code> 实现更受欢迎的原因之一，特别是在使用 <code>BeanFactoryPostProcessor</code> 和 <code>BeanPostProcessor</code> 时。这些机制实现了诸如属性占位符替换和AOP 等重要功能。</p>
 </div>
 </div>
 </div>
