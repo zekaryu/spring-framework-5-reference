@@ -8002,10 +8002,9 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="resources-resource"><a class="anchor" href="#resources-resource"></a>2.2. The Resource interface</h3>
+<h3 id="resources-resource"><a class="anchor" href="#resources-resource"></a>2.2. 资源接口</h3>
 <div class="paragraph">
-<p>Spring&#8217;s <code>Resource</code> interface is meant to be a more capable interface for abstracting
-access to low-level resources.</p>
+<p>Spring 的 <code>Resource</code> 接口的使命是成为一个用于抽象对低级别资源访问的更加强大的接口。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8038,57 +8037,35 @@ access to low-level resources.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Some of the most important methods from the <code>Resource</code> interface are:</p>
+<p><code>Resource</code> 接口中一些最重要的方法是：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>getInputStream()</code>: locates and opens the resource, returning an <code>InputStream</code> for
-reading from the resource. It is expected that each invocation returns a fresh
-<code>InputStream</code>. It is the responsibility of the caller to close the stream.</p>
+<p><code>getInputStream()</code>：定位并打开资源，返回一个从资源读取的 <code>InputStream</code> 流。 预计每个调用都会返回一个新的 <code>InputStream</code>。调用方有责任关闭该流。</p>
 </li>
 <li>
-<p><code>exists()</code>: returns a <code>boolean</code> indicating whether this resource actually exists in
-physical form.</p>
+<p><code>exists()</code>：返回一个 <code>boolean</code> 值，表明这个资源是否以物理形式真实存在。</p>
 </li>
 <li>
-<p><code>isOpen()</code>: returns a <code>boolean</code> indicating whether this resource represents a handle
-with an open stream. If <code>true</code>, the <code>InputStream</code> cannot be read multiple times, and
-must be read once only and then closed to avoid resource leaks. Will be <code>false</code> for
-all usual resource implementations, with the exception of <code>InputStreamResource</code>.</p>
+<p><code>isOpen()</code>: 返回一个 <code>boolean</code> 值，表示资源是否正在被一个打开的流处理。如果返回值为 <code>true</code>，则 <code>InputStream</code> 不能被多次读取，且只能被读取一次然后关闭以防资源泄露。对于所有常规的资源实现，将返回 <code>false</code>，除了 <code>InputStreamResource</code>。</p>
 </li>
 <li>
-<p><code>getDescription()</code>: returns a description for this resource, to be used for error
-output when working with the resource. This is often the fully qualified file name or
-the actual URL of the resource.</p>
+<p><code>getDescription()</code>：返回这个资源的描述符，用于处理资源时的错误输出。这通常是全限定的文件名或资源的实际 URL。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Other methods allow you to obtain an actual <code>URL</code> or <code>File</code> object representing the
-resource (if the underlying implementation is compatible, and supports that
-functionality).</p>
+<p>其他方法允许您获取表示资源的实际 <code>URL</code> 或 <code>File</code> 对象（如果底层实现兼容并支持该功能）。</p>
 </div>
 <div class="paragraph">
-<p>The <code>Resource</code> abstraction is used extensively in Spring itself, as an argument type in
-many method signatures when a resource is needed. Other methods in some Spring APIs
-(such as the constructors to various <code>ApplicationContext</code> implementations), take a
-<code>String</code> which in unadorned or simple form is used to create a <code>Resource</code> appropriate to
-that context implementation, or via special prefixes on the <code>String</code> path, allow the
-caller to specify that a specific <code>Resource</code> implementation must be created and used.</p>
+<p>当资源被请求时，<code>Resource</code> 抽象以许多方法签名参数的形式在 Spring 本身中被广泛使用。在一些Spring API （比如各种 <code>ApplicationContext</code> 实现的构造函数）的其他方法中，它们接收 <code>String</code> 使用简单或者粗糙的形式创建一个适合于上下文实现的<code>Resource</code>  ，或者通过 <code>String</code> 路径上的特殊前缀，允许调用者指定必须创建和使用特定的 <code>Resource</code> 实现。</p>
 </div>
 <div class="paragraph">
-<p>While the <code>Resource</code> interface is used a lot with Spring and by Spring, it&#8217;s actually
-very useful to use as a general utility class by itself in your own code, for access to
-resources, even when your code doesn&#8217;t know or care about any other parts of Spring.
-While this couples your code to Spring, it really only couples it to this small set of
-utility classes, which are serving as a more capable replacement for <code>URL</code>, and can be
-considered equivalent to any other library you would use for this purpose.</p>
+<p>虽然 <code>Resource</code> 接口被 Spring 和在 Spring 中大量使用，但是在自己的代码中，将作为一个用来访问资源的通用工具类是很有用的，甚至你的代码可以不感知或者不关心 Spring 的其他部分。虽然这会将你的代码与 Spring 耦合起来，但它实际上只是将它与这一小组工具类耦合，这些工具类可以更好地替代 <code>URL</code>，并且可以被认为与你为此目的使用的任何其他库相同。</p>
 </div>
 <div class="paragraph">
-<p>It is important to note that the <code>Resource</code> abstraction does not replace functionality:
-it wraps it where possible. For example, a <code>UrlResource</code> wraps a URL, and uses the
-wrapped <code>URL</code> to do its work.</p>
+<p>值得注意的是，<code>Resource</code> 抽象并不取代功能：它只是尽可能包装它。例如，<code>UrlResource</code> 包装一个<code>URL</code>，并使用包装的 <code>URL</code> 来完成其工作。</p>
 </div>
 </div>
 <div class="sect2">
