@@ -9350,37 +9350,20 @@ cs.convert(input,
 </div>
 </div>
 <div class="sect2">
-<h3 id="format"><a class="anchor" href="#format"></a>3.6. Spring Field Formatting</h3>
+<h3 id="format"><a class="anchor" href="#format"></a>3.6. Spring 字段格式化</h3>
 <div class="paragraph">
-<p>As discussed in the previous section, <a href="#core-convert"><code>core.convert</code></a> is a
-general-purpose type conversion system. It provides a unified ConversionService API as
-well as a strongly-typed Converter SPI for implementing conversion logic from one type
-to another. A Spring Container uses this system to bind bean property values. In
-addition, both the Spring Expression Language (SpEL) and DataBinder use this system to
-bind field values. For example, when SpEL needs to coerce a <code>Short</code> to a <code>Long</code> to
-complete an <code>expression.setValue(Object bean, Object value)</code> attempt, the core.convert
-system performs the coercion.</p>
+<p>如上一小节所述，<a href="#core-convert"><code>core.convert</code></a> 是一个通用的类型转换系统。它提供了一个统一的 ConversionService API 以及一个强类型的 Converter SPI，用于实现从一种类型到另一种类型的转换逻辑。 Spring 容器使用这个系统来绑定 bean 的属性值。另外，Spring 表达式语言（SpEL）和 DataBinder 都使用这个系统绑定字段值。例如，当 SpEL 需要强制将 <code>Short</code> 转换为 <code>Long</code> 来完成一个 <code>expression.setValue(Object bean, Object value)</code> 尝试时，core.convert 系统会强制执行这个操作。</p>
 </div>
 <div class="paragraph">
-<p>Now consider the type conversion requirements of a typical client environment such as a
-web or desktop application. In such environments, you typically convert <em>from String</em>
-to support the client postback process, as well as back <em>to String</em> to support the
-view rendering process. In addition, you often need to localize String values. The more
-general <em>core.convert</em> Converter SPI does not address such <em>formatting</em> requirements
-directly. To directly address them, Spring 3 introduces a convenient Formatter SPI that
-provides a simple and robust alternative to PropertyEditors for client environments.</p>
+<p>现在考虑典型客户端环境（如 Web 或桌面应用程序）的类型转换要求。在这样的环境中，您通常将 String 作为转换的源类型来支持客户端回发过程，并将 String 作为转换的目的类型返回以支持视图呈现过程。另外，您经常需要本地化字符串值。更一般的 <em>core.convert</em> Converter SPI 不能直接解决这种格式化要求。为了直接解决这些问题，Spring 3 引入了一个方便的 Formatter SPI，为客户端环境提供了 PropertyEditor 的一个简单而健壮的替代方案。</p>
 </div>
 <div class="paragraph">
-<p>In general, use the Converter SPI when you need to implement general-purpose type
-conversion logic; for example, for converting between a java.util.Date and and
-java.lang.Long. Use the Formatter SPI when you&#8217;re working in a client environment, such
-as a web application, and need to parse and print localized field values. The
-ConversionService provides a unified type conversion API for both SPIs.</p>
+<p>通常，在需要实现通用类型转换逻辑时使用 Converter SPI；例如，在 java.util.Date 和 java.lang.Long 之间进行类型转换。在客户端环境（如Web应用程序）中使用 Formatter SPI 时，需要解析和打印本地化的字段值。 ConversionService 为两个 SPI 提供了一个统一的类型转换API。</p>
 </div>
 <div class="sect3">
 <h4 id="format-Formatter-SPI"><a class="anchor" href="#format-Formatter-SPI"></a>3.6.1. Formatter SPI</h4>
 <div class="paragraph">
-<p>The Formatter SPI to implement field formatting logic is simple and strongly typed:</p>
+<p>用于实现字段格式化逻辑的 Formatter SPI 是简单且强类型的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9391,7 +9374,7 @@ ConversionService provides a unified type conversion API for both SPIs.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Where Formatter extends from the Printer and Parser building-block interfaces:</p>
+<p>Formatter 继承了 Printer 和 Parser 内置接口：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9410,24 +9393,14 @@ ConversionService provides a unified type conversion API for both SPIs.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To create your own Formatter, simply implement the Formatter interface above.
-Parameterize T to be the type of object you wish to format, for example,
-<code>java.util.Date</code>. Implement the <code>print()</code> operation to print an instance of T for
-display in the client locale. Implement the <code>parse()</code> operation to parse an instance of
-T from the formatted representation returned from the client locale. Your Formatter
-should throw a ParseException or IllegalArgumentException if a parse attempt fails. Take
-care to ensure your Formatter implementation is thread-safe.</p>
+<p>要创建自己的格式化程序，只需实现上面的格式化接口。将 T 参数化为要格式化的对象的类型，例如 <code>java.util.Date</code>。实现 <code>print()</code> 操作来打印 T 的实例以在客户端语言环境中显示。实现 <code>parse()</code>操作，从客户端语言环境返回的格式化表示中解析 T 的一个实例。如果解析尝试失败，则格式化程序应该抛出 ParseException 或 IllegalArgumentException。注意确保您的 Formatter 实现是线程安全的。
+</p>
 </div>
 <div class="paragraph">
-<p>Several Formatter implementations are provided in <code>format</code> subpackages as a convenience.
-The <code>number</code> package provides a <code>NumberFormatter</code>, <code>CurrencyFormatter</code>, and
-<code>PercentFormatter</code> to format <code>java.lang.Number</code> objects using a <code>java.text.NumberFormat</code>.
-The <code>datetime</code> package provides a <code>DateFormatter</code> to format <code>java.util.Date</code> objects with
-a <code>java.text.DateFormat</code>. The <code>datetime.joda</code> package provides comprehensive datetime
-formatting support based on the <a href="http://joda-time.sourceforge.net">Joda Time library</a>.</p>
+<p>方便起见，<code>format</code> 子程序包中提供了几个格式化程序实现。<code>number</code> 包提供了 <code>NumberFormatter</code>，<code>CurrencyFormatter</code> 和 <code>PercentFormatter</code> 来格式化使用 <code>java.text.NumberFormat</code> 的 <code>java.lang.Number</code> 对象。<code>datetime</code> 包提供了一个 <code>DateFormatter</code> 用 <code>java.text.DateFormat</code> 来格式化 <code>java.util.Date</code> 对象。<code>datetime.joda</code> 包提供基于 <a href="http://joda-time.sourceforge.net">Joda Time library</a> 的综合日期时间格式化支持。</p>
 </div>
 <div class="paragraph">
-<p>Consider <code>DateFormatter</code> as an example <code>Formatter</code> implementation:</p>
+<p>以 <code>DateFormatter</code> 为 <code>Formatter</code> 实现的一个例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9465,15 +9438,13 @@ formatting support based on the <a href="http://joda-time.sourceforge.net">Joda 
 </div>
 </div>
 <div class="paragraph">
-<p>The Spring team welcomes community-driven <code>Formatter</code> contributions; see
-<a href="https://jira.spring.io/browse/SPR">jira.spring.io</a> to contribute.</p>
+<p>Spring 团队欢迎社区驱动的 <code>Formatter</code> 贡献; 见向 <a href="https://jira.spring.io/browse/SPR">jira.spring.io</a> 贡献。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="format-CustomFormatAnnotations"><a class="anchor" href="#format-CustomFormatAnnotations"></a>3.6.2. Annotation-driven Formatting</h4>
+<h4 id="format-CustomFormatAnnotations"><a class="anchor" href="#format-CustomFormatAnnotations"></a>3.6.2. 注解驱动的格式化</h4>
 <div class="paragraph">
-<p>As you will see, field formatting can be configured by field type or annotation. To bind
-an Annotation to a formatter, implement AnnotationFormatterFactory:</p>
+<p>你将会看到，字段格式化可以通过字段类型或注解进行配置。要将注解绑定到 formatter，需要实现 AnnotationFormatterFactory：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9491,16 +9462,10 @@ an Annotation to a formatter, implement AnnotationFormatterFactory:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Parameterize A to be the field annotationType you wish to associate formatting logic
-with, for example <code>org.springframework.format.annotation.DateTimeFormat</code>. Have
-<code>getFieldTypes()</code> return the types of fields the annotation may be used on. Have
-<code>getPrinter()</code> return a Printer to print the value of an annotated field. Have
-<code>getParser()</code> return a Parser to parse a clientValue for an annotated field.</p>
+<p>参数化的 A 是你想要与格式化逻辑关联的字段注解类型，例如 <code>org.springframework.format.annotation.DateTimeFormat</code>。<code>getFieldTypes()</code> 返回可以使用该注解的字段类型。<code>getPrinter()</code> 返回一个用于打印注解字段的值的 Printer。<code>getParser()</code> 返回用来解析注解字段 clientValue 的 Parser。</p>
 </div>
 <div class="paragraph">
-<p>The example AnnotationFormatterFactory implementation below binds the @NumberFormat
-Annotation to a formatter. This annotation allows either a number style or pattern to be
-specified:</p>
+<p>下面的示例 AnnotationFormatterFactory 实现将 @NumberFormat 注解绑定到一个 formatter。 此注解允许指定 number 样式或特定格式：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9540,7 +9505,7 @@ specified:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To trigger formatting, simply annotate fields with @NumberFormat:</p>
+<p>要触发格式化，只需使用 @NumberFormat 注解字段即可：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9553,15 +9518,12 @@ specified:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="format-annotations-api"><a class="anchor" href="#format-annotations-api"></a>Format Annotation API</h5>
+<h5 id="format-annotations-api"><a class="anchor" href="#format-annotations-api"></a>格式化注解 API</h5>
 <div class="paragraph">
-<p>A portable format annotation API exists in the <code>org.springframework.format.annotation</code>
-package. Use @NumberFormat to format java.lang.Number fields. Use @DateTimeFormat to
-format java.util.Date, java.util.Calendar, java.util.Long, or Joda Time fields.</p>
+<p><code>org.springframework.format.annotation</code> 包中存在可移植的格式化 API。使用 @NumberFormat 格式化 java.lang.Number 字段。使用 @DateTimeFormat 格式化 java.util.Date，java.util.Calendar，java.util.Long 或 Joda </p>
 </div>
 <div class="paragraph">
-<p>The example below uses @DateTimeFormat to format a java.util.Date as a ISO Date
-(yyyy-MM-dd):</p>
+<p>下面的示例使用 @DateTimeFormat 将 java.util.Date 格式化为 ISO 日期（yyyy-MM-dd）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9578,15 +9540,10 @@ format java.util.Date, java.util.Calendar, java.util.Long, or Joda Time fields.<
 <div class="sect3">
 <h4 id="format-FormatterRegistry-SPI"><a class="anchor" href="#format-FormatterRegistry-SPI"></a>3.6.3. FormatterRegistry SPI</h4>
 <div class="paragraph">
-<p>The FormatterRegistry is an SPI for registering formatters and converters.
-<code>FormattingConversionService</code> is an implementation of FormatterRegistry suitable for
-most environments. This implementation may be configured programmatically or
-declaratively as a Spring bean using <code>FormattingConversionServiceFactoryBean</code>. Because
-this implementation also implements <code>ConversionService</code>, it can be directly configured
-for use with Spring&#8217;s DataBinder and the Spring Expression Language (SpEL).</p>
+<p>FormatterRegistry 是用于注册 formatter 和 converter 的 SPI。<code>FormattingConversionService</code> 是适用于大多数环境的 FormatterRegistry 的一个实现。 这个实现可以使用 <code>FormattingConversionServiceFactoryBean</code> 以编程方式或声明方式配置为Spring bean。 因为这个实现也实现了 <code>ConversionService</code>，所以它可以直接配置用于 Spring 的 DataBinder 和 Spring 表达式语言（SpEL）。</p>
 </div>
 <div class="paragraph">
-<p>Review the FormatterRegistry SPI below:</p>
+<p>请看下面的 FormatterRegistry SPI：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9606,21 +9563,16 @@ for use with Spring&#8217;s DataBinder and the Spring Expression Language (SpEL)
 </div>
 </div>
 <div class="paragraph">
-<p>As shown above, Formatters can be registered by fieldType or annotation.</p>
+<p>如上所示，Formatter 可以通过 fieldType 或注解进行注册。</p>
 </div>
 <div class="paragraph">
-<p>The FormatterRegistry SPI allows you to configure Formatting rules centrally, instead of
-duplicating such configuration across your Controllers. For example, you might want to
-enforce that all Date fields are formatted a certain way, or fields with a specific
-annotation are formatted in a certain way. With a shared FormatterRegistry, you define
-these rules once and they are applied whenever formatting is needed.</p>
+<p>FormatterRegistry SPI 允许您集中配置格式化规则，而不是在控制器中复制这样的配置。例如，你可能希望强制所有日期字段以特定方式格式化，或者使用特定注解的字段以特定方式格式化。使用共享的 FormatterRegistry，你只要一次性定义这些规则，然后需要格式化时应用这些规则。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="format-FormatterRegistrar-SPI"><a class="anchor" href="#format-FormatterRegistrar-SPI"></a>3.6.4. FormatterRegistrar SPI</h4>
 <div class="paragraph">
-<p>The FormatterRegistrar is an SPI for registering formatters and converters through the
-FormatterRegistry:</p>
+<p>FormatterRegistrar 是通过 FormatterRegistry 注册 formatter 和 converter 的 SPI：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9634,18 +9586,13 @@ FormatterRegistry:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A FormatterRegistrar is useful when registering multiple related converters and
-formatters for a given formatting category, such as Date formatting. It can also be
-useful where declarative registration is insufficient. For example when a formatter
-needs to be indexed under a specific field type different from its own &lt;T&gt; or when
-registering a Printer/Parser pair. The next section provides more information on
-converter and formatter registration.</p>
+<p>FormatterRegistrar 在对于给定的格式类别（如日期格式）注册多个相关的 converter 和 formatter 时很有用。在声明式注册不满足需求的情况下也是有用的。例如，对于 <T> 泛型取得的不同的特定字段类型，某个 formatter 需要进行索引，或者在注册 Printer/Parser 对时。下一节提供有关 converter 和 formatter 注册的更多信息。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="format-configuring-formatting-mvc"><a class="anchor" href="#format-configuring-formatting-mvc"></a>3.6.5. Configuring Formatting in Spring MVC</h4>
+<h4 id="format-configuring-formatting-mvc"><a class="anchor" href="#format-configuring-formatting-mvc"></a>3.6.5. 在 Spring MVC 中配置格式化</h4>
 <div class="paragraph">
-<p>See <a href="web.html#mvc-config-conversion">Conversion and Formatting</a> in the Spring MVC chapter.</p>
+<p>参见 Spring MVC 章节的 <a href="web.html#mvc-config-conversion">类型转换和格式化</a>。</p>
 </div>
 </div>
 </div>
