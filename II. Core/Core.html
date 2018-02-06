@@ -8653,88 +8653,60 @@ ApplicationContext ctx =
 </div>
 </div>
 <div class="sect2">
-<h3 id="beans-beans"><a class="anchor" href="#beans-beans"></a>3.4. Bean manipulation and the BeanWrapper</h3>
+<h3 id="beans-beans"><a class="anchor" href="#beans-beans"></a>3.4. Bean 操作和 BeanWrapper</h3>
 <div class="paragraph">
-<p>The <code>org.springframework.beans</code> package adheres to the JavaBeans standard provided by
-Oracle. A JavaBean is simply a class with a default no-argument constructor, which follows
-a naming convention where (by way of an example) a property named <code>bingoMadness</code> would
-have a setter method <code>setBingoMadness(..)</code> and a getter method <code>getBingoMadness()</code>. For
-more information about JavaBeans and the specification, please refer to Oracle&#8217;s website (
-<a href="http://docs.oracle.com/javase/6/docs/api/java/beans/package-summary.html">javabeans</a>).</p>
+<p><code>org.springframework.beans</code> 包遵循 Oracle 提供的 JavaBeans 标准。JavaBean只是一个具有默认无参构造器的类，它遵循一个命名约定（举例来说），名为 <code>bingoMadness</code> 的属性将具有 setter 方法 <code>setBingoMadness(..)</code> 和 getter 方法 <code>getBingoMadness()</code>。有关 JavaBeans 和规范的更多信息，请参阅 Oracle 网站（<a href="http://docs.oracle.com/javase/6/docs/api/java/beans/package-summary.html">javabeans</a>）。</p>
 </div>
 <div class="paragraph">
-<p>One quite important class in the beans package is the <code>BeanWrapper</code> interface and its
-corresponding implementation ( <code>BeanWrapperImpl</code>). As quoted from the javadocs, the
-<code>BeanWrapper</code> offers functionality to set and get property values (individually or in
-bulk), get property descriptors, and to query properties to determine if they are
-readable or writable. Also, the <code>BeanWrapper</code> offers support for nested properties,
-enabling the setting of properties on sub-properties to an unlimited depth. Then, the
-<code>BeanWrapper</code> supports the ability to add standard JavaBeans <code>PropertyChangeListeners</code>
-and <code>VetoableChangeListeners</code>, without the need for supporting code in the target class.
-Last but not least, the <code>BeanWrapper</code> provides support for the setting of indexed
-properties. The <code>BeanWrapper</code> usually isn&#8217;t used by application code directly, but by
-the <code>DataBinder</code> and the <code>BeanFactory</code>.</p>
+<p>Bean 包中一个相当重要的类是 <code>BeanWrapper</code> 接口及其相应的实现（<code>BeanWrapperImpl</code>）。javadocs 引言，<code>BeanWrapper</code> 提供了设置和获取属性值（单独或批量），获取属性描述符，并查询属性以确定它们是否可读或可写的功能。此外，<code>BeanWrapper</code> 提供对嵌套属性的支持，可以无限深度的子属性设置。然后，<code>BeanWrapper</code> 支持添加标准的 JavaBeans <code>PropertyChangeListeners</code> 和 <code>VetoableChangeListeners</code>，而不需要目标类的代码支持。最后，<code>BeanWrapper</code> 提供了对索引属性设置的支持。 <code>BeanWrapper</code> 通常不被应用程序代码直接使用，而是被 <code>DataBinder</code> 和 <code>BeanFactory</code> 使用。</p>
 </div>
 <div class="paragraph">
-<p>The way the <code>BeanWrapper</code> works is partly indicated by its name: <em>it wraps a bean</em> to
-perform actions on that bean, like setting and retrieving properties.</p>
+<p><code>BeanWrapper</code> 的工作方式部分由它的名字来表示：<em>它包装一个 bean</em>来对这个它执行操作，比如设置和检索属性。</p>
 </div>
 <div class="sect3">
-<h4 id="beans-beans-conventions"><a class="anchor" href="#beans-beans-conventions"></a>3.4.1. Setting and getting basic and nested properties</h4>
+<h4 id="beans-beans-conventions"><a class="anchor" href="#beans-beans-conventions"></a>3.4.1. 设置或获得基本和嵌套属性</h4>
 <div class="paragraph">
-<p>Setting and getting properties is done using the <code>setPropertyValue(s)</code> and
-<code>getPropertyValue(s)</code> methods that both come with a couple of overloaded variants.
-They&#8217;re all described in more detail in the javadocs Spring comes with. What&#8217;s important
-to know is that there are a couple of conventions for indicating properties of an
-object. A couple of examples:</p>
+<p>设置和获取属性是使用 <code>setPropertyValue(s)</code> 和 <code>getPropertyValue(s)</code> 方法完成的，这两个方法都带有一些重载的变体。他们都在 javadocs 中有更详细的描述。重要的是知道有几个用于指示对象的属性约定。几个例子：</p>
 </div>
 <table id="beans-beans-conventions-properties-tbl" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 11. Examples of properties</caption>
+<caption class="title">Table 11. 属性的例子</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Expression</th>
-<th class="tableblock halign-left valign-top">Explanation</th>
+<th class="tableblock halign-left valign-top">表达式</th>
+<th class="tableblock halign-left valign-top">解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates the property <code>name</code> corresponding to the methods <code>getName()</code> or <code>isName()</code>
-and <code>setName(..)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">表示与方法 <code>getName()</code> 或 <code>isName()</code> 和 <code>setName(..)</code> 相对应的属性名称。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>account.name</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates the nested property <code>name</code> of the property <code>account</code> corresponding e.g. to
-the methods <code>getAccount().setName()</code> or <code>getAccount().getName()</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">表示 <code>account</code> 属性的嵌套属性属性 <code>name</code> 对应的方法 <code>getAccount().setName()</code> 或者 <code>getAccount().getName()</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>account[2]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates the <em>third</em> element of the indexed property <code>account</code>. Indexed properties
-can be of type <code>array</code>, <code>list</code> or other <em>naturally ordered</em> collection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">表示可索引的 <code>account</code> 属性的第三个元素。 索引属性可以是数组 <code>array</code>，列表 <code>list</code> 或其他自然排序的集合</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>account[COMPANYNAME]</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Indicates the value of the map entry indexed by the key <em>COMPANYNAME</em> of the Map
-property <code>account</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">表示由 Map 属性 <code>account</code> 的键 <em>COMPANYNAME</em> 索引的 map 条目的值</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Below you&#8217;ll find some examples of working with the <code>BeanWrapper</code> to get and set
-properties.</p>
+<p>下面你会发现一些使用 <code>BeanWrapper</code> 来获取和设置属性的例子。=</p>
 </div>
 <div class="paragraph">
-<p><em>(This next section is not vitally important to you if you&#8217;re not planning to work with
-the <code>BeanWrapper</code> directly. If you&#8217;re just using the <code>DataBinder</code> and the <code>BeanFactory</code>
-and their out-of-the-box implementation, you should skip ahead to the section about
-<code>PropertyEditors</code>.)</em></p>
+<p><em>（如果你不打算直接使用 <code>BeanWrapper</code> ，那么下一节对你来说并不是非常重要，如果你只是使用<code>DataBinder</code> 和 <code>BeanFactory</code> 以及它们的开箱即用的实现，你应该跳到有关<code>PropertyEditors</code> 的部分。）</em></p>
 </div>
 <div class="paragraph">
-<p>Consider the following two classes:</p>
+<p>考虑以下两个类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8788,8 +8760,7 @@ and their out-of-the-box implementation, you should skip ahead to the section ab
 </div>
 </div>
 <div class="paragraph">
-<p>The following code snippets show some examples of how to retrieve and manipulate some of
-the properties of instantiated <code>Companies</code> and <code>Employees</code>:</p>
+<p>以下代码片段显示了如何检索和操作实例化 <code>Companies</code> 和 <code>Employees</code> 的一些属性的一些示例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8811,142 +8782,95 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 </div>
 </div>
 <div class="sect3">
-<h4 id="beans-beans-conversion"><a class="anchor" href="#beans-beans-conversion"></a>3.4.2. Built-in PropertyEditor implementations</h4>
+<h4 id="beans-beans-conversion"><a class="anchor" href="#beans-beans-conversion"></a>3.4.2. 内置的 PropertyEditor 实现</h4>
 <div class="paragraph">
-<p>Spring uses the concept of <code>PropertyEditors</code> to effect the conversion between an
-<code>Object</code> and a <code>String</code>. If you think about it, it sometimes might be handy to be able
-to represent properties in a different way than the object itself. For example, a <code>Date</code>
-can be represented in a human readable way (as the <code>String</code> <code>'2007-14-09'</code>), while
-we&#8217;re still able to convert the human readable form back to the original date (or even
-better: convert any date entered in a human readable form, back to <code>Date</code> objects). This
-behavior can be achieved by <em>registering custom editors</em>, of type
-<code>java.beans.PropertyEditor</code>. Registering custom editors on a <code>BeanWrapper</code> or
-alternately in a specific IoC container as mentioned in the previous chapter, gives it
-the knowledge of how to convert properties to the desired type. Read more about
-<code>PropertyEditors</code> in the javadocs of the <code>java.beans</code> package provided by Oracle.</p>
+<p>Spring 使用 <code>PropertyEditors</code> 的概念来实现 <code>Object</code> 和 <code>String</code> 之间的转换。如果你仔细想想，有时候使用不同于对象本身的方式表示属性可能会比比对象本身更方便。 例如，<code>Date</code> 可以用人类可读的方式表示（如<code>String</code> <code>'2007-14-09'</code>），而我们仍然能够将人类可读的形式转换回原始日期（或者甚至更好：将任何日期以人类可读形式输入，返回 <code>Date</code> 对象）。这种行为可以通过注册 <code>java.beans.PropertyEditor</code> 类型的自定义编辑器来实现。在上一章中提到的在 <code>BeanWrapper</code> 上注册自定义编辑器，或者在特定的 IoC 容器中注册自定义编辑器，可以使其知道如何将属性转换为所需的类型。 你可以在 Oracle 提供的 <code>java.beans</code> 包的 javadoc 中阅读更多关于 <code>PropertyEditors</code> 的内容。</p>
 </div>
 <div class="paragraph">
-<p>A couple of examples where property editing is used in Spring:</p>
+<p>在 Spring 中使用属性编辑的几个例子：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>setting properties on beans</em> is done using <code>PropertyEditors</code>. When mentioning
-<code>java.lang.String</code> as the value of a property of some bean you&#8217;re declaring in XML
-file, Spring will (if the setter of the corresponding property has a
-<code>Class</code>-parameter) use the <code>ClassEditor</code> to try to resolve the parameter to a <code>Class</code>
-object.</p>
+<p>使用 <code>PropertyEditors</code> 来 <em>设置 bean 的属性</em>。当作为你在 XML 文件中声明的某个 bean 属性的值的 <code>java.lang.String</code> 时，Spring 将（如果相应属性的 setter 具有一个 <code>Class</code> 参数）使用 <code>ClassEditor</code> 来尝试将参数解析为 <code>Class</code> 对象。</p>
 </li>
 <li>
-<p><em>parsing HTTP request parameters</em> in Spring&#8217;s MVC framework is done using all kinds
-of <code>PropertyEditors</code> that you can manually bind in all subclasses of the
-<code>CommandController</code>.</p>
+<p>在 Spring 的 MVC 框架中 <em>解析HTTP请求参数 </em> 是使用各种 <code>PropertyEditors</code> 完成的，你可以在 <code>CommandController</code> 的所有子类中手动绑定。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Spring has a number of built-in <code>PropertyEditors</code> to make life easy. Each of those is
-listed below and they are all located in the <code>org.springframework.beans.propertyeditors</code>
-package. Most, but not all (as indicated below), are registered by default by
-<code>BeanWrapperImpl</code>. Where the property editor is configurable in some fashion, you can of
-course still register your own variant to override the default one:</p>
+<p>Spring 有一些内置的 <code>PropertyEditors</code> 来简化你代码。所有项目都在下表中列出了，它们都位于<code>org.springframework.beans.propertyeditors</code> 包中。大部分但不是全部（如下所示）由 <code>BeanWrapperImpl</code> 默认注册。在以某种方式配置属性编辑器的情况下，你当然可以注册自己的自定义编辑器来覆盖默认的行为：</p>
 </div>
 <table id="beans-beans-property-editors-tbl" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 12. Built-in PropertyEditors</caption>
+<caption class="title">Table 12. 内置 PropertyEditors</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Class</th>
-<th class="tableblock halign-left valign-top">Explanation</th>
+<th class="tableblock halign-left valign-top">类</th>
+<th class="tableblock halign-left valign-top">解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ByteArrayPropertyEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Editor for byte arrays. Strings will simply be converted to their corresponding byte
-representations. Registered by default by <code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">字节数组编辑器。字符串将被简单地转换为相应的字节表示。由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ClassEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Parses Strings representing classes to actual classes and the other way around. When a
-class is not found, an <code>IllegalArgumentException</code> is thrown. Registered by default by
-<code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">将表示类的字符串解析为实际类，反之亦然。当找不到类时，会抛出 <code>IllegalArgumentException</code> 。由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CustomBooleanEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Customizable property editor for <code>Boolean</code> properties. Registered by default by
-<code>BeanWrapperImpl</code>, but, can be overridden by registering custom instance of it as
-custom editor.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">为 <code>Boolean</code> 属性自定义属性编辑器。由 <code>BeanWrapperImpl</code> 默认注册，但可以通过将自定义实例注册为自定义编辑器来覆盖之前的配置。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CustomCollectionEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Property editor for Collections, converting any source <code>Collection</code> to a given target
-<code>Collection</code> type.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">集合属性编辑器，将任何源 <code>Collection</code> 转换成给定的目标 <code>Collection</code> 类型。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CustomDateEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Customizable property editor for java.util.Date, supporting a custom DateFormat. NOT
-registered by default. Must be user registered as needed with appropriate format.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">java.util.Date 自定义属性编辑器，支持自定义日期格式。默认并未注册。必须由用户根据需求以适当的格式注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>CustomNumberEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Customizable property editor for any Number subclass like <code>Integer</code>, <code>Long</code>, <code>Float</code>,
-<code>Double</code>. Registered by default by <code>BeanWrapperImpl</code>, but can be overridden by
-registering custom instance of it as a custom editor.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">自定义属性编辑器，用于任何Number 子类，如 <code>Integer</code>， <code>Long</code>，<code>Float</code>，<code>Double</code>。由 <code>BeanWrapperImpl</code> 默认注册，但可以通过将自定义实例注册为自定义编辑器来覆盖之前的配置。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>FileEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Capable of resolving Strings to <code>java.io.File</code> objects. Registered by default by
-<code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">能够将字符串解析为 <code>java.io.File</code> 对象。 由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>InputStreamEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-way property editor, capable of taking a text string and producing (via an
-intermediate <code>ResourceEditor</code> and <code>Resource</code>) an <code>InputStream</code>, so <code>InputStream</code>
-properties may be directly set as Strings. Note that the default usage will not close
-the <code>InputStream</code> for you! Registered by default by <code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">单向属性编辑器，能够接受一个文本字符串并生成（通过中间媒介 <code>ResourceEditor</code>和 <code>Resource</code>）一个 <code>InputStream</code> ，所以 <code>InputStream</code> 属性可以直接设置为 Strings。注意默认的用法不会为你关闭 <code>InputStream</code>！ 由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocaleEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Capable of resolving Strings to <code>Locale</code> objects and vice versa (the String format is
-<em class="language">[country]</em>[variant], which is the same thing the toString() method of
-Locale provides). Registered by default by <code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">能够将字符串解析为 <code>Locale</code> 对象，反之亦然（字符串格式是<em class="language">[country]</em>[variant]，与Locale 提供的 toString() 方法是一样的）。由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PatternEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Capable of resolving Strings to <code>java.util.regex.Pattern</code> objects and vice versa.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> 能够将字符串解析为 <code>java.util.regex.Pattern</code> 对象，反之亦然。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>PropertiesEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Capable of converting Strings (formatted using the format as defined in the javadocs
-of the <code>java.util.Properties</code> class) to <code>Properties</code> objects. Registered by default
-by <code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">能够将字符串（使用<code>java.util.Properties</code> 类的 javadoc 中定义的格式进行格式化）转换为 <code>Properties</code> 对象。由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>StringTrimmerEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Property editor that trims Strings. Optionally allows transforming an empty string
-into a <code>null</code> value. NOT registered by default; must be user registered as needed.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">修剪字符串的属性编辑器。 可以允许将空字符串转换为 <code>null</code> 值。默认并未注册;必须由用户根据需求注册。</td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>URLEditor</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Capable of resolving a String representation of a URL to an actual <code>URL</code> object.
-Registered by default by <code>BeanWrapperImpl</code>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">能够将 <code>URL</code> 的字符串表示解析为实际的 <code>URL</code> 对象。 由 <code>BeanWrapperImpl</code> 默认注册。</p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Spring uses the <code>java.beans.PropertyEditorManager</code> to set the search path for property
-editors that might be needed. The search path also includes <code>sun.bean.editors</code>, which
-includes <code>PropertyEditor</code> implementations for types such as <code>Font</code>, <code>Color</code>, and most of
-the primitive types. Note also that the standard JavaBeans infrastructure will
-automatically discover <code>PropertyEditor</code> classes (without you having to register them
-explicitly) if they are in the same package as the class they handle, and have the same
-name as that class, with <code>'Editor'</code> appended; for example, one could have the following
-class and package structure, which would be sufficient for the <code>FooEditor</code> class to be
-recognized and used as the <code>PropertyEditor</code> for <code>Foo</code>-typed properties.</p>
+<p>Spring使用 <code>java.beans.PropertyEditorManager</code> 来设置可能需要的属性编辑器的搜索路径。 搜索路径还包括 <code>sun.bean.editors</code> ，其中包括用于 <code>Font</code>，<code>Color</code> 和大多数基本类型的 <code>PropertyEditor</code> 实现。还要注意，如果 <code>PropertyEditor</code> 类与它们处理的类位于同一个包中，并且与该类具有相同的名称，并以 <code>'Editor'</code> ，即使他们没有被显式注册，标准 JavaBeans 基础结构约会自动发现 <code>PropertyEditor</code> 类; 例如，对于以下类和包结构，这足以使 <code>FooEditor</code> 类被识别并用作 <code>Foo</code> 类型属性的 <code>PropertyEditor</code>。</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -8958,12 +8882,8 @@ recognized and used as the <code>PropertyEditor</code> for <code>Foo</code>-type
 </div>
 </div>
 <div class="paragraph">
-<p>Note that you can also use the standard <code>BeanInfo</code> JavaBeans mechanism here as well
-(described
-<a href="http://docs.oracle.com/javase/tutorial/javabeans/advanced/customization.html">in
-not-amazing-detail here</a>). Find below an example of using the <code>BeanInfo</code> mechanism for
-explicitly registering one or more <code>PropertyEditor</code> instances with the properties of an
-associated class.</p>
+<p>注意你也可以在这里使用标准的 <code>BeanInfo</code> JavaBeans 机制（在
+  <a href="http://docs.oracle.com/javase/tutorial/javabeans/advanced/customization.html">这里</a>描述）。下面是一个使用 <code>BeanInfo</code> 机制来显式注册一个或多个 <code>PropertyEditor</code> 实例和关联类的属性的例子。</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -8975,8 +8895,7 @@ associated class.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is the Java source code for the referenced <code>FooBeanInfo</code> class. This would
-associate a <code>CustomNumberEditor</code> with the <code>age</code> property of the <code>Foo</code> class.</p>
+<p>这里是引用的 <code>FooBeanInfo</code> 类的 Java 源代码。这会将 <code>CustomNumberEditor</code> 与 <code>Foo</code> 类的 <code>age</code> 属性相关联。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9000,45 +8919,21 @@ associate a <code>CustomNumberEditor</code> with the <code>age</code> property o
 </div>
 </div>
 <div class="sect4">
-<h5 id="beans-beans-conversion-customeditor-registration"><a class="anchor" href="#beans-beans-conversion-customeditor-registration"></a>Registering additional custom PropertyEditors</h5>
+<h5 id="beans-beans-conversion-customeditor-registration"><a class="anchor" href="#beans-beans-conversion-customeditor-registration"></a>注册额外的自定义属性编辑器</h5>
 <div class="paragraph">
-<p>When setting bean properties as a string value, a Spring IoC container ultimately uses
-standard JavaBeans <code>PropertyEditors</code> to convert these Strings to the complex type of the
-property. Spring pre-registers a number of custom <code>PropertyEditors</code> (for example, to
-convert a classname expressed as a string into a real <code>Class</code> object). Additionally,
-Java&#8217;s standard JavaBeans <code>PropertyEditor</code> lookup mechanism allows a <code>PropertyEditor</code>
-for a class simply to be named appropriately and placed in the same package as the class
-it provides support for, to be found automatically.</p>
+<p>将 bean 属性设置为字符串值时，Spring IoC 容器最终将使用标准 JavaBean <code>PropertyEditors</code> 将这些字符串转换为该属性的复杂类型。 Spring 预注册了一些定制的 <code>PropertyEditors</code>（例如，将一个以字符串表示的类名转换为一个真实的 <code>Class</code> 对象）。另外，Java 的标准 JavaBean <code>PropertyEditor</code> 查找机制允许只要一个 <code>PropertyEditor</code> 类被恰当地命名，并且被放在与它提供支持的类相同的包中，便能被自动找到。</p>
 </div>
 <div class="paragraph">
-<p>If there is a need to register other custom <code>PropertyEditors</code>, there are several
-mechanisms available. The most manual approach, which is not normally convenient or
-recommended, is to simply use the <code>registerCustomEditor()</code> method of the
-<code>ConfigurableBeanFactory</code> interface, assuming you have a <code>BeanFactory</code> reference.
-Another, slightly more convenient, mechanism is to use a special bean factory
-post-processor called <code>CustomEditorConfigurer</code>. Although bean factory post-processors
-can be used with <code>BeanFactory</code> implementations, the <code>CustomEditorConfigurer</code> has a
-nested property setup, so it is strongly recommended that it is used with the
-<code>ApplicationContext</code>, where it may be deployed in similar fashion to any other bean, and
-automatically detected and applied.</p>
+<p>如果需要注册其他的自定义 <code>PropertyEditors</code>，有几种机制可用。通常不方便或不推荐的最手动的方法是假设你有一个 <code>BeanFactory</code> 引用，使用 <code>ConfigurableBeanFactory</code> 接口的 <code>registerCustomEditor()</code>方法。另一种稍微方便一点的机制是使用一个名为 <code>CustomEditorConfigurer</code> 的特殊的 bean 工厂 post-processor。尽管 bean 工厂 post-processor 可以与 <code>BeanFactory</code> 实现结合使用，但是 <code>CustomEditorConfigurer</code> 具有嵌套的属性设置，因此强烈建议将其与 <code>ApplicationContext</code> 一起使用，它可以以类似于任何其他 bean 的方式进行部署，并自动检测和应用。</p>
 </div>
 <div class="paragraph">
-<p>Note that all bean factories and application contexts automatically use a number of
-built-in property editors, through their use of something called a <code>BeanWrapper</code> to
-handle property conversions. The standard property editors that the <code>BeanWrapper</code>
-registers are listed in <a href="#beans-beans-conversion">the previous section</a>. Additionally,
-<code>ApplicationContexts</code> also override or add an additional number of editors to handle
-resource lookups in a manner appropriate to the specific application context type.</p>
+<p>请注意，所有的 bean 工厂和应用程序上下文会自动使用一些内置的属性编辑器，通过使用称为 <code>BeanWrapper</code> 的东西来处理属性转换。<a href="#beans-beans-conversion">上一节</a> 中列出了 <code>BeanWrapper</code> 注册的标准属性编辑器。此外，<code>ApplicationContexts</code> 还会覆盖或添加额外数量的编辑器，以适合特定应用程序上下文类型的方式处理资源查找。</p>
 </div>
 <div class="paragraph">
-<p>Standard JavaBeans <code>PropertyEditor</code> instances are used to convert property values
-expressed as strings to the actual complex type of the property.
-<code>CustomEditorConfigurer</code>, a bean factory post-processor, may be used to conveniently add
-support for additional <code>PropertyEditor</code> instances to an <code>ApplicationContext</code>.</p>
+<p>标准 JavaBeans <code>PropertyEditor</code> 实例用于将以字符串表示的属性值转换为属性的实际复杂类型。 CustomEditorConfigurer（一个 bean 工厂 post-processor ）可以方便地将对额外 <code>PropertyEditor</code> 实例的支持添加到一个ApplicationContext中。</p>
 </div>
 <div class="paragraph">
-<p>Consider a user class <code>ExoticType</code>, and another class <code>DependsOnExoticType</code> which needs
-<code>ExoticType</code> set as a property:</p>
+<p>考虑一个用户类 <code>ExoticType</code> ，以及需要将 <code>ExoticType</code> 设置为属性的另一个类<code>DependsOnExoticType</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9064,9 +8959,7 @@ support for additional <code>PropertyEditor</code> instances to an <code>Applica
 </div>
 </div>
 <div class="paragraph">
-<p>When things are properly set up, we want to be able to assign the type property as a
-string, which a <code>PropertyEditor</code> will behind the scenes convert into an actual
-<code>ExoticType</code> instance:</p>
+<p>当设置正确的时候，我们希望能够将类型属性赋值为一个字符串，<code>PropertyEditor</code> 会在幕后将这个字符串转换成一个实际的 <code>ExoticType</code> 实例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9076,7 +8969,7 @@ string, which a <code>PropertyEditor</code> will behind the scenes convert into 
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>PropertyEditor</code> implementation could look similar to this:</p>
+<p><code>PropertyEditor</code> 的实现可能看起来像这样：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9092,8 +8985,7 @@ string, which a <code>PropertyEditor</code> will behind the scenes convert into 
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, we use <code>CustomEditorConfigurer</code> to register the new <code>PropertyEditor</code> with the
-<code>ApplicationContext</code>, which will then be able to use it as needed:</p>
+<p>最后，我们使用 <code>CustomEditorConfigurer</code> 向 <code>ApplicationContext</code> 注册新的 <code>PropertyEditor</code> ，然后根据需要使用它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9107,25 +8999,12 @@ string, which a <code>PropertyEditor</code> will behind the scenes convert into 
 </div>
 </div>
 <div class="sect5">
-<h6 id="beans-beans-conversion-customeditor-registration-per"><a class="anchor" href="#beans-beans-conversion-customeditor-registration-per"></a>Using PropertyEditorRegistrars</h6>
+<h6 id="beans-beans-conversion-customeditor-registration-per"><a class="anchor" href="#beans-beans-conversion-customeditor-registration-per"></a>使用 PropertyEditorRegistrars</h6>
 <div class="paragraph">
-<p>Another mechanism for registering property editors with the Spring container is to
-create and use a <code>PropertyEditorRegistrar</code>. This interface is particularly useful when
-you need to use the same set of property editors in several different situations: write
-a corresponding registrar and reuse that in each case. <code>PropertyEditorRegistrars</code> work
-in conjunction with an interface called <code>PropertyEditorRegistry</code>, an interface that is
-implemented by the Spring <code>BeanWrapper</code> (and <code>DataBinder</code>). <code>PropertyEditorRegistrars</code>
-are particularly convenient when used in conjunction with the <code>CustomEditorConfigurer</code>
-(introduced <a href="#beans-beans-conversion-customeditor-registration">here</a>), which exposes a
-property called <code>setPropertyEditorRegistrars(..)</code>: <code>PropertyEditorRegistrars</code> added to a
-<code>CustomEditorConfigurer</code> in this fashion can easily be shared with <code>DataBinder</code> and
-Spring MVC <code>Controllers</code>. Furthermore, it avoids the need for synchronization on custom
-editors: a <code>PropertyEditorRegistrar</code> is expected to create fresh <code>PropertyEditor</code>
-instances for each bean creation attempt.</p>
+<p>向 Spring 容器注册属性编辑器的另一种机制是创建和使用 <code>PropertyEditorRegistrar</code>。当你需要在几种不同的情况下使用同一组属性编辑器时，此接口特别有用：编写相应的注册器，并在每种情况下重用。<code>PropertyEditorRegistrars</code> 与一个名为 <code>PropertyEditorRegistry</code> 的接口同时使用，这是一个被 Spring <code>BeanWrapper</code>（和 <code>DataBinder</code> ）实现的接口。 <code>PropertyEditorRegistrars</code> 与 <code>CustomEditorConfigurer</code>（在 <a href="#beans-beans-conversion-customeditor-registration">这里</a> 介绍）结合使用时特别方便，它暴露了一个名为<code>setPropertyEditorRegistrars(..)</code> 的属性：以这种方式添加到 <code>CustomEditorConfigurer</code> 的 <code>PropertyEditorRegistrars</code> 可以很容易地与<code>DataBinder</code> 和 Spring MVC <code>Controllers</code> 共享。此外，它避免了在自定义编辑器上需要同步的缺点：<code>PropertyEditorRegistrar</code> 应该为每次创建 bean 的尝试对应创建新的 <code>PropertyEditor</code> 实例。</p>
 </div>
 <div class="paragraph">
-<p>Using a <code>PropertyEditorRegistrar</code> is perhaps best illustrated with an example. First
-off, you need to create your own <code>PropertyEditorRegistrar</code> implementation:</p>
+<p>使用 <code>PropertyEditorRegistrar</code> 最好的方法在例子中。首先，您需要创建自己的 <code>PropertyEditorRegistrar</code> 实现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9144,13 +9023,10 @@ off, you need to create your own <code>PropertyEditorRegistrar</code> implementa
 </div>
 </div>
 <div class="paragraph">
-<p>See also the <code>org.springframework.beans.support.ResourceEditorRegistrar</code> for an example
-<code>PropertyEditorRegistrar</code> implementation. Notice how in its implementation of the
-<code>registerCustomEditors(..)</code> method it creates new instances of each property editor.</p>
+<p>有关 <code>PropertyEditorRegistrar</code> 实现的示例，另请参阅 <code>org.springframework.beans.support.ResourceEditorRegistrar</code> 。 注意在它的 <code>registerCustomEditors(..)</code> 方法的实现中，它为每个属性编辑器创建新的实例。</p>
 </div>
 <div class="paragraph">
-<p>Next we configure a <code>CustomEditorConfigurer</code> and inject an instance of our
-<code>CustomPropertyEditorRegistrar</code> into it:</p>
+<p>接下来，我们配置一个 <code>CustomEditorConfigurer</code> 并将其 <code>CustomPropertyEditorRegistrar</code> 的一个实例注入到其中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9167,11 +9043,7 @@ off, you need to create your own <code>PropertyEditorRegistrar</code> implementa
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, and in a bit of a departure from the focus of this chapter, for those of you
-using <a href="web.html#mvc">Spring&#8217;s MVC web framework</a>, using <code>PropertyEditorRegistrars</code> in
-conjunction with data-binding <code>Controllers</code> (such as <code>SimpleFormController</code>) can be very
-convenient. Find below an example of using a <code>PropertyEditorRegistrar</code> in the
-implementation of an <code>initBinder(..)</code> method:</p>
+<p>最后，在本章的重点之外，对于那些使用 <a href="web.html#mvc">Spring 的 MVC Web 框架</a> 的使用者来说，使用 <code>PropertyEditorRegistrars</code> 和数据绑定 <code>Controllers</code>（如<code>SimpleFormController</code>）非常方便。下面的例子使用 <code>PropertyEditorRegistrar</code> 实现一个 <code>initBinder(..)</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9193,10 +9065,7 @@ implementation of an <code>initBinder(..)</code> method:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This style of <code>PropertyEditor</code> registration can lead to concise code (the implementation
-of <code>initBinder(..)</code> is just one line long!), and allows common <code>PropertyEditor</code>
-registration code to be encapsulated in a class and then shared amongst as many
-<code>Controllers</code> as needed.</p>
+<p>这种 <code>PropertyEditor</code> 注册的风格可以简化代码（<code>initBinder(..)</code> 的实现只是一行！），并允许将通用的 <code>PropertyEditor</code> 注册代码封装在一个类中，然后根据需要在众多 <code>Controllers</code> 之间共享。</p>
 </div>
 </div>
 </div>
