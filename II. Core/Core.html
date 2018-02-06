@@ -9072,19 +9072,14 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 </div>
 </div>
 <div class="sect2">
-<h3 id="core-convert"><a class="anchor" href="#core-convert"></a>3.5. Spring Type Conversion</h3>
+<h3 id="core-convert"><a class="anchor" href="#core-convert"></a>3.5. Spring 类型转换</h3>
 <div class="paragraph">
-<p>Spring 3 introduces a <code>core.convert</code> package that provides a general type conversion
-system. The system defines an SPI to implement type conversion logic, as well as an API
-to execute type conversions at runtime. Within a Spring container, this system can be
-used as an alternative to PropertyEditors to convert externalized bean property value
-strings to required property types. The public API may also be used anywhere in your
-application where type conversion is needed.</p>
+<p>Spring 3 引入了一个 <code>core.convert</code> 包，提供了一个通用的类型转换系统。系统定义了一个 SPI 来实现类型转换逻辑，以及一个在运行时执行类型转换的 API。在一个Spring容器中，这个系统可以用来替代属性编辑器来将外部化的 bean 属性值字符串转换为所需的属性类型。公共 API 也可以在需要进行类型转换的应用程序中使用。</p>
 </div>
 <div class="sect3">
 <h4 id="core-convert-Converter-API"><a class="anchor" href="#core-convert-Converter-API"></a>3.5.1. Converter SPI</h4>
 <div class="paragraph">
-<p>The SPI to implement type conversion logic is simple and strongly typed:</p>
+<p>实现类型转换逻辑的 SPI 是简单的而且是强类型的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9098,22 +9093,13 @@ application where type conversion is needed.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To create your own converter, simply implement the interface above. Parameterize <code>S</code>
-as the type you are converting from, and <code>T</code> as the type you are converting to. Such a
-converter can also be applied transparently if a collection or array of <code>S</code> needs to be
-converted to an array or collection of <code>T</code>, provided that a delegating array/collection
-converter has been registered as well (which <code>DefaultConversionService</code> does by default).</p>
+<p>要创建自己的转换器，只需实现上面的接口。 将 <code>S</code> 指定为要转换的类型，将 <code>T</code> 指定为转换后的类型。 如果 <code>S</code> 的集合或者数组需要被转换为 <code>T</code> 的数组或者集合的话，这样的转换器也可以被透明地应用，只要委托的数组/收集转换器也被注册（默认是 <code>DefaultConversionService</code>）。</p>
 </div>
 <div class="paragraph">
-<p>For each call to <code>convert(S)</code>, the source argument is guaranteed to be NOT null. Your
-Converter may throw any unchecked exception if conversion fails; specifically, an
-<code>IllegalArgumentException</code> should be thrown to report an invalid source value.
-Take care to ensure that your <code>Converter</code> implementation is thread-safe.</p>
+<p>对于每个<code>convert(S)</code> 调用，源参数保证不为 null。如果转换失败，您的转换器可能会抛出任何未检查的异常; 具体而言，应抛出 <code>IllegalArgumentException</code> 异常来报告无效的源值。 注意确保您的 <code>Converter</code> 实现是线程安全的。</p>
 </div>
 <div class="paragraph">
-<p>Several converter implementations are provided in the <code>core.convert.support</code> package as
-a convenience. These include converters from Strings to Numbers and other common types.
-Consider <code>StringToInteger</code> as an example for a typical <code>Converter</code> implementation:</p>
+<p>为方便起见，<code>core.convert.support</code> 包提供了几个转换器实现。这些包括从字符串到数字和其他常见类型的转换器。 以 <code>StringToInteger</code>  作为典型的 <code>Converter</code> 实现的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9130,11 +9116,9 @@ Consider <code>StringToInteger</code> as an example for a typical <code>Converte
 </div>
 </div>
 <div class="sect3">
-<h4 id="core-convert-ConverterFactory-SPI"><a class="anchor" href="#core-convert-ConverterFactory-SPI"></a>3.5.2. ConverterFactory</h4>
+<h4 id="core-convert-ConverterFactory-SPI"><a class="anchor" href="#core-convert-ConverterFactory-SPI"></a>3.5.2. ConverterFactory 转换工厂</h4>
 <div class="paragraph">
-<p>When you need to centralize the conversion logic for an entire class hierarchy, for
-example, when converting from String to java.lang.Enum objects, implement
-<code>ConverterFactory</code>:</p>
+<p>当您需要集中整个类层次结构的转换逻辑时，例如，从 String 转换为 java.lang.Enum 对象时，实现 <code>ConverterFactory</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9148,12 +9132,10 @@ example, when converting from String to java.lang.Enum objects, implement
 </div>
 </div>
 <div class="paragraph">
-<p>Parameterize S to be the type you are converting from and R to be the base type defining
-the <em>range</em> of classes you can convert to. Then implement getConverter(Class&lt;T&gt;),
-where T is a subclass of R.</p>
+<p>将 S 指定为要转换的类型，将 R 指定为转换之后允许的类范围的基本类型。然后实现 getConverter(Class&lt;T&gt;)，其中 T 是 R 的子类。</p>
 </div>
 <div class="paragraph">
-<p>Consider the <code>StringToEnum</code> ConverterFactory as an example:</p>
+<p>以 <code>StringToEnum</code> ConverterFactory 为例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9182,14 +9164,9 @@ where T is a subclass of R.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="core-convert-GenericConverter-SPI"><a class="anchor" href="#core-convert-GenericConverter-SPI"></a>3.5.3. GenericConverter</h4>
+<h4 id="core-convert-GenericConverter-SPI"><a class="anchor" href="#core-convert-GenericConverter-SPI"></a>3.5.3. GenericConverter 通用转换器</h4>
 <div class="paragraph">
-<p>When you require a sophisticated Converter implementation, consider the GenericConverter
-interface. With a more flexible but less strongly typed signature, a GenericConverter
-supports converting between multiple source and target types. In addition, a
-GenericConverter makes available source and target field context you can use when
-implementing your conversion logic. Such context allows a type conversion to be driven
-by a field annotation, or generic information declared on a field signature.</p>
+<p>当您需要某个复杂的 Converter 实现时，请考虑 GenericConverter 接口。使用更灵活但更少的强类型签名，GenericConverter 支持在多个源类型和目标类型之间进行转换。此外，GenericConverter 还提供了在实现转换逻辑时可以使用的源和目标字段上下文。 这样的上下文允许类型转换由字段注解或在字段签名上声明的通用信息来驱动。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9205,18 +9182,10 @@ by a field annotation, or generic information declared on a field signature.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To implement a GenericConverter, have getConvertibleTypes() return the supported
-source&#8594;target type pairs. Then implement convert(Object, TypeDescriptor,
-TypeDescriptor) to implement your conversion logic. The source TypeDescriptor provides
-access to the source field holding the value being converted. The target TypeDescriptor
-provides access to the target field where the converted value will be set.</p>
+<p>要实现 GenericConverter，getConvertibleTypes() 返回支持的源→目标类型对。然后实现 convert(Object, TypeDescriptor, TypeDescriptor) 来实现你的转换逻辑。源 TypeDescriptor 提供对持有正在转换的值的源字段的访问。 目标 TypeDescriptor 提供对设置转换值的目标字段的访问。</p>
 </div>
 <div class="paragraph">
-<p>A good example of a GenericConverter is a converter that converts between a Java Array
-and a Collection. Such an ArrayToCollectionConverter introspects the field that declares
-the target Collection type to resolve the Collection&#8217;s element type. This allows each
-element in the source array to be converted to the Collection element type before the
-Collection is set on the target field.</p>
+<p>GenericConverter的一个很好的例子是在 Java Array 和 Collection 之间转换的转换器。这样的 ArrayToCollectionConverter 内省了声明目标 Collection 类型的字段来解析 Collection 的元素类型。 这允许源数组中的每个元素在目标字段被设置为目标 Collection 类型之前转换为 Collection 元素类型。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -9226,8 +9195,7 @@ Collection is set on the target field.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Because GenericConverter is a more complex SPI interface, only use it when you need it.
-Favor Converter or ConverterFactory for basic type conversion needs.</p>
+<p>由于 GenericConverter 是一个更复杂的 SPI 接口，只有在需要时才使用它。Converter 或 ConverterFactory 用于基本类型转换需求。</p>
 </div>
 </td>
 </tr>
@@ -9236,12 +9204,7 @@ Favor Converter or ConverterFactory for basic type conversion needs.</p>
 <div class="sect4">
 <h5 id="core-convert-ConditionalGenericConverter-SPI"><a class="anchor" href="#core-convert-ConditionalGenericConverter-SPI"></a>ConditionalGenericConverter</h5>
 <div class="paragraph">
-<p>Sometimes you only want a <code>Converter</code> to execute if a specific condition holds true. For
-example, you might only want to execute a <code>Converter</code> if a specific annotation is present
-on the target field. Or you might only want to execute a <code>Converter</code> if a specific method,
-such as a <code>static valueOf</code> method, is defined on the target class.
-<code>ConditionalGenericConverter</code> is the union of the <code>GenericConverter</code> and
-<code>ConditionalConverter</code> interfaces that allows you to define such custom matching criteria:</p>
+<p>有时你只想要 <code>Converter</code> 在特定的条件成立的情况下执行。例如，如果目标字段上存在特定的注解，则你可能只想执行某个 <code>Converter</code> 。或者，如果在目标类上定义了特定的方法（如 <code>static valueOf</code> 方法），就执行某个 <code>Converter</code>。<code>ConditionalGenericConverter</code> 是 <code>GenericConverter</code> 和 <code>ConditionalConverter</code> 接口的联合，允许你定义这样的自定义匹配条件：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9258,19 +9221,14 @@ such as a <code>static valueOf</code> method, is defined on the target class.
 </div>
 </div>
 <div class="paragraph">
-<p>A good example of a <code>ConditionalGenericConverter</code> is an EntityConverter that converts
-between an persistent entity identifier and an entity reference. Such a EntityConverter
-might only match if the target entity type declares a static finder method e.g.
-<code>findAccount(Long)</code>. You would perform such a finder method check in the implementation of
-<code>matches(TypeDescriptor, TypeDescriptor)</code>.</p>
+<p><code>ConditionalGenericConverter</code> 的一个很好的例子是一个 EntityConverter，它在持久化实体标识符和实体引用之间进行转换。 这种 EntityConverter 可能只有在目标实体类型声明静态查找方法（例如，<code>findAccount(Long)</code>）的时候才会匹配成功。 你可以在 <code>matches(TypeDescriptor, TypeDescriptor)</code> 的实现中执行这样的 finder 方法检查。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="core-convert-ConversionService-API"><a class="anchor" href="#core-convert-ConversionService-API"></a>3.5.4. ConversionService API</h4>
+<h4 id="core-convert-ConversionService-API"><a class="anchor" href="#core-convert-ConversionService-API"></a>3.5.4. ConversionService API 转换服务接口</h4>
 <div class="paragraph">
-<p>The ConversionService defines a unified API for executing type conversion logic at
-runtime. Converters are often executed behind this facade interface:</p>
+<p>ConversionService 定义了用于在运行时执行类型转换逻辑的统一 API。转换器通常在这个外观接口后执行：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9290,26 +9248,16 @@ runtime. Converters are often executed behind this facade interface:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Most ConversionService implementations also implement <code>ConverterRegistry</code>, which
-provides an SPI for registering converters. Internally, a ConversionService
-implementation delegates to its registered converters to carry out type conversion logic.</p>
+<p>大多数 ConversionService 实现也实现了 <code>ConverterRegistry</code>，它提供了一个用于注册转换器的 SPI。 在内部，ConversionService 实现委托其已注册的转换器来执行类型转换逻辑。</p>
 </div>
 <div class="paragraph">
-<p>A robust ConversionService implementation is provided in the <code>core.convert.support</code>
-package. <code>GenericConversionService</code> is the general-purpose implementation suitable for
-use in most environments. <code>ConversionServiceFactory</code> provides a convenient factory for
-creating common ConversionService configurations.</p>
+<p>在 <code>core.convert.support</code> 包中提供了强健的 ConversionService 实现。 <code>GenericConversionService</code> 是适用于大多数环境的通用实现。<code>ConversionServiceFactory</code> 为创建常见的 ConversionService 配置提供了一个便利的工厂。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="core-convert-Spring-config"><a class="anchor" href="#core-convert-Spring-config"></a>3.5.5. Configuring a ConversionService</h4>
+<h4 id="core-convert-Spring-config"><a class="anchor" href="#core-convert-Spring-config"></a>3.5.5. 配置 ConversionService</h4>
 <div class="paragraph">
-<p>A ConversionService is a stateless object designed to be instantiated at application
-startup, then shared between multiple threads. In a Spring application, you typically
-configure a ConversionService instance per Spring container (or ApplicationContext).
-That ConversionService will be picked up by Spring and then used whenever a type
-conversion needs to be performed by the framework. You may also inject this
-ConversionService into any of your beans and invoke it directly.</p>
+<p>ConversionService 是一个无状态对象，被设计用于在应用程序启动时实例化，然后在多个线程之间共享。 在 Spring 应用程序中，通常为每个 Spring 容器（或 ApplicationContext）配置一个 ConversionService 实例。 该 ConversionService 将被 Spring 获取，然后在框架需要执行类型转换时使用。 您也可以将这个 ConversionService 注入到任何一个bean中，并直接调用它。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -9319,16 +9267,14 @@ ConversionService into any of your beans and invoke it directly.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If no ConversionService is registered with Spring, the original PropertyEditor-based
-system is used.</p>
+<p>如果 Spring 中没有注册 ConversionService，则使用原始的基于 PropertyEditor 的系统。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>To register a default ConversionService with Spring, add the following bean definition
-with id <code>conversionService</code>:</p>
+<p>要用 Spring 注册一个默认的 ConversionService，需要添加下面的id 为 <code>conversionService</code> 的 bean 定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9337,10 +9283,7 @@ with id <code>conversionService</code>:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A default ConversionService can convert between strings, numbers, enums, collections,
-maps, and other common types. To supplement or override the default converters with your
-own custom converter(s), set the <code>converters</code> property. Property values may implement
-either of the Converter, ConverterFactory, or GenericConverter interfaces.</p>
+<p>默认的 ConversionService 可以在字符串，数字，枚举，集合，map 和其他常用类型之间进行转换。 要用自定义转换器补充或覆盖默认转换器，需要设置 <code>converters</code> 属性。属性值可以是 Converter，ConverterFactory 或 GenericConverter 接口的实现。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9355,20 +9298,16 @@ either of the Converter, ConverterFactory, or GenericConverter interfaces.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>It is also common to use a ConversionService within a Spring MVC application. See
-<a href="web.html#mvc-config-conversion">Conversion and Formatting</a> in the Spring MVC chapter.</p>
+<p>在 Spring MVC 应用程序中使用 ConversionService 也很常见。 请参阅 Spring MVC 章节中的 <a href="web.html#mvc-config-conversion">转换和格式化</a>。</p>
 </div>
 <div class="paragraph">
-<p>In certain situations you may wish to apply formatting during conversion. See
-<a href="#format-FormatterRegistry-SPI">FormatterRegistry SPI</a> for details on using
-<code>FormattingConversionServiceFactoryBean</code>.</p>
+<p>在某些情况下，您可能希望在转换过程中对其进行格式化。有关使用 <code>FormattingConversionServiceFactoryBean</code> 的详细信息，请参阅 <a href="#format-FormatterRegistry-SPI">FormatterRegistry SPI</a>。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="core-convert-programmatic-usage"><a class="anchor" href="#core-convert-programmatic-usage"></a>3.5.6. Using a ConversionService programmatically</h4>
+<h4 id="core-convert-programmatic-usage"><a class="anchor" href="#core-convert-programmatic-usage"></a>3.5.6. 编程使用 ConversionService</h4>
 <div class="paragraph">
-<p>To work with a ConversionService instance programmatically, simply inject a reference to
-it like you would for any other bean:</p>
+<p>要以编程方式使用 ConversionServic e实例，只需像为其他任何 bean 注入引用即可：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9387,13 +9326,10 @@ it like you would for any other bean:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>For most use cases, the <code>convert</code> method specifying the <em>targetType</em> can be used but it
-will not work with more complex types such as a collection of a parameterized element.
-If you want to convert a <code>List</code> of <code>Integer</code> to a <code>List</code> of <code>String</code> programmatically,
-for instance, you need to provide a formal definition of the source and target types.</p>
+<p>对于大多数使用用例，可以使用指定 <em>targetType</em> 的 <code>convert</code> 方法，但这不适用于更复杂的类型，如参数化元素的集合。例如，如果要以编程方式将 <code>Integer</code> <code>List</code> 转换为<code>String</code> <code>List</code>，则需要提供源和目标类型的格式化定义。</p>
 </div>
 <div class="paragraph">
-<p>Fortunately, <code>TypeDescriptor</code> provides various options to make that straightforward:</p>
+<p>幸运的是，<code>TypeDescriptor</code>  提供了多种选项来简化实现这样的功能：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9406,16 +9342,10 @@ cs.convert(input,
 </div>
 </div>
 <div class="paragraph">
-<p>Note that <code>DefaultConversionService</code> registers converters automatically which are
-appropriate for most environments. This includes collection converters, scalar
-converters, and also basic <code>Object</code> to <code>String</code> converters. The same converters can
-be registered with any <code>ConverterRegistry</code> using the <em>static</em> <code>addDefaultConverters</code>
-method on the <code>DefaultConversionService</code> class.</p>
+<p>注意 <code>DefaultConversionService</code>  会自动注册适用于大多数环境的转换器。 这包括集合转换器，标量转换器，以及基本的 <code>Object</code> 到 <code>String</code> 的转换器。可以使用 <code>DefaultConversionService</code> 类上的 <em>static</em> <code>addDefaultConverters</code> 方法将相同的转换器注册到任何 <code>ConverterRegistry</code>。</p>
 </div>
 <div class="paragraph">
-<p>Converters for value types will be reused for arrays and collections, so there is
-no need to create a specific converter to convert from a <code>Collection</code> of <code>S</code> to a
-<code>Collection</code> of <code>T</code>, assuming that standard collection handling is appropriate.</p>
+<p>值类型转换器将被重用于数组和集合，因此，假设标准的集合处理是合适的，就不需要创建一个特定的转换器来从 <code>S</code> 集合转换为 <code>T</code> 集合。</p>
 </div>
 </div>
 </div>
