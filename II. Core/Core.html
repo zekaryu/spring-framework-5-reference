@@ -9597,22 +9597,15 @@ cs.convert(input,
 </div>
 </div>
 <div class="sect2">
-<h3 id="format-configuring-formatting-globaldatetimeformat"><a class="anchor" href="#format-configuring-formatting-globaldatetimeformat"></a>3.7. Configuring a global date &amp; time format</h3>
+<h3 id="format-configuring-formatting-globaldatetimeformat"><a class="anchor" href="#format-configuring-formatting-globaldatetimeformat"></a>3.7. 配置全局的日期和时间格式</h3>
 <div class="paragraph">
-<p>By default, date and time fields that are not annotated with <code>@DateTimeFormat</code> are
-converted from strings using the <code>DateFormat.SHORT</code> style. If you prefer, you can
-change this by defining your own global format.</p>
+<p>默认情况下，未使用 <code>@DateTimeFormat</code> 注解的日期和时间字段使用 <code>DateFormat.SHORT</code> 风格从字符串转换而来。如果你需要，你可以通过定义你自己的全局格式来改变现有行为。</p>
 </div>
 <div class="paragraph">
-<p>You will need to ensure that Spring does not register default formatters, and instead
-you should register all formatters manually. Use the
-<code>org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar</code> or
-<code>org.springframework.format.datetime.DateFormatterRegistrar</code> class depending on whether
-you use the Joda Time library.</p>
+<p>你需要确保 Spring 不会注册默认 formatter，而应该手动注册所有 formatter。使用 <code>org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar</code> 还是 <code>org.springframework.format.datetime.DateFormatterRegistrar</code> 类取决于你是否使用Joda时间库。</p>
 </div>
 <div class="paragraph">
-<p>For example, the following Java configuration will register a global ' `yyyyMMdd&#8217;
-format. This example does not depend on the Joda Time library:</p>
+<p>例如，下面的 Java 配置将会注册一个全局的 “yyyyMMdd” 格式。这个例子不依赖于 Joda 时间库：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9639,9 +9632,7 @@ format. This example does not depend on the Joda Time library:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you prefer XML based configuration you can use a
-<code>FormattingConversionServiceFactoryBean</code>. Here is the same example, this time using Joda
-Time:</p>
+<p>如果你更喜欢基于 XML 的配置，则可以使用 <code>FormattingConversionServiceFactoryBean</code>。同样的例子，这次使用 Joda Time：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9682,22 +9673,14 @@ Time:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Joda Time provides separate distinct types to represent <code>date</code>, <code>time</code> and <code>date-time</code>
-values. The <code>dateFormatter</code>, <code>timeFormatter</code> and <code>dateTimeFormatter</code> properties of the
-<code>JodaTimeFormatterRegistrar</code> should be used to configure the different formats for each
-type. The <code>DateTimeFormatterFactoryBean</code> provides a convenient way to create formatters.</p>
+<p>Joda Time 提供单独的不同类型来表示日期 <code>date</code>，时间 <code>time</code> 和日期时间 <code>date-time</code> 值。 应该使用 <code>JodaTimeFormatterRegistrar</code> 的 <code>dateFormatter</code>，<code>timeFormatter</code> 和 <code>dateTimeFormatter</code> 属性为每种类型配置不同的格式。 <code>DateTimeFormatterFactoryBean</code> 提供了创建 formatter 的简便方法。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If you are using Spring MVC remember to explicitly configure the conversion service that
-is used. For Java based <code>@Configuration</code> this means extending the
-<code>WebMvcConfigurationSupport</code> class and overriding the <code>mvcConversionService()</code> method.
-For XML you should use the <code>'conversion-service'</code> attribute of the
-<code>mvc:annotation-driven</code> element.
-See <a href="web.html#mvc-config-conversion">Conversion and Formatting</a> for details.</p>
+<p>如果你使用的是Spring MVC，请记住要显式地配置使用的转换服务。对于基于 Java 的 <code>@Configuration</code>，这意味着扩展 <code>WebMvcConfigurationSupport</code> 类并覆盖 <code>mvcConversionService()</code> 方法。对于 XML，你应该使用 <code>mvc:annotation-driven</code> 元素的 <code>'conversion-service'</code> 属性。有关详细信息，请参阅<a href="web.html#mvc-config-conversion">转换和格式</a>。</p>
 </div>
 </div>
 <div class="sect2">
