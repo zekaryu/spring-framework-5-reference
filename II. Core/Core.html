@@ -9877,107 +9877,86 @@ BindingResult results = binder.getBindingResult();</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="expressions"><a class="anchor" href="#expressions"></a>4. Spring Expression Language (SpEL)</h2>
+<h2 id="expressions"><a class="anchor" href="#expressions"></a>4. Spring 表达式语言 (SpEL)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="expressions-intro"><a class="anchor" href="#expressions-intro"></a>4.1. Introduction</h3>
+<h3 id="expressions-intro"><a class="anchor" href="#expressions-intro"></a>4.1. 简介</h3>
 <div class="paragraph">
-<p>The Spring Expression Language (SpEL for short) is a powerful expression language that
-supports querying and manipulating an object graph at runtime. The language syntax is
-similar to Unified EL but offers additional features, most notably method invocation and
-basic string templating functionality.</p>
+<p>Spring 表达式语言（简称SpEL）是一种强大的表达式语言，支持在运行时查询和操作对象拓扑图。语言语法与Unified EL相似，但是提供了额外的功能，特别是方法调用和基本字符串模板功能。.</p>
 </div>
 <div class="paragraph">
-<p>While there are several other Java expression languages available, OGNL, MVEL, and JBoss
-EL, to name a few, the Spring Expression Language was created to provide the Spring
-community with a single well supported expression language that can be used across all
-the products in the Spring portfolio. Its language features are driven by the
-requirements of the projects in the Spring portfolio, including tooling requirements for
-code completion support within the eclipse based Spring Tool Suite. That said,
-SpEL is based on a technology agnostic API allowing other expression language
-implementations to be integrated should the need arise.</p>
+<p>虽然还有其他几种可用的Java表达式语言，如 OGNL，MVEL和 JBoss EL（仅举几个例子），Spring 表达式语言的创建是为了向 Spring 社区提供单一支持的表达式语言，可以在所有产品中使用 Spring 的项目组合。它的语言特性是由 Spring 项目中的项目需求驱动的，包括基于 Eclipse 的 Spring Tool Suite 中 code completion support 的工具需求。也就是说，SpEL 基于一种技术无关的 API，允许在需要时集成其他表达式语言实现。</p>
 </div>
 <div class="paragraph">
-<p>While SpEL serves as the foundation for expression evaluation within the Spring
-portfolio, it is not directly tied to Spring and can be used independently. In order to
-be self contained, many of the examples in this chapter use SpEL as if it were an
-independent expression language. This requires creating a few bootstrapping
-infrastructure classes such as the parser. Most Spring users will not need to deal with
-this infrastructure and will instead only author expression strings for evaluation. An
-example of this typical use is the integration of SpEL into creating XML or annotated
-based bean definitions as shown in the section <a href="#expressions-beandef">Expression support
-for defining bean definitions.</a></p>
+<p>虽然 SpEL 是 Spring 项目组合中表达式评估的基础，但它并不与 Spring 直接相关，可以独立使用。为了自包含，本章中的许多例子都使用 SpEL，就好像它是独立的表达式语言一样。这需要创建一些引导基础结构类，比如解析器。大多数 Spring 用户不需要处理这个基础结构，而只需要编写用于评估的表达式字符串。这种典型用法的一个例子是将 SpEL 集成到创建 XML 或基于注解的 bean 定义中，如 <a href="#expressions-beandef"> 定义 bean 定义的表达式支持</a> 部分所示。</p>
 </div>
 <div class="paragraph">
-<p>This chapter covers the features of the expression language, its API, and its language
-syntax. In several places an Inventor and Inventor&#8217;s Society class are used as the
-target objects for expression evaluation. These class declarations and the data used to
-populate them are listed at the end of the chapter.</p>
+<p>本节介绍了表达式语言，API 及其语言语法的特性。在一些地方，Inventor 和 Inventor 的 Society 类被用作表达评估的目标对象。这些类声明和用来填充它们的数据在本章最后列出。</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expressions-features"><a class="anchor" href="#expressions-features"></a>4.2. Feature Overview</h3>
+<h3 id="expressions-features"><a class="anchor" href="#expressions-features"></a>4.2. 特性概览</h3>
 <div class="paragraph">
-<p>The expression language supports the following functionality</p>
+<p> 表达式语言支持以下的功能 </p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Literal expressions</p>
+<p>Literal expressions 字面表达式</p>
 </li>
 <li>
-<p>Boolean and relational operators</p>
+<p>Boolean and relational operators 布尔和关系操作符</p>
 </li>
 <li>
-<p>Regular expressions</p>
+<p>Regular expressions 正则表达式</p>
 </li>
 <li>
-<p>Class expressions</p>
+<p>Class expressions 类表达式</p>
 </li>
 <li>
-<p>Accessing properties, arrays, lists, maps</p>
+<p>Accessing properties, arrays, lists, maps 访问 properties，数组，列表，map</p>
 </li>
 <li>
-<p>Method invocation</p>
+<p>Method invocation 方法调用</p>
 </li>
 <li>
-<p>Relational operators</p>
+<p>Relational operators 关系操作符</p>
 </li>
 <li>
-<p>Assignment</p>
+<p>Assignment 赋值</p>
 </li>
 <li>
-<p>Calling constructors</p>
+<p>Calling constructors 调用构造器</p>
 </li>
 <li>
-<p>Bean references</p>
+<p>Bean references Bean 引用</p>
 </li>
 <li>
-<p>Array construction</p>
+<p>Array construction 数组构建</p>
 </li>
 <li>
-<p>Inline lists</p>
+<p>Inline lists 内联list</p>
 </li>
 <li>
-<p>Inline maps</p>
+<p>Inline maps 内联 map</p>
 </li>
 <li>
-<p>Ternary operator</p>
+<p>Ternary operator 三目运算符</p>
 </li>
 <li>
-<p>Variables</p>
+<p>Variables 变量</p>
 </li>
 <li>
-<p>User defined functions</p>
+<p>User defined functions 用于自定义功能</p>
 </li>
 <li>
-<p>Collection projection</p>
+<p>Collection projection 集合映射</p>
 </li>
 <li>
-<p>Collection selection</p>
+<p>Collection selection 集合选择</p>
 </li>
 <li>
-<p>Templated expressions</p>
+<p>Templated expressions 模板表达式</p>
 </li>
 </ul>
 </div>
