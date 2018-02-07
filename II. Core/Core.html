@@ -9684,23 +9684,17 @@ cs.convert(input,
 </div>
 </div>
 <div class="sect2">
-<h3 id="validation-beanvalidation"><a class="anchor" href="#validation-beanvalidation"></a>3.8. Spring Validation</h3>
+<h3 id="validation-beanvalidation"><a class="anchor" href="#validation-beanvalidation"></a>3.8. Spring 验证</h3>
 <div class="paragraph">
-<p>Spring 3 introduces several enhancements to its validation support. First, the JSR-303
-Bean Validation API is now fully supported. Second, when used programmatically, Spring&#8217;s
-DataBinder can now validate objects as well as bind to them. Third, Spring MVC now has
-support for declaratively validating <code>@Controller</code> inputs.</p>
+<p>Spring 3 引入了一些对其验证支持功能的增强。 首先，现在完全支持 JSR-303 Bean 验证 API。其次，当以编程方式使用时，Spring 的 DataBinder 现在可以验证对象并绑定到它们。第三，Spring MVC 现在支持声明性验证 <code>@Controller</code> 输入。</p>
 </div>
 <div class="sect3">
-<h4 id="validation-beanvalidation-overview"><a class="anchor" href="#validation-beanvalidation-overview"></a>3.8.1. Overview of the JSR-303 Bean Validation API</h4>
+<h4 id="validation-beanvalidation-overview"><a class="anchor" href="#validation-beanvalidation-overview"></a>3.8.1. JSR-303 Bean 验证 API 概述</h4>
 <div class="paragraph">
-<p>JSR-303 standardizes validation constraint declaration and metadata for the Java
-platform. Using this API, you annotate domain model properties with declarative
-validation constraints and the runtime enforces them. There are a number of built-in
-constraints you can take advantage of. You may also define your own custom constraints.</p>
+<p>JSR-303 标准化了 Java 平台的验证约束声明和元数据。 使用此 API，你可以使用声明式验证约束来注解域模型属性，并且运行时会强制执行它们。 有许多内置的约束可以利用。 你也可以定义你自己的自定义约束。</p>
 </div>
 <div class="paragraph">
-<p>To illustrate, consider a simple PersonForm model with two properties:</p>
+<p>考虑一个简单的具有两个属性的 PersonForm 模型来进行说明：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9711,7 +9705,7 @@ constraints you can take advantage of. You may also define your own custom const
 </div>
 </div>
 <div class="paragraph">
-<p>JSR-303 allows you to define declarative validation constraints against such properties:</p>
+<p>JSR-303 允许你定义对这些属性的声明式验证约束：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9728,27 +9722,19 @@ constraints you can take advantage of. You may also define your own custom const
 </div>
 </div>
 <div class="paragraph">
-<p>When an instance of this class is validated by a JSR-303 Validator, these constraints
-will be enforced.</p>
+<p>当这个类的一个实例被 JSR-303 验证器验证时，这些约束将被执行。</p>
 </div>
 <div class="paragraph">
-<p>For general information on JSR-303/JSR-349, see the <a href="http://beanvalidation.org/">Bean
-Validation website</a>. For information on the specific capabilities of the default
-reference implementation, see the <a href="https://www.hibernate.org/412.html">Hibernate
-Validator</a> documentation. To learn how to setup a Bean Validation provider as a Spring
-bean, keep reading.</p>
+<p>有关 JSR-303/JSR-349 的总览信息，请参阅 <a href="http://beanvalidation.org/">Bean验证网站</a>。 有关默认引用实现的特定功能的信息，请参阅 <a href="https://www.hibernate.org/412.html">Hibernate Validator</a> 文档。要学习如何将 Bean Validation 提供者设置为 Spring bean，请继续阅读。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="validation-beanvalidation-spring"><a class="anchor" href="#validation-beanvalidation-spring"></a>3.8.2. Configuring a Bean Validation Provider</h4>
+<h4 id="validation-beanvalidation-spring"><a class="anchor" href="#validation-beanvalidation-spring"></a>3.8.2. 配置 Bean Validation Provider</h4>
 <div class="paragraph">
-<p>Spring provides full support for the Bean Validation API. This includes convenient
-support for bootstrapping a JSR-303/JSR-349 Bean Validation provider as a Spring bean.
-This allows for a <code>javax.validation.ValidatorFactory</code> or <code>javax.validation.Validator</code> to
-be injected wherever validation is needed in your application.</p>
+<p>Spring 提供对 Bean Validation API 的全面支持。这包括对以 JSR-303/JSR-349 Bean Validation provider 作为 Spring bean 进行引导的方便支持。 这允许在你的应用程序在需要验证的任何地方注入 <code>javax.validation.ValidatorFactory</code> 或 <code>javax.validation.Validator</code>。</p>
 </div>
 <div class="paragraph">
-<p>Use the <code>LocalValidatorFactoryBean</code> to configure a default Validator as a Spring bean:</p>
+<p>使用 <code>LocalValidatorFactoryBean</code> 将默认的 Validator 配置为一个 Spring bean：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9757,21 +9743,15 @@ be injected wherever validation is needed in your application.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The basic configuration above will trigger Bean Validation to initialize using its
-default bootstrap mechanism. A JSR-303/JSR-349 provider, such as Hibernate Validator,
-is expected to be present in the classpath and will be detected automatically.</p>
+<p>上面的基本配置将触发 Bean Validation 使用其默认引导机制进行初始化。 JSR-303/JSR-349 provider（如Hibernate Validator）如期会出现在类路径中，并会自动检测到。</p>
 </div>
 <div class="sect4">
-<h5 id="validation-beanvalidation-spring-inject"><a class="anchor" href="#validation-beanvalidation-spring-inject"></a>Injecting a Validator</h5>
+<h5 id="validation-beanvalidation-spring-inject"><a class="anchor" href="#validation-beanvalidation-spring-inject"></a>注入 Validator</h5>
 <div class="paragraph">
-<p><code>LocalValidatorFactoryBean</code> implements both <code>javax.validation.ValidatorFactory</code> and
-<code>javax.validation.Validator</code>, as well as Spring&#8217;s
-<code>org.springframework.validation.Validator</code>. You may inject a reference to either of
-these interfaces into beans that need to invoke validation logic.</p>
+<p><code>LocalValidatorFactoryBean</code> 实现了 <code>javax.validation.ValidatorFactory</code> 和 <code>javax.validation.Validator</code>，以及 Spring 的 <code>org.springframework.validation.Validator</code>。你可以将这些接口的引用注入到需要调用验证逻辑的 bean 中。</p>
 </div>
 <div class="paragraph">
-<p>Inject a reference to <code>javax.validation.Validator</code> if you prefer to work with the Bean
-Validation API directly:</p>
+<p>如果你跟愿意直接使用 Bean Validation API，则注入对 <code>javax.validation.Validator</code> 的引用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9785,8 +9765,7 @@ Validation API directly:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Inject a reference to <code>org.springframework.validation.Validator</code> if your bean requires
-the Spring Validation API:</p>
+<p>如果您的 bean 需要Spring Validation API，则注入对 <code>org.springframework.validation.Validator</code> 的引用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9803,24 +9782,15 @@ the Spring Validation API:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="validation-beanvalidation-spring-constraints"><a class="anchor" href="#validation-beanvalidation-spring-constraints"></a>Configuring Custom Constraints</h5>
+<h5 id="validation-beanvalidation-spring-constraints"><a class="anchor" href="#validation-beanvalidation-spring-constraints"></a>配置自定义约束</h5>
 <div class="paragraph">
-<p>Each Bean Validation constraint consists of two parts. First, a <code>@Constraint</code> annotation
-that declares the constraint and its configurable properties. Second, an implementation
-of the <code>javax.validation.ConstraintValidator</code> interface that implements the constraint&#8217;s
-behavior. To associate a declaration with an implementation, each <code>@Constraint</code> annotation
-references a corresponding ValidationConstraint implementation class. At runtime, a
-<code>ConstraintValidatorFactory</code> instantiates the referenced implementation when the
-constraint annotation is encountered in your domain model.</p>
+<p>每个Bean Validation 约束由两部分组成。 首先，一个声明约束及其可配置的属性的 <code>@Constraint</code> 注解。其次，实现约束行为的 <code>javax.validation.ConstraintValidator</code> 接口的实现。为了将一个声明和一个实现关联起来，每个 <code>@Constraint</code> 注解引用一个对应的 ValidationConstraint 实现类。在运行时，<code>ConstraintValidatorFactory</code> 在你的域模型中遇到约束注解时实例化所引用的实现。</p>
 </div>
 <div class="paragraph">
-<p>By default, the <code>LocalValidatorFactoryBean</code> configures a <code>SpringConstraintValidatorFactory</code>
-that uses Spring to create ConstraintValidator instances. This allows your custom
-ConstraintValidators to benefit from dependency injection like any other Spring bean.</p>
+<p>默认情况下，<code>LocalValidatorFactoryBean</code> 配置一个使用 Spring 创建 ConstraintValidator 实例的 <code>SpringConstraintValidatorFactory</code>。这允许你的自定义 ConstraintValidators 像任何其他 Spring bean 一样受益于依赖注入。</p>
 </div>
 <div class="paragraph">
-<p>Shown below is an example of a custom <code>@Constraint</code> declaration, followed by an associated
-<code>ConstraintValidator</code> implementation that uses Spring for dependency injection:</p>
+<p>下面是一个自定义 <code>@Constraint</code> 声明的示例，之后是一个使用 Spring 进行依赖注入的相关 <code>ConstraintValidator</code>  实现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9845,16 +9815,13 @@ ConstraintValidators to benefit from dependency injection like any other Spring 
 </div>
 </div>
 <div class="paragraph">
-<p>As you can see, a ConstraintValidator implementation may have its dependencies
-@Autowired like any other Spring bean.</p>
+<p>如你所见，一个 ConstraintValidator 实现可能像其他任何 Spring bean 一样拥有 @Autowired 依赖。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="validation-beanvalidation-spring-method"><a class="anchor" href="#validation-beanvalidation-spring-method"></a>Spring-driven Method Validation</h5>
+<h5 id="validation-beanvalidation-spring-method"><a class="anchor" href="#validation-beanvalidation-spring-method"></a>Spring 驱动的方法验证</h5>
 <div class="paragraph">
-<p>The method validation feature supported by Bean Validation 1.1, and as a custom
-extension also by Hibernate Validator 4.3, can be integrated into a Spring context
-through a <code>MethodValidationPostProcessor</code> bean definition:</p>
+<p>Bean Validation 1.1 支持的方法验证功能以及 Hibernate Validator 4.3 的自定义扩展可以通过一个 <code>MethodValidationPostProcessor</code> bean 定义集成到 Spring 上下文中：:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9862,32 +9829,23 @@ through a <code>MethodValidationPostProcessor</code> bean definition:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In order to be eligible for Spring-driven method validation, all target classes need
-to be annotated with Spring&#8217;s <code>@Validated</code> annotation, optionally declaring the
-validation groups to use. Check out the <code>MethodValidationPostProcessor</code> javadocs
-for setup details with Hibernate Validator and Bean Validation 1.1 providers.</p>
+<p>为了符合 Spring 驱动的方法验证的条件，所有的目标类都需要使用 Spring 的 <code>@Validated</code> 注解，可以选择声明验证组来使用。使用 Hibernate Validator 和 Bean Validation 1.1 provider 查看 <code>MethodValidationPostProcessor</code> javadoc 以了解设置细节。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="validation-beanvalidation-spring-other"><a class="anchor" href="#validation-beanvalidation-spring-other"></a>Additional Configuration Options</h5>
+<h5 id="validation-beanvalidation-spring-other"><a class="anchor" href="#validation-beanvalidation-spring-other"></a>其他配置选项</h5>
 <div class="paragraph">
-<p>The default <code>LocalValidatorFactoryBean</code> configuration should prove sufficient for most
-cases. There are a number of configuration options for various Bean Validation
-constructs, from message interpolation to traversal resolution. See the
-<code>LocalValidatorFactoryBean</code> javadocs for more information on these options.</p>
+<p>在大多数情况下，默认的 <code>LocalValidatorFactoryBean</code>  配置应该足够了。对于各种 Bean Validation 结构，有许多配置选项，从消息插值到遍历解析。有关这些选项的更多信息，请参阅 <code>LocalValidatorFactoryBean</code> javadoc。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="validation-binder"><a class="anchor" href="#validation-binder"></a>3.8.3. Configuring a DataBinder</h4>
+<h4 id="validation-binder"><a class="anchor" href="#validation-binder"></a>3.8.3. 配置 DataBinder</h4>
 <div class="paragraph">
-<p>Since Spring 3, a DataBinder instance can be configured with a Validator. Once
-configured, the Validator may be invoked by calling <code>binder.validate()</code>. Any validation
-Errors are automatically added to the binder&#8217;s BindingResult.</p>
+<p>从 Spring 3 开始，可以在 DataBinder 实例上使用 Validator 配置。配置完成后，可以通过调用 <code>binder.validate()</code>来调用 Validator。任何验证错误都会自动添加到 binder 的 BindingResult 中。</p>
 </div>
 <div class="paragraph">
-<p>When working with the DataBinder programmatically, this can be used to invoke validation
-logic after binding to a target object:</p>
+<p>以编程方式使用 DataBinder 时，可以在绑定到目标对象后调用验证逻辑：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9906,16 +9864,13 @@ BindingResult results = binder.getBindingResult();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>A DataBinder can also be configured with multiple <code>Validator</code> instances via
-<code>dataBinder.addValidators</code> and <code>dataBinder.replaceValidators</code>. This is useful when
-combining globally configured Bean Validation with a Spring <code>Validator</code> configured
-locally on a DataBinder instance. See <a href="#validation-mvc-configuring">[validation-mvc-configuring]</a>.</p>
+<p>DataBinder 也可以通过 <code>dataBinder.addValidators</code> 和 <code>dataBinder.replaceValidators</code> 配置多个 <code>Validator</code> 实例。将全局配置的 Bean Validation 与本地在 DataBinder 实例上配置的 Spring <code>Validator</code> 相结合时，这非常有用。参见 <a href="#validation-mvc-configuring">[validation-mvc-configuring]</a>。</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="validation-mvc"><a class="anchor" href="#validation-mvc"></a>3.8.4. Spring MVC 3 Validation</h4>
 <div class="paragraph">
-<p>See <a href="web.html#mvc-config-validation">Validation</a> in the Spring MVC chapter.</p>
+<p>参见 Spring MVC 章节的 <a href="web.html#mvc-config-validation">Validation</a>。</p>
 </div>
 </div>
 </div>
