@@ -11589,14 +11589,9 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-ataspectj"><a class="anchor" href="#aop-ataspectj"></a>5.2. @AspectJ support</h3>
+<h3 id="aop-ataspectj"><a class="anchor" href="#aop-ataspectj"></a>5.2. @AspectJ 支持</h3>
 <div class="paragraph">
-<p>@AspectJ refers to a style of declaring aspects as regular Java classes annotated with
-annotations. The @AspectJ style was introduced by the
-<a href="https://www.eclipse.org/aspectj">AspectJ project</a> as part of the AspectJ 5 release. Spring
-interprets the same annotations as AspectJ 5, using a library supplied by AspectJ
-for pointcut parsing and matching. The AOP runtime is still pure Spring AOP though, and
-there is no dependency on the AspectJ compiler or weaver.</p>
+<p>@AspectJ 是指将切面声明为常规 Java 类的注解的风格。<a href="https://www.eclipse.org/aspectj">AspectJ</a> 项目作为 AspectJ 5 版本的一部分引入了 @AspectJ 风格。Spring 使用 AspectJ 提供的用于切点解析和匹配的库来翻译与 AspectJ 5 相同的注解。AOP 运行时仍然是纯粹的 Spring AOP，并且不依赖于 AspectJ 编译器或织入器。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -11606,34 +11601,24 @@ there is no dependency on the AspectJ compiler or weaver.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Using the AspectJ compiler and weaver enables use of the full AspectJ language, and is
-discussed in <a href="#aop-using-aspectj">Using AspectJ with Spring applications</a>.</p>
+<p>对 AspectJ 编译器和织入器的使用启用了完整的 AspectJ 语言，在<a href="#aop-using-aspectj">在 Spring 应用程序中使用 AspectJ</a> 中进行了讨论。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="aop-aspectj-support"><a class="anchor" href="#aop-aspectj-support"></a>5.2.1. Enabling @AspectJ Support</h4>
+<h4 id="aop-aspectj-support"><a class="anchor" href="#aop-aspectj-support"></a>5.2.1. 启用 @AspectJ 支持</h4>
 <div class="paragraph">
-<p>To use @AspectJ aspects in a Spring configuration you need to enable Spring support for
-configuring Spring AOP based on @AspectJ aspects, and <em>autoproxying</em> beans based on
-whether or not they are advised by those aspects. By autoproxying we mean that if Spring
-determines that a bean is advised by one or more aspects, it will automatically generate
-a proxy for that bean to intercept method invocations and ensure that advice is executed
-as needed.</p>
+<p>要在 Spring 配置中使用 @AspectJ 切面，你需要启用 Spring 对于基于 @AspectJ 切面配置 Spring AOP 的支持，并根据 bean 是否被这些切面通知决定是否对 bean 进行自动代理配置。自动代理的意思是，如果 Spring 确定 bean 被一个或多个切面通知，它会自动生成一个代理来拦截方法调用，并确保在需要时执行通知。</p>
 </div>
 <div class="paragraph">
-<p>The @AspectJ support can be enabled with XML or Java style configuration. In either
-case you will also need to ensure that AspectJ&#8217;s <code>aspectjweaver.jar</code> library is on the
-classpath of your application (version 1.6.8 or later). This library is available in the
-<code>'lib'</code> directory of an AspectJ distribution or via the Maven Central repository.</p>
+<p>对 @AspectJ 支持可以使用 XML 或 Java 风格的配置来启用。无论哪种情况，你还需要确保 AspectJ 的<code>aspectjweaver.jar</code> 库位于应用程序的类路径（1.6.8 或更高版本）上。 这个库可以在 AspectJ 发行版的 <code>'lib'</code> 目录下或者通过 Maven Central 版本库获得。</p>
 </div>
 <div class="sect4">
-<h5 id="aop-enable-aspectj-java"><a class="anchor" href="#aop-enable-aspectj-java"></a>Enabling @AspectJ Support with Java configuration</h5>
+<h5 id="aop-enable-aspectj-java"><a class="anchor" href="#aop-enable-aspectj-java"></a>通过 Java 配置启用对 @AspectJ 的支持</h5>
 <div class="paragraph">
-<p>To enable @AspectJ support with Java <code>@Configuration</code> add the <code>@EnableAspectJAutoProxy</code>
-annotation:</p>
+<p>要通过 Java 配置启用对 @AspectJ 的支持需要添加 <code>@EnableAspectJAutoProxy</code> 注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11646,10 +11631,9 @@ annotation:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-enable-aspectj-xml"><a class="anchor" href="#aop-enable-aspectj-xml"></a>Enabling @AspectJ Support with XML configuration</h5>
+<h5 id="aop-enable-aspectj-xml"><a class="anchor" href="#aop-enable-aspectj-xml"></a>通过 XML 配置启用对 @AspectJ 的支持</h5>
 <div class="paragraph">
-<p>To enable @AspectJ support with XML based configuration use the <code>aop:aspectj-autoproxy</code>
-element:</p>
+<p>要通过基于 XML DE 配置启用对 @AspectJ 的支持需要使用 <code>aop:aspectj-autoproxy</code> 元素：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11657,22 +11641,17 @@ element:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This assumes that you are using schema support as described in <a href="appendix.html#xsd-configuration">XML Schema-based configuration</a>. See <a href="appendix.html#xsd-config-body-schemas-aop">the AOP schema</a>
-for how to import the tags in the <code>aop</code> namespace.</p>
+<p>前提是假设你正在使用如 <a href="appendix.html#xsd-configuration">基于 XML Schema 的配置</a> 中所述的对 schema 支持。请参阅<a href="appendix.html#xsd-config-body-schemas-aop"> AOP schema</a> 以了解如何在 <code>aop</code> 命名空间中导入标签。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-at-aspectj"><a class="anchor" href="#aop-at-aspectj"></a>5.2.2. Declaring an aspect</h4>
+<h4 id="aop-at-aspectj"><a class="anchor" href="#aop-at-aspectj"></a>5.2.2. 声明切面</h4>
 <div class="paragraph">
-<p>With the @AspectJ support enabled, any bean defined in your application context with a
-class that is an @AspectJ aspect (has the <code>@Aspect</code> annotation) will be automatically
-detected by Spring and used to configure Spring AOP. The following example shows the
-minimal definition required for a not-very-useful aspect:</p>
+<p>在启用 @AspectJ 支持的情况下，在你的应用程序上下文中定义的任何一个具有 @AspectJ 切面的类（具有@Aspect 注解）的 bean 将被 Spring 自动检测，并用于配置 Spring AOP。以下示例显示了一个不太有用的切面所需的最小定义：</p>
 </div>
 <div class="paragraph">
-<p>A regular bean definition in the application context, pointing to a bean class that has
-the <code>@Aspect</code> annotation:</p>
+<p>应用程序上下文中的常规 bean 定义，指向具有<code>@Aspect</code> 注解的 bean 类：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11682,8 +11661,7 @@ the <code>@Aspect</code> annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>And the <code>NotVeryUsefulAspect</code> class definition, annotated with
-<code>org.aspectj.lang.annotation.Aspect</code> annotation;</p>
+<p>以及由 <code>org.aspectj.lang.annotation.Aspect</code> 注解的 <code>NotVeryUsefulAspect</code> 类定义；</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11697,9 +11675,7 @@ the <code>@Aspect</code> annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Aspects (classes annotated with <code>@Aspect</code>) may have methods and fields just like any
-other class. They may also contain pointcut, advice, and introduction (inter-type)
-declarations.</p>
+<p>切面（用 <code>@Aspect</code> 注解的类）可能与其他类一样有其他方法和字段。它们也可能包含切点，通知和引入（类型间）声明。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -11708,14 +11684,9 @@ declarations.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="title">Autodetecting aspects through component scanning</div>
+<div class="title">通过组件扫描自动检测切面</div>
 <div class="paragraph">
-<p>You may register aspect classes as regular beans in your Spring XML configuration, or
-autodetect them through classpath scanning - just like any other Spring-managed bean.
-However, note that the <em>@Aspect</em> annotation is <em>not</em> sufficient for autodetection in
-the classpath: For that purpose, you need to add a separate <em>@Component</em> annotation
-(or alternatively a custom stereotype annotation that qualifies, as per the rules of
-Spring&#8217;s component scanner).</p>
+<p>你可以在 Spring XML 配置中将切面类注册为常规 bean，或者像通过其他 Spring 管理的 bean 一样通过类路径扫描来自动检测它们。但是，注意，<em>@Aspect</em> 注解对于类路径中的自动检测是不够的：为此，您需要添加一个单独的 <em>@Component</em> 注解（或者按照 Spring 组件扫描器的规则，添加一个自定义 stereotype 注解）。</p>
 </div>
 </td>
 </tr>
@@ -11728,11 +11699,9 @@ Spring&#8217;s component scanner).</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="title">Advising aspects with other aspects?</div>
+<div class="title">用其他切面通知切面？</div>
 <div class="paragraph">
-<p>In Spring AOP, it is <em>not</em> possible to have aspects themselves be the target of advice
-from other aspects. The <em>@Aspect</em> annotation on a class marks it as an aspect, and
-hence excludes it from auto-proxying.</p>
+<p>在 Spring AOP 中，不可能将切面本身作为其他切面的通知的目标。类上的 <em>@Aspect</em> 注解将其标记为一个切面，因此它会被自动代理排除。</p>
 </div>
 </td>
 </tr>
