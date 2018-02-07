@@ -9962,15 +9962,12 @@ BindingResult results = binder.getBindingResult();</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expressions-evaluation"><a class="anchor" href="#expressions-evaluation"></a>4.3. Expression Evaluation using Spring&#8217;s Expression Interface</h3>
+<h3 id="expressions-evaluation"><a class="anchor" href="#expressions-evaluation"></a>4.3. 使用 Spring 表达式接口来评估表达式</h3>
 <div class="paragraph">
-<p>This section introduces the simple use of SpEL interfaces and its expression language.
-The complete language reference can be found in the section
-<a href="#expressions-language-ref">Language Reference</a>.</p>
+<p>本节介绍 SpEL 接口的简单使用及其表达式语言。完整的语言参考可在<a href="#expressions-language-ref">语言参考</a>一节中找到。</p>
 </div>
 <div class="paragraph">
-<p>The following code introduces the SpEL API to evaluate the literal string expression
-'Hello World'.</p>
+<p>以下代码引入了 SpEL API 来评估文字字符串表达式 'Hello World' 。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9980,26 +9977,19 @@ The complete language reference can be found in the section
 </div>
 </div>
 <div class="paragraph">
-<p>The value of the message variable is simply 'Hello World'.</p>
+<p>message 的值就是简单的 'Hello World' 字符串</p>
 </div>
 <div class="paragraph">
-<p>The SpEL classes and interfaces you are most likely to use are located in the packages
-<code>org.springframework.expression</code> and its sub packages and <code>spel.support</code>.</p>
+<p>你最可能使用的 SpEL 类和接口位于 <code>org.springframework.expression</code> 包及其子包 <code>spel.support</code> 中。</p>
 </div>
 <div class="paragraph">
-<p>The interface <code>ExpressionParser</code> is responsible for parsing an expression string. In
-this example the expression string is a string literal denoted by the surrounding single
-quotes. The interface <code>Expression</code> is responsible for evaluating the previously defined
-expression string. There are two exceptions that can be thrown, <code>ParseException</code> and
-<code>EvaluationException</code> when calling <code>parser.parseExpression</code> and <code>exp.getValue</code>
-respectively.</p>
+<p><code>ExpressionParser</code> 接口负责解析表达式字符串。在这个例子中，表达式字符串是由单引号包含的字符串文字。 接口 <code>Expression</code> 负责评估之前定义的表达式字符串。 当分别调用 <code>parser.parseExpression</code>和 <code>exp.getValue</code> 时，可能会抛出两个异常，<code>ParseException</code> 和 <code>EvaluationException</code> 。</p>
 </div>
 <div class="paragraph">
-<p>SpEL supports a wide range of features, such as calling methods, accessing properties,
-and calling constructors.</p>
+<p>SpEL 支持许多的功能，例如方法调用，属性访问和构造器调用。</p>
 </div>
 <div class="paragraph">
-<p>As an example of method invocation, we call the <code>concat</code> method on the string literal.</p>
+<p>举一个方法调用的例子，我们在字符串上调用 <code>concat</code> 方法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10009,11 +9999,10 @@ and calling constructors.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The value of message is now 'Hello World!'.</p>
+<p>现在 message 的值变成了 'Hello World!'.</p>
 </div>
 <div class="paragraph">
-<p>As an example of calling a JavaBean property, the String property <code>Bytes</code> can be called
-as shown below.</p>
+<p>举一个 JavaBean 属性调用的例子， 字符串属性 <code>Bytes</code> 可以按如下方式调用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10025,11 +10014,10 @@ as shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>SpEL also supports nested properties using standard <em>dot</em> notation, i.e.
-prop1.prop2.prop3 and the setting of property values</p>
+<p>SpEL 还支持通过标准的点号访问嵌套属性，如 prop1.prop2.prop3 和属性值的设置。</p>
 </div>
 <div class="paragraph">
-<p>Public fields may also be accessed.</p>
+<p>Public 字段也可以被访问。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10041,7 +10029,7 @@ prop1.prop2.prop3 and the setting of property values</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The String&#8217;s constructor can be called instead of using a string literal.</p>
+<p>可以调用 String 的构造器，而不使用字符串字面量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10051,17 +10039,10 @@ prop1.prop2.prop3 and the setting of property values</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note the use of the generic method <code>public &lt;T&gt; T getValue(Class&lt;T&gt; desiredResultType)</code>.
-Using this method removes the need to cast the value of the expression to the desired
-result type. An <code>EvaluationException</code> will be thrown if the value cannot be cast to the
-type <code>T</code> or converted using the registered type converter.</p>
+<p>注意使用通用方法public <T> T getValue(Class <T> desiredResultType)。使用此方法就不需要将表达式的值强制转换为所需的结果类型。如果值不能转换为类型 <code>T</code> 或者使用注册类型转换器转换失败，则抛出 <code>EvaluationException</code> 异常。</p>
 </div>
 <div class="paragraph">
-<p>The more common usage of SpEL is to provide an expression string that is evaluated
-against a specific object instance (called the root object). There are two options here
-and which to choose depends on whether the object against which the expression is being
-evaluated will be changing with each call to evaluate the expression. In the following
-example we retrieve the <code>name</code> property from an instance of the Inventor class.</p>
+<p>SpEL 更常见的用法是提供一个处理特定对象实例（称为根对象）的表达式字符串。这里有两个选项，选择哪一个取决于表达式被评估的对象是否随每次对表达式评估的调用而改变。在以下示例中，我们从 Inventor 类的实例中检索 <code>name</code> 属性。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10080,12 +10061,7 @@ EvaluationContext context = <span class="keyword">new</span> StandardEvaluationC
 </div>
 </div>
 <div class="paragraph">
-<p>In the last line, the value of the string variable <code>name</code> will be set to "Nikola Tesla".
-The class StandardEvaluationContext is where you can specify which object the "name"
-property will be evaluated against. This is the mechanism to use if the root object is
-unlikely to change, it can simply be set once in the evaluation context. If the root
-object is likely to change repeatedly, it can be supplied on each call to <code>getValue</code>, as
-this next example shows:</p>
+<p>在最后一行中，字符串变量 <code>name</code> 的值将被设置为“Nikola Tesla”。StandardEvaluationContext 类可以指定哪个对象的 “name” 属性将被评估。如果根对象不太可能改变就使用这个机制，它只要在评估上下文中设置一次即可。如果根对象可能会重复更改，则可以在每次调用 <code>getValue</code> 时提供该对象，如下面的示例所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10102,21 +10078,13 @@ ExpressionParser parser = <span class="keyword">new</span> SpelExpressionParser(
 </div>
 </div>
 <div class="paragraph">
-<p>In this case the inventor <code>tesla</code> has been supplied directly to <code>getValue</code> and the
-expression evaluation infrastructure creates and manages a default evaluation context
-internally - it did not require one to be supplied.</p>
+<p>在这种情况下，inventor <code>tesla</code> 被直接传递给 <code>getValue</code>，表达式评估基础结构在内部创建和管理默认的评估上下文 - 它不需要被显式创建并传递。</p>
 </div>
 <div class="paragraph">
-<p>The StandardEvaluationContext is relatively expensive to construct and during repeated
-usage it builds up cached state that enables subsequent expression evaluations to be
-performed more quickly. For this reason it is better to cache and reuse them where
-possible, rather than construct a new one for each expression evaluation.</p>
+<p>StandardEvaluationContext 的构造代价相对来说比较大，在重复使用时，它建立了缓存状态，使后续的表达式评估能够更快地执行。因此最好在可能的地方缓存和重用它们，而不是为每个表达式评估构建一个新的上下文。</p>
 </div>
 <div class="paragraph">
-<p>In some cases it can be desirable to use a configured evaluation context and yet still
-supply a different root object on each call to <code>getValue</code>. <code>getValue</code> allows both to be
-specified on the same call. In these situations the root object passed on the call is
-considered to override any (which maybe null) specified on the evaluation context.</p>
+<p>在某些情况下，可能需要使用一个配置好的评估上下文，但仍然希望在每次调用 <code>getValue</code> 时提供不同的根对象。<code>getValue</code>  允许你在同一个调用中保留这两个特性。在这些情况下，在调用中传递的根对象将被视为会覆盖评估上下文中指定的任何（可能为null）根对象。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -10126,20 +10094,14 @@ considered to override any (which maybe null) specified on the evaluation contex
 </td>
 <td class="content">
 <div class="paragraph">
-<p>In standalone usage of SpEL there is a need to create the parser, parse expressions and
-perhaps provide evaluation contexts and a root context object. However, more common
-usage is to provide only the SpEL expression string as part of a configuration file, for
-example for Spring bean or Spring Web Flow definitions. In this case, the parser,
-evaluation context, root object and any predefined variables are all set up implicitly,
-requiring the user to specify nothing other than the expressions.</p>
+<p>在独立使用 SpEL 的环境中，需要创建解析器，解析表达式，并可能需要提供评估上下文和根上下文对象。但是，更常见的用法是只提供 SpEL 表达式字符串作为配置文件的一部分，例如 Spring bean 或 Spring Web Flow 定义。在这种情况下，解析器，评估上下文，根对象和任何预定义的变量都是隐式设置的，要求用户除了表达式之外什么也不指定。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>As a final introductory example, the use of a boolean operator is shown using the
-Inventor object in the previous example.</p>
+<p>作为最后的介绍性例子，使用前面的例子中的 Inventor 对象展示了布尔运算符的使用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10148,7 +10110,7 @@ Inventor object in the previous example.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-evaluation-context"><a class="anchor" href="#expressions-evaluation-context"></a>4.3.1. The EvaluationContext interface</h4>
+<h4 id="expressions-evaluation-context"><a class="anchor" href="#expressions-evaluation-context"></a>4.3.1. EvaluationContext 接口</h4>
 <div class="paragraph">
 <p>The interface <code>EvaluationContext</code> is used when evaluating an expression to resolve
 properties, methods, fields, and to help perform type conversion. The out-of-the-box
@@ -11462,52 +11424,37 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="aop"><a class="anchor" href="#aop"></a>5. Aspect Oriented Programming with Spring</h2>
+<h2 id="aop"><a class="anchor" href="#aop"></a>5. 使用 Spring 进行面向切面编程 </h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="aop-introduction"><a class="anchor" href="#aop-introduction"></a>5.1. Introduction</h3>
+<h3 id="aop-introduction"><a class="anchor" href="#aop-introduction"></a>5.1. 简介</h3>
 <div class="paragraph">
-<p><em>Aspect-Oriented Programming</em> (AOP) complements Object-Oriented Programming (OOP) by
-providing another way of thinking about program structure. The key unit of modularity in
-OOP is the class, whereas in AOP the unit of modularity is the <em>aspect</em>. Aspects
-enable the modularization of concerns such as transaction management that cut across
-multiple types and objects. (Such concerns are often termed <em>crosscutting</em> concerns in
-AOP literature.)</p>
+<p><em>面向切面编程</em>（AOP）通过提供另一种思考程序结构的方式来补充面向对象编程（OOP）。OOP 中模块化的关键单元是类，而 AOP 中模块化的单元是切面。Aspect 可以使关注点模块化，例如跨越多种类型和对象的事务管理。（这种关注在 AOP 文献中常常被称为横切关注点。）</p>
 </div>
 <div class="paragraph">
-<p>One of the key components of Spring is the <em>AOP framework</em>. While the Spring IoC
-container does not depend on AOP, meaning you do not need to use AOP if you don&#8217;t want
-to, AOP complements Spring IoC to provide a very capable middleware solution.</p>
+<p><em>AOP 框架</em> 是 Spring 的关键组件之一。不过 Spring IoC 容器不依赖于 AOP，也就是说，如果你不想使用 AOP，就可以不用， AOP 是 Spring IoC 的补充，可以提供非常强大的中间件解决方案。</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="title">Spring 2.0 AOP</div>
 <div class="paragraph">
-<p>Spring 2.0 introduces a simpler and more powerful way of writing custom aspects using
-either a <a href="#aop-schema">schema-based approach</a> or the <a href="#aop-ataspectj">@AspectJ annotation
-style</a>. Both of these styles offer fully typed advice and use of the AspectJ pointcut
-language, while still using Spring AOP for weaving.</p>
+<p>Spring 2.0 引入了使用 <a href="#aop-schema">基于 schema 的方法</a> 或 <a href="#aop-ataspectj">@AspectJ 注解风格</a> 来编写自定义切面的更简单和更强大的方法。这两种风格都提供完AspectJ pointcut 语言的所有类型的 advice 和使用，同时仍然使用Spring AOP 进行织入。</p>
 </div>
 <div class="paragraph">
-<p>The Spring 2.0 schema- and @AspectJ-based AOP support is discussed in this chapter.
-Spring 2.0 AOP remains fully backwards compatible with Spring 1.2 AOP, and the
-lower-level AOP support offered by the Spring 1.2 APIs is discussed in <a href="#aop-api">the
-following chapter</a>.</p>
+<p>本章将讨论基于Spring 2.0 schema 和基于 @AspectJ 的 AOP 支持。Spring 2.0 AOP 对 Spring 1.2 AOP 保持完全向后兼容，Spring 1.2 API 提供的底层AOP支持将在 <a href="#aop-api">下一章</a> 讨论。</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>AOP is used in the Spring Framework to&#8230;&#8203;</p>
+<p>AOP 被用来在 Spring 框架中...</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>&#8230;&#8203; provide declarative enterprise services, especially as a replacement for EJB
-declarative services. The most important such service is
-<a href="#transaction-declarative"><em>declarative transaction management</em></a>.</p>
+<p>...提供声明式企业服务，特别是作为 EJB 声明式服务的替代品。这种服务最重要的是 <a href="#transaction-declarative"><em>声明式事务管理</em></a>。</p>
 </li>
 <li>
-<p>&#8230;&#8203; allow users to implement custom aspects, complementing their use of OOP with AOP.</p>
+<p>...允许用户实现自定义的切面，用 AOP 补充面向对象 OOP 的使用。</p>
 </li>
 </ul>
 </div>
@@ -11519,165 +11466,93 @@ declarative services. The most important such service is
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you are interested only in generic declarative services or other pre-packaged
-declarative middleware services such as pooling, you do not need to work directly with
-Spring AOP, and can skip most of this chapter.</p>
+<p>如果你只对通用声明式服务或其他预先打包的声明式中间件服务（例如池）感兴趣，则不需要直接使用 Spring AOP，且可以跳过本章的大部分内容。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="aop-introduction-defn"><a class="anchor" href="#aop-introduction-defn"></a>5.1.1. AOP concepts</h4>
+<h4 id="aop-introduction-defn"><a class="anchor" href="#aop-introduction-defn"></a>5.1.1. AOP 概念</h4>
 <div class="paragraph">
-<p>Let us begin by defining some central AOP concepts and terminology. These terms are not
-Spring-specific&#8230;&#8203; unfortunately, AOP terminology is not particularly intuitive;
-however, it would be even more confusing if Spring used its own terminology.</p>
+<p>让我们从定义一些 AOP 核心概念和术语开始。这些术语不是特定于 Spring 的...不幸的是，AOP 术语并不是特别直观；然而，如果 Spring 使用自己的术语，那将更加令人困惑。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>Aspect</em>: a modularization of a concern that cuts across multiple classes.
-Transaction management is a good example of a crosscutting concern in enterprise Java
-applications. In Spring AOP, aspects are implemented using regular classes
-(the <a href="#aop-schema">schema-based approach</a>) or regular classes annotated with the
-<code>@Aspect</code> annotation (the <a href="#aop-ataspectj"><code>@AspectJ</code> style</a>).</p>
+  <p><em>Aspect（切面）</em>：跨越多个类的关注点的模块化。事务管理是企业级 Java 应用程序中横切关注的一个很好的例子。在 Spring AOP 中，切面是使用常规类（<a href="#aop-schema">基于 schema 的方法</a>）或使用 <code>@Aspect</code> 注解（<a href="#aop-ataspectj"><code>@AspectJ</code> 风格</a>）的常规类来实现的。</p>
 </li>
 <li>
-<p><em>Join point</em>: a point during the execution of a program, such as the execution of a
-method or the handling of an exception. In Spring AOP, a join point <em>always</em>
-represents a method execution.</p>
+<p><em>Join point（连接点）</em>：程序执行期间的一个点，例如方法的执行或异常的处理。在 Spring AOP中，连接点总是代表一个方法的执行。</p>
 </li>
 <li>
-<p><em>Advice</em>: action taken by an aspect at a particular join point. Different types of
-advice include "around," "before" and "after" advice. (Advice types are discussed
-below.) Many AOP frameworks, including Spring, model an advice as an <em>interceptor</em>,
-maintaining a chain of interceptors <em>around</em> the join point.</p>
+<p><em>Advice（通知）</em>：切面在特定连接点执行的操作。通知有个不同类型，包括“around”环绕，“before”前置“after”后置。（通知的类型在后面会讨论到）。包括 Spring 在内的很多 AOP 框架将通知建模成拦截器，围绕连接点维护了一个拦截器链。</p>
 </li>
 <li>
-<p><em>Pointcut</em>: a predicate that matches join points. Advice is associated with a
-pointcut expression and runs at any join point matched by the pointcut (for example,
-the execution of a method with a certain name). The concept of join points as matched
-by pointcut expressions is central to AOP, and Spring uses the AspectJ pointcut
-expression language by default.</p>
+<p><em>Pointcut（切点）</em>：匹配连接点的谓词断言。通知与切点表达式相关联，且在与切点匹配的连接点上执行（例如，执行具有特定方法名的方法）。与切点匹配的连接点概念是 AOP 的核心，Spring 默认使用 AspectJ 切点表达式语言。</p>
 </li>
 <li>
-<p><em>Introduction</em>: declaring additional methods or fields on behalf of a type. Spring
-AOP allows you to introduce new interfaces (and a corresponding implementation) to any
-advised object. For example, you could use an introduction to make a bean implement an
-<code>IsModified</code> interface, to simplify caching. (An introduction is known as an
-inter-type declaration in the AspectJ community.)</p>
+<p><em>Introduction（引入）</em>：代表类型声明额外的方法或者字段。Spring AOP 允许你对通知对象引入新的接口（和一个相应的实现）。例如，你可以使用 introduction 使得某个 bean 实现 <code>IsModified</code> 接口以便简化缓存。（在 AspectJ 社区中，introduction 被称为“类型间声明”。）</p>
 </li>
 <li>
-<p><em>Target object</em>: object being advised by one or more aspects. Also referred to as
-the <em>advised</em> object. Since Spring AOP is implemented using runtime proxies, this
-object will always be a <em>proxied</em> object.</p>
+<p><em>Target object（目标对象）</em>：被一个或多个切面通知的对象。也被称为通知对象。由于 Spring AOP 是使用运行时代理实现的，因此该对象将始终是代理对象。</p>
 </li>
 <li>
-<p><em>AOP proxy</em>: an object created by the AOP framework in order to implement the aspect
-contracts (advise method executions and so on). In the Spring Framework, an AOP proxy
-will be a JDK dynamic proxy or a CGLIB proxy.</p>
+<p><em>AOP proxy（AOP 代理）</em>：一个由 AOP 框架创建的用于实现切面约定（通知方法执行等等）的对象。在 Spring 框架中，AOP 代理是由 JDK 动态代理或 CGLIB 代理实现的。</p>
 </li>
 <li>
-<p><em>Weaving</em>: linking aspects with other application types or objects to create an
-advised object. This can be done at compile time (using the AspectJ compiler, for
-example), load time, or at runtime. Spring AOP, like other pure Java AOP frameworks,
-performs weaving at runtime.</p>
+<p><em>Weaving（织入）</em>：将切面与其他应用程序类型或对象链接以创建通知对象。这可以在编译时（例如使用 AspectJ 编译器），加载时或运行时完成。像其他纯 Java AOP 框架一样，Spring AOP 在运行时执行织入。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Types of advice:</p>
+<p>通知类型：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>Before advice</em>: Advice that executes before a join point, but which does not have
-the ability to prevent execution flow proceeding to the join point (unless it throws
-an exception).</p>
+<p><em>Before advice（前置通知）</em>：在连接点目标之前执行的通知，它不能阻止程序执行流执行到连接点（除非通知抛出异常）。</p>
 </li>
 <li>
-<p><em>After returning advice</em>: Advice to be executed after a join point completes
-normally: for example, if a method returns without throwing an exception.</p>
+<p><em>After returning advice（返回通知）</em>：在连接点目标正常完成之后执行的通知：例如，如果一个方法在没有异常抛出的情况下返回。</p>
 </li>
 <li>
-<p><em>After throwing advice</em>: Advice to be executed if a method exits by throwing an
-exception.</p>
+<p><em>After throwing advice（异常通知）</em>：如果某个方法因抛出异常而退出才执行的通知。 </p>
 </li>
 <li>
-<p><em>After (finally) advice</em>: Advice to be executed regardless of the means by which a
-join point exits (normal or exceptional return).</p>
+<p><em>After (finally) advice（后置通知）</em>：不管连接点以什么方式退出（正常的或者异常的返回）都会在之后执行的通知。</p>
 </li>
 <li>
-<p><em>Around advice</em>: Advice that surrounds a join point such as a method invocation.
-This is the most powerful kind of advice. Around advice can perform custom behavior
-before and after the method invocation. It is also responsible for choosing whether to
-proceed to the join point or to shortcut the advised method execution by returning its
-own return value or throwing an exception.</p>
+<p><em>Around advice（环绕通知）</em>：在连接点如方法调用前后（环绕）执行的通知。这是最强大的通知类型。环绕通知可以在方法调用前调用后执行自定义行为。它还负责选择是否处理连接点或者是否通过返回通知方法本身的返回值或抛出异常来切断通知方法的执行。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Around advice is the most general kind of advice. Since Spring AOP, like AspectJ,
-provides a full range of advice types, we recommend that you use the least powerful
-advice type that can implement the required behavior. For example, if you need only to
-update a cache with the return value of a method, you are better off implementing an
-after returning advice than an around advice, although an around advice can accomplish
-the same thing. Using the most specific advice type provides a simpler programming model
-with less potential for errors. For example, you do not need to invoke the <code>proceed()</code>
-method on the <code>JoinPoint</code> used for around advice, and hence cannot fail to invoke it.</p>
+<p>环绕通知是最常用的通知。Spring AOP 像 AspectJ 一样提供了一整套的通知类型，我们建议你使用能够满足实现所需行为的能力相对对小的通知类型。例如，如果只需要用方法的返回值来更新缓存，则最好是实现一个返回通知而不是环绕通知，尽管环绕通知可以完成同样的事情。使用的通知类型越具体，编程模型就越简单，潜在错误的可能性也就越小。例如，如果你不需要调用 <code>JoinPoint</code> 中用于环绕通知的 <code>proceed()</code> 方法，也就不可能出现调用失败。</p>
 </div>
 <div class="paragraph">
-<p>In Spring 2.0, all advice parameters are statically typed, so that you work with advice
-parameters of the appropriate type (the type of the return value from a method execution
-for example) rather than <code>Object</code> arrays.</p>
+<p>在 Spring 2.0 中，所有的通知参数都是静态类型的，所以你应该使用适当类型的通知参数（例如来自方法执行的返回值的类型）而不是 <code>Object</code> 数组。</p>
 </div>
 <div class="paragraph">
-<p>The concept of join points, matched by pointcuts, is the key to AOP which distinguishes
-it from older technologies offering only interception. Pointcuts enable advice to be
-targeted independently of the Object-Oriented hierarchy. For example, an around advice
-providing declarative transaction management can be applied to a set of methods spanning
-multiple objects (such as all business operations in the service layer).</p>
+<p>被切点匹配的连接点的概念是 AOP 的关键，区别于仅提供拦截的旧技术。切点使通知可以独立于面向对象的层次结构进行设定。例如，提供声明式事务管理的环绕通知可以应用于跨越多个对象（例如服务层中的所有业务操作）的一组方法。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-introduction-spring-defn"><a class="anchor" href="#aop-introduction-spring-defn"></a>5.1.2. Spring AOP capabilities and goals</h4>
+<h4 id="aop-introduction-spring-defn"><a class="anchor" href="#aop-introduction-spring-defn"></a>5.1.2. Spring AOP 能力和目标</h4>
 <div class="paragraph">
-<p>Spring AOP is implemented in pure Java. There is no need for a special compilation
-process. Spring AOP does not need to control the class loader hierarchy, and is thus
-suitable for use in a Servlet container or application server.</p>
+<p>Spring AOP 是用纯 Java 实现的。不需要特殊的编译过程。Spring AOP 不需要控制类加载器层次结构，因此适用于Servlet 容器或应用程序服务器。</p>
 </div>
 <div class="paragraph">
-<p>Spring AOP currently supports only method execution join points (advising the execution
-of methods on Spring beans). Field interception is not implemented, although support for
-field interception could be added without breaking the core Spring AOP APIs. If you need
-to advise field access and update join points, consider a language such as AspectJ.</p>
+<p>Spring AOP 目前仅支持方法执行连接点（通知 Spring bean 上的方法执行）。字段拦截并没有实现，虽然可以在不破坏核心 Spring AOP API 的情况下添加对字段拦截的支持。如果你需要通知字段访问和更新连接点，请考虑使用诸如AspectJ 之类的语言。</p>
 </div>
 <div class="paragraph">
-<p>Spring AOP&#8217;s approach to AOP differs from that of most other AOP frameworks. The aim is
-not to provide the most complete AOP implementation (although Spring AOP is quite
-capable); it is rather to provide a close integration between AOP implementation and
-Spring IoC to help solve common problems in enterprise applications.</p>
+<p>Spring AOP 的 AOP 方法与其他大多数 AOP 框架不同。目标不是提供最完整的 AOP 实现（尽管 Spring AOP 是可以做到的）;而是提供 AOP 实现和 Spring IoC 之间的紧密集成，以帮助解决企业应用程序中的常见问题。</p>
 </div>
 <div class="paragraph">
-<p>Thus, for example, the Spring Framework&#8217;s AOP functionality is normally used in
-conjunction with the Spring IoC container. Aspects are configured using normal bean
-definition syntax (although this allows powerful "autoproxying" capabilities): this is a
-crucial difference from other AOP implementations. There are some things you cannot do
-easily or efficiently with Spring AOP, such as advise very fine-grained objects (such as
-domain objects typically): AspectJ is the best choice in such cases. However, our
-experience is that Spring AOP provides an excellent solution to most problems in
-enterprise Java applications that are amenable to AOP.</p>
+<p>因此，举个例子，Spring 框架的 AOP 功能通常与 Spring IoC 容器一起使用。切面使用正常的 bean 定义语法进行配置（尽管这允许强大的“自动代理”功能来实现）：这是与其他 AOP 实现的关键区别。有些事情你无法用Spring AOP 轻松或有效地完成，比如通知非常细粒度的对象（比如典型的域对象）：在这种情况下，AspectJ是最好的选择。但是，我们的经验是，Spring AOP 为适用于 AOP 的企业级 Java 应用程序中的大多数问题提供了极好的解决方案。</p>
 </div>
 <div class="paragraph">
-<p>Spring AOP will never strive to compete with AspectJ to provide a comprehensive AOP
-solution. We believe that both proxy-based frameworks like Spring AOP and full-blown
-frameworks such as AspectJ are valuable, and that they are complementary, rather than in
-competition. Spring seamlessly integrates Spring AOP and IoC with AspectJ, to enable
-all uses of AOP to be catered for within a consistent Spring-based application
-architecture. This integration does not affect the Spring AOP API or the AOP Alliance
-API: Spring AOP remains backward-compatible. See <a href="#aop-api">the following chapter</a> for a
-discussion of the Spring AOP APIs.</p>
+<p>Spring AOP 将永远不会与 AspectJ 竞争提供全面的 AOP 解决方案。我们认为像 Spring AOP 这样的基于代理的框架和像 AspectJ 这样的全面的框架都是有价值的，而且它们是互补的关系，而不是竞争的关系。 Spring 将 Spring AOP 和 IoC 与 AspectJ 无缝集成，以便在一致的基于 Spring 的应用程序体系结构中满足 AOP 的所有用途。此集成不影响 Spring AOP API 或 AOP Alliance API：Spring AOP 保持向后兼容。有关Spring AOP API 的讨论，请参阅<a href="#aop-api">以下章节</a>。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -11687,27 +11562,13 @@ discussion of the Spring AOP APIs.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>One of the central tenets of the Spring Framework is that of <em>non-invasiveness</em>; this
-is the idea that you should not be forced to introduce framework-specific classes and
-interfaces into your business/domain model. However, in some places the Spring Framework
-does give you the option to introduce Spring Framework-specific dependencies into your
-codebase: the rationale in giving you such options is because in certain scenarios it
-might be just plain easier to read or code some specific piece of functionality in such
-a way. The Spring Framework (almost) always offers you the choice though: you have the
-freedom to make an informed decision as to which option best suits your particular use
-case or scenario.</p>
+<p>Spring 框架的核心原则之一是 <em>非侵入式</em>；意思就是你不应该被迫在你的业务/领域模型中引入框架特定的类和接口。然而，在一些地方，Spring 框架的确给了你在你的代码库中引入特定的 Spring 框架的依赖关系的选择：给你这样的选择的理由是因为在某些情况下，阅读或者编写一些特定的功能可能会变得更加简单。Spring 框架（几乎）总会为你提供这样选择：你可以自由决定哪个选项最适合你的特定用例或场景。</p>
 </div>
 <div class="paragraph">
-<p>One such choice that is relevant to this chapter is that of which AOP framework (and
-which AOP style) to choose. You have the choice of AspectJ and/or Spring AOP, and you
-also have the choice of either the @AspectJ annotation-style approach or the Spring XML
-configuration-style approach. The fact that this chapter chooses to introduce the
-@AspectJ-style approach first should not be taken as an indication that the Spring team
-favors the @AspectJ annotation-style approach over the Spring XML configuration-style.</p>
+<p>与本章相关的此类选择是对于 AOP 框架（以及 AOP 风格）的选择。您可以选择 AspectJ 和/或 Spring AOP，也可以选择 @AspectJ 注解风格的方式或 Spring XML 配置风格的方式。本章首先选择引入的是 @AspectJ 风格的方式，这个事实不应该被认为是：相比Spring XML 配置风格， Spring 团队更喜欢使用 @AspectJ 注解风格的方式。</p>
 </div>
 <div class="paragraph">
-<p>See <a href="#aop-choosing">Choosing which AOP declaration style to use</a> for a more complete discussion of the whys and wherefores of each
-style.</p>
+<p>请参阅 <a href="#aop-choosing">选择使用哪种 AOP 声明风格</a> 来更全面地讨论每种风格的原因和动机。</p>
 </div>
 </td>
 </tr>
@@ -11715,24 +11576,15 @@ style.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-introduction-proxies"><a class="anchor" href="#aop-introduction-proxies"></a>5.1.3. AOP Proxies</h4>
+<h4 id="aop-introduction-proxies"><a class="anchor" href="#aop-introduction-proxies"></a>5.1.3. AOP Proxies（AOP 代理）</h4>
 <div class="paragraph">
-<p>Spring AOP defaults to using standard JDK <em>dynamic proxies</em> for AOP proxies. This
-enables any interface (or set of interfaces) to be proxied.</p>
+<p>Spring AOP 默认使用标准 JDK <em>动态代理</em> 来实现 AOP 代理。这使得任何接口（或一组接口）都可以被代理。</p>
 </div>
 <div class="paragraph">
-<p>Spring AOP can also use CGLIB proxies. This is necessary to proxy classes rather than
-interfaces. CGLIB is used by default if a business object does not implement an
-interface. As it is good practice to program to interfaces rather than classes; business
-classes normally will implement one or more business interfaces. It is possible to
-<a href="#aop-proxying">force the use of CGLIB</a>, in those (hopefully rare) cases where you
-need to advise a method that is not declared on an interface, or where you need to
-pass a proxied object to a method as a concrete type.</p>
+<p>Spring AOP 也可以使用 CGLIB 代理。这是代理类而不是接口的必要条件。如果业务对象没有实现接口，则默认使用CGLIB。 对接口进行编程而不是对类进行编程是个好习惯; 业务类通常会实现一个或多个业务接口。在那些需要通知未在接口中声明的方法的情况下（希望很少），或者需要将代理对象作为具体类型传递给方法的情况下，可以<a href="#aop-proxying">强制使用CGLIB</a>，</p>
 </div>
 <div class="paragraph">
-<p>It is important to grasp the fact that Spring AOP is <em>proxy-based</em>. See
-<a href="#aop-understanding-aop-proxies">Understanding AOP proxies</a> for a thorough examination of exactly what this
-implementation detail actually means.</p>
+<p>记住 Spring AOP 是 <em>基于代理的</em> 这个事实非常重要。请参阅 <a href="#aop-understanding-aop-proxies">理解 AOP 代理</a>，以彻底查看此实现细节的实际含义。</p>
 </div>
 </div>
 </div>
