@@ -11709,22 +11709,12 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-pointcuts"><a class="anchor" href="#aop-pointcuts"></a>5.2.3. Declaring a pointcut</h4>
+<h4 id="aop-pointcuts"><a class="anchor" href="#aop-pointcuts"></a>5.2.3. 声明切点</h4>
 <div class="paragraph">
-<p>Recall that pointcuts determine join points of interest, and thus enable us to control
-when advice executes. <em>Spring AOP only supports method execution join points for Spring
-beans</em>, so you can think of a pointcut as matching the execution of methods on Spring
-beans. A pointcut declaration has two parts: a signature comprising a name and any
-parameters, and a pointcut expression that determines <em>exactly</em> which method
-executions we are interested in. In the @AspectJ annotation-style of AOP, a pointcut
-signature is provided by a regular method definition, and the pointcut expression is
-indicated using the <code>@Pointcut</code> annotation (the method serving as the pointcut signature
-<em>must</em> have a <code>void</code> return type).</p>
+<p>回想一下，切点决定了感兴趣的连接点，从而使我们能够控制何时执行通知。<em>Spring AOP 只支持 Spring bean 的方法执行连接点</em>，所以你可以把切点视为对 Spring bean 上方法执行的匹配。切点声明包含两部分：包含名称和任何参数的签名，以及确定我们感兴趣的方法执行的切点表达式。在 AOP 的 @AspectJ 注解风格中，切点签名由常规方法定义提供，并且使用 <code>@Pointcut</code> 注解来表示切点表达式（用作切点签名的方法 <em>必须</em> 具有 <code>void</code> 返回类型）。</p>
 </div>
 <div class="paragraph">
-<p>An example will help make this distinction between a pointcut signature and a pointcut
-expression clear. The following example defines a pointcut named <code>'anyOldTransfer'</code> that
-will match the execution of any method named <code>'transfer'</code>:</p>
+<p>举个例子将有助于区分切点签名和切点表达式之间的区别。以下示例定义了一个名为 <code>'anyOldTransfer'</code> 的切点，该切点将匹配任何名为 <code>'transfer'</code> 的方法的执行：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11733,88 +11723,57 @@ will match the execution of any method named <code>'transfer'</code>:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The pointcut expression that forms the value of the <code>@Pointcut</code> annotation is a regular
-AspectJ 5 pointcut expression. For a full discussion of AspectJ&#8217;s pointcut language, see
-the <a href="https://www.eclipse.org/aspectj/doc/released/progguide/index.html">AspectJ
-Programming Guide</a> (and for extensions, the
-<a href="https://www.eclipse.org/aspectj/doc/released/adk15notebook/index.html">AspectJ 5
-Developers Notebook</a>) or one of the books on AspectJ such as "Eclipse AspectJ" by Colyer
-et. al. or "AspectJ in Action" by Ramnivas Laddad.</p>
+<p>构成 <code>@Pointcut</code> 注解值的切点表达式是一个常规的 AspectJ 5 切点表达式。有关 AspectJ 的切点语言的完整讨论，请参见 <a href="https://www.eclipse.org/aspectj/doc/released/progguide/index.html">AspectJ编程指南</a>（以及用于扩展的 <a href="https://www.eclipse.org/aspectj/doc/released/adk15notebook/index.html">AspectJ 5 开发人员笔记</a>）或 AspectJ 主题的书籍，如Colyer 等人的“Eclipse AspectJ” 或 Ramnivas Laddad 的“AspectJ in Action”。</p>
 </div>
 <div class="sect4">
-<h5 id="aop-pointcuts-designators"><a class="anchor" href="#aop-pointcuts-designators"></a>Supported Pointcut Designators</h5>
+<h5 id="aop-pointcuts-designators"><a class="anchor" href="#aop-pointcuts-designators"></a>支持的切点指示符</h5>
 <div class="paragraph">
-<p>Spring AOP supports the following AspectJ pointcut designators (PCD) for use in pointcut
-expressions:</p>
+<p>Spring AOP 支持在切点表达式中使用以下 AspectJ 切点指示符（PCD）：</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
-<div class="title">Other pointcut types</div>
+<div class="title">其它切点类型</div>
 <div class="paragraph">
-<p>The full AspectJ pointcut language supports additional pointcut designators that are not
-supported in Spring. These are: <code>call, get, set, preinitialization,
-staticinitialization, initialization, handler, adviceexecution, withincode, cflow,
-cflowbelow, if, @this</code>, and <code>@withincode</code>. Use of these pointcut designators in pointcut
-expressions interpreted by Spring AOP will result in an <code>IllegalArgumentException</code> being
-thrown.</p>
+<p>完整的 AspectJ 切点语言支持 Spring 中不支持的附加切入点指示符。它们是：<code>call，get，set，preinitialization，staticinitialization，initialization，handler，adviceexecution，withincode，cflow，cflowbelow，if，@this</code> 和<code> @withincode</code>。在由 Spring AOP 翻译的切点表达式中使用这些切点指示符将导致抛出 <code>IllegalArgumentException</code> 异常。</p>
 </div>
 <div class="paragraph">
-<p>The set of pointcut designators supported by Spring AOP may be extended in future
-releases to support more of the AspectJ pointcut designators.</p>
+<p>Spring AOP 支持的一系列切点指示符可能在将来的版本中扩展，以支持更多的 AspectJ 切点指示符。</p>
 </div>
 </div>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><em>execution</em> - for matching method execution join points, this is the primary
-pointcut designator you will use when working with Spring AOP</p>
+<p><em>execution</em> - 用于匹配方法执行连接点，是使用 Spring AOP 时要使用的主要切点指示符</p>
 </li>
 <li>
-<p><em>within</em> - limits matching to join points within certain types (simply the execution
-of a method declared within a matching type when using Spring AOP)</p>
+<p><em>within</em> - 限制匹配的连接点类型范围（使用 Spring AOP 时，匹配类型中声明的方法的执行）</p>
 </li>
 <li>
-<p><em>this</em> - limits matching to join points (the execution of methods when using Spring
-AOP) where the bean reference (Spring AOP proxy) is an instance of the given type</p>
+<p><em>this</em> - 限制匹配连接点（使用 Spring AOP 时，方法的执行），其中 bean 引用（Spring AOP 代理）是给定类型的一个实例</p>
 </li>
 <li>
-<p><em>target</em> - limits matching to join points (the execution of methods when using
-Spring AOP) where the target object (application object being proxied) is an instance
-of the given type</p>
+<p><em>target</em> - 限制匹配连接点（使用Spring AOP时，方法的执行），其中目标对象（被代理的应用程序对象）是给定类型的实例</p>
 </li>
 <li>
-<p><em>args</em> - limits matching to join points (the execution of methods when using Spring
-AOP) where the arguments are instances of the given types</p>
+<p><em>args</em> -  限制匹配连接点（使用Spring AOP时，方法的执行），其中参数是给定类型的实例</p>
 </li>
 <li>
-<p><em>@target</em> - limits matching to join points (the execution of methods when using
-Spring AOP) where the class of the executing object has an annotation of the given type</p>
+<p><em>@target</em> - 限制匹配连接点（使用Spring AOP时，方法的执行），执行对象的类有一个给定类型的注解</p>
 </li>
 <li>
-<p><em>@args</em> - limits matching to join points (the execution of methods when using Spring
-AOP) where the runtime type of the actual arguments passed have annotations of the
-given type(s)</p>
+<p><em>@args</em> - 限制匹配连接点（使用Spring AOP时，方法的执行），实参的运行时类型有给定类型的注解</p>
 </li>
 <li>
-<p><em>@within</em> - limits matching to join points within types that have the given
-annotation (the execution of methods declared in types with the given annotation when
-using Spring AOP)</p>
+<p><em>@within</em> - 限制匹配具有给定注解类型的连接点（使用Spring AOP时，带有给定注解的类型声明的方法的执行</p>
 </li>
 <li>
-<p><em>@annotation</em> - limits matching to join points where the subject of the join point
-(method being executed in Spring AOP) has the given annotation</p>
+<p><em>@annotation</em> -  限制匹配具有给定的注解类型的连接点（在Spring AOP中执行的方法）</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Because Spring AOP limits matching to only method execution join points, the discussion
-of the pointcut designators above gives a narrower definition than you will find in the
-AspectJ programming guide. In addition, AspectJ itself has type-based semantics and at
-an execution join point both <code>this</code> and <code>target</code> refer to the same object - the
-object executing the method. Spring AOP is a proxy-based system and differentiates
-between the proxy object itself (bound to <code>this</code>) and the target object behind the
-proxy (bound to <code>target</code>).</p>
+<p>由于 Spring AOP 将匹配仅限于方法执行连接点，所以上面的切点指示符的讨论给出了比在 AspectJ 编程指南中找到的更窄的定义。另外，AspectJ 本身具有基于类型的语义且在执行连接点上，<code>this</code> 和 <code>target</code> 都指向同一个对象 - 执行方法的对象。 Spring AOP 是一个基于代理的系统，区分代理对象本身（绑定到 <code>this</code>）和代理（绑定到 <code>target</code> ）后面的目标对象。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -11824,23 +11783,13 @@ proxy (bound to <code>target</code>).</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Due to the proxy-based nature of Spring&#8217;s AOP framework, calls within the target object
-are by definition <em>not</em> intercepted. For JDK proxies, only public interface method
-calls on the proxy can be intercepted. With CGLIB, public and protected method calls on
-the proxy will be intercepted, and even package-visible methods if necessary. However,
-common interactions through proxies should always be designed through public signatures.</p>
+<p>由于 Spring AOP 框架基于代理的性质，目标对象内的调用根本没有被截取。对于 JDK 代理，只有代理上的 public 接口方法调用才能被拦截。使用 CGLIB，代理上的 public 和 protected 方法调用将被拦截，如果需要的话，甚至包package-visible 方法。但是，通过代理的常见交互应始终通过public 签名来设计。</p>
 </div>
 <div class="paragraph">
-<p>Note that pointcut definitions are generally matched against any intercepted method.
-If a pointcut is strictly meant to be public-only, even in a CGLIB proxy scenario with
-potential non-public interactions through proxies, it needs to be defined accordingly.</p>
+<p>注意切点定义通常与任何拦截的方法相匹配。如果一个切点严格意味着它只能是 public 的，即使在通过代理进行潜在的非 public 交互的 CGLIB 代理场景中，也需要相应地定义切点。</p>
 </div>
 <div class="paragraph">
-<p>If your interception needs include method calls or even constructors within the target
-class, consider the use of Spring-driven <a href="#aop-aj-ltw">native AspectJ weaving</a> instead
-of Spring&#8217;s proxy-based AOP framework. This constitutes a different mode of AOP usage
-with different characteristics, so be sure to make yourself familiar with weaving first
-before making a decision.</p>
+<p>如果拦截需求包含方法调用，甚至包含目标类中的构造器，请考虑使用给予 Spring 驱动的<a href="#aop-aj-ltw">本地 AspectJ 织入</a>，而不是 Spring 的基于代理的 AOP 框架。这构成了不同特征的 AOP 使用方式，所以在做出决定之前一定要先熟悉织入。</p>
 </div>
 </td>
 </tr>
