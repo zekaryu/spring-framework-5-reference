@@ -11701,7 +11701,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 <td class="content">
 <div class="title">用其他切面通知切面？</div>
 <div class="paragraph">
-<p>在 Spring AOP 中，不可能将切面本身作为其他切面的通知的目标。类上的 <em>@Aspect</em> 注解将其标记为一个切面，因此它会被自动代理排除。</p>
+<p>在 Spring AOP 中，不可能将切面本身作为其他切面的通知目标。类上的 <em>@Aspect</em> 注解将其标记为一个切面，因此它会被自动代理排除。</p>
 </div>
 </td>
 </tr>
@@ -11796,9 +11796,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>Spring AOP also supports an additional PCD named <code>bean</code>. This PCD allows you to limit
-the matching of join points to a particular named Spring bean, or to a set of named
-Spring beans (when using wildcards). The <code>bean</code> PCD has the following form:</p>
+<p>Spring AOP 还支持额外的 PCD 命名 <code>bean</code>。 这个 PCD 允许你将连接点限制为一个特定的 Spring bean 的匹配，或者一组命名的 Spring bean（当使用通配符时）。 <code>bean</code> PCD 有以下形式：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11806,11 +11804,7 @@ Spring beans (when using wildcards). The <code>bean</code> PCD has the following
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>idOrNameOfBean</code> token can be the name of any Spring bean: limited wildcard
-support using the <code>*</code> character is provided, so if you establish some naming
-conventions for your Spring beans you can quite easily write a <code>bean</code> PCD expression
-to pick them out. As is the case with other pointcut designators, the <code>bean</code> PCD can
-be &amp;&amp;'ed, ||'ed, and ! (negated) too.</p>
+<p><code>idOrNameOfBean</code> 标记可以是任何 Spring bean 的 name：提供了使用 <code>*</code> 字符的有限通配符支持，所以如果你为 Spring bean 建立了一些命名约定，你可以很容易地写一个 <code>bean</code> PCD 表达式来挑选它们。与其他切入点指示符的情况一样，<code>bean</code> PCD 可以被 &&，||和!（否定）编辑。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -11820,16 +11814,10 @@ be &amp;&amp;'ed, ||'ed, and ! (negated) too.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Please note that the <code>bean</code> PCD is <em>only</em> supported in Spring AOP - and <em>not</em> in
-native AspectJ weaving. It is a Spring-specific extension to the standard PCDs that
-AspectJ defines and therefore not available for aspects declared in the <code>@Aspect</code> model.</p>
+<p>请注意，<code>bean</code> PCD 仅在 Spring AOP 中受支持，而不是在 AspectJ 本地织入中支持。 这是 AspectJ 定义的标准 PCD 的 Spring 扩展，因此不适用于 <code>@Aspect</code> 模型中声明的切面。</p>
 </div>
 <div class="paragraph">
-<p>The <code>bean</code> PCD operates at the <em>instance</em> level (building on the Spring bean name
-concept) rather than at the type level only (which is what weaving-based AOP is limited
-to). Instance-based pointcut designators are a special capability of Spring&#8217;s
-proxy-based AOP framework and its close integration with the Spring bean factory, where
-it is natural and straightforward to identify specific beans by name.</p>
+<p><code>bean</code> PCD 在实例级别运行（基于Spring bean 命名概念构建），而不是仅在类型级别（这是基于织入的 AOP 所限制的）。基于实例的切点指示符是 Spring 基于代理的 AOP 框架的一个特殊功能，它与 Spring bean 工厂紧密集成，通过名称识别特定的 bean 是很自然和直接的。</p>
 </div>
 </td>
 </tr>
@@ -11837,14 +11825,9 @@ it is natural and straightforward to identify specific beans by name.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-pointcuts-combining"><a class="anchor" href="#aop-pointcuts-combining"></a>Combining pointcut expressions</h5>
+<h5 id="aop-pointcuts-combining"><a class="anchor" href="#aop-pointcuts-combining"></a>合并切点表达式</h5>
 <div class="paragraph">
-<p>Pointcut expressions can be combined using '&amp;&amp;', '||' and '!'. It is also possible to
-refer to pointcut expressions by name. The following example shows three pointcut
-expressions: <code>anyPublicOperation</code> (which matches if a method execution join point
-represents the execution of any public method); <code>inTrading</code> (which matches if a method
-execution is in the trading module), and <code>tradingOperation</code> (which matches if a method
-execution represents any public method in the trading module).</p>
+<p>切入点表达式可以使用'&&'，'||' 和 “!” 合并，也可以通过名称来引用切点表达式。 以下示例显示三个切点表达式：<code>anyPublicOperation</code>（如果方法执行连接点表示任何 public 方法的执行，则匹配）; <code>inTrading</code>（如果方法执行连接点在 trading 模块下执行，则匹配）和 <code>tradingOperation</code>（如果方法执行连接点表示在 trading 模块下任何 public 方法的执行，则匹配）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11859,20 +11842,13 @@ execution represents any public method in the trading module).</p>
 </div>
 </div>
 <div class="paragraph">
-<p>It is a best practice to build more complex pointcut expressions out of smaller named
-components as shown above. When referring to pointcuts by name, normal Java visibility
-rules apply (you can see private pointcuts in the same type, protected pointcuts in the
-hierarchy, public pointcuts anywhere and so on). Visibility does not affect pointcut
-<em>matching</em>.</p>
+<p>如上所示，用更小的命名组件构建更复杂的切点表达式是一种最佳实践。当按名称引用切点时，将应用普通的 Java 可见性规则（你可以看到相同类型的 private 切点，层次结构中受 protected 切点，任何位置的 public 切点等）。可见性不影响切入点匹配。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-common-pointcuts"><a class="anchor" href="#aop-common-pointcuts"></a>Sharing common pointcut definitions</h5>
+<h5 id="aop-common-pointcuts"><a class="anchor" href="#aop-common-pointcuts"></a>共享通用的切点定义</h5>
 <div class="paragraph">
-<p>When working with enterprise applications, you often want to refer to modules of the
-application and particular sets of operations from within several aspects. We recommend
-defining a "SystemArchitecture" aspect that captures common pointcut expressions for
-this purpose. A typical such aspect would look as follows:</p>
+<p>在处理企业级应用程序时，你经常要从几个切面引用应用程序的模块和特定的一组操作。我们建议定义一个 “SystemArchitecture” 切面来捕获常见的切点表达式。典型的这个切面看起来如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11937,9 +11913,7 @@ this purpose. A typical such aspect would look as follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The pointcuts defined in such an aspect can be referred to anywhere that you need a
-pointcut expression. For example, to make the service layer transactional, you could
-write:</p>
+<p>在这个切面定义的切点可以在任何需要切点表达式的地方引用。例如，要使服务层事务化，您可以编写：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11957,15 +11931,13 @@ write:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>&lt;aop:config&gt;</code> and <code>&lt;aop:advisor&gt;</code> elements are discussed in <a href="#aop-schema">Schema-based AOP support</a>. The
-transaction elements are discussed in <a href="data-access.html#transaction">Transaction Management</a>.</p>
+<p><code>&lt;aop:config&gt;</code> 和 <code>&lt;aop:advisor&gt;</code> 元素会在基于 schema 的 AOP 支持中讨论。<a href="data-access.html#transaction">事务管理</a> 中讨论了事务相关的元素。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-pointcuts-examples"><a class="anchor" href="#aop-pointcuts-examples"></a>Examples</h5>
+<h5 id="aop-pointcuts-examples"><a class="anchor" href="#aop-pointcuts-examples"></a>示例</h5>
 <div class="paragraph">
-<p>Spring AOP users are likely to use the <code>execution</code> pointcut designator the most often.
-The format of an execution expression is:</p>
+<p>Spring AOP 用户可能最常使用 <code>execution</code> 切点指示符。execution 表达式的格式是：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11974,29 +11946,15 @@ The format of an execution expression is:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>All parts except the returning type pattern (ret-type-pattern in the snippet above),
-name pattern, and parameters pattern are optional. The returning type pattern determines
-what the return type of the method must be in order for a join point to be matched. Most
-frequently you will use <code>*</code> as the returning type pattern, which matches any return
-type. A fully-qualified type name will match only when the method returns the given
-type. The name pattern matches the method name. You can use the <code>*</code> wildcard as all or
-part of a name pattern. If specifying a declaring type pattern
-then include a trailing <code>.</code> to join it to the name pattern component.
-The parameters pattern is slightly more complex: <code>()</code> matches a
-method that takes no parameters, whereas <code>(..)</code> matches any number of parameters (zero
-or more). The pattern <code>(*)</code> matches a method taking one parameter of any type,
-<code>(*,String)</code> matches a method taking two parameters, the first can be of any type, the
-second must be a String. Consult the
-<a href="https://www.eclipse.org/aspectj/doc/released/progguide/semantics-pointcuts.html">Language
-Semantics</a> section of the AspectJ Programming Guide for more information.</p>
+<p>除了返回类型模式（上面代码段中的ret-type-pattern），命名模式和参数模式以外的所有部分都是可选的。返回类型模式决定了该方法的返回类型必须是什么，才能匹配连接点。大多数情况下，您将使用 <code>*</code> 作为返回类型，它匹配任何返回类型。只有当方法返回给定类型时，完全限定类型名称才会匹配。命名模式匹配方法名。您可以使用 <code>*</code> 通配符作为命名模式的全部或部分。如果要指定一个声明类型模式，就在命名模式后面添加 <code>.</code>。参数模式稍微复杂一点：<code>()</code> 匹配一个不带参数的方法，而 <code>(..)</code> 匹配任意数量的参数（零个或多个）。<code>(*)</code> 模式匹配任何类型接受一个参数的方法，<code>(*,String)</code> 匹配接受两个参数的方法，第一个可以是任何类型，第二个必须是一个字符串。有关更多信息，请参阅 “AspectJ 编程指南” 的 <a href="https://www.eclipse.org/aspectj/doc/released/progguide/semantics-pointcuts.html">语言语义</a> 部分。</p>
 </div>
 <div class="paragraph">
-<p>Some examples of common pointcut expressions are given below.</p>
+<p>常见切点表达式的一些例子如下所示。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>the execution of any public method:</p>
+<p>任何 public 方法的执行</p>
 </li>
 </ul>
 </div>
@@ -12008,7 +11966,7 @@ Semantics</a> section of the AspectJ Programming Guide for more information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>the execution of any method with a name beginning with "set":</p>
+<p>以“set”开头的任何方法的执行：</p>
 </li>
 </ul>
 </div>
@@ -12020,7 +11978,7 @@ Semantics</a> section of the AspectJ Programming Guide for more information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>the execution of any method defined by the <code>AccountService</code> interface:</p>
+<p>由 <code>AccountService</code> 接口定义的任何方法的执行：</p>
 </li>
 </ul>
 </div>
@@ -12032,7 +11990,7 @@ Semantics</a> section of the AspectJ Programming Guide for more information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>the execution of any method defined in the service package:</p>
+<p>在 service 包定义的任何方法的执行：</p>
 </li>
 </ul>
 </div>
@@ -12044,7 +12002,7 @@ Semantics</a> section of the AspectJ Programming Guide for more information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>the execution of any method defined in the service package or a sub-package:</p>
+<p>在 service 包或者其子包内定义的任何方法的执行：</p>
 </li>
 </ul>
 </div>
@@ -12056,7 +12014,7 @@ Semantics</a> section of the AspectJ Programming Guide for more information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) within the service package:</p>
+<p>service 包中的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12068,8 +12026,7 @@ Semantics</a> section of the AspectJ Programming Guide for more information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) within the service package or a
-sub-package:</p>
+<p>service 包或者其子包中的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12081,8 +12038,7 @@ sub-package:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) where the proxy implements the
-<code>AccountService</code> interface:</p>
+<p>其代理实现了 <code>AccountService</code>  接口的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12099,8 +12055,7 @@ sub-package:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'this' is more commonly used in a binding form :- see the following section on advice
-for how to make the proxy object available in the advice body.</p>
+<p>“this”更常用于绑定形式：-请参阅下面一节关于如何使代理对象在通知主体中可用。</p>
 </div>
 </td>
 </tr>
@@ -12109,8 +12064,7 @@ for how to make the proxy object available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) where the target object
-implements the <code>AccountService</code> interface:</p>
+<p>其目标对象实现了 <code>AccountService</code> 接口的任何连接点（只在 Spring AOP 中的方法执行）a：</p>
 </li>
 </ul>
 </div>
@@ -12127,8 +12081,7 @@ implements the <code>AccountService</code> interface:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'target' is more commonly used in a binding form :- see the following section on advice
-for how to make the target object available in the advice body.</p>
+<p>“target”更常用于绑定形式：-请参阅下面一节关于如何使目标对象在通知主体中可用。</p>
 </div>
 </td>
 </tr>
@@ -12137,8 +12090,7 @@ for how to make the target object available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) which takes a single parameter,
-and where the argument passed at runtime is <code>Serializable</code>:</p>
+<p>接受单个参数且传入参数的运行时类型是 <code>Serializable</code> 的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12155,24 +12107,20 @@ and where the argument passed at runtime is <code>Serializable</code>:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'args' is more commonly used in a binding form :- see the following section on advice
-for how to make the method arguments available in the advice body.</p>
+<p>“args”更常用于绑定形式：-请参阅下面一节关于如何使方法参数在通知主体中可用。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Note that the pointcut given in this example is different to <code>execution(*
-*(java.io.Serializable))</code>: the args version matches if the argument passed at runtime is
-Serializable, the execution version matches if the method signature declares a single
-parameter of type <code>Serializable</code>.</p>
+<p>注意，此示例中给出的切点与 <code>execution(*
+  *(java.io.Serializable))</code> 不同：如果在运行时传递的参数是 Serializable，则 args 版本会匹配，如果方法签名声明的单个参数类型是 <code>Serializable</code>，则 execution 版本匹配。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) where the target object has an
-<code>@Transactional</code> annotation:</p>
+<p>目标对象具有 <code>@Transactional</code> 注解的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12189,8 +12137,7 @@ parameter of type <code>Serializable</code>.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'@target' can also be used in a binding form :- see the following section on advice for
-how to make the annotation object available in the advice body.</p>
+<p>“@target”更常用于绑定形式：-请参阅下面一节关于如何使注解对象在通知主体中可用。</p>
 </div>
 </td>
 </tr>
@@ -12199,8 +12146,7 @@ how to make the annotation object available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) where the declared type of the
-target object has an <code>@Transactional</code> annotation:</p>
+<p>声明的目标对象的类型具有 <code>@Transactional</code> 注解的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12217,8 +12163,7 @@ target object has an <code>@Transactional</code> annotation:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'@within' can also be used in a binding form :- see the following section on advice for
-how to make the annotation object available in the advice body.</p>
+<p>“@within”更常用于绑定形式：-请参阅下面一节关于如何使注解对象在通知主体中可用。</p>
 </div>
 </td>
 </tr>
@@ -12227,8 +12172,7 @@ how to make the annotation object available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) where the executing method has an
-<code>@Transactional</code> annotation:</p>
+<p>执行的方法具有 <code>@Transactional</code> 注解的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12245,8 +12189,7 @@ how to make the annotation object available in the advice body.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'@annotation' can also be used in a binding form :- see the following section on advice
-for how to make the annotation object available in the advice body.</p>
+<p>“@annotation”更常用于绑定形式：-请参阅下面一节关于如何使注解对象在通知主体中可用。</p>
 </div>
 </td>
 </tr>
@@ -12255,8 +12198,7 @@ for how to make the annotation object available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) which takes a single parameter,
-and where the runtime type of the argument passed has the <code>@Classified</code> annotation:</p>
+<p>接受单个参数且传入参数的运行时类型是具有 <code>@Classified</code> 注解的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12273,8 +12215,7 @@ and where the runtime type of the argument passed has the <code>@Classified</cod
 </td>
 <td class="content">
 <div class="paragraph">
-<p>'@args' can also be used in a binding form :- see the following section on advice for
-how to make the annotation object(s) available in the advice body.</p>
+<p>“@args”更常用于绑定形式：-请参阅下面一节关于如何使注解对象在通知主体中可用。</p>
 </div>
 </td>
 </tr>
@@ -12283,8 +12224,7 @@ how to make the annotation object(s) available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) on a Spring bean named
-<code>tradeService</code>:</p>
+<p>Spring bean 上名字为 <code>tradeService</code> 的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12296,8 +12236,7 @@ how to make the annotation object(s) available in the advice body.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>any join point (method execution only in Spring AOP) on Spring beans having names that
-match the wildcard expression <code>*Service</code>:</p>
+<p>Spring bean 上名字匹配 <code>*Service</code> 通配符表达式的任何连接点（只在 Spring AOP 中的方法执行）：</p>
 </li>
 </ul>
 </div>
@@ -12308,65 +12247,40 @@ match the wildcard expression <code>*Service</code>:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="writing-good-pointcuts"><a class="anchor" href="#writing-good-pointcuts"></a>Writing good pointcuts</h5>
+<h5 id="writing-good-pointcuts"><a class="anchor" href="#writing-good-pointcuts"></a>编写好的切点</h5>
 <div class="paragraph">
-<p>During compilation, AspectJ processes pointcuts in order to try and optimize matching
-performance. Examining code and determining if each join point matches (statically or
-dynamically) a given pointcut is a costly process. (A dynamic match means the match
-cannot be fully determined from static analysis and a test will be placed in the code to
-determine if there is an actual match when the code is running). On first encountering a
-pointcut declaration, AspectJ will rewrite it into an optimal form for the matching
-process. What does this mean? Basically pointcuts are rewritten in DNF (Disjunctive
-Normal Form) and the components of the pointcut are sorted such that those components
-that are cheaper to evaluate are checked first. This means you do not have to worry
-about understanding the performance of various pointcut designators and may supply them
-in any order in a pointcut declaration.</p>
+<p>在编译期间，AspectJ 会处理切点以试图优化匹配性能。检查代码并确定每个连接点是否匹配（静态或动态）给定的切点是一个代价高昂的过程。（动态匹配意味着无法从静态分析完全确定匹配，并且将在代码中放置测试以确定代码运行时是否存在实际匹配）。在第一次遇到切点声明时，AspectJ 会为匹配过程重写切点的最佳形式。什么意思呢？ 基本上，切点会被重写为DNF（析取范式），并且切点的组件会被排序，以便首先检查那些评估代价更小的组件。 这意味着你不必担心需要理解各种切点指示符的性能，并且可以在切点声明中以任何顺序提供它们。</p>
 </div>
 <div class="paragraph">
-<p>However, AspectJ can only work with what it is told, and for optimal performance of
-matching you should think about what they are trying to achieve and narrow the search
-space for matches as much as possible in the definition. The existing designators
-naturally fall into one of three groups: kinded, scoping and context:</p>
+<p>然而，AspectJ 只能使用它被告知的内容，为了获得最佳的匹配性能，你应该考虑他们正在努力实现的目标，并尽可能地缩小匹配的搜索空间。现有的指示符自然地分为三类：kinded，scoping 和 context：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Kinded designators are those which select a particular kind of join point. For
-example: execution, get, set, call, handler</p>
+<p>Kinded 指示符是那些选择特定连接点类型的指示符，例如：execution，get，set，call，handler</p>
 </li>
 <li>
-<p>Scoping designators are those which select a group of join points of interest (of
-probably many kinds). For example: within, withincode</p>
+<p>Scoping 指示符是那些选择一组感兴趣的连接点（可能会有很类型）的指示符，例如：within，withincode</p>
 </li>
 <li>
-<p>Contextual designators are those that match (and optionally bind) based on context.
-For example: this, target, @annotation</p>
+<p>Contextual 指示符是那些匹配（和选择性绑定）基于 context 的指示符，例如：this，target，@annotation</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>A well written pointcut should try and include at least the first two types (kinded and
-scoping), whilst the contextual designators may be included if wishing to match based on
-join point context, or bind that context for use in the advice. Supplying either just a
-kinded designator or just a contextual designator will work but could affect weaving
-performance (time and memory used) due to all the extra processing and analysis. Scoping
-designators are very fast to match and their usage means AspectJ can very quickly
-dismiss groups of join points that should not be further processed - that is why a good
-pointcut should always include one if possible.</p>
+<p>一个编写良好的切点应至少包括前两种类型（kinded 和 scoping），如果希望基于连接点上下文进行匹配，则可以包含上下文指示符，或者将该上下文绑定以用于通知。只提供一个 kinded 指示符或仅指定一个 contextual 指示符将会起作用，但是会由于所有额外的处理和分析而影响织入性能（时间和内存消耗）。Scoping 指示符的匹配速度非常快，而且它们的使用方式意味着 AspectJ 可以很快地解除不应该进一步处理的连接点组-这就是为什么一个编写良好的切点应该总是包含一个 Scoping 指示符。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-advice"><a class="anchor" href="#aop-advice"></a>5.2.4. Declaring advice</h4>
+<h4 id="aop-advice"><a class="anchor" href="#aop-advice"></a>5.2.4. 声明通知</h4>
 <div class="paragraph">
-<p>Advice is associated with a pointcut expression, and runs before, after, or around
-method executions matched by the pointcut. The pointcut expression may be either a
-simple reference to a named pointcut, or a pointcut expression declared in place.</p>
+<p>通知与切点表达式相关联，并在切点匹配的方法执行之前，之后或前后运行。切点表达式可以是对已经命名切点的简单引用，也可以是就地声明的切点表达式。</p>
 </div>
 <div class="sect4">
-<h5 id="aop-advice-before"><a class="anchor" href="#aop-advice-before"></a>Before advice</h5>
+<h5 id="aop-advice-before"><a class="anchor" href="#aop-advice-before"></a>前置通知</h5>
 <div class="paragraph">
-<p>Before advice is declared in an aspect using the <code>@Before</code> annotation:</p>
+<p>切面中使用 <code>@Before</code>  注解来声明前置通知：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12385,7 +12299,7 @@ simple reference to a named pointcut, or a pointcut expression declared in place
 </div>
 </div>
 <div class="paragraph">
-<p>If using an in-place pointcut expression we could rewrite the above example as:</p>
+<p>如果就地使用切点表达式，我们可以将上面的例子重写为：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12405,10 +12319,9 @@ simple reference to a named pointcut, or a pointcut expression declared in place
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-advice-after-returning"><a class="anchor" href="#aop-advice-after-returning"></a>After returning advice</h5>
+<h5 id="aop-advice-after-returning"><a class="anchor" href="#aop-advice-after-returning"></a>返回通知</h5>
 <div class="paragraph">
-<p>After returning advice runs when a matched method execution returns normally. It is
-declared using the <code>@AfterReturning</code> annotation:</p>
+<p>返回通知在一个匹配方法执行正常返回时执行。它使用 <code>@AfterReturning</code> 注解声明：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12434,17 +12347,14 @@ declared using the <code>@AfterReturning</code> annotation:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Note: it is of course possible to have multiple advice declarations, and other members
-as well, all inside the same aspect. We&#8217;re just showing a single advice declaration in
-these examples to focus on the issue under discussion at the time.</p>
+<p>注意：同一个切面当然也可以有多个通知声明和其他成员。我们只是在这些例子中展示一个通知声明，以关注当下正在讨论的问题。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Sometimes you need access in the advice body to the actual value that was returned. You
-can use the form of <code>@AfterReturning</code> that binds the return value for this:</p>
+<p>有时您需要在通知主体中访问返回的实际值。你可以使用 <code>@AfterReturning</code> 的形式来绑定这个返回值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12465,22 +12375,16 @@ can use the form of <code>@AfterReturning</code> that binds the return value for
 </div>
 </div>
 <div class="paragraph">
-<p>The name used in the <code>returning</code> attribute must correspond to the name of a parameter in
-the advice method. When a method execution returns, the return value will be passed to
-the advice method as the corresponding argument value. A <code>returning</code> clause also
-restricts matching to only those method executions that return a value of the specified
-type ( <code>Object</code> in this case, which will match any return value).</p>
+<p><code>returning</code> 属性中使用的名字必须对应于通知方法中参数的名子。当方法执行返回时，返回值将作为相应的参数值传递给通知方法。<code>returning</code> 子句还将匹配限制为仅返回指定类型的值的方法执行（在这个例子中 <code>Object</code> 将匹配任何返回值）。</p>
 </div>
 <div class="paragraph">
-<p>Please note that it is <em>not</em> possible to return a totally different reference when
-using after-returning advice.</p>
+<p>请注意，使用返回通知时，不能返回完全不同的引用。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-advice-after-throwing"><a class="anchor" href="#aop-advice-after-throwing"></a>After throwing advice</h5>
+<h5 id="aop-advice-after-throwing"><a class="anchor" href="#aop-advice-after-throwing"></a>异常通知</h5>
 <div class="paragraph">
-<p>After throwing advice runs when a matched method execution exits by throwing an
-exception. It is declared using the <code>@AfterThrowing</code> annotation:</p>
+<p>异常通知在匹配方法执行以异常方式退出的时候执行。它使用 <code>@AfterThrowing</code> 注解声明：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12499,10 +12403,7 @@ exception. It is declared using the <code>@AfterThrowing</code> annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Often you want the advice to run only when exceptions of a given type are thrown, and
-you also often need access to the thrown exception in the advice body. Use the
-<code>throwing</code> attribute to both restrict matching (if desired, use <code>Throwable</code> as the
-exception type otherwise) and bind the thrown exception to an advice parameter.</p>
+<p>通常，只有在抛出给定类型的异常时，才需要执行这个通知，而且你还需要经常访问通知主体中的被抛出异常。 使用 <code>throwing</code> 属性来限制匹配（如果需要，则使用  <code>Throwable</code> 作为异常类型）并将抛出的异常绑定到通知的参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12523,19 +12424,13 @@ exception type otherwise) and bind the thrown exception to an advice parameter.<
 </div>
 </div>
 <div class="paragraph">
-<p>The name used in the <code>throwing</code> attribute must correspond to the name of a parameter in
-the advice method. When a method execution exits by throwing an exception, the exception
-will be passed to the advice method as the corresponding argument value. A <code>throwing</code>
-clause also restricts matching to only those method executions that throw an exception
-of the specified type ( <code>DataAccessException</code> in this case).</p>
+<p><code>throwing</code> 属性中使用的名字必须对应于通知方法中参数的名子。当方法执行以抛出异常的方式退出时，异常将作为相应的参数值传递给通知方法。<code>throwing</code> 子句还将严格匹配限制为仅抛出指定类型的异常的方法执行（在这个例子中是 <code>DataAccessException</code>）。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-advice-after-finally"><a class="anchor" href="#aop-advice-after-finally"></a>After (finally) advice</h5>
+<h5 id="aop-advice-after-finally"><a class="anchor" href="#aop-advice-after-finally"></a>后置（finally）通知</h5>
 <div class="paragraph">
-<p>After (finally) advice runs however a matched method execution exits. It is declared
-using the <code>@After</code> annotation. After advice must be prepared to handle both normal and
-exception return conditions. It is typically used for releasing resources, etc.</p>
+<p>后置（finally）通知在匹配的方法执行退出后执行。它使用 <code>@After</code> 注解声明。后置通知必须准备好处理正常和异常的返回条件。它通常用于释放资源等。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12555,22 +12450,12 @@ exception return conditions. It is typically used for releasing resources, etc.<
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-ataspectj-around-advice"><a class="anchor" href="#aop-ataspectj-around-advice"></a>Around advice</h5>
+<h5 id="aop-ataspectj-around-advice"><a class="anchor" href="#aop-ataspectj-around-advice"></a>环绕通知</h5>
 <div class="paragraph">
-<p>The final kind of advice is around advice. Around advice runs "around" a matched method
-execution. It has the opportunity to do work both before and after the method executes,
-and to determine when, how, and even if, the method actually gets to execute at all.
-Around advice is often used if you need to share state before and after a method
-execution in a thread-safe manner (starting and stopping a timer for example). Always
-use the least powerful form of advice that meets your requirements (i.e. don&#8217;t use
-around advice if simple before advice would do).</p>
+<p>最后一种类型的通知是环绕通知。环绕通知“环绕”匹配的方法执行。它可以在方法执行之前和之后进行工作，并确定方法实际上何时，如何甚至是何时执行。如果您需要以线程安全的方式（例如启动和停止计时器）在方法执行之前和之后共享状态，则通常会使用“围绕”通知。总是使用符合你要求的功能最少的通知（即在如果简单的前置通知就能完成就不要使用环绕通知）。</p>
 </div>
 <div class="paragraph">
-<p>Around advice is declared using the <code>@Around</code> annotation. The first parameter of the
-advice method must be of type <code>ProceedingJoinPoint</code>. Within the body of the advice,
-calling <code>proceed()</code> on the <code>ProceedingJoinPoint</code> causes the underlying method to
-execute. The <code>proceed</code> method may also be called passing in an <code>Object[]</code> - the values
-in the array will be used as the arguments to the method execution when it proceeds.</p>
+<p>环绕通知使用 <code>@Around</code> 注解来声明。通知方法的第一个参数必须是 <code>ProceedingJoinPoint</code> 类型。在通知的主体中，在 <code>ProceedingJoinPoint</code> 上调用 <code>proceed()</code> 会似的底层方法执行。 <code>proceed</code> 方法也可以通过传递 <code>Object[]</code> 调用-数组的值将会被当作参数在方法执行时继续使用。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -12580,19 +12465,8 @@ in the array will be used as the arguments to the method execution when it proce
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The behavior of proceed when called with an Object[] is a little different than the
-behavior of proceed for around advice compiled by the AspectJ compiler. For around
-advice written using the traditional AspectJ language, the number of arguments passed to
-proceed must match the number of arguments passed to the around advice (not the number
-of arguments taken by the underlying join point), and the value passed to proceed in a
-given argument position supplants the original value at the join point for the entity
-the value was bound to (Don&#8217;t worry if this doesn&#8217;t make sense right now!). The approach
-taken by Spring is simpler and a better match to its proxy-based, execution only
-semantics. You only need to be aware of this difference if you are compiling @AspectJ
-aspects written for Spring and using proceed with arguments with the AspectJ compiler
-and weaver. There is a way to write such aspects that is 100% compatible across both
-Spring AOP and AspectJ, and this is discussed in the following section on advice
-parameters.</p>
+<p>使用 Object[] 调用时的 proceed 的行为与 AspectJ 编译器编译的 around 处理的行为稍有不同。对于使用传统AspectJ 语言编写的环绕通知，传递给 proceed 的参数数量必须与传递给环绕通知的参数数量（而不是当下连接点接受的参数数量）匹配，并且以给定的参数位置传递给 proceed 的值取代了该值所绑定的实体的连接点的原始值（如果现在不能理解，不用担心！）。Spring 采用的方法更简单，与其基于代理的匹配更好， execution only
+  semantic。如果你正在编译为 Spring 编写 @AspectJ 切面，并使用 AspectJ 编译器和织入器进行参数处理，只需要了解这种差异就行了。有一种方法可以编写 Spring AOP 和 AspectJ 100％ 兼容的切面，这在下面的通知参数部分讨论。</p>
 </div>
 </td>
 </tr>
@@ -12619,47 +12493,24 @@ parameters.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The value returned by the around advice will be the return value seen by the caller of
-the method. A simple caching aspect for example could return a value from a cache if it
-has one, and invoke proceed() if it does not. Note that proceed may be invoked once,
-many times, or not at all within the body of the around advice, all of these are quite
-legal.</p>
+<p>环绕通知返回的值将是此方法调用者看到的返回值。例如，一个简单的缓存切面可以从一个缓存中返回一个值，如果它存在;如果不存在，则调用 proceed()。 注意，proceed 可能会一次，多次调用或根本没有在环绕通知中出现，所有这些都是合法的。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-ataspectj-advice-params"><a class="anchor" href="#aop-ataspectj-advice-params"></a>Advice parameters</h5>
+<h5 id="aop-ataspectj-advice-params"><a class="anchor" href="#aop-ataspectj-advice-params"></a>通知参数</h5>
 <div class="paragraph">
-<p>Spring offers fully typed advice - meaning that you declare the parameters you need
-in the advice signature (as we saw for the returning and throwing examples above) rather
-than work with <code>Object[]</code> arrays all the time. We&#8217;ll see how to make argument and other
-contextual values available to the advice body in a moment. First let&#8217;s take a look at
-how to write generic advice that can find out about the method the advice is currently
-advising.</p>
+<p>Spring 提供全类型通知—— 意思就是你只需在通知签名（正如我们在之前看到的 returning 和 throwing 的例子）中声明你需要的参数而不是一直与 <code>Object[]</code> 数组打交道。后面我们会看到如何是的参数和其他上下文值在通知中可用。首先我们来看看如何编写通用通知，通用通知可以找出目前哪些方法正在被通知。</p>
 </div>
 <div class="sect5">
-<h6 id="aop-ataspectj-advice-params-the-joinpoint"><a class="anchor" href="#aop-ataspectj-advice-params-the-joinpoint"></a>Access to the current JoinPoint</h6>
+<h6 id="aop-ataspectj-advice-params-the-joinpoint"><a class="anchor" href="#aop-ataspectj-advice-params-the-joinpoint"></a>访问当前连接点</h6>
 <div class="paragraph">
-<p>Any advice method may declare as its first parameter, a parameter of type
-<code>org.aspectj.lang.JoinPoint</code> (please note that around advice is <em>required</em> to declare
-a first parameter of type <code>ProceedingJoinPoint</code>, which is a subclass of <code>JoinPoint</code>. The
-<code>JoinPoint</code> interface provides a number of useful methods such as <code>getArgs()</code> (returns
-the method arguments), <code>getThis()</code> (returns the proxy object), <code>getTarget()</code> (returns
-the target object), <code>getSignature()</code> (returns a description of the method that is being
-advised) and <code>toString()</code> (prints a useful description of the method being advised).
-Please do consult the javadocs for full details.</p>
+<p>任何通知方法都可能将 <code>org.aspectj.lang.JoinPoint</code> 类型声明为第一个参数（请注意，环绕通知要求其第一个参数必须是 <code>ProceedingJoinPoint</code> 类型，<code>JoinPoint</code> 的子类。<code>JoinPoint</code> 接口提供了很多有用的方法如 <code>getArgs()</code>（返回方法参数），<code>getThis()</code>（返回代理对象），<code>getTarget()</code>（返回目标对象），<code>getSignature()</code>（返回被通知方法的描述）和 <code>toString()</code>（打印被通知方法的有用描述））全部细节请参见 javadoc。</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="aop-ataspectj-advice-params-passing"><a class="anchor" href="#aop-ataspectj-advice-params-passing"></a>Passing parameters to advice</h6>
+<h6 id="aop-ataspectj-advice-params-passing"><a class="anchor" href="#aop-ataspectj-advice-params-passing"></a>向通知传递参数</h6>
 <div class="paragraph">
-<p>We&#8217;ve already seen how to bind the returned value or exception value (using after
-returning and after throwing advice). To make argument values available to the advice
-body, you can use the binding form of <code>args</code>. If a parameter name is used in place of a
-type name in an args expression, then the value of the corresponding argument will be
-passed as the parameter value when the advice is invoked. An example should make this
-clearer. Suppose you want to advise the execution of dao operations that take an Account
-object as the first parameter, and you need access to the account in the advice body.
-You could write the following:</p>
+<p>我们已经知道如何绑定返回的值或异常值（在返回通知和异常通知）。要使参数值在通知主体内可用，可以使用 <code>args</code> 的绑定形式。如果在 args 表达式中使用参数名称代替类型名称，则在调用通知时，相应参数的值将作为参数值传递。 举个例子会更清楚。假设你想通知第一个参数为 Account 对象的 dao 操作，并且你需要访问通知主体中的 account。 你可以按如下方式编写：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12670,16 +12521,11 @@ You could write the following:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>args(account,..)</code> part of the pointcut expression serves two purposes: firstly, it
-restricts matching to only those method executions where the method takes at least one
-parameter, and the argument passed to that parameter is an instance of <code>Account</code>;
-secondly, it makes the actual <code>Account</code> object available to the advice via the <code>account</code>
-parameter.</p>
+<p>切点表达式的 <code>args(account,..)</code> 部分有两个目的：首先，它将匹配限制为那些至少需要一个参数的方法执行，并且传递给该形参的实参是一个 <code>Account</code> 实例; 其次，它通过 <code>account</code> 形参使实际的 <code>Account</code> 对象可用于通知。</p>
 </div>
 <div class="paragraph">
-<p>Another way of writing this is to declare a pointcut that "provides" the <code>Account</code>
-object value when it matches a join point, and then just refer to the named pointcut
-from the advice. This would look as follows:</p>
+<p>
+  另一种编写方法是声明一个切点，当它匹配一个连接点时“提供”  <code>Account</code> 对象的值，然后在通知中引用指定的切点。看起来如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12693,17 +12539,14 @@ from the advice. This would look as follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The interested reader is once more referred to the AspectJ programming guide for more
-details.</p>
+<p>再次提醒有兴趣的读者参考“AspectJ 编程指南”了解更多细节。</p>
 </div>
 <div class="paragraph">
-<p>The proxy object ( <code>this</code>), target object ( <code>target</code>), and annotations ( <code>@within,
-@target, @annotation, @args</code>) can all be bound in a similar fashion. The following
-example shows how you could match the execution of methods annotated with an
-<code>@Auditable</code> annotation, and extract the audit code.</p>
+<p>代理对象（<code>this</code>），目标对象（<code>target</code>）和注解（<code>@within,
+  @target, @annotation, @args</code>）都可以以类似的方式绑定。以下示例展示了如何匹配使用 <code>@Auditable</code> 注解的方法执行，并提取 audit 代码。</p>
 </div>
 <div class="paragraph">
-<p>First the definition of the <code>@Auditable</code> annotation:</p>
+<p>首先，<code>@Auditable</code> 注解的定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12715,7 +12558,7 @@ example shows how you could match the execution of methods annotated with an
 </div>
 </div>
 <div class="paragraph">
-<p>And then the advice that matches the execution of <code>@Auditable</code> methods:</p>
+<p>然后与 <code>@Auditable</code> 方法执行匹配的通知：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12728,10 +12571,9 @@ example shows how you could match the execution of methods annotated with an
 </div>
 </div>
 <div class="sect5">
-<h6 id="aop-ataspectj-advice-params-generics"><a class="anchor" href="#aop-ataspectj-advice-params-generics"></a>Advice parameters and generics</h6>
+<h6 id="aop-ataspectj-advice-params-generics"><a class="anchor" href="#aop-ataspectj-advice-params-generics"></a>通知参数和泛型</h6>
 <div class="paragraph">
-<p>Spring AOP can handle generics used in class declarations and method parameters. Suppose
-you have a generic type like this:</p>
+<p>Spring AOP 可以处理在类声明和方法参数中使用的泛型。假设你有一个泛型如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12742,8 +12584,7 @@ you have a generic type like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>You can restrict interception of method types to certain parameter types by simply
-typing the advice parameter to the parameter type you want to intercept the method for:</p>
+<p>你可以通过将通知参数设置为你想要拦截的方法的参数类型，而将对方法类型的拦截限制为某些特定参数类型：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12754,9 +12595,7 @@ typing the advice parameter to the parameter type you want to intercept the meth
 </div>
 </div>
 <div class="paragraph">
-<p>That this works is pretty obvious as we already discussed above. However, it&#8217;s worth
-pointing out that this won&#8217;t work for generic collections. So you cannot define a
-pointcut like this:</p>
+<p>根据我们上面的讨论这是很明显这是有效的。但是，值得指出的是，这对于通用集合来说不起作用。所以你不能像定义这样一个切点：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12767,27 +12606,18 @@ pointcut like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To make this work we would have to inspect every element of the collection, which is not
-reasonable as we also cannot decide how to treat <code>null</code> values in general. To achieve
-something similar to this you have to type the parameter to <code>Collection&lt;?&gt;</code> and manually
-check the type of the elements.</p>
+<p>为了使这个设置有效，我们将不得不检查集合中的每一个元素，这是不合理的，因为我们也不能决定如何处理 <code>null</code> 值。为了实现类似于此的操作，您必须将参数键入 <code>Collection&lt;?&gt;</code> 并手动检查元素的类型。</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="aop-ataspectj-advice-params-names"><a class="anchor" href="#aop-ataspectj-advice-params-names"></a>Determining argument names</h6>
+<h6 id="aop-ataspectj-advice-params-names"><a class="anchor" href="#aop-ataspectj-advice-params-names"></a>确定参数名</h6>
 <div class="paragraph">
-<p>The parameter binding in advice invocations relies on matching names used in pointcut
-expressions to declared parameter names in (advice and pointcut) method signatures.
-Parameter names are <em>not</em> available through Java reflection, so Spring AOP uses the
-following strategies to determine parameter names:</p>
+<p>通知调用中的参数绑定依赖于在切点表达式中使用的匹配名称，匹配名称用于在（通知和切点）方法签名中的声明参数名称。参数名不能通过 Java 反射来使用，所以 Spring AOP 使用以下策略来确定参数名称：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>If the parameter names have been specified by the user explicitly, then the specified
-parameter names are used: both the advice and the pointcut annotations have
-an optional "argNames" attribute which can be used to specify the argument names of
-the annotated method - these argument names <em>are</em> available at runtime. For example:</p>
+<p>如果用户明确指定了参数名，则使用指定的参数名：通知和切点注解都具有可选的“argNames”属性，可用于指定注解方法的参数名 - 这些参数名称在运行时可用。例如：</p>
 </li>
 </ul>
 </div>
@@ -12802,10 +12632,7 @@ the annotated method - these argument names <em>are</em> available at runtime. F
 </div>
 </div>
 <div class="paragraph">
-<p>If the first parameter is of the <code>JoinPoint</code>, <code>ProceedingJoinPoint</code>, or
-<code>JoinPoint.StaticPart</code> type, you may leave out the name of the parameter from the value
-of the "argNames" attribute. For example, if you modify the preceding advice to receive
-the join point object, the "argNames" attribute need not include it:</p>
+<p>如果第一个参数是 <code>JoinPoint</code>，<code>ProceedingJoinPoint</code>，或者 <code>JoinPoint.StaticPart</code> 类型，则可以从“argNames”属性的值中省略之。例如，如果修改前面的通知以接收连接点对象，则“argNames”属性不需要包含它：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12818,11 +12645,7 @@ the join point object, the "argNames" attribute need not include it:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The special treatment given to the first parameter of the <code>JoinPoint</code>,
-<code>ProceedingJoinPoint</code>, and <code>JoinPoint.StaticPart</code> types is particularly convenient for
-advice that do not collect any other join point context. In such situations, you may
-simply omit the "argNames" attribute. For example, the following advice need not declare
-the "argNames" attribute:</p>
+<p>对于那些不需要收集任何连接点上下文信息的通知来说，对给定的参数类型为 <code>JoinPoint</code>，<code>ProceedingJoinPoint</code>，或者 <code>JoinPoint.StaticPart</code> 的第一个参数的特殊处理很方便的。在这种情况下，您只需省略“argNames”属性即可。例如，以下通知不需要声明“argNames”属性：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12835,15 +12658,7 @@ the "argNames" attribute:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Using the <code>'argNames'</code> attribute is a little clumsy, so if the <code>'argNames'</code> attribute
-has not been specified, then Spring AOP will look at the debug information for the
-class and try to determine the parameter names from the local variable table. This
-information will be present as long as the classes have been compiled with debug
-information ( <code>'-g:vars'</code> at a minimum). The consequences of compiling with this flag
-on are: (1) your code will be slightly easier to understand (reverse engineer), (2)
-the class file sizes will be very slightly bigger (typically inconsequential), (3) the
-optimization to remove unused local variables will not be applied by your compiler. In
-other words, you should encounter no difficulties building with this flag on.</p>
+<p>使用 <code>'argNames'</code> 属性有点笨拙，所以如果没有指定 <code>'argNames'</code> 属性，那么Spring AOP 将查看类的调试信息，并尝试从局部变量表中确定参数名称。只要这些类编译的时候带有调试信息（至少需要 <code>'-g:vars'</code>），这些信息就会呈现。用这个标记编译的结果是：（1）你的代码会更容易理解一点（反向工程），（2）类文件会稍微大一些（通常这是无关紧要的），（3）对未使用的本地变量会被删除的优化将不会被编译器应用。换句话说，用这个标记构建不会有任何困难。</p>
 </li>
 </ul>
 </div>
@@ -12855,9 +12670,7 @@ other words, you should encounter no difficulties building with this flag on.</p
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If an @AspectJ aspect has been compiled by the AspectJ compiler (ajc) even without the
-debug information then there is no need to add the argNames attribute as the compiler
-will retain the needed information.</p>
+<p>如果 AspectJ 编译器在没有调试信息的情况下（ajc）编译了 @AspectJ 切面，也不需要添加argNames属性，因为编译器会保留所需的信息。</p>
 </div>
 </td>
 </tr>
@@ -12866,26 +12679,18 @@ will retain the needed information.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>If the code has been compiled without the necessary debug information, then Spring AOP
-will attempt to deduce the pairing of binding variables to parameters (for example, if
-only one variable is bound in the pointcut expression, and the advice method only
-takes one parameter, the pairing is obvious!). If the binding of variables is
-ambiguous given the available information, then an <code>AmbiguousBindingException</code> will be
-thrown.</p>
+<p>如果代码已经被编译且没有携带必要的调试信息，那么 Spring AOP 会尝试推断绑定变量与参数的配对（例如，如果在切点表达式中只绑定了一个变量，并且通知方法只有一个参数， 默认配对是很明显的！）。如果给定可用的信息对于变量的绑定有歧义，那么就会抛出一个 <code>AmbiguousBindingException</code> 异常。</p>
 </li>
 <li>
-<p>If all of the above strategies fail then an <code>IllegalArgumentException</code> will be thrown.</p>
+<p>如果上述所有的策略都失败了，那么 <code>IllegalArgumentException</code> 将被抛出。</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect5">
-<h6 id="aop-ataspectj-advice-proceeding-with-the-call"><a class="anchor" href="#aop-ataspectj-advice-proceeding-with-the-call"></a>Proceeding with arguments</h6>
+<h6 id="aop-ataspectj-advice-proceeding-with-the-call"><a class="anchor" href="#aop-ataspectj-advice-proceeding-with-the-call"></a>实参处理</h6>
 <div class="paragraph">
-<p>We remarked earlier that we would describe how to write a proceed call <em>with
-arguments</em> that works consistently across Spring AOP and AspectJ. The solution is
-simply to ensure that the advice signature binds each of the method parameters in order.
-For example:</p>
+<p>我们之前提过，我们将描述如何利用可以在 Spring AOP 和 AspectJ 一致使用的参数来编写 proceed 调用。解决方案是只要确保通知签名按顺序绑定每个方法参数即可。例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12900,51 +12705,31 @@ For example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In many cases you will be doing this binding anyway (as in the example above).</p>
+<p>在许多情况下，你都会做这个绑定（如上面的例子）。</p>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-ataspectj-advice-ordering"><a class="anchor" href="#aop-ataspectj-advice-ordering"></a>Advice ordering</h5>
+<h5 id="aop-ataspectj-advice-ordering"><a class="anchor" href="#aop-ataspectj-advice-ordering"></a>通知顺序</h5>
 <div class="paragraph">
-<p>What happens when multiple pieces of advice all want to run at the same join point?
-Spring AOP follows the same precedence rules as AspectJ to determine the order of advice
-execution. The highest precedence advice runs first "on the way in" (so given two pieces
-of before advice, the one with highest precedence runs first). "On the way out" from a
-join point, the highest precedence advice runs last (so given two pieces of after
-advice, the one with the highest precedence will run second).</p>
+<p>
+  当多个通知都想在同一个连接点上执行时会发生什么？ Spring AOP 遵循与 AspectJ 相同的优先规则来确定通知执行的顺序。在切面从连接点到通知的执行进入过程中，最高优先级的通知首先执行“on the way in”（因此对于给定的两个前置通知，优先级高的通知先执行）。在切面从通知到连接点执行退出的过程中，优先级最高的通知最后运行“on the way out”（因此对于给定的两个后置通知，优先级高的通知后执行）。</p>
 </div>
 <div class="paragraph">
-<p>When two pieces of advice defined in <em>different</em> aspects both need to run at the same
-join point, unless you specify otherwise the order of execution is undefined. You can
-control the order of execution by specifying precedence. This is done in the normal
-Spring way by either implementing the <code>org.springframework.core.Ordered</code> interface in
-the aspect class or annotating it with the <code>Order</code> annotation. Given two aspects, the
-aspect returning the lower value from <code>Ordered.getValue()</code> (or the annotation value) has
-the higher precedence.</p>
+<p>当在不同切面定义的两个通知都需要在同一个连接点上执行时，除非你指定了否则执行的顺序是未定义的。您可以通过指定优先级来控制执行顺序。这是通过在切面类中实现 <code>org.springframework.core.Ordered</code> 接口或使用 <code>Order</code> 注解对其进行注解以正常的 Spring 方式完成的。给定两个切面，从 <code>Ordered.getValue()</code> 或注解值）返回较低值的切面具有较高的优先级。</p>
 </div>
 <div class="paragraph">
-<p>When two pieces of advice defined in <em>the same</em> aspect both need to run at the same
-join point, the ordering is undefined (since there is no way to retrieve the declaration
-order via reflection for javac-compiled classes). Consider collapsing such advice
-methods into one advice method per join point in each aspect class, or refactor the
-pieces of advice into separate aspect classes - which can be ordered at the aspect level.</p>
+<p>当在同一切面定义的两个通知都需要在同一个连接点上执行时，执行顺势是未定义的（因为没有办法通过反射为 javac 编译的类检索声明顺序）。考虑将这些通知方法分解成每个切面类中的每个连接点的一个通知方法，或者将多个通知重构成单独的切面类 - 可以在切面级别进行排序。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-introductions"><a class="anchor" href="#aop-introductions"></a>5.2.5. Introductions</h4>
+<h4 id="aop-introductions"><a class="anchor" href="#aop-introductions"></a>5.2.5. 引入</h4>
 <div class="paragraph">
-<p>Introductions (known as inter-type declarations in AspectJ) enable an aspect to declare
-that advised objects implement a given interface, and to provide an implementation of
-that interface on behalf of those objects.</p>
+<p>引入（在 AspectJ 中称为类型间声明）使得一个切面能够声明被通知对象实现给定的接口，并且代表这些对象提供该接口的实现。</p>
 </div>
 <div class="paragraph">
-<p>An introduction is made using the <code>@DeclareParents</code> annotation. This annotation is used
-to declare that matching types have a new parent (hence the name). For example, given an
-interface <code>UsageTracked</code>, and an implementation of that interface <code>DefaultUsageTracked</code>,
-the following aspect declares that all implementors of service interfaces also implement
-the <code>UsageTracked</code> interface. (In order to expose statistics via JMX for example.)</p>
+<p>引入使用 <code>@DeclareParents</code> 注解实现。这个注解用来声明匹配的类型有一个新的父类（因此名字）。 例如，给定一个接口 <code>UsageTracked</code> 和这个接口的实现 <code>DefaultUsageTracked</code>，下面的切面声明了所有服务接口的实现者也实现了 <code>UsageTracked</code> 接口。（例如，为了通过 JMX 公开统计信息。）</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12963,12 +12748,7 @@ the <code>UsageTracked</code> interface. (In order to expose statistics via JMX 
 </div>
 </div>
 <div class="paragraph">
-<p>The interface to be implemented is determined by the type of the annotated field. The
-<code>value</code> attribute of the <code>@DeclareParents</code> annotation is an AspectJ type pattern :- any
-bean of a matching type will implement the UsageTracked interface. Note that in the
-before advice of the above example, service beans can be directly used as
-implementations of the <code>UsageTracked</code> interface. If accessing a bean programmatically
-you would write the following:</p>
+<p>要实现哪个接口由注解字段的类型决定。<code>@DeclareParents</code> 注解的 <code>value</code> 属性是一个AspectJ 类型模式：- 匹配类型的任何 bean 都将实现 UsageTracked 接口。注意，在上述示例的前置通知中，serivce bean 可以直接作为 <code>UsageTracked</code> 接口的实现使用。如果以编程方式访问这个 bean，你可以编写如下代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12977,7 +12757,7 @@ you would write the following:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-instantiation-models"><a class="anchor" href="#aop-instantiation-models"></a>5.2.6. Aspect instantiation models</h4>
+<h4 id="aop-instantiation-models"><a class="anchor" href="#aop-instantiation-models"></a>5.2.6. 切面实例化模型</h4>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -12986,23 +12766,17 @@ you would write the following:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>(This is an advanced topic, so if you are just starting out with AOP you can safely skip
-it until later.)</p>
+<p>（这是一个高级主题，所以如果你刚开始使用 AOP，你可以选择跳过以后再读。）</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>By default there will be a single instance of each aspect within the application
-context. AspectJ calls this the singleton instantiation model. It is possible to define
-aspects with alternate lifecycles :- Spring supports AspectJ&#8217;s <code>perthis</code> and <code>pertarget</code>
-instantiation models ( <code>percflow, percflowbelow,</code> and <code>pertypewithin</code> are not currently
-supported).</p>
+<p>默认情况下，应用程序上下文中将存在每个切面的单例实例。AspectJ 把这个模型称为单例实例化模型。 可以使用不同的生命周期定义切面：Spring 支持 AspectJ 的 <code>perthis</code> 和 <code>pertarget</code> 实例化模型（<code>percflow, percflowbelow,</code> 和 <code>pertypewithin</code> 目前不支持）。</p>
 </div>
 <div class="paragraph">
-<p>A "perthis" aspect is declared by specifying a <code>perthis</code> clause in the <code>@Aspect</code>
-annotation. Let&#8217;s look at an example, and then we&#8217;ll explain how it works.</p>
+<p>“perthis”切面通过在 <code>@Aspect</code> 注解中指定 <code>perthis</code> 子句来声明。我们来看一个例子，然后我们将解释它是如何运行的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13020,40 +12794,23 @@ annotation. Let&#8217;s look at an example, and then we&#8217;ll explain how it 
 </div>
 </div>
 <div class="paragraph">
-<p>The effect of the <code>'perthis'</code> clause is that one aspect instance will be created for
-each unique service object executing a business service (each unique object bound to
-'this' at join points matched by the pointcut expression). The aspect instance is
-created the first time that a method is invoked on the service object. The aspect goes
-out of scope when the service object goes out of scope. Before the aspect instance is
-created, none of the advice within it executes. As soon as the aspect instance has been
-created, the advice declared within it will execute at matched join points, but only
-when the service object is the one this aspect is associated with. See the AspectJ
-programming guide for more information on per-clauses.</p>
+<p><code>'perthis'</code> 子句的效果是，每个唯一的 service 对象执行 businessService 时，这个切面对象就会被创建（每个唯一对象都会跟与切点表达式匹配的接入点‘this’ 绑定）。切面实例是在 service 对象首次调用方法时创建的。当 service 对象处在作用域之外时，切面也会在作用域之外（ The aspect goes
+  out of scope when the service object goes out of scope？how to understand this）。在创建 切面实例被创建之前，其中的任何通知都不会执行。一旦切面实例被创建，其中声明的通知将在连接点被匹配的时候执行，但前提条件是 service 对象是与此切面实例相关联的那个对象。有关每个子句的更多信息，请参阅 “AspectJ编程指南”。</p>
 </div>
 <div class="paragraph">
-<p>The <code>'pertarget'</code> instantiation model works in exactly the same way as perthis, but
-creates one aspect instance for each unique target object at matched join points.</p>
+<p><code>'pertarget'</code> 实例化模型的执行方式与 perthis 完全相同，只是为在匹配连接点处的每个唯一目标对象创建一个切面实例。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-ataspectj-example"><a class="anchor" href="#aop-ataspectj-example"></a>5.2.7. Example</h4>
+<h4 id="aop-ataspectj-example"><a class="anchor" href="#aop-ataspectj-example"></a>5.2.7. 示例</h4>
 <div class="paragraph">
-<p>Now that you have seen how all the constituent parts work, let&#8217;s put them together to do
-something useful!</p>
+<p>现在你已经看到所有组成部分是如何工作的，让我们把它们放在一起做一些有用的事情！</p>
 </div>
 <div class="paragraph">
-<p>The execution of business services can sometimes fail due to concurrency issues (for
-example, deadlock loser). If the operation is retried, it is quite likely to succeed
-next time round. For business services where it is appropriate to retry in such
-conditions (idempotent operations that don&#8217;t need to go back to the user for conflict
-resolution), we&#8217;d like to transparently retry the operation to avoid the client seeing a
-<code>PessimisticLockingFailureException</code>. This is a requirement that clearly cuts across
-multiple services in the service layer, and hence is ideal for implementing via an
-aspect.</p>
+<p>business service 的执行有时会由于并发问题而失败（例如死锁失败）。如果操作重新执行，下一次很有可能成功。 对于适合在这种情况下重试的 business service（不需要返回给用户进行冲突解决的幂等操作），我们希望透明地重试操作以避免客户端看到 <code>PessimisticLockingFailureException</code>。很明显这是一个在服务层中跨越多个 service 的需求，因此非常适合通过某个切面实现。</p>
 </div>
 <div class="paragraph">
-<p>Because we want to retry the operation, we will need to use around advice so that we can
-call proceed multiple times. Here&#8217;s how the basic aspect implementation looks:</p>
+<p>因为我们想重试操作，所以我们需要使用环绕通知，以便我们可以多次调用。以下是基本切面实现的的样子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13097,16 +12854,10 @@ call proceed multiple times. Here&#8217;s how the basic aspect implementation lo
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the aspect implements the <code>Ordered</code> interface so we can set the precedence of
-the aspect higher than the transaction advice (we want a fresh transaction each time we
-retry). The <code>maxRetries</code> and <code>order</code> properties will both be configured by Spring. The
-main action happens in the <code>doConcurrentOperation</code> around advice. Notice that for the
-moment we&#8217;re applying the retry logic to all <code>businessService()s</code>. We try to proceed,
-and if we fail with an <code>PessimisticLockingFailureException</code> we simply try again unless
-we have exhausted all of our retry attempts.</p>
+<p>注意，该切面实现了 <code>Ordered</code> 接口，因此我们可以将其优先级设置高于事务通知（每次我们重试时都希望有一个新事务）。 <code>maxRetries</code> 和<code>order</code> 属性都将由 Spring 配置。主要的操作发生在 <code>doConcurrentOperation</code> 环绕通知。注意，目前我们正在将重试逻辑应用于所有 <code>businessService()</code>。我们试着 proceed，如果因为 <code>PessimisticLockingFailureException</code> 异常而失败了，只需要再试一次，除非已经耗尽了所有的重试次数。</p>
 </div>
 <div class="paragraph">
-<p>The corresponding Spring configuration is:</p>
+<p>对应的 Spring 配置是这样的：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13119,8 +12870,7 @@ we have exhausted all of our retry attempts.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To refine the aspect so that it only retries idempotent operations, we might define an
-<code>Idempotent</code> annotation:</p>
+<p>为了改进切面使其只重试幂等运算，我们可以定义一个 <code>Idempotent</code> 幂等注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13131,9 +12881,7 @@ we have exhausted all of our retry attempts.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and use the annotation to annotate the implementation of service operations. The change
-to the aspect to only retry idempotent operations simply involves refining the pointcut
-expression so that only <code>@Idempotent</code> operations match:</p>
+<p>并将此注解用于 service 操作的实现。将切面修改为只重试幂等操作只涉及改进切点表达式，使得只有 <code>@Idempotent</code> 操作匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
