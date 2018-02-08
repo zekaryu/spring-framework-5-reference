@@ -12854,7 +12854,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>注意，该切面实现了 <code>Ordered</code> 接口，因此我们可以将其优先级设置高于事务通知（每次我们重试时都希望有一个新事务）。 <code>maxRetries</code> 和<code>order</code> 属性都将由 Spring 配置。主要的操作发生在 <code>doConcurrentOperation</code> 环绕通知。注意，目前我们正在将重试逻辑应用于所有 <code>businessService()</code>。我们试着 proceed，如果因为 <code>PessimisticLockingFailureException</code> 异常而失败了，只需要再试一次，除非已经耗尽了所有的重试次数。</p>
+<p>注意，该切面实现了 <code>Ordered</code> 接口，因此我们可以将其优先级设置高于事务通知（每次我们重试时都希望有一个新事务）。 <code>maxRetries</code> 和<code>order</code> 属性都将由 Spring 配置。主要的操作发生在 <code>doConcurrentOperation</code> 环绕通知方法。注意，目前我们正在将重试逻辑应用于所有 <code>businessService()</code>。我们试着 proceed，如果因为 <code>PessimisticLockingFailureException</code> 异常而失败了，只需要再试一次，除非已经耗尽了所有的重试次数。</p>
 </div>
 <div class="paragraph">
 <p>对应的 Spring 配置是这样的：</p>
@@ -12895,26 +12895,15 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-schema"><a class="anchor" href="#aop-schema"></a>5.3. Schema-based AOP support</h3>
+<h3 id="aop-schema"><a class="anchor" href="#aop-schema"></a>5.3. 基于 Schema 的 AOP 支持</h3>
 <div class="paragraph">
-<p>If you prefer an XML-based format, then Spring also offers support for defining aspects
-using the new "aop" namespace tags. The exact same pointcut expressions and advice kinds
-are supported as when using the @AspectJ style, hence in this section we will focus on
-the new <em>syntax</em> and refer the reader to the discussion in the previous section
-(<a href="#aop-ataspectj">@AspectJ support</a>) for an understanding of writing pointcut expressions and the binding
-of advice parameters.</p>
+<p>如果您更喜欢基于 XML 格式配置，那么 Spring 还提供了使用新的 “aop” 命名空间标签来支持定义切面。 使用 @AspectJ 风格，支持完全相同的切入点表达式和通知类型，因此在本节中，我们将重点介绍新的语法，并请读者参考前一节（<a href="#aop-ataspectj">@AspectJ 支持</a>）中的讨论，以便理解编写切点表达式和通知参数的绑定。</p>
 </div>
 <div class="paragraph">
-<p>To use the aop namespace tags described in this section, you need to import the
-<code>spring-aop</code> schema as described in <a href="appendix.html#xsd-configuration">XML Schema-based configuration</a>.
-See <a href="appendix.html#xsd-config-body-schemas-aop">the AOP schema</a>
-for how to import the tags in the <code>aop</code> namespace.</p>
+<p>要使用本节中描述的 aop 命名空间标签，你需要按照 <a href="appendix.html#xsd-configuration">基于 XML schema 的配置</a> 中所述导入 <code>spring-aop</code> 模式。 参阅<a href="appendix.html#xsd-config-body-schemas-aop">AOP schema</a> 以了解如何在 <code>aop</code> 命名空间中导入标签。</p>
 </div>
 <div class="paragraph">
-<p>Within your Spring configurations, all aspect and advisor elements must be placed within
-an <code>&lt;aop:config&gt;</code> element (you can have more than one <code>&lt;aop:config&gt;</code> element in an
-application context configuration). An <code>&lt;aop:config&gt;</code> element can contain pointcut,
-advisor, and aspect elements (note these must be declared in that order).</p>
+<p>在你的 Spring 配置中，所有的切面和通知元素都必须放置在 <code>&lt;aop:config&gt;</code>元素中（应用程序上下文配置中可以有多个 <code>&lt;aop:config&gt;</code> 元素）。 一个 <code>&lt;aop:config&gt;</code> 元素可以包含 pointcut，advisor 和 aspect 元素（注意这些元素必须按照这个顺序声明）。</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -12924,26 +12913,19 @@ advisor, and aspect elements (note these must be declared in that order).</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>&lt;aop:config&gt;</code> style of configuration makes heavy use of Spring&#8217;s
-<a href="#aop-autoproxy">auto-proxying</a> mechanism. This can cause issues (such as advice not
-being woven) if you are already using explicit auto-proxying via the use of
-<code>BeanNameAutoProxyCreator</code> or suchlike. The recommended usage pattern is to use either
-just the <code>&lt;aop:config&gt;</code> style, or just the <code>AutoProxyCreator</code> style.</p>
+<p>Spring 的 <a href="#aop-autoproxy">auto-proxying</a> 机制大量使用 <code>&lt;aop:config&gt;</code> 风格的配置。如果你已经通过使用 <code>BeanNameAutoProxyCreator</code> 或类似的方式使用显式的自动代理，这可能会导致某些问题（如通知没有被织入）。推荐的使用模式是要么只使用 <code>&lt;aop:config&gt;</code> 风格，要么只使用 <code>AutoProxyCreator</code> 样式。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-declaring-an-aspect"><a class="anchor" href="#aop-schema-declaring-an-aspect"></a>5.3.1. Declaring an aspect</h4>
+<h4 id="aop-schema-declaring-an-aspect"><a class="anchor" href="#aop-schema-declaring-an-aspect"></a>5.3.1. 声明切面</h4>
 <div class="paragraph">
-<p>Using the schema support, an aspect is simply a regular Java object defined as a bean in
-your Spring application context. The state and behavior is captured in the fields and
-methods of the object, and the pointcut and advice information is captured in the XML.</p>
+<p>有了 schema 的支持，切面就只是在 Spring 应用程序上下文中定义的一个普通的 Java 对象。状态和行为会在对象的字段和方法中被捕获，切点和通知信息会在 XML 中被捕获。</p>
 </div>
 <div class="paragraph">
-<p>An aspect is declared using the &lt;aop:aspect&gt; element, and the backing bean is referenced
-using the <code>ref</code> attribute:</p>
+<p>切面用 &lt;aop:aspect&gt; 元素声明，辅助的 bean 用 <code>ref</code> 特性实现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12959,19 +12941,16 @@ using the <code>ref</code> attribute:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The bean backing the aspect (" `aBean`" in this case) can of course be configured and
-dependency injected just like any other Spring bean.</p>
+<p>辅助切面的 bean （本例中是“aBean”）当然也可以像其他 Spring bean 一样被配置和被依赖注入。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-pointcuts"><a class="anchor" href="#aop-schema-pointcuts"></a>5.3.2. Declaring a pointcut</h4>
+<h4 id="aop-schema-pointcuts"><a class="anchor" href="#aop-schema-pointcuts"></a>5.3.2. 声明切点</h4>
 <div class="paragraph">
-<p>A named pointcut can be declared inside an &lt;aop:config&gt; element, enabling the pointcut
-definition to be shared across several aspects and advisors.</p>
+<p>一个命名的切点可以在 &lt;aop:config&gt; 元素中声明，使切点定义可以被多个切面和通知共享。</p>
 </div>
 <div class="paragraph">
-<p>A pointcut representing the execution of any business service in the service layer could
-be defined as follows:</p>
+<p>代表 service 层中任何 business service 的执行的切点可以定义如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12984,11 +12963,7 @@ be defined as follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the pointcut expression itself is using the same AspectJ pointcut expression
-language as described in <a href="#aop-ataspectj">@AspectJ support</a>. If you are using the schema based
-declaration style, you can refer to named pointcuts defined in types
-(@Aspects) within the pointcut expression. Another way of defining the above pointcut
-would be:</p>
+<p>注意切点表达式本身正在使用 <a href="#aop-ataspectj">@AspectJ 支持</a> 中描述的相同的 AspectJ 切点表达式语言。如果使用基于 schema 的声明风格，则可以引用在切点表达式中的类型（@Aspects）中定义的命名切点。 定义上述切点的另一种方法是：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13001,10 +12976,10 @@ would be:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Assuming you have a <code>SystemArchitecture</code> aspect as described in <a href="#aop-common-pointcuts">Sharing common pointcut definitions</a>.</p>
+<p>假设你有一个如 <a href="#aop-common-pointcuts">共享通用切点定义</a> 中描述的 <code>SystemArchitecture</code> 切面。</p>
 </div>
 <div class="paragraph">
-<p>Declaring a pointcut inside an aspect is very similar to declaring a top-level pointcut:</p>
+<p>在切面中定义切点与定义顶级切点非常相似：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13023,9 +12998,7 @@ would be:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Much the same way in an @AspectJ aspect, pointcuts declared using the schema based
-definition style may collect join point context. For example, the following pointcut
-collects the 'this' object as the join point context and passes it to advice:</p>
+<p>与 @AspectJ 切面大致相同，使用基于 shema 定义风格声明的切点可以收集连接点上下文。例如，下面的切点将“this”对象作为连接点上下文并将其传递给通知：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13046,8 +13019,7 @@ collects the 'this' object as the join point context and passes it to advice:</p
 </div>
 </div>
 <div class="paragraph">
-<p>The advice must be declared to receive the collected join point context by including
-parameters of the matching names:</p>
+<p>通知必须通过包含匹配名字的参数声明来接收收集到的连接点上下文： </p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13057,9 +13029,7 @@ parameters of the matching names:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>When combining pointcut sub-expressions, '&amp;&amp;' is awkward within an XML document, and so
-the keywords 'and', 'or' and 'not' can be used in place of '&amp;&amp;', '||' and '!'
-respectively. For example, the previous pointcut may be better written as:</p>
+<p>当合并切点的子表达式时，在 XML 文档中使用 ‘&&’ 是很笨拙的，所以关键字‘and’，‘or’，‘not’可以分别用来代替‘&&’，‘||’ 和‘!’。例如，前面这个切点写成如下形式可能更好：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13078,23 +13048,18 @@ respectively. For example, the previous pointcut may be better written as:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that pointcuts defined in this way are referred to by their XML id and cannot be
-used as named pointcuts to form composite pointcuts. The named pointcut support in the
-schema based definition style is thus more limited than that offered by the @AspectJ
-style.</p>
+<p>注意，以这种方式定义的切点由其 XML id 引用，不能用作命名切点来组成复合切点。因此，基于 schema 的定义风格中的命名切点支持比 @AspectJ 风格提供的支持更有限。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-advice"><a class="anchor" href="#aop-schema-advice"></a>5.3.3. Declaring advice</h4>
+<h4 id="aop-schema-advice"><a class="anchor" href="#aop-schema-advice"></a>5.3.3. 声明通知</h4>
 <div class="paragraph">
-<p>The same five advice kinds are supported as for the @AspectJ style, and they have
-exactly the same semantics.</p>
+<p>五种相同类型的通知也像 @AspectJ 风格中一样被支持，且它们具有完全相同的语义。</p>
 </div>
 <div class="sect4">
-<h5 id="aop-schema-advice-before"><a class="anchor" href="#aop-schema-advice-before"></a>Before advice</h5>
+<h5 id="aop-schema-advice-before"><a class="anchor" href="#aop-schema-advice-before"></a>前置通知</h5>
 <div class="paragraph">
-<p>Before advice runs before a matched method execution. It is declared inside an
-<code>&lt;aop:aspect&gt;</code> using the &lt;aop:before&gt; element.</p>
+<p>前置通知在方法执行之前运行。它在 <code>&lt;aop:aspect&gt;</code> 中使用 &lt;aop:before&gt; 元素声明。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13110,9 +13075,7 @@ exactly the same semantics.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Here <code>dataAccessOperation</code> is the id of a pointcut defined at the top ( <code>&lt;aop:config&gt;</code>)
-level. To define the pointcut inline instead, replace the <code>pointcut-ref</code> attribute with
-a <code>pointcut</code> attribute:</p>
+<p>这里 <code>dataAccessOperation</code> 是定义在顶层的切点 id（<code>&lt;aop:config&gt;</code>）。要定义内联切点，请用 <code>pointcut</code> 特性替换 <code>pointcut-ref</code> 特性：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13128,22 +13091,16 @@ a <code>pointcut</code> attribute:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As we noted in the discussion of the @AspectJ style, using named pointcuts can
-significantly improve the readability of your code.</p>
+<p>正如我们在讨论 @AspectJ 风格时所指出的那样，使用命名切点可以显着提高代码的可读性。</p>
 </div>
 <div class="paragraph">
-<p>The method attribute identifies a method ( <code>doAccessCheck</code>) that provides the body of
-the advice. This method must be defined for the bean referenced by the aspect element
-containing the advice. Before a data access operation is executed (a method execution
-join point matched by the pointcut expression), the "doAccessCheck" method on the aspect
-bean will be invoked.</p>
+<p>method 特性标识了提供通知主体的方法（doAccessCheck）。必须为包含通知的 aspect 元素所引用的 bean 定义此方法。在执行数据访问操作（由切点表达式匹配的方法执行连接点）之前，切面 bean 上的 “doAccessCheck” 方法将被调用。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-schema-advice-after-returning"><a class="anchor" href="#aop-schema-advice-after-returning"></a>After returning advice</h5>
+<h5 id="aop-schema-advice-after-returning"><a class="anchor" href="#aop-schema-advice-after-returning"></a>返回通知</h5>
 <div class="paragraph">
-<p>After returning advice runs when a matched method execution completes normally. It is
-declared inside an <code>&lt;aop:aspect&gt;</code> in the same way as before advice. For example:</p>
+<p>返回通知在一个匹配方法执行正常返回时执行。它在 <code>&lt;aop:aspect&gt;</code> 中定义，与前置通知的定义方式一致。例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13159,9 +13116,7 @@ declared inside an <code>&lt;aop:aspect&gt;</code> in the same way as before adv
 </div>
 </div>
 <div class="paragraph">
-<p>Just as in the @AspectJ style, it is possible to get hold of the return value within the
-advice body. Use the returning attribute to specify the name of the parameter to which
-the return value should be passed:</p>
+<p>就像在 @AspectJ 风格里阐述的，你可以在通知主体内获得返回值。使用 returning 特性来指定应传递给的参数的返回值名字：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13178,9 +13133,7 @@ the return value should be passed:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The doAccessCheck method must declare a parameter named <code>retVal</code>. The type of this
-parameter constrains matching in the same way as described for @AfterReturning. For
-example, the method signature may be declared as:</p>
+<p>doAccessCheck 方法必须声明一个名为 <code>retVal</code> 参数。这个参数会和 @AfterReturning 一样对参数类型进行约束匹配，方法签名声明如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13189,10 +13142,9 @@ example, the method signature may be declared as:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-schema-advice-after-throwing"><a class="anchor" href="#aop-schema-advice-after-throwing"></a>After throwing advice</h5>
+<h5 id="aop-schema-advice-after-throwing"><a class="anchor" href="#aop-schema-advice-after-throwing"></a>异常通知</h5>
 <div class="paragraph">
-<p>After throwing advice executes when a matched method execution exits by throwing an
-exception. It is declared inside an <code>&lt;aop:aspect&gt;</code> using the after-throwing element:</p>
+<p>异常通知在匹配方法执行以异常方式退出的时候执行。它在 <code>&lt;aop:aspect&gt;</code> 中使用 after-throwing 元素声明：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13208,9 +13160,7 @@ exception. It is declared inside an <code>&lt;aop:aspect&gt;</code> using the af
 </div>
 </div>
 <div class="paragraph">
-<p>Just as in the @AspectJ style, it is possible to get hold of the thrown exception within
-the advice body. Use the throwing attribute to specify the name of the parameter to
-which the exception should be passed:</p>
+<p>就像在 @AspectJ 风格中一样，可以在通知主体中获取抛出的异常。使用 throwing 特性指定参数名，异常会被传递到这个参数：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13227,9 +13177,7 @@ which the exception should be passed:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The doRecoveryActions method must declare a parameter named <code>dataAccessEx</code>. The type of
-this parameter constrains matching in the same way as described for @AfterThrowing. For
-example, the method signature may be declared as:</p>
+<p>doRecoveryActions 方法必须声明一个名为 <code>dataAccessEx</code> 参数。这个参数会和 @AfterThrowing 一样对参数类型进行约束匹配，方法签名声明如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13238,10 +13186,9 @@ example, the method signature may be declared as:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-schema-advice-after-finally"><a class="anchor" href="#aop-schema-advice-after-finally"></a>After (finally) advice</h5>
+<h5 id="aop-schema-advice-after-finally"><a class="anchor" href="#aop-schema-advice-after-finally"></a>后置 (finally) 声明</h5>
 <div class="paragraph">
-<p>After (finally) advice runs however a matched method execution exits. It is declared
-using the <code>after</code> element:</p>
+<p>后置（finally）通知在匹配的方法执行退出后执行。它使用 <code>after</code> 元素定义：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13258,23 +13205,12 @@ using the <code>after</code> element:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-schema-advice-around"><a class="anchor" href="#aop-schema-advice-around"></a>Around advice</h5>
+<h5 id="aop-schema-advice-around"><a class="anchor" href="#aop-schema-advice-around"></a>环绕通知</h5>
 <div class="paragraph">
-<p>The final kind of advice is around advice. Around advice runs "around" a matched method
-execution. It has the opportunity to do work both before and after the method executes,
-and to determine when, how, and even if, the method actually gets to execute at all.
-Around advice is often used if you need to share state before and after a method
-execution in a thread-safe manner (starting and stopping a timer for example). Always
-use the least powerful form of advice that meets your requirements; don&#8217;t use around
-advice if simple before advice would do.</p>
+<p>最后一种类型的通知是环绕通知。环绕通知“环绕”匹配的方法执行。它可以在方法执行之前和之后进行工作，并确定方法实际上何时，如何甚至是何时执行。如果您需要以线程安全的方式（例如启动和停止计时器）在方法执行之前和之后共享状态，则通常会使用“围绕”通知。总是使用符合你要求的功能最少的通知（即在如果简单的前置通知就能完成就不要使用环绕通知）.</p>
 </div>
 <div class="paragraph">
-<p>Around advice is declared using the <code>aop:around</code> element. The first parameter of the
-advice method must be of type <code>ProceedingJoinPoint</code>. Within the body of the advice,
-calling <code>proceed()</code> on the <code>ProceedingJoinPoint</code> causes the underlying method to
-execute. The <code>proceed</code> method may also be calling passing in an <code>Object[]</code> - the values
-in the array will be used as the arguments to the method execution when it proceeds. See
-<a href="#aop-ataspectj-around-advice">Around advice</a> for notes on calling proceed with an <code>Object[]</code>.</p>
+<p>环绕通知使用 <code>aop:around</code> 元素来声明。通知方法的第一个参数必须是 <code>ProceedingJoinPoint</code> 类型。在通知的主体中，在 <code>ProceedingJoinPoint</code> 上调用 <code>proceed()</code> 会似的底层方法执行。 <code>proceed</code> 方法也可以通过传递 <code>Object[]</code> 调用-数组的值将会被当作参数在方法执行时继续使用。有关调用带有<code>Object[]</code> 的 proceed 的要点，参见 <a href="#aop-ataspectj-around-advice">环绕通知</a>。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13290,8 +13226,7 @@ in the array will be used as the arguments to the method execution when it proce
 </div>
 </div>
 <div class="paragraph">
-<p>The implementation of the <code>doBasicProfiling</code> advice would be exactly the same as in the
-@AspectJ example (minus the annotation of course):</p>
+<p><code>doBasicProfiling</code> 通知的实现与 @AspectJ 例子中的完全一致 （当然除去注解）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13305,16 +13240,9 @@ in the array will be used as the arguments to the method execution when it proce
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-schema-params"><a class="anchor" href="#aop-schema-params"></a>Advice parameters</h5>
+<h5 id="aop-schema-params"><a class="anchor" href="#aop-schema-params"></a>通知参数</h5>
 <div class="paragraph">
-<p>The schema based declaration style supports fully typed advice in the same way as
-described for the @AspectJ support - by matching pointcut parameters by name against
-advice method parameters. See <a href="#aop-ataspectj-advice-params">Advice parameters</a> for details. If you wish
-to explicitly specify argument names for the advice methods (not relying on the
-detection strategies previously described) then this is done using the <code>arg-names</code>
-attribute of the advice element, which is treated in the same manner to the "argNames"
-attribute in an advice annotation as described in <a href="#aop-ataspectj-advice-params-names">Determining argument names</a>.
-For example:</p>
+<p>基于 schema 的声明风格支持全类型的通知，与 @AspectJ 支持中的描述的方法一样 —— 通过匹配切点参数名和通知方法参数名实现。 细节参见 <a href="#aop-ataspectj-advice-params">通知参数</a>。如果你希望为通知方法显式指定实参名（而不是依赖之前描述的检测策略）那么这可以用 advice 元素的 <code>arg-names</code> 实现，这与在 <a href="#aop-ataspectj-advice-params-names">确定实参名</a> 中所描述的对通知注解中的“argNames” 处理方式一样：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13325,11 +13253,10 @@ For example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>arg-names</code> attribute accepts a comma-delimited list of parameter names.</p>
+<p><code>arg-names</code> 特性接受一个由逗号分隔的形参名列表。</p>
 </div>
 <div class="paragraph">
-<p>Find below a slightly more involved example of the XSD-based approach that illustrates
-some around advice used in conjunction with a number of strongly typed parameters.</p>
+<p>下面是一个基于 XSD 的方法的示例，该示例演示了与一些强类型参数结合使用的一些环绕通知。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13349,10 +13276,7 @@ some around advice used in conjunction with a number of strongly typed parameter
 </div>
 </div>
 <div class="paragraph">
-<p>Next up is the aspect. Notice the fact that the <code>profile(..)</code> method accepts a number of
-strongly-typed parameters, the first of which happens to be the join point used to
-proceed with the method call: the presence of this parameter is an indication that the
-<code>profile(..)</code> is to be used as <code>around</code> advice:</p>
+<p>接下来是切面。注意  <code>profile(..)</code> 方法接受一些强类型参数的事实，第一个参数是用来执行 proceed 方法调用的连接点：这个参数的出现暗示了 <code>profile(..)</code> 会被当做环绕通知使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13377,8 +13301,7 @@ proceed with the method call: the presence of this parameter is an indication th
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, here is the XML configuration that is required to effect the execution of the
-above advice for a particular join point:</p>
+<p>最后，这里的 XML 配置为特定连接点配置了上述影响其执行的通知：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13412,8 +13335,7 @@ above advice for a particular join point:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If we had the following driver script, we would get output something like this on
-standard output:</p>
+<p>如果我们有以下驱动脚本，我们可以在标准输出上得到一些信息：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13442,30 +13364,21 @@ ms     %     Task name
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-ordering"><a class="anchor" href="#aop-ordering"></a>Advice ordering</h5>
+<h5 id="aop-ordering"><a class="anchor" href="#aop-ordering"></a>通知顺序</h5>
 <div class="paragraph">
-<p>When multiple advice needs to execute at the same join point (executing method) the
-ordering rules are as described in <a href="#aop-ataspectj-advice-ordering">Advice ordering</a>. The precedence
-between aspects is determined by either adding the <code>Order</code> annotation to the bean
-backing the aspect or by having the bean implement the <code>Ordered</code> interface.</p>
+<p>当多个通知都想在同一个连接点上执行时（执行方法）执行顺序规则在 <a href="#aop-ataspectj-advice-ordering">通知顺序</a> 中已经给出。切面之间的优先级是由在切面的辅助 bean 中添加 <code>Order</code> 注解或者实现 <code>Ordered</code> 接口实现的。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-introductions"><a class="anchor" href="#aop-schema-introductions"></a>5.3.4. Introductions</h4>
+<h4 id="aop-schema-introductions"><a class="anchor" href="#aop-schema-introductions"></a>5.3.4. 引入</h4>
 <div class="paragraph">
-<p>Introductions (known as inter-type declarations in AspectJ) enable an aspect to declare
-that advised objects implement a given interface, and to provide an implementation of
-that interface on behalf of those objects.</p>
+  <p>引入（在 AspectJ 中称为类型间声明）使得一个切面能够声明被通知对象实现给定的接口，并且代表这些对象提供该接口的实现。</p>
 </div>
 <div class="paragraph">
-<p>An introduction is made using the <code>aop:declare-parents</code> element inside an <code>aop:aspect</code>
-This element is used to declare that matching types have a new parent (hence the name).
-For example, given an interface <code>UsageTracked</code>, and an implementation of that interface
-<code>DefaultUsageTracked</code>, the following aspect declares that all implementors of service
-interfaces also implement the <code>UsageTracked</code> interface. (In order to expose statistics
-via JMX for example.)</p>
+<p>引入由 <code>aop:aspect</code> 元素中的 <code>aop:declare-parents</code> 元素实现。这个注解用来声明匹配的类型有一个新的父类（因此名字）。例如，给定一个接口 <code>UsageTracked</code> 和这个接口的实现 <code>DefaultUsageTracked</code>，下面的切面声明了所有服务接口的实现者也实现了 <code>UsageTracked</code> 接口。（例如，为了通过 JMX 公开统计信息。）</p>
 </div>
+
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;aop:aspect</span> <span class="attribute-name">id</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">usageTrackerAspect</span><span class="delimiter">&quot;</span></span> <span class="attribute-name">ref</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">usageTracking</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>
@@ -13484,7 +13397,7 @@ via JMX for example.)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The class backing the <code>usageTracking</code> bean would contain the method:</p>
+<p> <code>usageTracking</code> bean 的辅助 bean 会包含这个方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13494,12 +13407,7 @@ via JMX for example.)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The interface to be implemented is determined by <code>implement-interface</code> attribute. The
-value of the <code>types-matching</code> attribute is an AspectJ type pattern :- any bean of a
-matching type will implement the <code>UsageTracked</code> interface. Note that in the before
-advice of the above example, service beans can be directly used as implementations of
-the <code>UsageTracked</code> interface. If accessing a bean programmatically you would write the
-following:</p>
+<p>要实现哪个接口由 <code>implement-interface</code> 特性决定。<code>types-matching</code> 特性的值是一个 AspectJ 类型模式：- 匹配类型的任何 bean 都将实现 UsageTracked 接口。注意，在上述示例的前置通知中，serivce bean 可以直接作为 UsageTracked 接口的实现使用。如果以编程方式访问这个 bean，你可以编写如下代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13508,26 +13416,18 @@ following:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-instatiation-models"><a class="anchor" href="#aop-schema-instatiation-models"></a>5.3.5. Aspect instantiation models</h4>
+<h4 id="aop-schema-instatiation-models"><a class="anchor" href="#aop-schema-instatiation-models"></a>5.3.5. 切面实例化模型</h4>
 <div class="paragraph">
-<p>The only supported instantiation model for schema-defined aspects is the singleton
-model. Other instantiation models may be supported in future releases.</p>
+<p>单例模型是唯一支持基于 schema 定义的切面的实例化模型。其他实例化模型可能在未来版本中得到支持。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-advisors"><a class="anchor" href="#aop-schema-advisors"></a>5.3.6. Advisors</h4>
+<h4 id="aop-schema-advisors"><a class="anchor" href="#aop-schema-advisors"></a>5.3.6. 通知</h4>
 <div class="paragraph">
-<p>The concept of "advisors" is brought forward from the AOP support defined in Spring 1.2
-and does not have a direct equivalent in AspectJ. An advisor is like a small
-self-contained aspect that has a single piece of advice. The advice itself is
-represented by a bean, and must implement one of the advice interfaces described in
-<a href="#aop-api-advice-types">Advice types in Spring</a>. Advisors can take advantage of AspectJ pointcut expressions
-though.</p>
+<p>“通知”这个概念是由 Spring 1.2 定义的 AOP 支持提出的，在 AspectJ 中没有直接的等价的概念。通知就像是一个小小的独立的切面，有一个唯一的通知。通知本身由一个 bean 表示，并且必须实现 <a href="#aop-api-advice-types">Spring中的通知类型</a> 中描述的接口之一。 通知可以使用 AspectJ 切点表达式。</p>
 </div>
 <div class="paragraph">
-<p>Spring supports the advisor concept with the <code>&lt;aop:advisor&gt;</code> element. You will most
-commonly see it used in conjunction with transactional advice, which also has its own
-namespace support in Spring. Here&#8217;s how it looks:</p>
+<p>Spring 使用 <code>&lt;aop:advisor&gt;</code> 元素来支持通知这个概念。最常见的情况是将它与事务通知结合使用，在 Spring 中它也有自己的命名空间支持。以下是它的样子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13550,34 +13450,22 @@ namespace support in Spring. Here&#8217;s how it looks:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As well as the <code>pointcut-ref</code> attribute used in the above example, you can also use the
-<code>pointcut</code> attribute to define a pointcut expression inline.</p>
+<p>除了上面例子中使用的 <code>pointcut-ref</code> 特性外，还可以使用 <code>pointcut</code> 特性来定义内联的切点表达式。</p>
 </div>
 <div class="paragraph">
-<p>To define the precedence of an advisor so that the advice can participate in ordering,
-use the <code>order</code> attribute to define the <code>Ordered</code> value of the advisor.</p>
+<p>要定义通知的优先级以便通知可以参与排序，请使用 <code>order</code> 特性来定义通知的  <code>Ordered</code> 值。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-schema-example"><a class="anchor" href="#aop-schema-example"></a>5.3.7. Example</h4>
+<h4 id="aop-schema-example"><a class="anchor" href="#aop-schema-example"></a>5.3.7. 示例</h4>
 <div class="paragraph">
-<p>Let&#8217;s see how the concurrent locking failure retry example from
-<a href="#aop-ataspectj-example">Example</a> looks when rewritten using the schema support.</p>
+<p>我们看看当我们用 schema 支持重写 <a href="#aop-ataspectj-example">示例</a> 中的并发锁失败重试例子是，它是怎么样的。/p>
 </div>
 <div class="paragraph">
-<p>The execution of business services can sometimes fail due to concurrency issues (for
-example, deadlock loser). If the operation is retried, it is quite likely it will
-succeed next time round. For business services where it is appropriate to retry in such
-conditions (idempotent operations that don&#8217;t need to go back to the user for conflict
-resolution), we&#8217;d like to transparently retry the operation to avoid the client seeing a
-<code>PessimisticLockingFailureException</code>. This is a requirement that clearly cuts across
-multiple services in the service layer, and hence is ideal for implementing via an
-aspect.</p>
+<p>business service 的执行有时会由于并发问题而失败（例如死锁失败）。如果操作重新执行，下一次很有可能成功。 对于适合在这种情况下重试的 business service（不需要返回给用户进行冲突解决的幂等操作），我们希望透明地重试操作以避免客户端看到 <code>PessimisticLockingFailureException</code>。很明显这是一个在服务层中跨越多个 service 的需求，因此非常适合通过某个切面实现。</p>
 </div>
 <div class="paragraph">
-<p>Because we want to retry the operation, we&#8217;ll need to use around advice so that we can
-call proceed multiple times. Here&#8217;s how the basic aspect implementation looks (it&#8217;s just
-a regular Java class using the schema support):</p>
+<p>因为我们想重试操作，所以我们需要使用环绕通知，以便我们可以多次调用。以下是基本切面实现的的样子（它只是使用 schema 支持的常规 Java 类）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13619,12 +13507,7 @@ a regular Java class using the schema support):</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the aspect implements the <code>Ordered</code> interface so we can set the precedence of
-the aspect higher than the transaction advice (we want a fresh transaction each time we
-retry). The <code>maxRetries</code> and <code>order</code> properties will both be configured by Spring. The
-main action happens in the <code>doConcurrentOperation</code> around advice method. We try to
-proceed, and if we fail with a <code>PessimisticLockingFailureException</code> we simply try again
-unless we have exhausted all of our retry attempts.</p>
+<p>注意，该切面实现了 <code>Ordered</code> 接口，因此我们可以将其优先级设置高于事务通知（每次我们重试时都希望有一个新事务）。<code>maxRetries</code> 和<code>order</code> 属性都将由 Spring 配置。主要的操作发生在 <code>doConcurrentOperation</code> 环绕通知方法。注意，目前我们正在将重试逻辑应用于所有 <code>businessService()</code>。我们试着 proceed，如果因为 <code>PessimisticLockingFailureException</code> 异常而失败了，只需要再试一次，除非已经耗尽了所有的重试次数。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -13634,15 +13517,14 @@ unless we have exhausted all of our retry attempts.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This class is identical to the one used in the @AspectJ example, but with the
-annotations removed.</p>
+<p>该类与 @AspectJ 示例中使用的类相同，但注解已经去除了。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The corresponding Spring configuration is:</p>
+<p>对应的 Spring 配置是：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13669,9 +13551,7 @@ annotations removed.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Notice that for the time being we assume that all business services are idempotent. If
-this is not the case we can refine the aspect so that it only retries genuinely
-idempotent operations, by introducing an <code>Idempotent</code> annotation:</p>
+<p>注意目前我们假设所有的 business service 都是幂等的。如果不是这种情况，为了改进切面使其只重试幂等运算，我们可以定义一个 <code>Idempotent</code> 幂等注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13682,9 +13562,7 @@ idempotent operations, by introducing an <code>Idempotent</code> annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>and using the annotation to annotate the implementation of service operations. The
-change to the aspect to retry only idempotent operations simply involves refining the
-pointcut expression so that only <code>@Idempotent</code> operations match:</p>
+<p>并将此注解用于 service 操作的实现。将切面修改为只重试幂等操作只涉及改进切点表达式，使得只有 <code>@Idempotent</code> 操作匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
