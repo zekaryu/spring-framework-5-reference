@@ -13574,63 +13574,30 @@ ms     %     Task name
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-choosing"><a class="anchor" href="#aop-choosing"></a>5.4. Choosing which AOP declaration style to use</h3>
+<h3 id="aop-choosing"><a class="anchor" href="#aop-choosing"></a>5.4. 选择使用哪种 AOP 声明风格</h3>
 <div class="paragraph">
-<p>Once you have decided that an aspect is the best approach for implementing a given
-requirement, how do you decide between using Spring AOP or AspectJ, and between the
-Aspect language (code) style, @AspectJ annotation style, or the Spring XML style? These
-decisions are influenced by a number of factors including application requirements,
-development tools, and team familiarity with AOP.</p>
+<p>一旦你确定某个切面是实现给定需求的最佳方法，那么如何在使用 Spring AOP 或 AspectJ 之间以及 Aspect 语言（代码）风格，@AspectJ 注解风格或 Spring XML 风格之间做出选择？这些决定受到许多因素的影响，包括应用的需求，开发工具和团队对 AOP 的熟悉程度。</p>
 </div>
 <div class="sect3">
-<h4 id="aop-spring-or-aspectj"><a class="anchor" href="#aop-spring-or-aspectj"></a>5.4.1. Spring AOP or full AspectJ?</h4>
+<h4 id="aop-spring-or-aspectj"><a class="anchor" href="#aop-spring-or-aspectj"></a>5.4.1. Spring AOP 还是全面使用 AspectJ ？</h4>
 <div class="paragraph">
-<p>Use the simplest thing that can work. Spring AOP is simpler than using full AspectJ as
-there is no requirement to introduce the AspectJ compiler / weaver into your development
-and build processes. If you only need to advise the execution of operations on Spring
-beans, then Spring AOP is the right choice. If you need to advise objects not managed by
-the Spring container (such as domain objects typically), then you will need to use
-AspectJ. You will also need to use AspectJ if you wish to advise join points other than
-simple method executions (for example, field get or set join points, and so on).</p>
+<p>使用有效的最简单的东西。Spring AOP 比使用全面的 AspectJ 更简单，因为不需要将 AspectJ 编译器/织入器引入到开发和构建过程。如果你只需要通知在 Spring bean 上的执行操作，那么 Spring AOP 就是正确的选择。如果你需要通知没有被 Spring 容器管理的对象（比如域对象），那么你需要使用 AspectJ。如果你希望通知连接点而不是简单的方法执行（例如，字段 get 或 set 连接点等），也需要使用 AspectJ。</p>
 </div>
 <div class="paragraph">
-<p>When using AspectJ, you have the choice of the AspectJ language syntax (also known as
-the "code style") or the @AspectJ annotation style. Clearly, if you are not using Java
-5+ then the choice has been made for you&#8230;&#8203; use the code style. If aspects play a large
-role in your design, and you are able to use the <a href="https://www.eclipse.org/ajdt/">AspectJ
-Development Tools (AJDT)</a> plugin for Eclipse, then the AspectJ language syntax is the
-preferred option: it is cleaner and simpler because the language was purposefully
-designed for writing aspects. If you are not using Eclipse, or have only a few aspects
-that do not play a major role in your application, then you may want to consider using
-the @AspectJ style and sticking with a regular Java compilation in your IDE, and adding
-an aspect weaving phase to your build script.</p>
+<p>使用 AspectJ 时，你可以选择 AspectJ 语言语法（也称为“代码风格”）或 @AspectJ 注释风格。显然，如果你没有在使用Java 5+ 那么选择已经为你作出...使用代码风格。如果切面在你的设计中扮演重要角色，并且你可以使用Eclipse 的 <a href="https://www.eclipse.org/ajdt/">AspectJ 开发工具（AJDT）</a>插件，那么 AspectJ 语言语法是首选选项：它更清晰和更简单，因为这种语言是专门用于编写切面的。如果你没有使用 Eclipse，或者只有一些切面且它们在应用程序中不起主要作用，那么你可能需要考虑使用 @AspectJ 风格，并在 IDE 中使用常规的 Java 编译，并在你的构建脚本中添加一个切面织入期。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-ataspectj-or-xml"><a class="anchor" href="#aop-ataspectj-or-xml"></a>5.4.2. @AspectJ or XML for Spring AOP?</h4>
+<h4 id="aop-ataspectj-or-xml"><a class="anchor" href="#aop-ataspectj-or-xml"></a>5.4.2. 对于 Spring AOP 使用 @AspectJ 还是 XML ?</h4>
 <div class="paragraph">
-<p>If you have chosen to use Spring AOP, then you have a choice of @AspectJ or XML style.
-There are various tradeoffs to consider.</p>
+<p>
+  如果你已经选择使用 Spring AOP，则你还有个选择，使用 @AspectJ 还是 XML 风格。其中会出现各种折衷考虑。</p>
 </div>
 <div class="paragraph">
-<p>The XML style will be most familiar to existing Spring users and it is backed by genuine
-POJOs. When using AOP as a tool to configure enterprise services then XML can be a good
-choice (a good test is whether you consider the pointcut expression to be a part of your
-configuration you might want to change independently). With the XML style arguably it is
-clearer from your configuration what aspects are present in the system.</p>
+<p>现有的 Spring 用户最熟悉的是 XML 风格，它是由真正的 POJO 支持的。当使用 AOP 作为配置企业服务的工具时，XML 可能是一个不错的选择（一个好的测试就是你是否认为切点表达式是你可能想要独立更改的配置的一部分）。用XML 的风格可以说从你的配置中可以更清楚地看到系统中存在哪些切面。</p>
 </div>
 <div class="paragraph">
-<p>The XML style has two disadvantages. Firstly it does not fully encapsulate the
-implementation of the requirement it addresses in a single place. The DRY principle says
-that there should be a single, unambiguous, authoritative representation of any piece of
-knowledge within a system. When using the XML style, the knowledge of <em>how</em> a
-requirement is implemented is split across the declaration of the backing bean class,
-and the XML in the configuration file. When using the @AspectJ style there is a single
-module - the aspect - in which this information is encapsulated. Secondly, the XML style
-is slightly more limited in what it can express than the @AspectJ style: only the
-"singleton" aspect instantiation model is supported, and it is not possible to combine
-named pointcuts declared in XML. For example, in the @AspectJ style you can write
-something like:</p>
+<p>XML 风格有两个缺点。首先，它并没有完全将其需求的实现封装在一个地方。DRY （dont repeat yourself）原则指出，对系统内的任何知识应该有一个单一的，明确的，权威的表示。当使用 XML 风格时，需求被实现的知识被分解为辅助 bean 类的声明和配置文件中的 XML。当使用 @AspectJ 风格时，只有一个模块 - 切面 - 其中封装了这些信息。其次，XML 风格比 @AspectJ 风格稍微有点局限：只支持“singleton”切面的实例化模型，不能组合使用 XML 声明的命名切点。例如，在 @AspectJ 风格，你可以写如下东西：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13645,7 +13612,7 @@ something like:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In the XML style I can declare the first two pointcuts:</p>
+<p>在 XML 风格的配置中我可以声明前两个切点：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13657,17 +13624,10 @@ something like:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The downside of the XML approach is that you cannot define the
-<code>accountPropertyAccess</code> pointcut by combining these definitions.</p>
+<p>XML 方式的不利之处在于，你无法通过组合这些定义来定义 <code>accountPropertyAccess</code> 切点。</p>
 </div>
 <div class="paragraph">
-<p>The @AspectJ style supports additional instantiation models, and richer pointcut
-composition. It has the advantage of keeping the aspect as a modular unit. It also has
-the advantage the @AspectJ aspects can be understood (and thus consumed) both by Spring
-AOP and by AspectJ - so if you later decide you need the capabilities of AspectJ to
-implement additional requirements then it is very easy to migrate to an AspectJ-based
-approach. On balance the Spring team prefer the @AspectJ style whenever you have aspects
-that do more than simple "configuration" of enterprise services.</p>
+<p>@AspectJ 风格支持其他的实例化模型，以及更丰富的切点组合。它具有将切面保持为模块化单元的优点。 它还具有以下优点：Spring AOP 和 AspectJ 都可以理解（并因此消费）@AspectJ 切面，所以如果你稍后决定需要AspectJ 的功能来实现附加要求，那么迁移到基于 AspectJ 方式也非常简单。总的来说，只要切面不仅仅只是简单的“配置”企业服务，Spring 团队就更喜欢使用 @AspectJ 风格。</p>
 </div>
 </div>
 </div>
