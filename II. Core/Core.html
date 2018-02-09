@@ -13816,19 +13816,13 @@ ms     %     Task name
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-aspectj-programmatic"><a class="anchor" href="#aop-aspectj-programmatic"></a>5.7. Programmatic creation of @AspectJ Proxies</h3>
+<h3 id="aop-aspectj-programmatic"><a class="anchor" href="#aop-aspectj-programmatic"></a>5.7. 编程方式创建 @AspectJ 代理</h3>
 <div class="paragraph">
-<p>In addition to declaring aspects in your configuration using either <code>&lt;aop:config&gt;</code> or
-<code>&lt;aop:aspectj-autoproxy&gt;</code>, it is also possible programmatically to create proxies that
-advise target objects. For the full details of Spring&#8217;s AOP API, see the next chapter.
-Here we want to focus on the ability to automatically create proxies using @AspectJ
-aspects.</p>
+<p>除了使用 <code>&lt;aop:config&gt;</code> 或
+  <code>&lt;aop:aspectj-autoproxy&gt;</code> 在配置中声明切面以外，还可以通过编程方式创建通知目标对象的代理。 有关 Spring AOP API 的全部细节，请参阅下一章。 这里我们要关注使用 @AspectJ 切面自动创建代理的能力。</p>
 </div>
 <div class="paragraph">
-<p>The class <code>org.springframework.aop.aspectj.annotation.AspectJProxyFactory</code> can be used
-to create a proxy for a target object that is advised by one or more @AspectJ aspects.
-Basic usage for this class is very simple, as illustrated below. See the javadocs for
-full information.</p>
+<p><code>org.springframework.aop.aspectj.annotation.AspectJProxyFactory</code> 类可用于为一个或多个 @AspectJ 切面通知的目标对象创建代理。这个类的基本用法非常简单，如下所示。 请参阅 javadoc 以获取完整信息。</p>
 </div>
 <div class="listingblock">
 <div class="content">
