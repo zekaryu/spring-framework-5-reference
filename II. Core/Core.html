@@ -13638,44 +13638,31 @@ ms     %     Task name
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-proxying"><a class="anchor" href="#aop-proxying"></a>5.6. Proxying mechanisms</h3>
+<h3 id="aop-proxying"><a class="anchor" href="#aop-proxying"></a>5.6. 代理机制</h3>
 <div class="paragraph">
-<p>Spring AOP uses either JDK dynamic proxies or CGLIB to create the proxy for a given
-target object. (JDK dynamic proxies are preferred whenever you have a choice).</p>
+<p>Spring AOP 使用 JDK 动态代理或者 CGLIB 来为给定对象创建代理。（只要可以选择，JDK 动态代理就是首选）。</p>
 </div>
 <div class="paragraph">
-<p>If the target object to be proxied implements at least one interface then a JDK dynamic
-proxy will be used. All of the interfaces implemented by the target type will be
-proxied. If the target object does not implement any interfaces then a CGLIB proxy will
-be created.</p>
+<p>如果要被代理的目标对象实现了至少一个接口，则将对其使用 JDK 动态代理。所有由目标类型实现的接口都将被代理。如果目标对象没有实现任何接口，则将创建一个 CGLIB 代理。</p>
 </div>
 <div class="paragraph">
-<p>If you want to force the use of CGLIB proxying (for example, to proxy every method
-defined for the target object, not just those implemented by its interfaces) you can do
-so. However, there are some issues to consider:</p>
+<p>如果你想强制使用 CGLIB 代理（例如，代理目标对象定义的每个方法，而不仅仅是代理由其接口实现的方法），则可以这样做。但是，有一些问题需要考虑：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>final</code> methods cannot be advised, as they cannot be overridden.</p>
+<p><code>final</code> 方法不能被通知，因为他们不能被覆盖。</p>
 </li>
 <li>
-<p>As of Spring 3.2, it is no longer necessary to add CGLIB to your project classpath, as
-CGLIB classes are repackaged under org.springframework and included directly in the
-spring-core JAR. This means that CGLIB-based proxy support 'just works' in the same
-way that JDK dynamic proxies always have.</p>
+<p>从 Spring 3.2 开始，不再需要将 CGLIB 添加到项目类路径中，因为 CGLIB 类在 org.springframework 下重新打包，并直接包含在 Spring-Core JAR 中。这意味着基于 CGLIB 的代理支持与 JDK 动态代理始终具有相同的工作方式。</p>
 </li>
 <li>
-<p>As of Spring 4.0, the constructor of your proxied object will NOT be called twice
-anymore since the CGLIB proxy instance will be created via Objenesis. Only if your
-JVM does not allow for constructor bypassing, you might see double invocations and
-corresponding debug log entries from Spring&#8217;s AOP support.</p>
+<p>从 Spring 4.0 开始，代理对象的构造器将不会被调用两次，因为 CGLIB 代理实例将通过 Objenesis 创建。只有当你的 JVM 不允许构造器绕过，你才可能会看到来自 Spring AOP 支持的双重调用和相应的调试日志条目。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>To force the use of CGLIB proxies set the value of the <code>proxy-target-class</code> attribute of
-the <code>&lt;aop:config&gt;</code> element to true:</p>
+<p>要强制使用 CGLIB 代理，请将 <code>&lt;aop:config&gt;</code> 元素的 <code>proxy-target-class</code> 特性的值设置为 true：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13685,8 +13672,7 @@ the <code>&lt;aop:config&gt;</code> element to true:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>To force CGLIB proxying when using the @AspectJ autoproxy support, set the
-<code>'proxy-target-class'</code> attribute of the <code>&lt;aop:aspectj-autoproxy&gt;</code> element to <code>true</code>:</p>
+<p>要在使用  @AspectJ 自动代理支持时强制使用 CGLIB 代理，请将 <code>&lt;aop:aspectj-autoproxy&gt;</code> 元素的 <code>'proxy-target-class'</code> 特性的值设置为 <code>true</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13701,32 +13687,22 @@ the <code>&lt;aop:config&gt;</code> element to true:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Multiple <code>&lt;aop:config/&gt;</code> sections are collapsed into a single unified auto-proxy creator
-at runtime, which applies the <em>strongest</em> proxy settings that any of the
-<code>&lt;aop:config/&gt;</code> sections (typically from different XML bean definition files) specified.
-This also applies to the <code>&lt;tx:annotation-driven/&gt;</code> and <code>&lt;aop:aspectj-autoproxy/&gt;</code>
-elements.</p>
+<p>多个 <code>&lt;aop:config/&gt;</code> 片段在运行时会被集中统一到一个的自动代理创建器，该应用程序指定的任何 <code>&lt;aop:config/&gt;</code> 片段（通常来自不同的 XML bean 定义文件）应用最强的代理设置。 这也适用于 <code>&lt;tx:annotation-driven/&gt;</code> 和 <code>&lt;aop:aspectj-autoproxy/&gt;</code> 元素。</p>
 </div>
 <div class="paragraph">
-<p>To be clear: using <code>proxy-target-class="true"</code> on <code>&lt;tx:annotation-driven/&gt;</code>,
-<code>&lt;aop:aspectj-autoproxy/&gt;</code> or <code>&lt;aop:config/&gt;</code> elements will force the use of CGLIB
-proxies <em>for all three of them</em>.</p>
+<p>明确一点：在 <code>&lt;tx:annotation-driven/&gt;</code>，<code>&lt;aop:aspectj-autoproxy/&gt;</code> 或 <code>&lt;aop:config/&gt;</code> 元素上使用 <code>proxy-target-class="true"</code> 将强制使用 CGLIB 来代理。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="aop-understanding-aop-proxies"><a class="anchor" href="#aop-understanding-aop-proxies"></a>5.6.1. Understanding AOP proxies</h4>
+<h4 id="aop-understanding-aop-proxies"><a class="anchor" href="#aop-understanding-aop-proxies"></a>5.6.1. 理解 AOP 代理</h4>
 <div class="paragraph">
-<p>Spring AOP is <em>proxy-based</em>. It is vitally important that you grasp the semantics of
-what that last statement actually means before you write your own aspects or use any of
-the Spring AOP-based aspects supplied with the Spring Framework.</p>
+<p>Spring AOP 是基于代理的。在编写自己的切面或使用 Spring 框架提供的任何基于 Spring AOP 的切面之前，掌握上一句话的真正意义是非常重要的。</p>
 </div>
 <div class="paragraph">
-<p>Consider first the scenario where you have a plain-vanilla, un-proxied,
-nothing-special-about-it, straight object reference, as illustrated by the following
-code snippet.</p>
+<p>首先考虑一下如果你有一个普通的，非代理的，没什么特别的，直接的对象引用，如下面的代码片段所示。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13744,8 +13720,7 @@ code snippet.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you invoke a method on an object reference, the method is invoked <em>directly</em> on
-that object reference, as can be seen below.</p>
+<p>如果你在对象引用上调用方法，则该方法会直接在该对象引用上被调用，如下所示。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -13767,8 +13742,7 @@ that object reference, as can be seen below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Things change slightly when the reference that client code has is a proxy. Consider the
-following diagram and code snippet.</p>
+<p>当客户端代码的引用是代理时，情况会稍微有所改变。考虑下面的图表和代码片段。</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -13794,24 +13768,10 @@ following diagram and code snippet.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The key thing to understand here is that the client code inside the <code>main(..)</code> of the
-<code>Main</code> class <em>has a reference to the proxy</em>. This means that method calls on that
-object reference will be calls on the proxy, and as such the proxy will be able to
-delegate to all of the interceptors (advice) that are relevant to that particular method
-call. However, once the call has finally reached the target object, the <code>SimplePojo</code>
-reference in this case, any method calls that it may make on itself, such as
-<code>this.bar()</code> or <code>this.foo()</code>, are going to be invoked against the <em>this</em> reference,
-and <em>not</em> the proxy. This has important implications. It means that self-invocation is
-<em>not</em> going to result in the advice associated with a method invocation getting a
-chance to execute.</p>
+<p>这里要理解的关键是 <code>Main</code> 类的 <code>main(..)</code> 中的客户代码 <em>有一个对代理的引用</em>。这意味着对对象引用的方法调用将是对代理的调用，因此代理将能与该特定方法调用相关的所有操作都够委托给拦截器（通知）。不过，一旦调用最终到达目标对象，这个例子中是 <code>SimplePojo</code>，它将执行它自己方法调用，比如 <code>this.bar()</code> 或 <code>this.foo()</code> ，将会在这个对象引用上调用，而不是代理。这具有重要意义。这意味着自我调用不会导致与方法调用相关的通知获得执行机会。</p>
 </div>
 <div class="paragraph">
-<p>Okay, so what is to be done about this? The best approach (the term best is used loosely
-here) is to refactor your code such that the self-invocation does not happen. For sure,
-this does entail some work on your part, but it is the best, least-invasive approach.
-The next approach is absolutely horrendous, and I am almost reticent to point it out
-precisely because it is so horrendous. You can (choke!) totally tie the logic within
-your class to Spring AOP by doing this:</p>
+<p>好的，那该怎么办呢？最好的方法（“最好”这个词语在这里使用不是很严格）是重构你的代码，使得自我调用不会发生。当然，这确实需要你做一些工作，但它是最好的，侵入性最小的方法。下一个方法绝对是非常可怕的，正因如此我几乎不愿意指出来。通过这个代码你完全可以（呛！尴尬-_-!）把你的类中的逻辑与 Spring AOP 绑定在一起：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13829,9 +13789,7 @@ your class to Spring AOP by doing this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This totally couples your code to Spring AOP, <em>and</em> it makes the class itself aware of
-the fact that it is being used in an AOP context, which flies in the face of AOP. It
-also requires some additional configuration when the proxy is being created:</p>
+<p>这完全将你的代码耦合到 Spring AOP 中，并且它使得类本身意识到它正在被 AOP 上下文使用的事实，这与 AOP 的目的截然相反。而且这么做在创建代理时，还需要一些额外的配置：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13853,8 +13811,7 @@ also requires some additional configuration when the proxy is being created:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Finally, it must be noted that AspectJ does not have this self-invocation issue because
-it is not a proxy-based AOP framework.</p>
+<p>最后，必须记住 AspectJ 没有这个自我调用的问题，因为它不是一个基于代理的 AOP 框架。</p>
 </div>
 </div>
 </div>
