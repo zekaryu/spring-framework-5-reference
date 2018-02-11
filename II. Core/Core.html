@@ -13842,37 +13842,20 @@ MyInterfaceType proxy = factory.getProxy();</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-using-aspectj"><a class="anchor" href="#aop-using-aspectj"></a>5.8. Using AspectJ with Spring applications</h3>
+<h3 id="aop-using-aspectj"><a class="anchor" href="#aop-using-aspectj"></a>5.8. 在 Spring 应用中使用 AspectJ </h3>
 <div class="paragraph">
-<p>Everything we&#8217;ve covered so far in this chapter is pure Spring AOP. In this section,
-we&#8217;re going to look at how you can use the AspectJ compiler/weaver instead of, or in
-addition to, Spring AOP if your needs go beyond the facilities offered by Spring AOP
-alone.</p>
+<p>本章到目前为止所介绍的所有有东西都是纯 Spring AOP。在本节中，我们将介绍如何使用 AspectJ 编译器/织入器代替 Spring AOP，或者除了 Spring AOP 之外，如果你的需要 Spring AOP 提供的功能之外的东西</p>
 </div>
 <div class="paragraph">
-<p>Spring ships with a small AspectJ aspect library, which is available standalone in your
-distribution as <code>spring-aspects.jar</code>; you&#8217;ll need to add this to your classpath in order
-to use the aspects in it. <a href="#aop-atconfigurable">在 Spring 中使用 AspectJ 对域对象进行依赖注入</a> and <a href="#aop-ajlib-other">Other Spring aspects for AspectJ</a> discuss the
-content of this library and how you can use it. <a href="#aop-aj-configure">Configuring AspectJ aspects using Spring IoC</a> discusses how to
-dependency inject AspectJ aspects that are woven using the AspectJ compiler. Finally,
-<a href="#aop-aj-ltw">Load-time weaving with AspectJ in the Spring Framework</a> provides an introduction to load-time weaving for Spring applications
-using AspectJ.</p>
+<p>Spring 提供了一个小的 AspectJ 切面库，它可以在你的发行版中作为 <code>spring-aspects.jar</code> 单独使用; 你需要将其添加到您的类路径中，以便使用其中的切面。 <a href="#aop-atconfigurable">在 Spring 中使用 AspectJ 对域对象进行依赖注入</a> 和 <a href="#aop-ajlib-other">AspectJ 的其他 Spring 切面</a> 讨论这个库的内容以及如何使用它。<a href="#aop-aj-configure">使用 Spring IoC 配置 AspectJ 切面</a> 讨论了如何依赖注入使用 AspectJ 编译器织入的 AspectJ 切面。最后，<a href="#aop-aj-ltw">在 Spring 框架中使用 AspectJ Load-time 织入</a> 介绍了使用 AspectJ 的 Spring 应用程序的加载时织入。</p>
 </div>
 <div class="sect3">
 <h4 id="aop-atconfigurable"><a class="anchor" href="#aop-atconfigurable"></a>5.8.1. 在 Spring 中使用 AspectJ 对域对象进行依赖注入</h4>
 <div class="paragraph">
-<p>The Spring container instantiates and configures beans defined in your application
-context. It is also possible to ask a bean factory to configure a <em>pre-existing</em>
-object given the name of a bean definition containing the configuration to be applied.
-The <code>spring-aspects.jar</code> contains an annotation-driven aspect that exploits this
-capability to allow dependency injection of <em>any object</em>. The support is intended to
-be used for objects created <em>outside of the control of any container</em>. Domain objects
-often fall into this category because they are often created programmatically using the
-<code>new</code> operator, or by an ORM tool as a result of a database query.</p>
+<p>Spring 容器实例化和配置在应用程序上下文中定义的 bean。也可以要求 bean 工厂配置一个 bean 定义的名字包含在要应用的配置中的预先存在的对象。<code>spring-aspects.jar</code> 包含一个注解驱动的切面，利用这个功能来允许依赖注入任何对象。该支持旨在用于在任何容器控制之外创建的对象。域对象通常属于这一类，因为它们通常是以编程方式使用 <code>new</code> 操作符或通过 ORM 工具作为数据库查询的结果创建的。</p>
 </div>
 <div class="paragraph">
-<p>The <code>@Configurable</code> annotation marks a class as eligible for Spring-driven
-configuration. In the simplest case it can be used just as a marker annotation:</p>
+<p><code>@Configurable</code> 注解将一个类标记为符合 Spring 驱动配置的类。在最简单的情况下，它可以用作标记注解：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13887,12 +13870,7 @@ configuration. In the simplest case it can be used just as a marker annotation:<
 </div>
 </div>
 <div class="paragraph">
-<p>When used as a marker interface in this way, Spring will configure new instances of the
-annotated type ( <code>Account</code> in this case) using a bean definition (typically
-prototype-scoped) with the same name as the fully-qualified type name (
-<code>com.xyz.myapp.domain.Account</code>). Since the default name for a bean is the
-fully-qualified name of its type, a convenient way to declare the prototype definition
-is simply to omit the <code>id</code> attribute:</p>
+<p>当以这种方式用作标记接口时，Spring 将使用与完全限定类型名称（<code>com.xyz.myapp.domain.Account</code>）同名的 bean 定义（通常是原型作用域的）来配置注解类型的新实例（在这个例子中为 <code>Account</code> ）。 由于 bean 的默认名称是其类型的完全限定名称，因此声明原型定义的一种简便方法就是省略<code>id</code> 特性：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13902,8 +13880,7 @@ is simply to omit the <code>id</code> attribute:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>If you want to explicitly specify the name of the prototype bean definition to use, you
-can do so directly in the annotation:</p>
+<p>如果要显式指定要使用的原型 bean 定义的名称，可以直接在注解中操作：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13918,36 +13895,16 @@ can do so directly in the annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Spring will now look for a bean definition named "account" and use that as the
-definition to configure new <code>Account</code> instances.</p>
+<p>Spring 现在将查找名为 “account” 的 bean 定义，并将其作为定义来配置新的 <code>Account</code> 实例。</p>
 </div>
 <div class="paragraph">
-<p>You can also use autowiring to avoid having to specify a dedicated bean definition at
-all. To have Spring apply autowiring use the <code>autowire</code> property of the
-<code>@Configurable</code> annotation: specify either <code>@Configurable(autowire=Autowire.BY_TYPE)</code> or
-<code>@Configurable(autowire=Autowire.BY_NAME</code> for autowiring by type or by name
-respectively. As an alternative, as of Spring 2.5 it is preferable to specify explicit,
-annotation-driven dependency injection for your <code>@Configurable</code> beans by using
-<code>@Autowired</code> or <code>@Inject</code> at the field or method level (see <a href="#beans-annotation-config">Annotation-based container configuration</a>
-for further details).</p>
+<p>你也可以使用自动装配来避免必须指定特定的 bean 定义。要使 Spring 通过使用 <code>@Configurable</code> 注解的 <code>autowire</code> 属性来应用自动装配：要么指定<code>@Configurable(autowire=Autowire.BY_TYPE)</code> 要么指定 <code>@Configurable(autowire=Autowire.BY_NAME</code>，以分别按类型或名称的方式自动装配。从 Spring 2.5 开始，最好通过在字段或方法级别使用 <code>@Autowired</code> 或 <code>@Inject</code>（请参阅<a href="#beans-annotation-config">基于注解的容器配置</a>以获取更多详细信息）为你的 <code>@Configurable</code>  bean 指定显式的，注解驱动的依赖注入。</p>
 </div>
 <div class="paragraph">
-<p>Finally you can enable Spring dependency checking for the object references in the newly
-created and configured object by using the <code>dependencyCheck</code> attribute (for example:
-<code>@Configurable(autowire=Autowire.BY_NAME,dependencyCheck=true)</code>). If this attribute is
-set to true, then Spring will validate after configuration that all properties (<em>which
-are not primitives or collections</em>) have been set.</p>
+<p>最后，您可以使用  <code>dependencyCheck</code> 特性（例如：@Configurable（<code>@Configurable(autowire=Autowire.BY_NAME,dependencyCheck=true)</code>）为新创建和配置的对象中的对象引用启用Spring 依赖项检查。如果此特性设置为 true，则 Spring 将在配置后验证所有属性（<em>不是基本类型或集合</em>）都已被设置。</p>
 </div>
 <div class="paragraph">
-<p>Using the annotation on its own does nothing of course. It is the
-<code>AnnotationBeanConfigurerAspect</code> in <code>spring-aspects.jar</code> that acts on the presence of
-the annotation. In essence the aspect says "after returning from the initialization of a
-new object of a type annotated with <code>@Configurable</code>, configure the newly created object
-using Spring in accordance with the properties of the annotation". In this context,
-<em>initialization</em> refers to newly instantiated objects (e.g., objects instantiated with
-the <code>new</code> operator) as well as to <code>Serializable</code> objects that are undergoing
-deserialization (e.g., via
-<a href="http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html">readResolve()</a>).</p>
+<p>当然，对它本身使用这个注解不会有任何作用。作用于注解的是 <code>spring-aspects.jar</code> 中的 <code>AnnotationBeanConfigurerAspect</code> 。切面从本质上来说就是“在从 <code>@Configurable</code> 注解的新对象的初始化返回后，根据注解的属性使用 Spring 配置新创建的对象”。在这个上下文中，初始化是指新实例化的对象（例如，用 <code>new</code> 运算符实例化的对象）以及正在经历反序列化（例如，通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html">readResolve()</a>）的可序列化对象。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -13957,14 +13914,7 @@ deserialization (e.g., via
 </td>
 <td class="content">
 <div class="paragraph">
-<p>One of the key phrases in the above paragraph is '<em>in essence</em>'. For most cases, the
-exact semantics of '<em>after returning from the initialization of a new object</em>' will be
-fine&#8230;&#8203; in this context, '<em>after initialization</em>' means that the dependencies will be
-injected <em>after</em> the object has been constructed - this means that the dependencies
-will not be available for use in the constructor bodies of the class. If you want the
-dependencies to be injected <em>before</em> the constructor bodies execute, and thus be
-available for use in the body of the constructors, then you need to define this on the
-<code>@Configurable</code> declaration like so:</p>
+<p>上段中的一个关键词是“实质上”。 在大多数情况下，'<em>after returning from the initialization of a new object</em>' 的确切语义是 OK 的......在这个上下文中，'<em>after initialization</em>' 意味着依赖关系将在对象被创建之后被注入 - 这意味着依赖关系将在类的构造方法体中不可用。如果你希望在构造器执行之前注入依赖项，并且可以在构造器方法体中可用，那么你需要在 <code>@Configurable</code> 声明中定义它，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -13972,25 +13922,14 @@ available for use in the body of the constructors, then you need to define this 
 </div>
 </div>
 <div class="paragraph">
-<p>You can find out more information about the language semantics of the various pointcut
-types in AspectJ
-<a href="https://www.eclipse.org/aspectj/doc/next/progguide/semantics-joinPoints.html">in this
-appendix</a> of the <a href="https://www.eclipse.org/aspectj/doc/next/progguide/index.html">AspectJ
-Programming Guide</a>.</p>
+<p>您可以在 <a href="https://www.eclipse.org/aspectj/doc/next/progguide/index.html">AspectJ编程指南</a> 的 <a href="https://www.eclipse.org/aspectj/doc/next/progguide/semantics-joinPoints.html">附录</a> 中找到关于 AspectJ 中各种切点类型语言语义的更多信息。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>For this to work the annotated types must be woven with the AspectJ weaver - you can
-either use a build-time Ant or Maven task to do this (see for example the
-<a href="https://www.eclipse.org/aspectj/doc/released/devguide/antTasks.html">AspectJ Development
-Environment Guide</a>) or load-time weaving (see <a href="#aop-aj-ltw">Load-time weaving with AspectJ in the Spring Framework</a>). The
-<code>AnnotationBeanConfigurerAspect</code> itself needs configuring by Spring (in order to obtain
-a reference to the bean factory that is to be used to configure new objects). If you are
-using Java based configuration simply add <code>@EnableSpringConfigured</code> to any
-<code>@Configuration</code> class.</p>
+<p>为此，注解类型必须与 AspectJ 织入器交织在一起 - 你可以使用构建时的Ant 或 Maven 任务来执行此操作（参阅<a href="https://www.eclipse.org/aspectj/doc/released/devguide/antTasks.html">AspectJ开发环境指南</a>）或加载时织入（参阅 <a href="#aop-aj-ltw">在 Spring 框架中的使用AspectJ 加载时织入</a>）。<code>AnnotationBeanConfigurerAspect</code> 本身需要由 Spring 进行配置（为了获得对用来配置新对象的bean 工厂的引用）。如果你使用基于 Java 的配置，只需将 <code>@EnableSpringConfigured</code> 添加到任何 <code>@Configuration</code> 类。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14002,7 +13941,7 @@ using Java based configuration simply add <code>@EnableSpringConfigured</code> t
 </div>
 </div>
 <div class="paragraph">
-<p>If you prefer XML based configuration, the Spring <a href="appendix.html#xsd-config-body-schemas-context"><code>context</code> namespace</a> defines a convenient <code>context:spring-configured</code> element:</p>
+<p>如果你更倾向于使用基于 XML 的配置，Spring <a href="appendix.html#xsd-config-body-schemas-context"><code>context</code> 命名空间</a> 定义了一个方便的<code>context:spring-configured</code> 元素：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14010,12 +13949,7 @@ using Java based configuration simply add <code>@EnableSpringConfigured</code> t
 </div>
 </div>
 <div class="paragraph">
-<p>Instances of <code>@Configurable</code> objects created <em>before</em> the aspect has been configured
-will result in a message being issued to the debug log and no configuration of the
-object taking place. An example might be a bean in the Spring configuration that creates
-domain objects when it is initialized by Spring. In this case you can use the
-"depends-on" bean attribute to manually specify that the bean depends on the
-configuration aspect.</p>
+<p>在配置切面之前创建的 <code>@Configurable</code> 对象实例将会向调试日志发送信息，并且不会发生对该对象的配置。一个例子是当被 Spring 初始化时，Spring 配置中的创建域对象的 bean。在这个例子中，你可以使用“depends-on” bean 特性来手动指定该 bean 依赖于配置切面。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14036,85 +13970,45 @@ configuration aspect.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Do not activate <code>@Configurable</code> processing through the bean configurer aspect unless you
-really mean to rely on its semantics at runtime. In particular, make sure that you do
-not use <code>@Configurable</code> on bean classes which are registered as regular Spring beans
-with the container: You would get double initialization otherwise, once through the
-container and once through the aspect.</p>
+<p>除非你真的想在运行时依赖它的语义，否则不要通过 bean 配置器切面激活 <code>@Configurable</code> 处理。尤其是你要确保你没有对在容器中注册为普通 Spring bean 的 Bean 类使用<code>@Configurable</code> ：否则会执行两次初始化，，一次通过容器，一次通过切面。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect4">
-<h5 id="aop-configurable-testing"><a class="anchor" href="#aop-configurable-testing"></a>Unit testing @Configurable objects</h5>
+<h5 id="aop-configurable-testing"><a class="anchor" href="#aop-configurable-testing"></a> @Configurable 对象的单元测试</h5>
 <div class="paragraph">
-<p>One of the goals of the <code>@Configurable</code> support is to enable independent unit testing of
-domain objects without the difficulties associated with hard-coded lookups. If
-<code>@Configurable</code> types have not been woven by AspectJ then the annotation has no affect
-during unit testing, and you can simply set mock or stub property references in the
-object under test and proceed as normal. If <code>@Configurable</code> types <em>have</em> been woven by
-AspectJ then you can still unit test outside of the container as normal, but you will
-see a warning message each time that you construct an <code>@Configurable</code> object indicating
-that it has not been configured by Spring.</p>
+<p><code>@Configurable</code> 支持的目标之一就是支持域对象的独立单元测试而不会遇到与硬编码查找相关的问题。如果 <code>@Configurable</code> 类型没有通过 AspectJ 织入，那么注解在单元测试中没有任何影响，你只要在被测对象中设置 mock 或 stub 属性引用，并照常执行。如果 <code>@Configurable</code> 类型已经通过 AspectJ 织入，那么你仍然可以像平常一样在容器的外部进行单元测试，但是每当你构造一个 <code>@Configurable</code> 对象时，你都会看到一条警告消息指出它没有被 Spring 配置。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-configurable-container"><a class="anchor" href="#aop-configurable-container"></a>Working with multiple application contexts</h5>
+<h5 id="aop-configurable-container"><a class="anchor" href="#aop-configurable-container"></a>使用多个应用程序上下文</h5>
 <div class="paragraph">
-<p>The <code>AnnotationBeanConfigurerAspect</code> used to implement the <code>@Configurable</code> support is an
-AspectJ singleton aspect. The scope of a singleton aspect is the same as the scope of
-<code>static</code> members, that is to say there is one aspect instance per classloader that
-defines the type. This means that if you define multiple application contexts within the
-same classloader hierarchy you need to consider where to define the
-<code>@EnableSpringConfigured</code> bean and where to place <code>spring-aspects.jar</code> on the classpath.</p>
+<p>用于实现 <code>@Configurable</code> 支持的 <code>AnnotationBeanConfigurerAspect</code> 是一个 AspectJ 单例切面。单例切面的作用域与 <code>static</code> 成员的作用域相同，也就是说每个类加载器有一个定义类型的且面实例。这意味着如果在相同的类加载器层次结构中定义多个应用程序上下文，则需要考虑在何处定义<code>@EnableSpringConfigured</code> 以及将 <code>spring-aspects.jar</code> 放置在类路径中的何处。</p>
 </div>
 <div class="paragraph">
-<p>Consider a typical Spring web-app configuration with a shared parent application context
-defining common business services and everything needed to support them, and one child
-application context per servlet containing definitions particular to that servlet. All
-of these contexts will co-exist within the same classloader hierarchy, and so the
-<code>AnnotationBeanConfigurerAspect</code> can only hold a reference to one of them. In this case
-we recommend defining the <code>@EnableSpringConfigured</code> bean in the shared (parent)
-application context: this defines the services that you are likely to want to inject
-into domain objects. A consequence is that you cannot configure domain objects with
-references to beans defined in the child (servlet-specific) contexts using the
-@Configurable mechanism (probably not something you want to do anyway!).</p>
+<p>考虑一个典型的Spring Web
+   应用程序配置，其中包含一个共享的父应用程序上下文，它定义了公用 business servsisce 以及支持它们的所有东西，以及一个子应用程序上下文，对应每个包含定义的 servlet 。所有这些上下文将在同一个类加载器层次结构中共存，因此 <code>AnnotationBeanConfigurerAspect</code> 只能拥有对其中一个的引用。在这种情况下，我们建议在共享（父）应用程序上下文中定义 <code>@EnableSpringConfigured</code> bean：这定义了你可能希望注入到域对象中的服务。结果是，你不能使用 @Configurable 机制（可能不是你想要的东西！）来对在子（与 servlet 关连的）上下文中配置中定义的 bean 引用配置域对象。</p>
 </div>
 <div class="paragraph">
-<p>When deploying multiple web-apps within the same container, ensure that each
-web-application loads the types in <code>spring-aspects.jar</code> using its own classloader (for
-example, by placing <code>spring-aspects.jar</code> in <code>'WEB-INF/lib'</code>). If <code>spring-aspects.jar</code> is
-only added to the container wide classpath (and hence loaded by the shared parent
-classloader), all web applications will share the same aspect instance which is probably
-not what you want.</p>
+<p>在同一容器中部署多个 web 应用程序时，请确保每个web应用程序使用自己的类加载器加载 <code>spring-aspects.jar</code> 中的类型（例如，将 <code>spring-aspects.jar</code> 放在 <code>'WEB-INF/lib'</code> 中）。如果 <code>spring-aspects.jar</code> 仅添加到容器范围的类路径（因此由共享的父类加载器加载），则所有 Web 应用程序将共享相同的切面实例，这可能不是您想要的。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-ajlib-other"><a class="anchor" href="#aop-ajlib-other"></a>5.8.2. Other Spring aspects for AspectJ</h4>
+<h4 id="aop-ajlib-other"><a class="anchor" href="#aop-ajlib-other"></a>5.8.2.  AspectJ 的其他 Spring 切面</h4>
 <div class="paragraph">
-<p>In addition to the <code>@Configurable</code> aspect, <code>spring-aspects.jar</code> contains an AspectJ
-aspect that can be used to drive Spring&#8217;s transaction management for types and methods
-annotated with the <code>@Transactional</code> annotation. This is primarily intended for users who
-want to use the Spring Framework&#8217;s transaction support outside of the Spring container.</p>
+<p>除了 <code>@Configurable</code> 切面，<code>spring-aspects.jar</code>  还包含一个 AspectJ 切面，用来驱动 Spring 对带有 <code>@Transactional</code> 注解的类型和方法进行事务管理。这主要是为那些希望在 Spring 容器之外使用Spring 框架的事务支持的用户而设计的。</p>
 </div>
 <div class="paragraph">
-<p>The aspect that interprets <code>@Transactional</code> annotations is the
-<code>AnnotationTransactionAspect</code>. When using this aspect, you must annotate the
-<em>implementation</em> class (and/or methods within that class), <em>not</em> the interface (if
-any) that the class implements. AspectJ follows Java&#8217;s rule that annotations on
-interfaces are <em>not inherited</em>.</p>
+<p><code>AnnotationTransactionAspect</code> 切面是用来翻译 <code>@Transactional</code> 注解的。当使用这个切面时，你必须在实现类（且/或实现类中的方法）上添加注解，而不是在实现类实现的接口（如果有的话）上添加注解。AspectJ 遵循 Java 的规则，也就是接口上的注解是不能被继承的。</p>
 </div>
 <div class="paragraph">
-<p>A <code>@Transactional</code> annotation on a class specifies the default transaction semantics for
-the execution of any <em>public</em> operation in the class.</p>
+<p>类上的 <code>@Transactional</code> 注解为类中任意 <em>public</em> 方法指定了一个默认的事务管理语义。</p>
 </div>
 <div class="paragraph">
-<p>A <code>@Transactional</code> annotation on a method within the class overrides the default
-transaction semantics given by the class annotation (if present). Methods of any
-visibility may be annotated, including private methods. Annotating non-public methods
-directly is the only way to get transaction demarcation for the execution of such methods.</p>
+<p>类中方法上的 <code>@Transactional</code> 注解覆盖了类注解（如果存在）给定的默认事务管理语义。任何可见的方法都可以被注解，包括 private 方法。直接对非 public 方法进行注解是获取这些方法执行的事务划分的唯一方法。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -14124,23 +14018,14 @@ directly is the only way to get transaction demarcation for the execution of suc
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Since Spring Framework 4.2, <code>spring-aspects</code> provides a similar aspect that offers the
-exact same features for the standard <code>javax.transaction.Transactional</code> annotation. Check
-<code>JtaAnnotationTransactionAspect</code> for more details.</p>
+<p>自 Spring Framework 4.2 以来，<code>spring-aspects</code> 提供了一个类似于为标准的 <code>javax.transaction.Transactional</code> 注解提供完全相同的功能的切面。查看 <code>JtaAnnotationTransactionAspect</code> 获取更多细节。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>For AspectJ programmers that want to use the Spring configuration and transaction
-management support but don&#8217;t want to (or cannot) use annotations, <code>spring-aspects.jar</code>
-also contains <code>abstract</code> aspects you can extend to provide your own pointcut
-definitions. See the sources for the <code>AbstractBeanConfigurerAspect</code> and
-<code>AbstractTransactionAspect</code> aspects for more information. As an example, the following
-excerpt shows how you could write an aspect to configure all instances of objects
-defined in the domain model using prototype bean definitions that match the
-fully-qualified class names:</p>
+<p>对于那些希望使用 Spring 配置和事务管理支持但不希望（或不能）使用注解的 AspectJ 程序员，<code>spring-aspects.jar</code> 还包含可以扩展以提供自己的切点定义的抽象切面。 有关更多信息，请参阅 <code>AbstractBeanConfigurerAspect</code> 和<code>AbstractTransactionAspect</code> 切面的源代码。作为一个例子，以下摘录展示了如何使用与完全限定的类名匹配的原型 bean 定义来编写切面，以配置域模型中定义的所有对象实例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14161,20 +14046,12 @@ fully-qualified class names:</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-aj-configure"><a class="anchor" href="#aop-aj-configure"></a>5.8.3. Configuring AspectJ aspects using Spring IoC</h4>
+<h4 id="aop-aj-configure"><a class="anchor" href="#aop-aj-configure"></a>5.8.3. 使用 Spring IoC 配置 AspectJ 切面</h4>
 <div class="paragraph">
-<p>When using AspectJ aspects with Spring applications, it is natural to both want and
-expect to be able to configure such aspects using Spring. The AspectJ runtime itself is
-responsible for aspect creation, and the means of configuring the AspectJ created
-aspects via Spring depends on the AspectJ instantiation model (the <code>per-xxx</code> clause)
-used by the aspect.</p>
+<p>在 Spring 应用程序中使用 AspectJ 切面的时候，希望和期望能够使用 Spring 来配置这些切面是很自然的。AspectJ 运行时本身负责创建切面，且通过 Spring 配置 AspectJ 创建的切面的方法取决于切面使用的 AspectJ 实例化模型（per-xxx子句）。</p>
 </div>
 <div class="paragraph">
-<p>The majority of AspectJ aspects are <em>singleton</em> aspects. Configuration of these
-aspects is very easy: simply create a bean definition referencing the aspect type as
-normal, and include the bean attribute <code>'factory-method="aspectOf"'</code>. This ensures that
-Spring obtains the aspect instance by asking AspectJ for it rather than trying to create
-an instance itself. For example:</p>
+<p>AspectJ 的大多数切面都是单例切面。这些切面的配置非常简单：只需简单地创建一个引用切面类型的 bean 定义，并包含一个 bean 特性 <code>'factory-method="aspectOf"'</code>。这确保了 Spring 通过询问AspectJ 来获得切面实例，而不是试图创建一个实例本身。例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14186,21 +14063,10 @@ an instance itself. For example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Non-singleton aspects are harder to configure: however it is possible to do so by
-creating prototype bean definitions and using the <code>@Configurable</code> support from
-<code>spring-aspects.jar</code> to configure the aspect instances once they have bean created by
-the AspectJ runtime.</p>
+<p>非单例切面的配置比较困难：但是，一旦切面实例被 AspectJ 运行时创建，通过创建原型 bean 定义并使用 <code>spring-aspects.jar</code> 中的 <code>@Configurable</code> 支持来配置切面实例是可能的。</p>
 </div>
 <div class="paragraph">
-<p>If you have some @AspectJ aspects that you want to weave with AspectJ (for example,
-using load-time weaving for domain model types) and other @AspectJ aspects that you want
-to use with Spring AOP, and these aspects are all configured using Spring, then you will
-need to tell the Spring AOP @AspectJ autoproxying support which exact subset of the
-@AspectJ aspects defined in the configuration should be used for autoproxying. You can
-do this by using one or more <code>&lt;include/&gt;</code> elements inside the <code>&lt;aop:aspectj-autoproxy/&gt;</code>
-declaration. Each <code>&lt;include/&gt;</code> element specifies a name pattern, and only beans with
-names matched by at least one of the patterns will be used for Spring AOP autoproxy
-configuration:</p>
+<p>如果您想要使用 AspectJ 编写一些 @AspectJ 切面（例如，为域模型类型使用 load-time 织入）或者你希望与 Spring AOP 一起使用的其他 @AspectJ 切面，并且这些切面都使用 Spring 进行配置 ，那么你需要告诉 Spring AOP @AspectJ 自动代理支持，在配置中定义的 @AspectJ 切面的哪个确切子集应该用于自动代理。你可以通过在<code>&lt;aop:aspectj-autoproxy/&gt;</code> 声明中使用一个或多个 <code>&lt;include/&gt;</code> 元素来完成此操作。每个 <code>&lt;include/&gt;</code> 元素指定一个命名模式，并且只有名字与至少一个模式相匹配的 bean 才会用于Spring AOP 的自动代理配置：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14218,9 +14084,7 @@ configuration:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Do not be misled by the name of the <code>&lt;aop:aspectj-autoproxy/&gt;</code> element: using it will
-result in the creation of <em>Spring AOP proxies</em>. The @AspectJ style of aspect
-declaration is just being used here, but the AspectJ runtime is <em>not</em> involved.</p>
+<p>不要被 <code>&lt;aop:aspectj-autoproxy/&gt;</code> 元素的名字误导：使用它将导致 Spring AOP 代理的创建。@AspectJ 风格切面声明也只用在这里，但 AspectJ 运行时不会被包含。</p>
 </div>
 </td>
 </tr>
@@ -14228,51 +14092,23 @@ declaration is just being used here, but the AspectJ runtime is <em>not</em> inv
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-aj-ltw"><a class="anchor" href="#aop-aj-ltw"></a>5.8.4. Load-time weaving with AspectJ in the Spring Framework</h4>
+<h4 id="aop-aj-ltw"><a class="anchor" href="#aop-aj-ltw"></a>5.8.4. 在 Spring 框架中使用 AspectJ Load-time 织入</h4>
 <div class="paragraph">
-<p>Load-time weaving (LTW) refers to the process of weaving AspectJ aspects into an
-application&#8217;s class files as they are being loaded into the Java virtual machine (JVM).
-The focus of this section is on configuring and using LTW in the specific context of the
-Spring Framework: this section is not an introduction to LTW though. For full details on
-the specifics of LTW and configuring LTW with just AspectJ (with Spring not being
-involved at all), see the
-<a href="https://www.eclipse.org/aspectj/doc/released/devguide/ltw.html">LTW section of the AspectJ
-Development Environment Guide</a>.</p>
+<p>加载时织入（LTW）是指在将 AspectJ 切面加载到 Java 虚拟机（JVM）中时将 AspectJ 切面织入到应用程序的类文件中的过程。本节的重点是在 Spring 框架的特定上下文中配置和使用 LTW：本节不是对 LTW 的介绍。有关 LTW 细节的详细信息以及仅使用 AspectJ 配置 LTW（Spring 完全不参与），请参阅<a href="https://www.eclipse.org/aspectj/doc/released/devguide/ltw.html"> AspectJ 开发环境指南的 LTW 部分</a>。</p>
 </div>
 <div class="paragraph">
-<p>The value-add that the Spring Framework brings to AspectJ LTW is in enabling much
-finer-grained control over the weaving process. 'Vanilla' AspectJ LTW is effected using
-a Java (5+) agent, which is switched on by specifying a VM argument when starting up a
-JVM. It is thus a JVM-wide setting, which may be fine in some situations, but often is a
-little too coarse. Spring-enabled LTW enables you to switch on LTW on a
-<em>per-ClassLoader</em> basis, which obviously is more fine-grained and which can make more
-sense in a 'single-JVM-multiple-application' environment (such as is found in a typical
-application server environment).</p>
+<p>Spring 框架为 AspectJ LTW 带来的附加价值是对织入过程进行更细粒度的控制。‘Vanilla’ AspectJ LTW 是使用 Java（5+）代理实现的，该代理在启动 JVM 时通过指定VM参数来开启。因此，这是一个JVM 域的设置，在某些情况下可能是 OK 的，但通常有点过于粗糙。启用 Spring 的 LTW 使你能够基于每个类加载器开启 LTW，这显然是更细粒度的控制，并且在“单JVM-多应用”环境中可以更有意义（例如在典型的应用服务器环境）。</p>
 </div>
 <div class="paragraph">
-<p>Further, <a href="#aop-aj-ltw-environments">in certain environments</a>, this support enables
-load-time weaving <em>without making any modifications to the application server&#8217;s launch
-script</em> that will be needed to add <code>-javaagent:path/to/aspectjweaver.jar</code> or (as we
-describe later in this section)
-<code>-javaagent:path/to/org.springframework.instrument-{version}.jar</code> (previously named
-<code>spring-agent.jar</code>). Developers simply modify one or more files that form the
-application context to enable load-time weaving instead of relying on administrators who
-typically are in charge of the deployment configuration such as the launch script.</p>
+<p>而且，<a href="#aop-aj-ltw-environments">在某些环境中</a>，这种支持可以在 <em>不修改应用服务器启动脚本</em> 的情况下进行加载时织入，修改脚本需要添加 <code>-javaagent:path/to/aspectjweaver.jar</code> 或（如本节后面所述）<code>-javaagent:path/to/org.springframework.instrument-{version}.jar</code>（以前称为 <code>spring-agent.jar</code>）。开发人员只需修改构成应用程序上下文的一个或多个文件，以启用加载时织入，而不是依赖通常负责部署配置（如启动脚本）的管理员。</p>
 </div>
 <div class="paragraph">
-<p>Now that the sales pitch is over, let us first walk through a quick example of AspectJ
-LTW using Spring, followed by detailed specifics about elements introduced in the
-following example. For a complete example, please see the
-<a href="https://github.com/spring-projects/spring-petclinic">Petclinic sample application</a>.</p>
+<p>现在安利（推销哈哈）部分结束，让我们先来看一下使用 Spring 的 AspectJ LTW 的一个简单例子，然后详细介绍下面例子中介绍的元素。有关完整示例，请参阅 <a href="https://github.com/spring-projects/spring-petclinic">Petclinic 示例应用程序</a>。</p>
 </div>
 <div class="sect4">
-<h5 id="aop-aj-ltw-first-example"><a class="anchor" href="#aop-aj-ltw-first-example"></a>A first example</h5>
+<h5 id="aop-aj-ltw-first-example"><a class="anchor" href="#aop-aj-ltw-first-example"></a>第一个示例</h5>
 <div class="paragraph">
-<p>Let us assume that you are an application developer who has been tasked with diagnosing
-the cause of some performance problems in a system. Rather than break out a profiling
-tool, what we are going to do is switch on a simple profiling aspect that will enable us
-to very quickly get some performance metrics, so that we can then apply a finer-grained
-profiling tool to that specific area immediately afterwards.</p>
+<p>假设你是应用程序开发人员，负责诊断系统中某些性能问题的原因。我们要做的就是打开一个简单的 profiling 切面，而不是开发一个 profiling 工具，这将使我们能够很快得到一些性能指标，以便我们能够之后立即将更细粒度的剖析工具应用到特定的区域。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -14282,18 +14118,14 @@ profiling tool to that specific area immediately afterwards.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The example presented here uses XML style configuration, it is also possible to
-configure and use @AspectJ with <a href="#beans-java">Java Configuration</a>.
-Specifically the <code>@EnableLoadTimeWeaving</code> annotation can be used as an alternative to
-<code>&lt;context:load-time-weaver/&gt;</code> (see <a href="#aop-aj-ltw-spring">below</a> for details).</p>
+<p>这里呈现的示例使用 XML 风格的配置，你也可以使用 <a href="#beans-java">Java 配置</a> 来配置和使用 @AspectJ。具体来说，<code>@EnableLoadTimeWeaving</code> 注解可以用来替代 <code>&lt;context:load-time-weaver/&gt;</code>（详见 <a href="#aop-aj-ltw-spring">下文</a>）。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Here is the profiling aspect. Nothing too fancy, just a quick-and-dirty time-based
-profiler, using the @AspectJ-style of aspect declaration.</p>
+<p>下面是一个 profiling 切面。没有太花哨的东西，只是一个快速和简陋的基于时间的剖析器，使用 @AspectJ 风格的切面声明 。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14327,10 +14159,7 @@ profiler, using the @AspectJ-style of aspect declaration.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>We will also need to create an <code>META-INF/aop.xml</code> file, to inform the AspectJ weaver
-that we want to weave our <code>ProfilingAspect</code> into our classes. This file convention,
-namely the presence of a file (or files) on the Java classpath called
-<code>META-INF/aop.xml</code> is standard AspectJ.</p>
+<p>我们还需要创建一个 <code>META-INF/aop.xml</code> 文件，来通知 AspectJ 织入者我们要将我们的 <code>ProfilingAspect</code> 织入到我们的类中。 这个文件约定，即名为 <code>META-INF/aop.xml</code> 的 Java 类路径上的文件（或多个文件）的存在代表是标准的 AspectJ。/p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14351,12 +14180,7 @@ namely the presence of a file (or files) on the Java classpath called
 </div>
 </div>
 <div class="paragraph">
-<p>Now to the Spring-specific portion of the configuration. We need to configure a
-<code>LoadTimeWeaver</code> (all explained later, just take it on trust for now). This load-time
-weaver is the essential component responsible for weaving the aspect configuration in
-one or more <code>META-INF/aop.xml</code> files into the classes in your application. The good
-thing is that it does not require a lot of configuration, as can be seen below (there
-are some more options that you can specify, but these are detailed later).</p>
+<p>现在轮到配置的 Spring 相关部分。我们需要配置一个 <code>LoadTimeWeaver</code>（所有相关的东西都会在后面解释，现在只要知道这么配置就行）。该加载时织入器是负责将一个或多个 <code>META-INF/aop.xml</code> 文件中的切面配置织入到应用程序中的类的基本组件。 好消息是它不需要很多配置，如下所示（还有一些选项可以指定，稍后会详细介绍）。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14380,9 +14204,7 @@ are some more options that you can specify, but these are detailed later).</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Now that all the required artifacts are in place - the aspect, the <code>META-INF/aop.xml</code>
-file, and the Spring configuration -, let us create a simple driver class with a
-<code>main(..)</code> method to demonstrate the LTW in action.</p>
+<p>现在，所有必需的构件（<code>META-INF/aop.xml</code> 文件和 Spring 配置）都已准备就绪，让我们使用 <code>main(..)</code> 方法创建一个简单的驱动程序类，以演示 LTW 的实际应用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14406,10 +14228,7 @@ file, and the Spring configuration -, let us create a simple driver class with a
 </div>
 </div>
 <div class="paragraph">
-<p>There is one last thing to do. The introduction to this section did say that one could
-switch on LTW selectively on a per- <code>ClassLoader</code> basis with Spring, and this is true.
-However, just for this example, we are going to use a Java agent (supplied with Spring)
-to switch on the LTW. This is the command line we will use to run the above <code>Main</code> class:</p>
+<p>最后还有一件事要做。本节的介绍确实表明，可以使用 Spring 基于每个类加载器选择性地切换 LTW，而且事实确实如此。但是，就这个例子而言，我们将使用 Java 代理（由Spring提供）来开启 LTW。这是我们将用来运行上面的<code>Main</code> 类的命令行：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -14417,18 +14236,10 @@ to switch on the LTW. This is the command line we will use to run the above <cod
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>-javaagent</code> is a flag for specifying and enabling
-<a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">agents
-to instrument programs running on the JVM</a>. The Spring Framework ships with such an
-agent, the <code>InstrumentationSavingAgent</code>, which is packaged in the
-<code>spring-instrument.jar</code> that was supplied as the value of the <code>-javaagent</code> argument in
-the above example.</p>
+<p><code>-javaagent</code> 是一个用于指定和启用 <a href="http://docs.oracle.com/javase/6/docs/api/java/lang/instrument/package-summary.html">运行在 JVM 上的工具程序的代理</a> 的标志。Spring 框架附带了一个代理 <code>InstrumentationSavingAgent</code> ，该代理作为上述示例中 <code>-javaagent</code> 参数的值被打包在 <code>spring-instrument.jar</code>中。</p>
 </div>
 <div class="paragraph">
-<p>The output from the execution of the <code>Main</code> program will look something like that below.
-(I have introduced a <code>Thread.sleep(..)</code> statement into the <code>calculateEntitlement()</code>
-implementation so that the profiler actually captures something other than 0
-milliseconds - the <code>01234</code> milliseconds is <em>not</em> an overhead introduced by the AOP :) )</p>
+<p><code>Main</code> 程序执行的输出结果如下所示。（我已经在 <code>calculateEntitlement()</code> 实现中引入了 <code>Thread.sleep(..)</code> 表达式，以便 profiler 实际上捕获非 0 毫秒数的内容 - <code>01234</code> 毫秒不是 AOP 的开销时间:)）</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -14442,9 +14253,7 @@ ms     %     Task name
 </div>
 </div>
 <div class="paragraph">
-<p>Since this LTW is effected using full-blown AspectJ, we are not just limited to advising
-Spring beans; the following slight variation on the <code>Main</code> program will yield the same
-result.</p>
+<p>由于这个 LTW 是通过使用成熟的 AspectJ 来实现的，所以我们不仅仅限于可以通知 Spring beans，<code>Main</code> 程序中的下列细微变化将产生相同的结果。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14468,14 +14277,10 @@ result.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Notice how in the above program we are simply bootstrapping the Spring container, and
-then creating a new instance of the <code>StubEntitlementCalculationService</code> totally outside
-the context of Spring&#8230;&#8203; the profiling advice still gets woven in.</p>
+<p>注意，在上面的程序中，我们只是简单地启动了 Spring 容器，然后在 Spring 的上下文之外创建了 <code>StubEntitlementCalculationService</code> 的新实例...prifiling 通知仍然被织入了。</p>
 </div>
 <div class="paragraph">
-<p>The example admittedly is simplistic&#8230;&#8203; however the basics of the LTW support in Spring
-have all been introduced in the above example, and the rest of this section will explain
-the 'why' behind each bit of configuration and usage in detail.</p>
+<p>不可否认这个例子很简单...但是 LTW 支持的基础知识都已经包含在上面的例子中了，本节的其余部分将详细解释每一个配置和用法的背后的理由。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -14485,10 +14290,7 @@ the 'why' behind each bit of configuration and usage in detail.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The <code>ProfilingAspect</code> used in this example may be basic, but it is quite useful. It is a
-nice example of a development-time aspect that developers can use during development (of
-course), and then quite easily exclude from builds of the application being deployed
-into UAT or production.</p>
+<p>本例中使用的 <code>ProfilingAspect</code> 可能很基础，但是却非常有用。 这是开发人员在开发过程中（很显然）可以使用的开发时切面的一个很好的例子，然后很容易在部署到 UAT 或生产中的应用程序的构建中将其排除。</p>
 </div>
 </td>
 </tr>
@@ -14496,50 +14298,37 @@ into UAT or production.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-aj-ltw-the-aspects"><a class="anchor" href="#aop-aj-ltw-the-aspects"></a>Aspects</h5>
+<h5 id="aop-aj-ltw-the-aspects"><a class="anchor" href="#aop-aj-ltw-the-aspects"></a>切面</h5>
 <div class="paragraph">
-<p>The aspects that you use in LTW have to be AspectJ aspects. They can be written in
-either the AspectJ language itself or you can write your aspects in the @AspectJ-style.
-It means that your aspects are then both valid AspectJ <em>and</em> Spring AOP aspects.
-Furthermore, the compiled aspect classes need to be available on the classpath.</p>
+<p>您在 LTW 中使用的切面必须是 AspectJ 切面。它们可以用 AspectJ 语言本身编写，也可以用 @AspectJ 风格编写。这意味着你的切面是有效的 AspectJ 和 Spring AOP 切面。而且，编译的切面类需要在类路径中可用</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="aop-aj-ltw-aop_dot_xml"><a class="anchor" href="#aop-aj-ltw-aop_dot_xml"></a>'META-INF/aop.xml'</h5>
 <div class="paragraph">
-<p>The AspectJ LTW infrastructure is configured using one or more <code>META-INF/aop.xml</code>
-files, that are on the Java classpath (either directly, or more typically in jar files).</p>
+<p>AspectJ LTW 基础结构使用一个或多个 <code>META-INF/aop.xml</code> 文件进行配置，这些文件位于 Java 类路径上（直接或者通常在 jar 文件中）。</p>
 </div>
 <div class="paragraph">
-<p>The structure and contents of this file is detailed in the main AspectJ reference
-documentation, and the interested reader is
-<a href="https://www.eclipse.org/aspectj/doc/released/devguide/ltw-configuration.html">referred to
-that resource</a>. (I appreciate that this section is brief, but the <code>aop.xml</code> file is
-100% AspectJ - there is no Spring-specific information or semantics that apply to it,
-and so there is no extra value that I can contribute either as a result), so rather than
-rehash the quite satisfactory section that the AspectJ developers wrote, I am just
-directing you there.)</p>
+<p>这个文件的结构和内容在主要的 AspectJ 参考文档中详细介绍，感兴趣的读者可以参考 <a href="https://www.eclipse.org/aspectj/doc/released/devguide/ltw-configuration.html">这个资源</a>。 （这个部分很简短，但 <code>aop.xml</code> 文件是 100％ 的 AspectJ - 没有与 Spring 相关的信息或语义适用于它，所以没有额外的价值拿来贡献，所以相比于 AspectJ 开发人员写的相当满意的部分改头换面，我们只是带你领进门。）</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-aj-ltw-libraries"><a class="anchor" href="#aop-aj-ltw-libraries"></a>Required libraries (JARS)</h5>
+<h5 id="aop-aj-ltw-libraries"><a class="anchor" href="#aop-aj-ltw-libraries"></a>必须的库 （JARS）</h5>
 <div class="paragraph">
-<p>At a minimum you will need the following libraries to use the Spring Framework&#8217;s support
-for AspectJ LTW:</p>
+<p>要使用Spring 框架对 AspectJ LTW 的支持，你至少需要以下库：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>spring-aop.jar</code> (version 2.5 or later, plus all mandatory dependencies)</p>
+<p><code>spring-aop.jar</code> （2.5 及之后的版本，加上所有强制必须的依赖项）</p>
 </li>
 <li>
-<p><code>aspectjweaver.jar</code> (version 1.6.8 or later)</p>
+<p><code>aspectjweaver.jar</code> （1.6.8 及之后的版本）(version 1.6.8 or later)</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>If you are using the <a href="#aop-aj-ltw-environment-generic">Spring-provided agent to enable
-instrumentation</a>, you will also need:</p>
+<p>如果你正在使用 <a href="#aop-aj-ltw-environment-generic">Spring 提供的代理启动 instrumentation</a>，你还需要：</p>
 </div>
 <div class="ulist">
 <ul>
@@ -14550,14 +14339,9 @@ instrumentation</a>, you will also need:</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-aj-ltw-spring"><a class="anchor" href="#aop-aj-ltw-spring"></a>Spring configuration</h5>
+<h5 id="aop-aj-ltw-spring"><a class="anchor" href="#aop-aj-ltw-spring"></a>Spring 配置</h5>
 <div class="paragraph">
-<p>The key component in Spring&#8217;s LTW support is the <code>LoadTimeWeaver</code> interface (in the
-<code>org.springframework.instrument.classloading</code> package), and the numerous implementations
-of it that ship with the Spring distribution. A <code>LoadTimeWeaver</code> is responsible for
-adding one or more <code>java.lang.instrument.ClassFileTransformers</code> to a <code>ClassLoader</code> at
-runtime, which opens the door to all manner of interesting applications, one of which
-happens to be the LTW of aspects.</p>
+<p>Spring LTW 支持中的关键组件是 <code>LoadTimeWeaver</code> 接口（在 <code>org.springframework.instrument.classloading</code> 包中）以及 Spring 发行版附带的大量实现。<code>LoadTimeWeaver</code> 负责在运行时向 <code>ClassLoader</code> 添加一个或多个 <code>java.lang.instrument.ClassFileTransformers</code> ，这为所有感兴趣的的应用打开了大门，其中一个就是 LTW 切面。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -14567,25 +14351,17 @@ happens to be the LTW of aspects.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you are unfamiliar with the idea of runtime class file transformation, you are
-encouraged to read the javadoc API documentation for the <code>java.lang.instrument</code> package
-before continuing. This is not a huge chore because there is - rather annoyingly -
-precious little documentation there&#8230;&#8203; the key interfaces and classes will at least be
-laid out in front of you for reference as you read through this section.</p>
+<p>如果你不熟悉运行时类文件转换的思路，我们鼓励你在继续之前阅读 <code>java.lang.instrument</code>  包的 javadoc API 文档。这不是一件很麻烦的事情，因为在那里有 - 虽然有点烦人 -重要的小文档...哪里有很多关键的接口和类，至少在你阅读本节时可以参考。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Configuring a <code>LoadTimeWeaver</code> for a particular <code>ApplicationContext</code> can be as easy as
-adding one line. (Please note that you almost certainly will need to be using an
-<code>ApplicationContext</code> as your Spring container - typically a <code>BeanFactory</code> will not be
-enough because the LTW support makes use of <code>BeanFactoryPostProcessors</code>.)</p>
+<p>为特定的 <code>ApplicationContext</code> 配置 <code>LoadTimeWeaver</code> 可以像添加一行配置一样简单。（注意，你几乎肯定会需要使用 <code>ApplicationContext</code> 作为你的 Spring 容器 - 通常 <code>BeanFactory</code> 是满足需求的，因为 LTW 支持使用 <code>BeanFactoryPostProcessors</code>。）</p>
 </div>
 <div class="paragraph">
-<p>To enable the Spring Framework&#8217;s LTW support, you need to configure a <code>LoadTimeWeaver</code>,
-which typically is done using the <code>@EnableLoadTimeWeaving</code> annotation.</p>
+<p>要启用 Spring 框架的 LTW 支持，你需要配置一个 <code>LoadTimeWeaver</code>，通常使用 <code>@EnableLoadTimeWeaving</code> 注解完成。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14597,9 +14373,7 @@ which typically is done using the <code>@EnableLoadTimeWeaving</code> annotation
 </div>
 </div>
 <div class="paragraph">
-<p>Alternatively, if you prefer XML based configuration, use the
-<code>&lt;context:load-time-weaver/&gt;</code> element. Note that the element is defined in the
-<code>context</code> namespace.</p>
+<p>或者，如果你更喜欢基于 XML 的配置，可以使用 <code>&lt;context:load-time-weaver/&gt;</code> 元素。注意这个元素是在 <code>context</code> 命名空间中定义的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14619,12 +14393,7 @@ which typically is done using the <code>@EnableLoadTimeWeaving</code> annotation
 </div>
 </div>
 <div class="paragraph">
-<p>The above configuration will define and register a number of LTW-specific infrastructure
-beans for you automatically, such as a <code>LoadTimeWeaver</code> and an <code>AspectJWeavingEnabler</code>.
-The default <code>LoadTimeWeaver</code> is the <code>DefaultContextLoadTimeWeaver</code> class, which attempts
-to decorate an automatically detected <code>LoadTimeWeaver</code>: the exact type of
-<code>LoadTimeWeaver</code> that will be 'automatically detected' is dependent upon your runtime
-environment (summarized in the following table).</p>
+<p>上述配置将自动为ni 定义并注册一些 LTW 特定的基础结构 bean，例如 <code>LoadTimeWeaver</code> 和 <code>AspectJWeavingEnabler</code> 。默认的 <code>LoadTimeWeaver</code> 是 <code>DefaultContextLoadTimeWeaver</code> 类，它试图装饰一个自动检测到的 <code>LoadTimeWeaver</code>：将被 “自动检测到” 的 <code>LoadTimeWeaver</code> 的确切类型取决于你的运行时环境（总结在下表中）。</p>
 </div>
 <table id="aop-aj-ltw-spring-env-impls" class="tableblock frame-all grid-all spread">
 <caption class="title">Table 13. DefaultContextLoadTimeWeaver LoadTimeWeavers</caption>
@@ -14634,8 +14403,8 @@ environment (summarized in the following table).</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Runtime Environment</th>
-<th class="tableblock halign-left valign-top"><code>LoadTimeWeaver</code> implementation</th>
+<th class="tableblock halign-left valign-top">运行时环境</th>
+<th class="tableblock halign-left valign-top"><code>LoadTimeWeaver</code> 实现</th>
 </tr>
 </thead>
 <tbody>
@@ -14661,25 +14430,21 @@ environment (summarized in the following table).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>WebSphereLoadTimeWeaver</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JVM started with Spring <code>InstrumentationSavingAgent</code> <em>(java
+<td class="tableblock halign-left valign-top"><p class="tableblock">用 Spring <code>InstrumentationSavingAgent</code> 启动 JVM <em>(java
 -javaagent:path/to/spring-instrument.jar)</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>InstrumentationLoadTimeWeaver</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Fallback, expecting the underlying ClassLoader to follow common conventions (e.g.
-applicable to <code>TomcatInstrumentableClassLoader</code> and <a href="http://www.caucho.com/">Resin</a>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">降级，期望潜在的类加载器遵循通用约定（例如，适用于 <code>TomcatInstrumentableClassLoader</code> 和 <a href="http://www.caucho.com/">Resin</a>）</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ReflectiveLoadTimeWeaver</code></p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>Note that these are just the <code>LoadTimeWeavers</code> that are autodetected when using the
-<code>DefaultContextLoadTimeWeaver</code>: it is of course possible to specify exactly which
-<code>LoadTimeWeaver</code> implementation that you wish to use.</p>
+<p>注意这些只是使用 <code>DefaultContextLoadTimeWeaver</code> 时自动检测到的 <code>LoadTimeWeaver</code>：当然你可以指定希望使用哪个 <code>LoadTimeWeaver</code> 实现。</p>
 </div>
 <div class="paragraph">
-<p>To specify a specific <code>LoadTimeWeaver</code> with Java configuration implement the
-<code>LoadTimeWeavingConfigurer</code> interface and override the <code>getLoadTimeWeaver()</code> method:</p>
+<p>要使用 Java 配置指定特定的 <code>LoadTimeWeaver</code> 实现需要实现 <code>LoadTimeWeavingConfigurer</code> 接口并覆盖 <code>getLoadTimeWeaver()</code> 方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14695,9 +14460,7 @@ applicable to <code>TomcatInstrumentableClassLoader</code> and <a href="http://w
 </div>
 </div>
 <div class="paragraph">
-<p>If you are using XML based configuration you can specify the fully-qualified classname
-as the value of the <code>weaver-class</code> attribute on the <code>&lt;context:load-time-weaver/&gt;</code>
-element:</p>
+<p>如果你使用基于 XML 的配置，则可以在 <code>&lt;context:load-time-weaver/&gt;</code> 元素上指定完全限定的类名称作为 <code>weaver-class</code> 特性的值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14718,24 +14481,13 @@ element:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>LoadTimeWeaver</code> that is defined and registered by the configuration can be later
-retrieved from the Spring container using the well-known name <code>loadTimeWeaver</code>.
-Remember that the <code>LoadTimeWeaver</code> exists just as a mechanism for Spring&#8217;s LTW
-infrastructure to add one or more <code>ClassFileTransformers</code>. The actual
-<code>ClassFileTransformer</code> that does the LTW is the <code>ClassPreProcessorAgentAdapter</code> (from
-the <code>org.aspectj.weaver.loadtime</code> package) class. See the class-level javadocs of the
-<code>ClassPreProcessorAgentAdapter</code> class for further details, because the specifics of how
-the weaving is actually effected is beyond the scope of this section.</p>
+<p>由配置定义和注册的 <code>LoadTimeWeaver</code> 可以在以后著名的 <code>loadTimeWeaver</code> 名字从 Spring 容器中检索。记住，<code>LoadTimeWeaver</code> 只是作为 Spring 的 LTW 基础结构的机制来添加一个或多个 <code>ClassFileTransformer</code> 。执行 LTW 的实际 <code>ClassFileTransformer</code> 是 <code>ClassPreProcessorAgentAdapter</code>（来自 <code>org.aspectj.weaver.loadtime</code> 包）类。请参阅类级别的 <code>ClassPreProcessorAgentAdapter</code> 类的类级别 javadoc 以了解更多细节，因为实际上织入方式的具体细节超出了本节的范围。</p>
 </div>
 <div class="paragraph">
-<p>There is one final attribute of the configuration left to discuss: the
-<code>aspectjWeaving</code> attribute (or <code>aspectj-weaving</code> if you are using XML). This is a
-simple attribute that controls whether LTW is enabled or not; it is as simple as that.
-It accepts one of three possible values, summarized below, with the default value being
-<code>autodetect</code> if the attribute is not present.</p>
+<p>还有一个最后的配置特性需要讨论：<code>aspectjWeaving</code> 特性（如果使用XML，则为 <code>aspectj-weaving</code>）。这是特性控制是否启用 LTW; 它跟呈现的一样简单。它接受三个可能的值之一，总结如下，如果该属性不存在，则默认值为 <code>autodetect</code> 。</p>
 </div>
 <table id="aop-aj-ltw-ltw-tag-attrs" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 14. AspectJ weaving attribute values</caption>
+<caption class="title">Table 14. AspectJ 织入特性值</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -14743,45 +14495,39 @@ It accepts one of three possible values, summarized below, with the default valu
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Annotation Value</th>
-<th class="tableblock halign-left valign-top">XML Value</th>
-<th class="tableblock halign-left valign-top">Explanation</th>
+<th class="tableblock halign-left valign-top">注解</th>
+<th class="tableblock halign-left valign-top">XML 值</th>
+<th class="tableblock halign-left valign-top">解释</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ENABLED</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>on</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">AspectJ weaving is on, and aspects will be woven at load-time as appropriate.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AspectJ 织入已开启，切面会在加载时以适当的方式被织入。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>DISABLED</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>off</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LTW is off&#8230;&#8203; no aspect will be woven at load-time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LTW 已关闭，加载时不会有切面被织入。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>AUTODETECT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>autodetect</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If the Spring LTW infrastructure can find at least one <code>META-INF/aop.xml</code> file,
-then AspectJ weaving is on, else it is off. This is the default value.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">如果Spring LTW 基础结构可以找到至少一个 <code>META-INF/aop.xml</code> 文件，则 AspectJ 织入就处于打开状态，否则处于关闭状态。这是默认值。</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect4">
-<h5 id="aop-aj-ltw-environments"><a class="anchor" href="#aop-aj-ltw-environments"></a>Environment-specific configuration</h5>
+<h5 id="aop-aj-ltw-environments"><a class="anchor" href="#aop-aj-ltw-environments"></a>环境相关配置</h5>
 <div class="paragraph">
-<p>This last section contains any additional settings and configuration that you will need
-when using Spring&#8217;s LTW support in environments such as application servers and web
-containers.</p>
+<p>最后一部分包含在应用程序服务器和 Web 容器等环境中使用 Spring LTW 支持时所需的任何其他设置和配置</p>
 </div>
 <div class="sect5">
 <h6 id="aop-aj-ltw-environment-tomcat"><a class="anchor" href="#aop-aj-ltw-environment-tomcat"></a>Tomcat</h6>
 <div class="paragraph">
-<p>Historically, <a href="https://tomcat.apache.org/">Apache Tomcat</a>'s default class loader did not
-support class transformation which is why Spring provides an enhanced implementation
-that addresses this need. Named <code>TomcatInstrumentableClassLoader</code>, the loader works on
-Tomcat 6.0 and above.</p>
+<p>从历史上看，<a href="https://tomcat.apache.org/">Apache Tomcat</a> 的默认类加载器不支持类转换，这就是为什么 Spring 提供了一个增强的实现来满足这种需求的原因。这个实现名为 <code>TomcatInstrumentableClassLoader</code>，加载器在 Tomcat 6.0 及更高版本上运行。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -14791,27 +14537,22 @@ Tomcat 6.0 and above.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Do not define <code>TomcatInstrumentableClassLoader</code> anymore on Tomcat 8.0 and higher.
-Instead, let Spring automatically use Tomcat&#8217;s new native <code>InstrumentableClassLoader</code>
-facility through the <code>TomcatLoadTimeWeaver</code> strategy.</p>
+<p>不要在 Tomcat 8.0 及其更高版本上定义 <code>TomcatInstrumentableClassLoader</code>。 相反，让 Spring 通过 <code>TomcatLoadTimeWeaver</code> 策略自动使用 Tomcat 新的本地 <code>InstrumentableClassLoader</code> 工具。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If you still need to use <code>TomcatInstrumentableClassLoader</code>, it can be registered
-individually for <em>each</em> web application as follows:</p>
+<p>如果你仍然需要使用 <code>TomcatInstrumentableClassLoader</code>，则可以按照以下方式单独为每个Web 应用注册它：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Copy <code>org.springframework.instrument.tomcat.jar</code> into <em>$CATALINA_HOME</em>/lib, where
-<em>$CATALINA_HOME</em> represents the root of the Tomcat installation)</p>
+<p>将 <code>org.springframework.instrument.tomcat.jar</code> 复制到 <em>$CATALINA_HOME</em>/lib 中，其中 <em>$CATALINA_HOME</em> 表示 Tomcat 安装的根目录）</p>
 </li>
 <li>
-<p>Instruct Tomcat to use the custom class loader (instead of the default) by editing the
-web application context file:</p>
+<p>引导 Tomcat 通过编辑 Web 应用程序上下文文件来使用自定义类加载器（而不是默认的）：</p>
 </li>
 </ul>
 </div>
@@ -14824,56 +14565,40 @@ web application context file:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Apache Tomcat (6.0+) supports several context locations:</p>
+<p>Apache Tomcat（6.0+）支持多个上下文位置：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>server configuration file - <em>$CATALINA_HOME/conf/server.xml</em></p>
+<p>服务器配置文件 - <em>$CATALINA_HOME/conf/server.xml</em></p>
 </li>
 <li>
-<p>default context configuration - <em>$CATALINA_HOME/conf/context.xml</em> - that affects all
-deployed web applications</p>
+<p>默认的上下文配置 - <em>$CATALINA_HOME/conf/context.xml</em> - 影响所有部署的 Web 应用程序</p>
 </li>
 <li>
-<p>per-web application configuration which can be deployed either on the server-side at
-<em>$CATALINA_HOME/conf/[enginename]/[hostname]/[webapp]-context.xml</em> or embedded
-inside the web-app archive at <em>META-INF/context.xml</em></p>
+<p>per-web 应用程序配置，可以在服务端的
+<em>$CATALINA_HOME/conf/[enginename]/[hostname]/[webapp]-context.xml</em> 或者在嵌入的 web-app archive 的  <em>META-INF/context.xml</em> 中部署。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>For efficiency, the embedded per-web-app configuration style is recommended because it
-will impact only applications that use the custom class loader and does not require any
-changes to the server configuration. See the Tomcat 6.0.x
-<a href="https://tomcat.apache.org/tomcat-6.0-doc/config/context.html">documentation</a> for more
-details about available context locations.</p>
+<p>为了提高效率，建议使用嵌入式 Web 应用程序配置风格，因为它只会影响使用自定义类加载器的应用程序，并且不需要对服务器配置进行任何更改。有关可用上下文位置的更多详细信息，请参阅Tomcat 6.0.x <a href="https://tomcat.apache.org/tomcat-6.0-doc/config/context.html">文档</a>。</p>
 </div>
 <div class="paragraph">
-<p>Alternatively, consider the use of the Spring-provided generic VM agent, to be specified
-in Tomcat&#8217;s launch script (see above). This will make instrumentation available to all
-deployed web applications, no matter what ClassLoader they happen to run on.</p>
+<p>或者，考虑使用 Spring 提供的通用 VM 代理，在 Tomcat 的启动脚本中指定（参见上文）。这将使所有已部署的Web 应用程序都可以使用这些工具，且不管它们运行在哪个类加载器上。</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="aop-aj-ltw-environments-weblogic-oc4j-resin-glassfish-jboss"><a class="anchor" href="#aop-aj-ltw-environments-weblogic-oc4j-resin-glassfish-jboss"></a>WebLogic, WebSphere, Resin, GlassFish, JBoss</h6>
 <div class="paragraph">
-<p>Recent versions of WebLogic Server (version 10 and above), IBM WebSphere Application
-Server (version 7 and above), Resin (3.1 and above) and JBoss (6.x or above) provide a
-ClassLoader that is capable of local instrumentation. Spring&#8217;s native LTW leverages such
-ClassLoaders to enable AspectJ weaving. You can enable LTW by simply activating
-load-time weaving as described earlier. Specifically, you do <em>not</em> need to modify the
-launch script to add <code>-javaagent:path/to/spring-instrument.jar</code>.</p>
+<p> WebLogic Server（版本 10 及以上），IBM WebSphere Application
+Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及以上） 的最新版本提供了有能力进行本地检测的类加载器。Spring 的本地 LTW 利用这样的类加载器来启用 AspectJ 织入。，你只需过通过前面描述的方法就能激活加载时织入来启用 LTW。具体而言，你不需要修改启动脚本添加 <code>-javaagent:path/to/spring-instrument.jar</code>。</p>
 </div>
 <div class="paragraph">
-<p>Note that GlassFish instrumentation-capable ClassLoader is available only in its EAR
-environment. For GlassFish web applications, follow the Tomcat setup instructions as
-outlined above.</p>
+<p>注意 GlassFish 基础组件类加载器在它的 EAR 环境中可用。对于 GlassFish web 应用，遵循上面列出的 Tomcat 设置说明。</p>
 </div>
 <div class="paragraph">
-<p>Note that on JBoss 6.x, the app server scanning needs to be disabled to prevent it from
-loading the classes before the application actually starts. A quick workaround is to add
-to your artifact a file named <code>WEB-INF/jboss-scanning.xml</code> with the following content:</p>
+<p>注意在 JBoss 6.x 上，需要禁用应用服务器扫描以防止应用程序启动之前先加载类。一个快速的解决方法是在构建中添加一个名为 <code>WEB-INF/jboss-scanning.xml</code> 的文件，内容如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14882,17 +14607,12 @@ to your artifact a file named <code>WEB-INF/jboss-scanning.xml</code> with the f
 </div>
 </div>
 <div class="sect5">
-<h6 id="aop-aj-ltw-environment-generic"><a class="anchor" href="#aop-aj-ltw-environment-generic"></a>Generic Java applications</h6>
+<h6 id="aop-aj-ltw-environment-generic"><a class="anchor" href="#aop-aj-ltw-environment-generic"></a>通用 Java 应用</h6>
 <div class="paragraph">
-<p>When class instrumentation is required in environments that do not support or are not
-supported by the existing <code>LoadTimeWeaver</code> implementations, a JDK agent can be the only
-solution. For such cases, Spring provides <code>InstrumentationLoadTimeWeaver</code>, which
-requires a Spring-specific (but very general) VM agent,
-<code>org.springframework.instrument-{version}.jar</code> (previously named <code>spring-agent.jar</code>).</p>
+<p>不支持或者不被现有的 <code>LoadTimeWeaver</code> 实现支持的环境中需要类基础组件时，JDK 代理就是唯一的解决方案了。对于此类情况，Spring 提供了 <code>InstrumentationLoadTimeWeaver</code> ，它需要 Spring 相关的 VM 代理 <code>org.springframework.instrument-{version}.jar</code>（之前称为 <code>spring-agent.jar</code>）。</p>
 </div>
 <div class="paragraph">
-<p>To use it, you must start the virtual machine with the Spring agent, by supplying the
-following JVM options:</p>
+<p>要使用它，必须通过提供以下 JVM 选项来使用 Spring 代理启动虚拟机：</p>
 </div>
 <div class="literalblock">
 <div class="content">
@@ -14900,14 +14620,10 @@ following JVM options:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that this requires modification of the VM launch script which may prevent you from
-using this in application server environments (depending on your operation policies).
-Additionally, the JDK agent will instrument the <em>entire</em> VM which can prove expensive.</p>
+<p>注意，对 VM 启动脚本的修改可能会阻止你使用应用程序服务器环境（具体取决于您的操作策略）。另外，JDK 代理将会测试整个虚拟机，这个代价会很高。</p>
 </div>
 <div class="paragraph">
-<p>For performance reasons, it is recommended to use this configuration only if your target
-environment (such as <a href="https://www.eclipse.org/jetty/">Jetty</a>) does not have (or does not
-support) a dedicated LTW.</p>
+<p>出于性能原因，只有在目标环境（如 <a href="https://www.eclipse.org/jetty/">Jetty</a>）没有（或不支持）专用 LTW 时，才推荐使用此配置。</p>
 </div>
 </div>
 </div>
