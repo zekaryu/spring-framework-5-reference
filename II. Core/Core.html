@@ -14653,19 +14653,17 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-api-pointcuts"><a class="anchor" href="#aop-api-pointcuts"></a>6.2. Pointcut API in Spring</h3>
+<h3 id="aop-api-pointcuts"><a class="anchor" href="#aop-api-pointcuts"></a>6.2. Spring 中的切点 API </h3>
 <div class="paragraph">
-<p>Let&#8217;s look at how Spring handles the crucial pointcut concept.</p>
+<p>让我们看看 Spring 如何处理关键的切点概念。</p>
 </div>
 <div class="sect3">
-<h4 id="aop-api-concepts"><a class="anchor" href="#aop-api-concepts"></a>6.2.1. Concepts</h4>
+<h4 id="aop-api-concepts"><a class="anchor" href="#aop-api-concepts"></a>6.2.1. 概念</h4>
 <div class="paragraph">
-<p>Spring&#8217;s pointcut model enables pointcut reuse independent of advice types. It&#8217;s
-possible to target different advice using the same pointcut.</p>
+<p>Spring 的切点模型使切点可以独立于通知类型进行重用。针对不同的通知可以使用相同的切点。</p>
 </div>
 <div class="paragraph">
-<p>The <code>org.springframework.aop.Pointcut</code> interface is the central interface, used to
-target advices to particular classes and methods. The complete interface is shown below:</p>
+<p><code>org.springframework.aop.Pointcut</code> 接口是核心接口，用于瞄准对特定的类和方法的通知。 完整的接口如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14679,14 +14677,10 @@ target advices to particular classes and methods. The complete interface is show
 </div>
 </div>
 <div class="paragraph">
-<p>Splitting the <code>Pointcut</code> interface into two parts allows reuse of class and method
-matching parts, and fine-grained composition operations (such as performing a "union"
-with another method matcher).</p>
+<p>将 <code>Pointcut</code> 接口分隔成两个部分，以便重用类和方法的 matching 部分，和细粒度的组合操作（例如与另一个方法 matcher 的“联合”）。 </p>
 </div>
 <div class="paragraph">
-<p>The <code>ClassFilter</code> interface is used to restrict the pointcut to a given set of target
-classes. If the <code>matches()</code> method always returns true, all target classes will be
-matched:</p>
+<p><code>ClassFilter</code> 接口用于将其切点限制为给定的一组目标类。如果 <code>matches()</code> 方法总是返回 true，则所有的目标类都将被匹配：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14697,8 +14691,7 @@ matched:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>MethodMatcher</code> interface is normally more important. The complete interface is
-shown below:</p>
+<p><code>MethodMatcher</code> 接口通常更加重要。完整接口如下所示： </p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14713,17 +14706,10 @@ shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>matches(Method, Class)</code> method is used to test whether this pointcut will ever
-match a given method on a target class. This evaluation can be performed when an AOP
-proxy is created, to avoid the need for a test on every method invocation. If the
-2-argument matches method returns true for a given method, and the <code>isRuntime()</code> method
-for the MethodMatcher returns true, the 3-argument matches method will be invoked on
-every method invocation. This enables a pointcut to look at the arguments passed to the
-method invocation immediately before the target advice is to execute.</p>
+<p><code>matches(Method, Class)</code> 方法用于测试此切点是否匹配目标类上的给定方法。 在创建 AOP 代理时可以执行此评估，以避免需要对每个方法调用进行测试。如果对于给定的方法，接受两个参数的 matches 方法返回 true，并且 MethodMatcher 的 <code>isRuntime()</code>  方法返回 true，则将在每个方法调用时调用接受3个参数的 matches 方法。这使得切点可以在目标通知执行之前立即查看传递给方法调用的参数。</p>
 </div>
 <div class="paragraph">
-<p>Most MethodMatchers are static, meaning that their <code>isRuntime()</code> method returns false.
-In this case, the 3-argument matches method will never be invoked.</p>
+<p>大多数 MethodMatchers 都是静态的，这意味着它们 <code>isRuntime()</code> 方法返回 false。在这种情况下，接受3个参数的 matches 方法永远不会被调用。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -14733,8 +14719,7 @@ In this case, the 3-argument matches method will never be invoked.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If possible, try to make pointcuts static, allowing the AOP framework to cache the
-results of pointcut evaluation when an AOP proxy is created.</p>
+<p>如果可能的话，试着将切点设置为静态，从而允许 AOP 框架在创建 AOP 代理时缓存切点评估的结果。</p>
 </div>
 </td>
 </tr>
@@ -14742,74 +14727,59 @@ results of pointcut evaluation when an AOP proxy is created.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-api-pointcut-ops"><a class="anchor" href="#aop-api-pointcut-ops"></a>6.2.2. Operations on pointcuts</h4>
+<h4 id="aop-api-pointcut-ops"><a class="anchor" href="#aop-api-pointcut-ops"></a>6.2.2. 切点上的操作</h4>
 <div class="paragraph">
-<p>Spring supports operations on pointcuts: notably, <em>union</em> and <em>intersection</em>.</p>
+<p>Spring 支持切点操作：特别是联合和交集。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Union means the methods that either pointcut matches.</p>
+<p>联合意味着任意切点只要其中之一匹配的方法。</p>
 </li>
 <li>
-<p>Intersection means the methods that both pointcuts match.</p>
+<p>交集点意味着两个切点都要同时匹配的方法。</p>
 </li>
 <li>
-<p>Union is usually more useful.</p>
+<p>通常联合更有用。</p>
 </li>
 <li>
-<p>Pointcuts can be composed using the static methods in the
-<em>org.springframework.aop.support.Pointcuts</em> class, or using the
-<em>ComposablePointcut</em> class in the same package. However, using AspectJ pointcut
-expressions is usually a simpler approach.</p>
+<p>切点可以使用 <em>org.springframework.aop.support.Pointcuts</em> 类中的静态方法，也可以使用同一个包中的 <em>ComposablePointcut</em> 类来组合。但是，使用 AspectJ 切点表达式通常是更简单的方法。</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-api-pointcuts-aspectj"><a class="anchor" href="#aop-api-pointcuts-aspectj"></a>6.2.3. AspectJ expression pointcuts</h4>
+<h4 id="aop-api-pointcuts-aspectj"><a class="anchor" href="#aop-api-pointcuts-aspectj"></a>6.2.3. AspectJ 表达式切面</h4>
 <div class="paragraph">
-<p>Since 2.0, the most important type of pointcut used by Spring is
-<code>org.springframework.aop.aspectj.AspectJExpressionPointcut</code>. This is a pointcut that
-uses an AspectJ supplied library to parse an AspectJ pointcut expression string.</p>
+<p>从2.0开始，Spring 使用的最重要的切点类型是 <code>org.springframework.aop.aspectj.AspectJExpressionPointcut</code>。这是一个使用 AspectJ 提供的库来解析 AspectJ 切点表达式字符串的切点。</p>
 </div>
 <div class="paragraph">
-<p>See the previous chapter for a discussion of supported AspectJ pointcut primitives.</p>
+<p>有关被支持的 AspectJ 切点基本类型的讨论，请参阅上一章。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-api-pointcuts-impls"><a class="anchor" href="#aop-api-pointcuts-impls"></a>6.2.4. Convenience pointcut implementations</h4>
+<h4 id="aop-api-pointcuts-impls"><a class="anchor" href="#aop-api-pointcuts-impls"></a>6.2.4. 便捷的切点实现</h4>
 <div class="paragraph">
-<p>Spring provides several convenient pointcut implementations. Some can be used out of the
-box; others are intended to be subclassed in application-specific pointcuts.</p>
+<p>Spring 提供了几个方便的切点实现。有些开箱即用;其他的用于在特定于应用程序的切点中进行子类化。</p>
 </div>
 <div class="sect4">
-<h5 id="aop-api-pointcuts-static"><a class="anchor" href="#aop-api-pointcuts-static"></a>Static pointcuts</h5>
+<h5 id="aop-api-pointcuts-static"><a class="anchor" href="#aop-api-pointcuts-static"></a>静态切点</h5>
 <div class="paragraph">
-<p>Static pointcuts are based on method and target class, and cannot take into account the
-method&#8217;s arguments. Static pointcuts are sufficient - <em>and best</em> - for most usages.
-It&#8217;s possible for Spring to evaluate a static pointcut only once, when a method is first
-invoked: after that, there is no need to evaluate the pointcut again with each method
-invocation.</p>
+<p>静态切点基于方法和目标类，方法的参数不列入考虑范围。对于大多数用途来说，静态切点已经足够，而且是最佳的。当一个方法第一次被调用时，Spring 可能只对静态切入点进行一次性评估：在这之后，不需要再为每次方法调执行切入点评估。</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s consider some static pointcut implementations included with Spring.</p>
+<p>考虑 Spring 包含的一些静态切点实现。</p>
 </div>
 <div class="sect5">
-<h6 id="aop-api-pointcuts-regex"><a class="anchor" href="#aop-api-pointcuts-regex"></a>Regular expression pointcuts</h6>
+<h6 id="aop-api-pointcuts-regex"><a class="anchor" href="#aop-api-pointcuts-regex"></a>正则表达式切点</h6>
 <div class="paragraph">
-<p>One obvious way to specify static pointcuts is regular expressions. Several AOP
-frameworks besides Spring make this possible.
-<code>org.springframework.aop.support.JdkRegexpMethodPointcut</code> is a generic regular
-expression pointcut, using the regular expression support in JDK 1.4+.</p>
+<p>指定静态切点的一个显而易见的方法是用正则表达式。Spring 之外的几个 AOP 框架使这种方法成为可能。<code>org.springframework.aop.support.JdkRegexpMethodPointcut</code> 是一个通用的正则表达式切点，使用 JDK 1.4+ 中的正则表达式支持。</p>
 </div>
 <div class="paragraph">
-<p>Using the <code>JdkRegexpMethodPointcut</code> class, you can provide a list of pattern Strings. If
-any of these is a match, the pointcut will evaluate to true. (So the result is
-effectively the union of these pointcuts.)</p>
+<p>使用<code>JdkRegexpMethodPointcut</code> 类，就可以提供一个模式字符串清单。如果其中任何一个匹配，那么这个切点的评估结果会是 true（因此结果就是这些切点的有效“联合”）。</p>
 </div>
 <div class="paragraph">
-<p>The usage is shown below:</p>
+<p>使用方法如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14825,11 +14795,7 @@ effectively the union of these pointcuts.)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Spring provides a convenience class, <code>RegexpMethodPointcutAdvisor</code>, that allows us to
-also reference an Advice (remember that an Advice can be an interceptor, before advice,
-throws advice etc.). Behind the scenes, Spring will use a <code>JdkRegexpMethodPointcut</code>.
-Using <code>RegexpMethodPointcutAdvisor</code> simplifies wiring, as the one bean encapsulates both
-pointcut and advice, as shown below:</p>
+<p>Spring 提供了一个方便的类，<code>RegexpMethodPointcutAdvisor</code>，它还允许我们引用一个通知（记住，通知可以是一个拦截器，前置通知，异常通知等）。在后台，Spring 将使用 <code>JdkRegexpMethodPointcut</code>。 使用 <code>RegexpMethodPointcutAdvisor</code> 简化了装配，因为一个 bean 同时封装了切点和通知，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14848,37 +14814,28 @@ pointcut and advice, as shown below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><em>RegexpMethodPointcutAdvisor</em> can be used with any Advice type.</p>
+<p><em>RegexpMethodPointcutAdvisor</em> 适用于所有通知类型。</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="aop-api-pointcuts-attribute-driven"><a class="anchor" href="#aop-api-pointcuts-attribute-driven"></a>Attribute-driven pointcuts</h6>
+<h6 id="aop-api-pointcuts-attribute-driven"><a class="anchor" href="#aop-api-pointcuts-attribute-driven"></a>Attribute 驱动的切点</h6>
 <div class="paragraph">
-<p>An important type of static pointcut is a <em>metadata-driven</em> pointcut. This uses the
-values of metadata attributes: typically, source-level metadata.</p>
+<p>元数据驱动的切点是静态切点中的重要类型。它使用元数据特性的值：通常是源代码级别的元数据。</p>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="aop-api-pointcuts-dynamic"><a class="anchor" href="#aop-api-pointcuts-dynamic"></a>Dynamic pointcuts</h5>
+<h5 id="aop-api-pointcuts-dynamic"><a class="anchor" href="#aop-api-pointcuts-dynamic"></a>动态切点</h5>
 <div class="paragraph">
-<p>Dynamic pointcuts are costlier to evaluate than static pointcuts. They take into account
-method <em>arguments</em>, as well as static information. This means that they must be
-evaluated with every method invocation; the result cannot be cached, as arguments will
-vary.</p>
+<p>动态切点比静态切点代价更大。它们考虑了方法实参以及静态信息。这意味着它们必须用评估每个方法调用；结果不能被缓存，因为实参会有所不同。</p>
 </div>
 <div class="paragraph">
 <p>The main example is the <code>control flow</code> pointcut.</p>
 </div>
 <div class="sect5">
-<h6 id="aop-api-pointcuts-cflow"><a class="anchor" href="#aop-api-pointcuts-cflow"></a>Control flow pointcuts</h6>
+<h6 id="aop-api-pointcuts-cflow"><a class="anchor" href="#aop-api-pointcuts-cflow"></a>控制流切点</h6>
 <div class="paragraph">
-<p>Spring control flow pointcuts are conceptually similar to AspectJ <em>cflow</em> pointcuts,
-although less powerful. (There is currently no way to specify that a pointcut executes
-below a join point matched by another pointcut.) A control flow pointcut matches the
-current call stack. For example, it might fire if the join point was invoked by a method
-in the <code>com.mycompany.web</code> package, or by the <code>SomeCaller</code> class. Control flow pointcuts
-are specified using the <code>org.springframework.aop.support.ControlFlowPointcut</code> class.</p>
+<p>Spring 控制流切点在概念上类似于 AspectJ cflow 切点，虽然功能较弱。（目前没有办法指定一个切点在另一个切点匹配的连接点下面执行）。一个控制流切点匹配当前的调用栈。例如，如果连接点是由 <code>com.mycompany.web</code> 包中的方法或 <code>SomeCaller</code> 类调用的，则可能会触发它。控制流切点使用 <code>org.springframework.aop.support.ControlFlowPointcut</code> 类来指定。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -14888,9 +14845,7 @@ are specified using the <code>org.springframework.aop.support.ControlFlowPointcu
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Control flow pointcuts are significantly more expensive to evaluate at runtime than even
-other dynamic pointcuts. In Java 1.4, the cost is about 5 times that of other dynamic
-pointcuts.</p>
+<p>与其他动态切点相比，控制流切点在运行时评估的代价更大。在 Java 1.4 中，成本约为其他动态切点的5倍。</p>
 </div>
 </td>
 </tr>
