@@ -15610,14 +15610,12 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-concise-proxy"><a class="anchor" href="#aop-concise-proxy"></a>6.6. Concise proxy definitions</h3>
+<h3 id="aop-concise-proxy"><a class="anchor" href="#aop-concise-proxy"></a>6.6. 精简代理定义</h3>
 <div class="paragraph">
-<p>Especially when defining transactional proxies, you may end up with many similar proxy
-definitions. The use of parent and child bean definitions, along with inner bean
-definitions, can result in much cleaner and more concise proxy definitions.</p>
+<p>特别是在定义事务代理时，最终可能会有许多类似的代理定义。使用父和子 bean 定义以及内部 bean 定义可以产生更干净，更简洁的代理定义。</p>
 </div>
 <div class="paragraph">
-<p>First a parent, <em>template</em>, bean definition is created for the proxy:</p>
+<p>首先为代理创建一个父 bean 定义 <em>template</em>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15633,9 +15631,7 @@ definitions, can result in much cleaner and more concise proxy definitions.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This will never be instantiated itself, so may actually be incomplete. Then each proxy
-which needs to be created is just a child bean definition, which wraps the target of the
-proxy as an inner bean definition, since the target will never be used on its own anyway.</p>
+<p>它永远不会被实例化，因此实际上可能也不完整。然后，每个需要创建的代理只是一个子 bean 定义，它将代理的目标作为内部 bean 定义进行包装，因为目标永远不会自行使用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15648,8 +15644,7 @@ proxy as an inner bean definition, since the target will never be used on its ow
 </div>
 </div>
 <div class="paragraph">
-<p>It is of course possible to override properties from the parent template, such as in
-this case, the transaction propagation settings:</p>
+<p>当然可以覆盖父模板的属性，例如在这种情况下，事务传播设置：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15670,15 +15665,7 @@ this case, the transaction propagation settings:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that in the example above, we have explicitly marked the parent bean definition as
-<em>abstract</em> by using the <em>abstract</em> attribute, as described
-<a href="#beans-child-bean-definitions">previously</a>, so that it may not actually ever be
-instantiated. Application contexts (but not simple bean factories) will by default
-pre-instantiate all singletons. It is therefore important (at least for singleton beans)
-that if you have a (parent) bean definition which you intend to use only as a template,
-and this definition specifies a class, you must make sure to set the <em>abstract</em>
-attribute to <em>true</em>, otherwise the application context will actually try to
-pre-instantiate it.</p>
+<p>注意在上面的示例中，我们已经明确地将父 bean 定义标记为 <em>abstract</em>，<a href="#beans-child-bean-definitions">如前所述</a>，使用<em>abstract</em> 属性，以便它不会被实例化。应用程序上下文（但不是简单的 bean 工厂）将默认预先实例化所有的单例。因此有一点很重要（至少对于单例bean）如果你有一个你打算只用作模板的（父）bean定义，并且这个定义指定了一个类，你必须确保将 <em>abstract</em> 属性设置为 <em>true</em>，否则应用程序上下文将尝试对它进行预实例化。</p>
 </div>
 </div>
 <div class="sect2">
