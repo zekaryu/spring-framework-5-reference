@@ -15313,12 +15313,9 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-pfb"><a class="anchor" href="#aop-pfb"></a>6.5. Using the ProxyFactoryBean to create AOP proxies</h3>
+<h3 id="aop-pfb"><a class="anchor" href="#aop-pfb"></a>6.5. 使用 ProxyFactoryBean 创建 AOP 代理</h3>
 <div class="paragraph">
-<p>If you&#8217;re using the Spring IoC container (an ApplicationContext or BeanFactory) for your
-business objects - and you should be! - you will want to use one of Spring&#8217;s AOP
-FactoryBeans. (Remember that a factory bean introduces a layer of indirection, enabling
-it to create objects of a different type.)</p>
+<p>如果你使用 Spring IoC 容器（ApplicationContext 或 BeanFactory）作为业务对象 - 那么你应该 - 你会想使用 Spring 的 AOP FactoryBeans。（记住，工厂 bean 引入了一个间接层，使其能够创建不同类型的对象。）</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -15328,129 +15325,89 @@ it to create objects of a different type.)</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The Spring AOP support also uses factory beans under the covers.</p>
+<p>The Spring AOP support also uses factory beans under the covers.（不懂？？？）</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The basic way to create an AOP proxy in Spring is to use the
-<em>org.springframework.aop.framework.ProxyFactoryBean</em>. This gives complete control over
-the pointcuts and advice that will apply, and their ordering. However, there are simpler
-options that are preferable if you don&#8217;t need such control.</p>
+<p>在 Spring 中创建 AOP 代理的基本方法是使用 <em>org.springframework.aop.framework.ProxyFactoryBean</em>。这样可以完全控制将要应用的切点和通知，以及它们的排序。但是，如果你不需要这种控制，则有更简单的选择。</p>
 </div>
 <div class="sect3">
-<h4 id="aop-pfb-1"><a class="anchor" href="#aop-pfb-1"></a>6.5.1. Basics</h4>
+<h4 id="aop-pfb-1"><a class="anchor" href="#aop-pfb-1"></a>6.5.1. 基础</h4>
 <div class="paragraph">
-<p>The <code>ProxyFactoryBean</code>, like other Spring <code>FactoryBean</code> implementations, introduces a
-level of indirection. If you define a <code>ProxyFactoryBean</code> with name <code>foo</code>, what objects
-referencing <code>foo</code> see is not the <code>ProxyFactoryBean</code> instance itself, but an object
-created by the <code>ProxyFactoryBean&#8217;s implementation of the `getObject()</code> method. This
-method will create an AOP proxy wrapping a target object.</p>
+<p>与其他Spring <code>FactoryBean</code> 实现一样，<code>ProxyFactoryBean</code> 引入了间接级别。如果用名称 <code>foo</code> 定义 <code>ProxyFactoryBean</code>，那么引用 <code>foo</code> 的对象不是 <code>ProxyFactoryBean</code> 实例本身，而是由 <code>ProxyFactoryBean 实现 getObject() </code> 方法创建的对象。此方法将创建包装目标对象的 AOP 代理。</p>
 </div>
 <div class="paragraph">
-<p>One of the most important benefits of using a <code>ProxyFactoryBean</code> or another IoC-aware
-class to create AOP proxies, is that it means that advices and pointcuts can also be
-managed by IoC. This is a powerful feature, enabling certain approaches that are hard to
-achieve with other AOP frameworks. For example, an advice may itself reference
-application objects (besides the target, which should be available in any AOP
-framework), benefiting from all the pluggability provided by Dependency Injection.</p>
+<p>使用 <code>ProxyFactoryBean</code> 或另一个支持 IoC 的类创建 AOP 代理的最重要的好处之一是，这意味着通知和切点也可以由 IoC 管理。这是一个强大的功能，支持某些难以用其他 AOP 框架实现的方法。例如，一个通知本身可以引用应用对象（除了应该在任何 AOP 框架中可用的目标之外），并受益于依赖注入提供的所有可插入性。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-pfb-2"><a class="anchor" href="#aop-pfb-2"></a>6.5.2. JavaBean properties</h4>
+<h4 id="aop-pfb-2"><a class="anchor" href="#aop-pfb-2"></a>6.5.2. JavaBean 属性</h4>
 <div class="paragraph">
-<p>In common with most <code>FactoryBean</code> implementations provided with Spring, the
-<code>ProxyFactoryBean</code> class is itself a JavaBean. Its properties are used to:</p>
+<p>与 Spring 提供的大多数 <code>FactoryBean</code> 实现一样，<code>ProxyFactoryBean</code> 类本身就是一个 JavaBean。其属性用于：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Specify the target you want to proxy.</p>
+<p>指定你想要代理的目标。</p>
 </li>
 <li>
-<p>Specify whether to use CGLIB (see below and also <a href="#aop-pfb-proxy-types">JDK- and CGLIB-based proxies</a>).</p>
+<p>指定是否使用 CGLIB（请参阅下文以及 <a href="#aop-pfb-proxy-types">基于 JDK 和 CGLIB 的代理</a>）。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Some key properties are inherited from <code>org.springframework.aop.framework.ProxyConfig</code>
-(the superclass for all AOP proxy factories in Spring). These key properties include:</p>
+<p>一些关键属性是从 <code>org.springframework.aop.framework.ProxyConfig</code> 继承而来的（Spring 中所有 AOP 代理工厂的超类）。这些关键属性包括：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>proxyTargetClass</code>: <code>true</code> if the target class is to be proxied, rather than the
-target class' interfaces. If this property value is set to <code>true</code>, then CGLIB proxies
-will be created (but see also <a href="#aop-pfb-proxy-types">JDK- and CGLIB-based proxies</a>).</p>
+<p><code>proxyTargetClass</code>：如果要代理目标类，而不是目标类的接口，则为 <code>true</code>。如果此属性值设置为 <code>true</code>，则将创建CGLIB代理（也可以参阅 <a href="#aop-pfb-proxy-types">基于 JDK 和 CGLIB 的代理</a>）。</p>
 </li>
 <li>
-<p><code>optimize</code>: controls whether or not aggressive optimizations are applied to proxies
-<em>created via CGLIB</em>. One should not blithely use this setting unless one fully
-understands how the relevant AOP proxy handles optimization. This is currently used
-only for CGLIB proxies; it has no effect with JDK dynamic proxies.</p>
+<p><code>optimize</code>：控制是否将积极的优化应用于 <em>通过CGLIB创建的</em> 代理。除非完全理解相关 AOP 代理如何处理优化，否则不应该轻率使用此设置。这目前仅用于 CGLIB 代理;它对 JDK 动态代理无效。</p>
 </li>
 <li>
-<p><code>frozen</code>: if a proxy configuration is <code>frozen</code>, then changes to the configuration are
-no longer allowed. This is useful both as a slight optimization and for those cases
-when you don&#8217;t want callers to be able to manipulate the proxy (via the <code>Advised</code>
-interface) after the proxy has been created. The default value of this property is
-<code>false</code>, so changes such as adding additional advice are allowed.</p>
+<p><code>frozen</code>：如果代理配置被冻结，则不再允许更改配置。这对于轻微优化以及在代理创建后不希望调用者能够操作代理（通过<code>Advised</code> 接口）的情况都很有用。此属性的默认值为 <code>false</code>，因此允许更改（如添加其他额外的通知）。</p>
 </li>
 <li>
-<p><code>exposeProxy</code>: determines whether or not the current proxy should be exposed in a
-<code>ThreadLocal</code> so that it can be accessed by the target. If a target needs to obtain
-the proxy and the <code>exposeProxy</code> property is set to <code>true</code>, the target can use the
-<code>AopContext.currentProxy()</code> method.</p>
+<p><code>exposeProxy</code>：确定当前代理是否应该暴露在 <code>ThreadLocal</code>  中，以便目标可以访问它。如果目标需要获取代理并且 <code>exposeProxy</code> 属性设置为true，则目标可以使用 <code>AopContext.currentProxy()</code> 方法。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Other properties specific to <code>ProxyFactoryBean</code> include:</p>
+<p><code>ProxyFactoryBean</code> 特有的其他属性包括：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>proxyInterfaces</code>: array of String interface names. If this isn&#8217;t supplied, a CGLIB
-proxy for the target class will be used (but see also <a href="#aop-pfb-proxy-types">JDK- and CGLIB-based proxies</a>).</p>
+<p><code>proxyInterfaces</code>：接口名字符串数组。如果未提供，则将使用目标类的 CGLIB 代理（也可以参阅 <a href="#aop-pfb-proxy-types">基于 JDK 和 CGLIB 的代理</a>）。</p>
 </li>
 <li>
-<p><code>interceptorNames</code>: String array of <code>Advisor</code>, interceptor or other advice names to
-apply. Ordering is significant, on a first come-first served basis. That is to say
-that the first interceptor in the list will be the first to be able to intercept the
-invocation.</p>
+<p><code>interceptorNames</code>：要应用的 <code>Advisor</code>，拦截器或其他通知的名字的字符串数组。排序很重要，原则是先到先服务。也就是说列表中的第一个拦截器将是第一个能够拦截调用的拦截器。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The names are bean names in the current factory, including bean names from ancestor
-factories. You can&#8217;t mention bean references here since doing so would result in the
-<code>ProxyFactoryBean</code> ignoring the singleton setting of the advice.</p>
+<p>这些名称是当前工厂中的 bean 名称，包括来自祖先工厂的 bean 名称。你不能在这里提及 bean 引用，因为这样做会导致 <code>ProxyFactoryBean</code> 忽略通知的单例设置。</p>
 </div>
 <div class="paragraph">
-<p>You can append an interceptor name with an asterisk ( <code>*</code>). This will result in the
-application of all advisor beans with names starting with the part before the asterisk
-to be applied. An example of using this feature can be found in <a href="#aop-global-advisors">Using 'global' advisors</a>.</p>
+<p>你可以附加一个带有星号（<code>*</code>）的拦截器名字。这将导致应用中所有以星号前的部分开头的所有通知器 bean 被应用。使用此功能的示例可以在 <a href="#aop-global-advisors">使用'全局'通知器</a> 中找到。</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>singleton: whether or not the factory should return a single object, no matter how
-often the <code>getObject()</code> method is called. Several <code>FactoryBean</code> implementations offer
-such a method. The default value is <code>true</code>. If you want to use stateful advice - for
-example, for stateful mixins - use prototype advices along with a singleton value of
-<code>false</code>.</p>
+<p>singleton：无论如何工厂都应该返回单个对象，不管调用 <code>getObject()</code> 方法的频率如何。几个 <code>FactoryBean</code> 实现提供了这样一种方法。 默认值是 <code>true</code> 。如果你想使用有状态的通知 - 例如，有状态的混合 - 使用原型通知以及单例值 <code>false</code>。</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-pfb-proxy-types"><a class="anchor" href="#aop-pfb-proxy-types"></a>6.5.3. JDK- and CGLIB-based proxies</h4>
+<h4 id="aop-pfb-proxy-types"><a class="anchor" href="#aop-pfb-proxy-types"></a>6.5.3. 基于 JDK 和基于 CGLIB 的代理</h4>
 <div class="paragraph">
-<p>This section serves as the definitive documentation on how the <code>ProxyFactoryBean</code>
-chooses to create one of either a JDK- and CGLIB-based proxy for a particular target
-object (that is to be proxied).</p>
+<p> 本节作为关于 <code>ProxyFactoryBean</code> 如何选择为特定目标对象（即将被代理）创建一个基于JDK 和 CGLIB 的代理的权威性文档。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -15460,74 +15417,43 @@ object (that is to be proxied).</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The behavior of the <code>ProxyFactoryBean</code> with regard to creating JDK- or CGLIB-based
-proxies changed between versions 1.2.x and 2.0 of Spring. The <code>ProxyFactoryBean</code> now
-exhibits similar semantics with regard to auto-detecting interfaces as those of the
-<code>TransactionProxyFactoryBean</code> class.</p>
+<p><code>ProxyFactoryBean</code> 在创建基于 JDK 或 CGLIB 的代理方面的行为在 Spring 的 1.2.x 和 2.0 版本之间发生了变化。现在的 <code>ProxyFactoryBean</code> 展示了类似于 <code>TransactionProxyFactoryBean</code> 类的自动检测接口的语义。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>If the class of a target object that is to be proxied (hereafter simply referred to as
-the target class) doesn&#8217;t implement any interfaces, then a CGLIB-based proxy will be
-created. This is the easiest scenario, because JDK proxies are interface based, and no
-interfaces means JDK proxying isn&#8217;t even possible. One simply plugs in the target bean,
-and specifies the list of interceptors via the <code>interceptorNames</code> property. Note that a
-CGLIB-based proxy will be created even if the <code>proxyTargetClass</code> property of the
-<code>ProxyFactoryBean</code> has been set to <code>false</code>. (Obviously this makes no sense, and is best
-removed from the bean definition because it is at best redundant, and at worst
-confusing.)</p>
+<p>如果要被代理的目标对象（以下简称为目标类）的类没有实现任何接口，则将创建一个基于 CGLIB 的代理。这是最简单的情况，因为 JDK 代理是基于接口的，没有接口意味着 JDK 代理是不可能的。只需插入目标 bean，并通过 interceptorNames 属性指定拦截器列表。注意即使 <code>ProxyFactoryBean</code> 的 <code>proxyTargetClass</code> 属性已设置为 <code>false</code>，也会创建基于 CGLIB 的代理。 （显然这是没有意义的，并且最好从 bean 定义中删除，因为它至少是多余的，最坏情况下会令人困惑。）</p>
 </div>
 <div class="paragraph">
-<p>If the target class implements one (or more) interfaces, then the type of proxy that is
-created depends on the configuration of the <code>ProxyFactoryBean</code>.</p>
+<p>如果目标类实现一个（或多个）接口，则创建的代理类型取决于 <code>ProxyFactoryBean</code> 的配置。</p>
 </div>
 <div class="paragraph">
-<p>If the <code>proxyTargetClass</code> property of the <code>ProxyFactoryBean</code> has been set to <code>true</code>,
-then a CGLIB-based proxy will be created. This makes sense, and is in keeping with the
-principle of least surprise. Even if the <code>proxyInterfaces</code> property of the
-<code>ProxyFactoryBean</code> has been set to one or more fully qualified interface names, the fact
-that the <code>proxyTargetClass</code> property is set to <code>true</code> <em>will</em> cause CGLIB-based
-proxying to be in effect.</p>
+<p>如果 <code>ProxyFactoryBean</code> 的 <code>proxyTargetClass</code> 属性已设置为 <code>true</code>，则将创建一个基于 CGLIB 的代理。这很符合逻辑，并且符合最少令人惊讶的原则。即使 <code>ProxyFactoryBean</code> 的 <code>proxyInterfaces</code> 属性已设置为一个或多个完全限定的接口名，但 <code>proxyTargetClass</code> 属性设置为 <code>true</code> 的事实将导致基于 CGLIB 的代理生效。</p>
 </div>
 <div class="paragraph">
-<p>If the <code>proxyInterfaces</code> property of the <code>ProxyFactoryBean</code> has been set to one or more
-fully qualified interface names, then a JDK-based proxy will be created. The created
-proxy will implement all of the interfaces that were specified in the <code>proxyInterfaces</code>
-property; if the target class happens to implement a whole lot more interfaces than
-those specified in the <code>proxyInterfaces</code> property, that is all well and good but those
-additional interfaces will not be implemented by the returned proxy.</p>
+<p>如果 <code>ProxyFactoryBean</code>  的 <code>proxyInterfaces</code> 属性已被设置为一个或多个完全限定的接口名称，则将创建一个基于JDK的代理。创建的代理将实现在 <code>proxyInterfaces</code> 属性中指定的所有接口；如果目标类恰好实现了比 <code>proxyInterfaces</code> 属性中指定的接口多得多的接口，那就很好，但这些多出来的接口将不会被返回的代理实现。</p>
 </div>
 <div class="paragraph">
-<p>If the <code>proxyInterfaces</code> property of the <code>ProxyFactoryBean</code> has <em>not</em> been set, but
-the target class <em>does implement one (or more)</em> interfaces, then the
-<code>ProxyFactoryBean</code> will auto-detect the fact that the target class does actually
-implement at least one interface, and a JDK-based proxy will be created. The interfaces
-that are actually proxied will be <em>all</em> of the interfaces that the target class
-implements; in effect, this is the same as simply supplying a list of each and every
-interface that the target class implements to the <code>proxyInterfaces</code> property. However,
-it is significantly less work, and less prone to typos.</p>
+<p>如果 <code>ProxyFactoryBean</code>  的 <code>proxyInterfaces</code> 属性属性尚未设置，但目标类 <em>确实实现了一个（或多个）</em> 接口，那么 <code>ProxyFactoryBean</code> 将自动检测目标类是否实现至少一个接口的事实，且将创建基于 JDK 的代理。实际被代理的接口将是目标类实现的所有接口；实际上，这与简单地将目标类实现的每个接口的列表提供给 <code>proxyInterfaces</code> 属性相同。但是，它的工作量要少得多，而且不太容易出现拼写错误。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-api-proxying-intf"><a class="anchor" href="#aop-api-proxying-intf"></a>6.5.4. Proxying interfaces</h4>
+<h4 id="aop-api-proxying-intf"><a class="anchor" href="#aop-api-proxying-intf"></a>6.5.4. 代理接口</h4>
 <div class="paragraph">
-<p>Let&#8217;s look at a simple example of <code>ProxyFactoryBean</code> in action. This example involves:</p>
+<p>让我们看一下 <code>ProxyFactoryBean</code> 的一个简单示例。这个例子涉及：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>A <em>target bean</em> that will be proxied. This is the "personTarget" bean definition in
-the example below.</p>
+<p>将被代理的 <em>目标 bean</em>。这是下面示例中的 "personTarget" bean 定义。</p>
 </li>
 <li>
-<p>An Advisor and an Interceptor used to provide advice.</p>
+<p>用于提供通知的 Advisor（通知器）和 Interceptor（拦截器） 。</p>
 </li>
 <li>
-<p>An AOP proxy bean definition specifying the target object (the personTarget bean) and
-the interfaces to proxy, along with the advices to apply.</p>
+<p>一个 AOP 代理 bean 定义，指定目标对象（personTarget bean）以及要代理的接口以及要应用的通知。</p>
 </li>
 </ul>
 </div>
@@ -15560,9 +15486,7 @@ the interfaces to proxy, along with the advices to apply.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the <code>interceptorNames</code> property takes a list of String: the bean names of the
-interceptor or advisors in the current factory. Advisors, interceptors, before, after
-returning and throws advice objects can be used. The ordering of advisors is significant.</p>
+<p>注意，<code>interceptorNames</code> 属性接受一个字符串列表：当前工厂中拦截器或通知器的 bean 名称。通知器，拦截器，前置通知，返回通知，异常通知都可以使用。通知器的排序很重要。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -15572,19 +15496,14 @@ returning and throws advice objects can be used. The ordering of advisors is sig
 </td>
 <td class="content">
 <div class="paragraph">
-<p>You might be wondering why the list doesn&#8217;t hold bean references. The reason for this is
-that if the ProxyFactoryBean&#8217;s singleton property is set to false, it must be able to
-return independent proxy instances. If any of the advisors is itself a prototype, an
-independent instance would need to be returned, so it&#8217;s necessary to be able to obtain
-an instance of the prototype from the factory; holding a reference isn&#8217;t sufficient.</p>
+<p>您可能想知道为什么列表不包含 bean 引用。原因是如果 ProxyFactoryBean 的 singleton 属性设置为 false，它必须能够返回独立的代理实例。如果任何通知器本身就是一个原型，那么就需要返回一个独立的实例，所以有必要从工厂获得一个原型实例; 保存一个引用是不够的。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The "person" bean definition above can be used in place of a Person implementation, as
-follows:</p>
+<p>上面的 “person” bean 定义可以用来代替 Person 实现，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15592,8 +15511,7 @@ follows:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Other beans in the same IoC context can express a strongly typed dependency on it, as
-with an ordinary Java object:</p>
+<p>与普通的 Java 对象一样，同一 IoC 上下文中的其他 bean 可以表达强类型依赖关系：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15603,15 +15521,10 @@ with an ordinary Java object:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>PersonUser</code> class in this example would expose a property of type Person. As far as
-it&#8217;s concerned, the AOP proxy can be used transparently in place of a "real" person
-implementation. However, its class would be a dynamic proxy class. It would be possible
-to cast it to the <code>Advised</code> interface (discussed below).</p>
+<p>此示例中的 <code>PersonUser</code> 类将暴露 Person 类型的属性。就其而言，AOP 代理可以透明地用来代替“真实”的 person 实现。但是，它的类是一个动态代理类。可以将它转换成<code>Advised</code> 接口（下面讨论）。</p>
 </div>
 <div class="paragraph">
-<p>It&#8217;s possible to conceal the distinction between target and proxy using an anonymous
-<em>inner bean</em>, as follows. Only the <code>ProxyFactoryBean</code> definition is different; the
-advice is included only for completeness:</p>
+<p>可以使用匿名内部 bean 隐藏目标和代理之间的区别，如下所示。只有 <code>ProxyFactoryBean</code> 定义不同; 该通知只是为了完整性考虑：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15640,66 +15553,44 @@ advice is included only for completeness:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This has the advantage that there&#8217;s only one object of type <code>Person</code>: useful if we want
-to prevent users of the application context from obtaining a reference to the un-advised
-object, or need to avoid any ambiguity with Spring IoC <em>autowiring</em>. There&#8217;s also
-arguably an advantage in that the ProxyFactoryBean definition is self-contained.
-However, there are times when being able to obtain the un-advised target from the
-factory might actually be an <em>advantage</em>: for example, in certain test scenarios.</p>
+<p>这具有如下优点：只有一个 <code>Person</code> 类型的对象：如果我们想阻止应用程序上下文的用户获得对未通知对象的引用，或者需要避免使用 Spring IoC 自动装配出现任何歧义，那么这很有用。ProxyFactoryBean 定义是独立的，这也有一个优势。但是，有时能够从工厂获得未通知的目标实际上可能反而是一个优势：例如，在某些测试场景中。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-api-proxying-class"><a class="anchor" href="#aop-api-proxying-class"></a>6.5.5. Proxying classes</h4>
+<h4 id="aop-api-proxying-class"><a class="anchor" href="#aop-api-proxying-class"></a>6.5.5. 代理类</h4>
 <div class="paragraph">
-<p>What if you need to proxy a class, rather than one or more interfaces?</p>
+<p>如果您需要代理一个类而不是一个或多个接口，该怎么办？</p>
 </div>
 <div class="paragraph">
-<p>Imagine that in our example above, there was no <code>Person</code> interface: we needed to advise
-a class called <code>Person</code> that didn&#8217;t implement any business interface. In this case, you
-can configure Spring to use CGLIB proxying, rather than dynamic proxies. Simply set the
-<code>proxyTargetClass</code> property on the ProxyFactoryBean above to true. While it&#8217;s best to
-program to interfaces, rather than classes, the ability to advise classes that don&#8217;t
-implement interfaces can be useful when working with legacy code. (In general, Spring
-isn&#8217;t prescriptive. While it makes it easy to apply good practices, it avoids forcing a
-particular approach.)</p>
+<p>想象一下，在我们上面的示例中，没有 <code>Person</code> 接口：我们需要通知一个名为 <code>Person</code> 的类，它没有实现任何业务接口。在这种情况下，你可以将 Spring 配置为使用 CGLIB 代理，而不是动态代理。只需将上面的 ProxyFactoryBean 上的 <code>proxyTargetClass</code> 属性设置为 true 即可。尽管最好对接口进行编程，而不是类，但在处理遗留代码时，具有通知未实现接口的类的能力会很有用。（一般来说，Spring 不是严格规范的，虽然它可以很容易地应用与良好的实践，但它避免了强制使用某种特定的方式。）</p>
 </div>
 <div class="paragraph">
-<p>If you want to, you can force the use of CGLIB in any case, even if you do have
-interfaces.</p>
+<p>如果你愿意，你可以在任何情况下强制使用 CGLIB，即使实现了接口。</p>
 </div>
 <div class="paragraph">
-<p>CGLIB proxying works by generating a subclass of the target class at runtime. Spring
-configures this generated subclass to delegate method calls to the original target: the
-subclass is used to implement the <em>Decorator</em> pattern, weaving in the advice.</p>
+<p>CGLIB 代理通过在运行时生成目标类的子类来工作。Spring 将这个生成的子类配置为将方法调用委托给原始目标：子类用于实现 <em>Decorator</em> 装饰者模式，在通知中织入。</p>
 </div>
 <div class="paragraph">
-<p>CGLIB proxying should generally be transparent to users. However, there are some issues
-to consider:</p>
+<p>CGLIB 代理通常应该对用户透明。但是，有一些问题需要考虑：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Final</code> methods can&#8217;t be advised, as they can&#8217;t be overridden.</p>
+<p><code>Final</code> 方法不能被通知，因为它们不能被覆盖。</p>
 </li>
 <li>
-<p>There is no need to add CGLIB to your classpath. As of Spring 3.2, CGLIB is repackaged
-and included in the spring-core JAR. In other words, CGLIB-based AOP will work "out of
-the box" just as do JDK dynamic proxies.</p>
+<p>不需要将 CGLIB 添加到类路径中。从 Spring 3.2 开始，CGLIB 被重新打包并包含在 Spring-JAR 中。换句话说，与 JDK 动态代理一样，基于 CGLIB 的 AOP 是“开箱即用”的。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>There&#8217;s little performance difference between CGLIB proxying and dynamic proxies. As of
-Spring 1.0, dynamic proxies are slightly faster. However, this may change in the future.
-Performance should not be a decisive consideration in this case.</p>
+<p>CGLIB 代理和动态代理之间几乎没有性能差异。从 Spring 1.0 开始，动态代理稍快一点。但是，这可能在未来发生变化。在这种情况下，性能不应该成为决定性的考虑因素。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-global-advisors"><a class="anchor" href="#aop-global-advisors"></a>6.5.6. Using 'global' advisors</h4>
+<h4 id="aop-global-advisors"><a class="anchor" href="#aop-global-advisors"></a>6.5.6. 使用'全局' advisor 通知器</h4>
 <div class="paragraph">
-<p>By appending an asterisk to an interceptor name, all advisors with bean names matching
-the part before the asterisk, will be added to the advisor chain. This can come in handy
-if you need to add a standard set of 'global' advisors:</p>
+<p>通过向拦截器名称附加星号，所有具有与星号前的部分匹配的 bean 名称的通知器将被添加到通知链中。 如果你需要添加一组标准的“全局”通知器，这可以派上用场：</p>
 </div>
 <div class="listingblock">
 <div class="content">
