@@ -15785,46 +15785,38 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-autoproxy"><a class="anchor" href="#aop-autoproxy"></a>6.9. Using the "auto-proxy" facility</h3>
+<h3 id="aop-autoproxy"><a class="anchor" href="#aop-autoproxy"></a>6.9. 使用"自动代理"功能</h3>
 <div class="paragraph">
-<p>So far we&#8217;ve considered explicit creation of AOP proxies using a <code>ProxyFactoryBean</code> or
-similar factory bean.</p>
+<p>到目前为止，我们已经考虑使用 <code>ProxyFactoryBean</code> 或类似的工厂 bean 显式创建 AOP 代理</p>
 </div>
 <div class="paragraph">
-<p>Spring also allows us to use "auto-proxy" bean definitions, which can automatically
-proxy selected bean definitions. This is built on Spring "bean post processor"
-infrastructure, which enables modification of any bean definition as the container loads.</p>
+<p>Spring 还允许我们使用“自动代理” bean 定义，它可以自动代理选定的 bean 定义。这是建立在 Spring “bean post processor” 基础结构上的，它可以在容器加载时修改任何 bean 定义。</p>
 </div>
 <div class="paragraph">
-<p>In this model, you set up some special bean definitions in your XML bean definition file
-to configure the auto proxy infrastructure. This allows you just to declare the targets
-eligible for auto-proxying: you don&#8217;t need to use <code>ProxyFactoryBean</code>.</p>
+<p>在这个模型中，你在 XML bean 定义文件中设置一些特殊的 bean 定义来配置自动代理基础结构。 这允许你只声明符合自动代理的目标：你不需要使用 <code>ProxyFactoryBean</code>。</p>
 </div>
 <div class="paragraph">
-<p>There are two ways to do this:</p>
+<p>有两种方法可以做到这一点：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Using an auto-proxy creator that refers to specific beans in the current context.</p>
+<p>使用在当前上下文中引用特定 bean 的自动代理创建器。</p>
 </li>
 <li>
-<p>A special case of auto-proxy creation that deserves to be considered separately;
-auto-proxy creation driven by source-level metadata attributes.</p>
+<p>自动代理创建的一个特例，值得单独考虑; 由源代码级元数据属性驱动的自动代理创建。</p>
 </li>
 </ul>
 </div>
 <div class="sect3">
-<h4 id="aop-autoproxy-choices"><a class="anchor" href="#aop-autoproxy-choices"></a>6.9.1. Autoproxy bean definitions</h4>
+<h4 id="aop-autoproxy-choices"><a class="anchor" href="#aop-autoproxy-choices"></a>6.9.1. 自动代理 bean 的定义</h4>
 <div class="paragraph">
-<p>The <code>org.springframework.aop.framework.autoproxy</code> package provides the following
-standard auto-proxy creators.</p>
+<p><code>org.springframework.aop.framework.autoproxy</code> 包提供了以下标准自动代理创建者。</p>
 </div>
 <div class="sect4">
 <h5 id="aop-api-autoproxy"><a class="anchor" href="#aop-api-autoproxy"></a>BeanNameAutoProxyCreator</h5>
 <div class="paragraph">
-<p>The <code>BeanNameAutoProxyCreator</code> class is a <code>BeanPostProcessor</code> that automatically creates
-AOP proxies for beans with names matching literal values or wildcards.</p>
+<p>The <code>BeanNameAutoProxyCreator</code> 类是一个 <code>BeanPostProcessor</code>，它自动为名字与字面量或者通配符匹配的 bean 创建 AOP 代理。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15839,65 +15831,41 @@ AOP proxies for beans with names matching literal values or wildcards.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>As with <code>ProxyFactoryBean</code>, there is an <code>interceptorNames</code> property rather than a list
-of interceptors, to allow correct behavior for prototype advisors. Named "interceptors"
-can be advisors or any advice type.</p>
+<p>与<code>ProxyFactoryBean</code> 一样，有一个 <code>interceptorNames</code> 属性而不是一个拦截器列表，以允许原型 advisor 的正确行为。命名的“interceptor”可以是 advisor 或任何通知类型。</p>
 </div>
 <div class="paragraph">
-<p>As with auto proxying in general, the main point of using <code>BeanNameAutoProxyCreator</code> is
-to apply the same configuration consistently to multiple objects, with minimal volume of
-configuration. It is a popular choice for applying declarative transactions to multiple
-objects.</p>
+<p>与一般的自动代理一样，使用 <code>BeanNameAutoProxyCreator</code> 的要点是将相同的配置一致地应用于多个对象，同时配置的量最小。将声明性事务应用于多个对象是一种流行的选择。</p>
 </div>
 <div class="paragraph">
-<p>Bean definitions whose names match, such as "jdkMyBean" and "onlyJdk" in the above
-example, are plain old bean definitions with the target class. An AOP proxy will be
-created automatically by the <code>BeanNameAutoProxyCreator</code>. The same advice will be applied
-to all matching beans. Note that if advisors are used (rather than the interceptor in
-the above example), the pointcuts may apply differently to different beans.</p>
+<p>在上例中，名称匹配的 bean 定义（例如“jdkMyBean”和“onlyJdk”）是带有目标类的普通旧式 bean 定义。  AOP 代理将由 <code>BeanNameAutoProxyCreator</code> 自动创建。相同的通知将应用于所有匹配的 bean。注意，如果使用 advisor（而不是上述示例中的拦截器），则切点可能对不同的 bean 有不同的应用。</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="aop-api-autoproxy-default"><a class="anchor" href="#aop-api-autoproxy-default"></a>DefaultAdvisorAutoProxyCreator</h5>
 <div class="paragraph">
-<p>A more general and extremely powerful auto proxy creator is
-<code>DefaultAdvisorAutoProxyCreator</code>. This will automagically apply eligible advisors in the
-current context, without the need to include specific bean names in the auto-proxy
-advisor&#8217;s bean definition. It offers the same merit of consistent configuration and
-avoidance of duplication as <code>BeanNameAutoProxyCreator</code>.</p>
+<p>一个更通用和非常强大的自动代理创建器是 <code>DefaultAdvisorAutoProxyCreator</code>。这将自动在当前上下文中应用符合条件的 advisor，而不需要在自动代理 advisor 的 bean 定义中包含特定的 bean 名称。它提供了与 <code>BeanNameAutoProxyCreator</code> 相同的配置和避免重复的优点。</p>
 </div>
 <div class="paragraph">
-<p>Using this mechanism involves:</p>
+<p>使用这种机制涉及：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Specifying a <code>DefaultAdvisorAutoProxyCreator</code> bean definition.</p>
+<p>指定一个<code>DefaultAdvisorAutoProxyCreator</code> bean 定义。</p>
 </li>
 <li>
-<p>Specifying any number of Advisors in the same or related contexts. Note that these
-<em>must</em> be Advisors, not just interceptors or other advices. This is necessary
-because there must be a pointcut to evaluate, to check the eligibility of each advice
-to candidate bean definitions.</p>
+<p>在相同或相关的上下文中指定任意数量的 advisor。注意，这些必须是 advisor，而不仅仅是拦截器或其他通知。这是必要的，因为必须有一个切点来评估，以检查每个通知是否符合候选 bean 定义的资格。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>DefaultAdvisorAutoProxyCreator</code> will automatically evaluate the pointcut contained
-in each advisor, to see what (if any) advice it should apply to each business object
-(such as "businessObject1" and "businessObject2" in the example).</p>
+<p><code>DefaultAdvisorAutoProxyCreator</code> 将自动评估每个 advisor 中包含的切点，以查看它应该应用于每个业务对象（如示例中的“businessObject1”和“businessObject2”）的通知（如果有的话）。</p>
 </div>
 <div class="paragraph">
-<p>This means that any number of advisors can be applied automatically to each business
-object. If no pointcut in any of the advisors matches any method in a business object,
-the object will not be proxied. As bean definitions are added for new business objects,
-they will automatically be proxied if necessary.</p>
+<p>这意味着可以将任意数量的 advisor 自动应用于每个业务对象。如果任何 advisor 中的切点都不匹配业务对象中的任何方法，则该对象将不会被代理。由于为新业务对象添加了 bean 定义，因此必要时它们将自动进行代理。</p>
 </div>
 <div class="paragraph">
-<p>Autoproxying in general has the advantage of making it impossible for callers or
-dependencies to obtain an un-advised object. Calling getBean("businessObject1") on this
-ApplicationContext will return an AOP proxy, not the target business object. (The "inner
-bean" idiom shown earlier also offers this benefit.)</p>
+<p>一般而言，自动代理具有使调用者或依赖关系不可能获得未通知的对象的优点。在此 ApplicationContext 上调用 getBean("businessObject1") 将返回 AOP 代理，而不是目标业务对象。（之前显示的“内部 bean ”语法也提供了这种好处。）</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15917,56 +15885,33 @@ bean" idiom shown earlier also offers this benefit.)</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>DefaultAdvisorAutoProxyCreator</code> is very useful if you want to apply the same advice
-consistently to many business objects. Once the infrastructure definitions are in place,
-you can simply add new business objects without including specific proxy configuration.
-You can also drop in additional aspects very easily - for example, tracing or
-performance monitoring aspects - with minimal change to configuration.</p>
+<p>如果您想要将相同的通知一致地应用于许多业务对象，则 <code>DefaultAdvisorAutoProxyCreator</code> 非常有用。一旦基础设施定义就位，你可以简单地添加新的业务对象，而不包括特定的代理配置。您还可以非常轻松地添加其他切面 - 例如跟踪或性能监视方面 - 只需对配置进行最少的更改即可。</p>
 </div>
 <div class="paragraph">
-<p>The DefaultAdvisorAutoProxyCreator offers support for filtering (using a naming
-convention so that only certain advisors are evaluated, allowing use of multiple,
-differently configured, AdvisorAutoProxyCreators in the same factory) and ordering.
-Advisors can implement the <code>org.springframework.core.Ordered</code> interface to ensure
-correct ordering if this is an issue. The TransactionAttributeSourceAdvisor used in the
-above example has a configurable order value; the default setting is unordered.</p>
+<p>DefaultAdvisorAutoProxyCreator 支持过滤（使用命名约定，以便只评估某些 advisor，允许在同一工厂使用多个不同配置的 AdvisorAutoProxyCreators）并进行排序。advisors 可以实现 <code>org.springframework.core.Ordered</code> 接口，以确保正确的排序。上例中使用的 TransactionAttributeSourceAdvisor 具有可配置的序列值；默认设置是无序的。</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="aop-api-autoproxy-abstract"><a class="anchor" href="#aop-api-autoproxy-abstract"></a>AbstractAdvisorAutoProxyCreator</h5>
 <div class="paragraph">
-<p>This is the superclass of DefaultAdvisorAutoProxyCreator. You can create your own
-auto-proxy creators by subclassing this class, in the unlikely event that advisor
-definitions offer insufficient customization to the behavior of the framework
-<code>DefaultAdvisorAutoProxyCreator</code>.</p>
+<p>这是 DefaultAdvisorAutoProxyCreator 的超类。您可以通过继承这个类来创建自己的自动代理创建器，但不太可能的情况是，advisor 定义对框架 <code>DefaultAdvisorAutoProxyCreator</code> 的行为提供的定制不足。</p>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-autoproxy-metadata"><a class="anchor" href="#aop-autoproxy-metadata"></a>6.9.2. Using metadata-driven auto-proxying</h4>
+<h4 id="aop-autoproxy-metadata"><a class="anchor" href="#aop-autoproxy-metadata"></a>6.9.2. 使用元数据驱动的自动代理</h4>
 <div class="paragraph">
-<p>A particularly important type of auto-proxying is driven by metadata. This produces a
-similar programming model to .NET <code>ServicedComponents</code>. Instead of defining metadata in
-XML descriptors, configuration for transaction management and other enterprise services
-is held in source-level attributes.</p>
+<p>元数据驱动的自动代理类型是自动代理中一个重要类型。它为 .NET ServicedComponents 生成了一个类似的编程模型。与在 XML 描述符中定义元数据不同，事务管理和其他企业服务的配置保存在源代码级别属性中。</p>
 </div>
 <div class="paragraph">
-<p>In this case, you use the <code>DefaultAdvisorAutoProxyCreator</code>, in combination with Advisors
-that understand metadata attributes. The metadata specifics are held in the pointcut
-part of the candidate advisors, rather than in the auto-proxy creation class itself.</p>
+<p>在这种情况下，您可以结合使用 <code>DefaultAdvisorAutoProxyCreator</code> 与理解元数据属性的advisor。元数据细节保存在候选 advisor 的切点部分，而不是自动代理创建类本身。</p>
 </div>
 <div class="paragraph">
-<p>This is really a special case of the <code>DefaultAdvisorAutoProxyCreator</code>, but deserves
-consideration on its own. (The metadata-aware code is in the pointcuts contained in the
-advisors, not the AOP framework itself.)</p>
+<p>这实际上是 <code>DefaultAdvisorAutoProxyCreator</code> 的特例，but deserves
+  consideration on its own。（元数据感知代码位于 advisor 包含的切点中，而不是AOP框架本身。）</p>
 </div>
 <div class="paragraph">
-<p>The <code>/attributes</code> directory of the JPetStore sample application shows the use of
-attribute-driven auto-proxying. In this case, there&#8217;s no need to use the
-<code>TransactionProxyFactoryBean</code>. Simply defining transactional attributes on business
-objects is sufficient, because of the use of metadata-aware pointcuts. The bean
-definitions include the following code, in <code>/WEB-INF/declarativeServices.xml</code>. Note that
-this is generic, and can be used outside the JPetStore:</p>
+<p>JPetStore 示例应用程序的 <code>/attributes</code> 目录展示使用属性驱动的自动代理。在这种情况下，不需要使用 <code>TransactionProxyFactoryBean</code>。由于使用了元数据感知切点，只需定义业务对象的事务属性就足够了。在 <code>/WEB-INF/declarativeServices.xml</code> 中，bean 定义包含以下代码。请注意，这是通用的，可以在 JPetStore 之外使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15990,23 +15935,10 @@ this is generic, and can be used outside the JPetStore:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>DefaultAdvisorAutoProxyCreator</code> bean definition (the name is not significant, hence
-it can even be omitted) will pick up all eligible pointcuts in the current application
-context. In this case, the "transactionAdvisor" bean definition, of type
-<code>TransactionAttributeSourceAdvisor</code>, will apply to classes or methods carrying a
-transaction attribute. The TransactionAttributeSourceAdvisor depends on a
-TransactionInterceptor, via constructor dependency. The example resolves this via
-autowiring. The <code>AttributesTransactionAttributeSource</code> depends on an implementation of
-the <code>org.springframework.metadata.Attributes</code> interface. In this fragment, the
-"attributes" bean satisfies this, using the Jakarta Commons Attributes API to obtain
-attribute information. (The application code must have been compiled using the Commons
-Attributes compilation task.)</p>
+<p><code>DefaultAdvisorAutoProxyCreator</code> bean 定义（名称不重要，因此甚至可以省略）将在当前应用程序上下文中选取所有合适的切点。在这种情况下，<code>TransactionAttributeSourceAdvisor</code> 类型的“transactionAdvisor” bean 定义将应用于携带事务属性的类或方法。TransactionAttributeSourceAdvisor 通过构造器依赖依赖于 TransactionInterceptor。该示例通过自动装配来解决此问题。<code>AttributesTransactionAttributeSource</code> 取决于 <code>org.springframework.metadata.Attributes</code> 接口的实现。在这个片段中，“attributes” bean 满足了这个要求，使用 Jakarta Commons Attributes API 来获取属性信息。（应用程序代码必须使用 Commons Attributes 编译任务进行编译。）</p>
 </div>
 <div class="paragraph">
-<p>The <code>/annotation</code> directory of the JPetStore sample application contains an analogous
-example for auto-proxying driven by JDK 1.5+ annotations. The following configuration
-enables automatic detection of Spring&#8217;s <code>Transactional</code> annotation, leading to implicit
-proxies for beans containing that annotation:</p>
+<p>JPetStore示例应用程序的 <code>/annotation</code> 目录包含一个类似的示例，用于由 JDK 1.5+ 注解驱动的自动代理。以下配置可以自动检测 Spring 的 <code>Transactional</code> 注释，从而为包含该注解的 bean 提供隐式代理：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16026,10 +15958,7 @@ proxies for beans containing that annotation:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>TransactionInterceptor</code> defined here depends on a <code>PlatformTransactionManager</code>
-definition, which is not included in this generic file (although it could be) because it
-will be specific to the application&#8217;s transaction requirements (typically JTA, as in
-this example, or Hibernate or JDBC):</p>
+<p>此处定义的 <code>TransactionInterceptor</code> 取决于 <code>PlatformTransactionManager</code> 定义，该定义不包含在此通用文件中（尽管这是可能的），因为它将特定于应用程序的事务要求（通常为JTA，如本示例或 Hibernate 或 JDBC）：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16045,37 +15974,27 @@ this example, or Hibernate or JDBC):</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If you require only declarative transaction management, using these generic XML
-definitions will result in Spring automatically proxying all classes or methods with
-transaction attributes. You won&#8217;t need to work directly with AOP, and the programming
-model is similar to that of .NET ServicedComponents.</p>
+<p>如果您只需要声明式事务管理，那么使用这些通用 XML 定义将使 Spring 自动使用事务属性代理所有类或方法。您不需要直接使用 AOP，编程模型与 .NET ServicedComponents 类似。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>This mechanism is extensible. It&#8217;s possible to do auto-proxying based on custom
-attributes. You need to:</p>
+<p>这种机制是可扩展的。可以根据自定义属性进行自动代理。你需要：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Define your custom attribute.</p>
+<p>定义您的自定义属性。</p>
 </li>
 <li>
-<p>Specify an Advisor with the necessary advice, including a pointcut that is triggered
-by the presence of the custom attribute on a class or method. You may be able to use
-an existing advice, merely implementing a static pointcut that picks up the custom
-attribute.</p>
+<p>使用必要的通知指定 Advisor，其中包括由在类或方法中存在自定义属性触发的切点。您可能能够使用已经存在的通知，只需实现一个静态切点来提取自定义属性。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>It&#8217;s possible for such advisors to be unique to each advised class (for example, mixins):
-they simply need to be defined as prototype, rather than singleton, bean definitions.
-For example, the <code>LockMixin</code> introduction interceptor from the Spring test suite,
-shown above, could be used in conjunction with a generic <code>DefaultIntroductionAdvisor</code>:</p>
+<p>这些 advisor 可能对每个通知的类都是唯一的（例如 mixin）：它们只需要定义为原型，而不是单例 bean 定义。例如，上面展示的来自 Spring 测试套件的 <code>LockMixin</code> 引入拦截器可以与通用的<code>DefaultIntroductionAdvisor</code> 结合使用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16088,7 +16007,7 @@ shown above, could be used in conjunction with a generic <code>DefaultIntroducti
 </div>
 </div>
 <div class="paragraph">
-<p>Note that both <code>lockMixin</code> and <code>lockableAdvisor</code> are defined as prototypes.</p>
+<p>注意 <code>lockMixin</code> 和 <code>lockableAdvisor</code> 都被定义为原型。</p>
 </div>
 </div>
 </div>
