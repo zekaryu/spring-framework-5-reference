@@ -15669,15 +15669,12 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-prog"><a class="anchor" href="#aop-prog"></a>6.7. Creating AOP proxies programmatically with the ProxyFactory</h3>
+<h3 id="aop-prog"><a class="anchor" href="#aop-prog"></a>6.7. 使用 ProxyFactory 以编程方式创建 AOP 代理</h3>
 <div class="paragraph">
-<p>It&#8217;s easy to create AOP proxies programmatically using Spring. This enables you to use
-Spring AOP without dependency on Spring IoC.</p>
+<p>使用 Spring 以编程方式创建 AOP 代理很容易。这使你能够在不依赖于 Spring IoC 的情况下使用 Spring AOP。</p>
 </div>
 <div class="paragraph">
-<p>The following listing shows creation of a proxy for a target object, with one
-interceptor and one advisor. The interfaces implemented by the target object will
-automatically be proxied:</p>
+<p>以下代码展示了使用一个拦截器和一个通知器为目标对象创建代理。目标对象实现的接口将自动被代理：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15688,21 +15685,13 @@ MyBusinessInterface tb = (MyBusinessInterface) factory.getProxy();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The first step is to construct an object of type
-<code>org.springframework.aop.framework.ProxyFactory</code>. You can create this with a target
-object, as in the above example, or specify the interfaces to be proxied in an alternate
-constructor.</p>
+<p>第一步是构建一个 <code>org.springframework.aop.framework.ProxyFactory</code> 类型的对象。你可以使用目标对象来创建此对象，如上例所示，或者指定要在替代构造器中进行代理的接口。</p>
 </div>
 <div class="paragraph">
-<p>You can add advices (with interceptors as a specialized kind of advice) and/or advisors,
-and manipulate them for the life of the ProxyFactory. If you add an
-IntroductionInterceptionAroundAdvisor, you can cause the proxy to implement additional
-interfaces.</p>
+<p>你可以添加通知（使用拦截器作为专门的通知）和/或通知器，并在 ProxyFactory 的生命周期中操纵它们。如果你添加了一个 IntroductionInterceptionAroundAdvisor，则可以使代理实现其他接口。</p>
 </div>
 <div class="paragraph">
-<p>There are also convenience methods on ProxyFactory (inherited from <code>AdvisedSupport</code>)
-which allow you to add other advice types such as before and throws advice.
-AdvisedSupport is the superclass of both ProxyFactory and ProxyFactoryBean.</p>
+<p>ProxyFactory 上还有一些便利方法（继承自 <code>AdvisedSupport</code>），它们允许你添加其他的通知类型，比如前置通知异常通知。AdvisedSupport 是 ProxyFactory 和 ProxyFactoryBean 的超类。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -15712,9 +15701,7 @@ AdvisedSupport is the superclass of both ProxyFactory and ProxyFactoryBean.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Integrating AOP proxy creation with the IoC framework is best practice in most
-applications. We recommend that you externalize configuration from Java code with AOP,
-as in general.</p>
+<p>将 AOP 代理创建与 IoC 框架集成是大多数应用程序的最佳实践。与一般情况相同，我们建议你使用 AOP 的 Java 代码外化配置。</p>
 </div>
 </td>
 </tr>
