@@ -7647,7 +7647,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <p>你也可以通过注解的 <code>condition</code>  特性添加额外的运行时过滤，该属性定义了一个 <a href="#expressions"><code>SpEL</code> 表达式</a>，如果该表达式匹配就会调用针对特定事件的这个方法。</p>
 </div>
 <div class="paragraph">
-<p>例如，我们的通知器可以被重写为仅在事件的 <code>test</code> 特性等于 <code>foo</code> 的时候被调用：</p>
+<p>例如，我们的 advisor 可以被重写为仅在事件的 <code>test</code> 特性等于 <code>foo</code> 的时候被调用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14911,7 +14911,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <p>每个通知都是一个 Spring bean。通知实例可以被所有被通知的对象共享，或者对每个被通知对象都是唯一的。 这对应于与类一一对应或与实例一一对应的通知。</p>
 </div>
 <div class="paragraph">
-<p>与类一一对应的通知最常使用。适用于事务通知器等通用通知。这些不依赖于代理对象的状态或添加新的状态; 他们只是在方法和参数上进行操作。</p>
+<p>与类一一对应的通知最常使用。适用于事务 advisor 等通用通知。这些不依赖于代理对象的状态或添加新的状态; 他们只是在方法和参数上进行操作。</p>
 </div>
 <div class="paragraph">
 <p>与实例一一对应的通知适合与引入，以支持混合。在这种情况下，通知将状态添加到代理对象。</p>
@@ -15295,21 +15295,21 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <p>我们可以非常简单地应用这个通知：它不需要配置。（然而，这是必要的：如果没有 <em>IntroductionAdvisor</em>，就不可能使用 <code>IntroductionInterceptor</code>。）与通常情况一样，通知必须是与实例一一对应，因为它是有状态的。对于每个通知的对象，我们需要一个不同的 <code>LockMixinAdvisor</code> 实例，和不同的 <code>LockMixin</code> 实例。通知包含通知对象状态的一部分。</p>
 </div>
 <div class="paragraph">
-<p>我们可以使用 <code>Advised.addAdvisor()</code> 方法以编程方式应用此通知器，或者像其他任何通知器一样在 XML 配置中使用推荐的方式。下面讨论的所有代理创建选项，包括“自动代理创建者”，都能正确处理引入和有状态的混合使用。</p>
+<p>我们可以使用 <code>Advised.addAdvisor()</code> 方法以编程方式应用此 advisor，或者像其他任何 advisor 一样在 XML 配置中使用推荐的方式。下面讨论的所有代理创建选项，包括“自动代理创建者”，都能正确处理引入和有状态的混合使用。</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-api-advisor"><a class="anchor" href="#aop-api-advisor"></a>6.4. Spring 中的通知器 API </h3>
+<h3 id="aop-api-advisor"><a class="anchor" href="#aop-api-advisor"></a>6.4. Spring 中的 advisor API </h3>
 <div class="paragraph">
-<p>在 Spring 中，通知器是一个只包含与切点表达式关联的单个通知对象的切面。</p>
+<p>在 Spring 中，advisor 是一个只包含与切点表达式关联的单个通知对象的切面。</p>
 </div>
 <div class="paragraph">
-<p>除了特殊情况的引入外，任何通知器都可以使用任何通知。 <code>org.springframework.aop.support.DefaultPointcutAdvisor</code> 是最常用的通知器类。例如，他可以与 <code>MethodInterceptor</code>，<code>BeforeAdvice</code> 或者 <code>ThrowsAdvice</code> 一起使用。</p>
+<p>除了特殊情况的引入外，任何 advisor 都可以使用任何通知。 <code>org.springframework.aop.support.DefaultPointcutAdvisor</code> 是最常用的 advisor 类。例如，他可以与 <code>MethodInterceptor</code>，<code>BeforeAdvice</code> 或者 <code>ThrowsAdvice</code> 一起使用。</p>
 </div>
 <div class="paragraph">
-<p>Spring 可以在同一个 AOP 代理中混合使用通知器和通知类型。例如，你可以在一个代理配置中使用环绕通知的拦截，异常通知和前置通知：Spring 将自动创建必要的拦截器链。</p>
+<p>Spring 可以在同一个 AOP 代理中混合使用 advisor 和通知类型。例如，你可以在一个代理配置中使用环绕通知的拦截，异常通知和前置通知：Spring 将自动创建必要的拦截器链。</p>
 </div>
 </div>
 <div class="sect2">
@@ -15367,7 +15367,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <p><code>proxyTargetClass</code>：如果要代理目标类，而不是目标类的接口，则为 <code>true</code>。如果此属性值设置为 <code>true</code>，则将创建CGLIB代理（也可以参阅 <a href="#aop-pfb-proxy-types">基于 JDK 和 CGLIB 的代理</a>）。</p>
 </li>
 <li>
-<p><code>optimize</code>：控制是否将积极的优化应用于 <em>通过CGLIB创建的</em> 代理。除非完全理解相关 AOP 代理如何处理优化，否则不应该轻率使用此设置。这目前仅用于 CGLIB 代理;它对 JDK 动态代理无效。</p>
+<p><code>optimize</code>：控制是否将激进的优化应用于 <em>通过CGLIB创建的</em> 代理。除非完全理解相关 AOP 代理如何处理优化，否则不应该轻率使用此设置。这目前仅用于 CGLIB 代理;它对 JDK 动态代理无效。</p>
 </li>
 <li>
 <p><code>frozen</code>：如果代理配置被冻结，则不再允许更改配置。这对于轻微优化以及在代理创建后不希望调用者能够操作代理（通过<code>Advised</code> 接口）的情况都很有用。此属性的默认值为 <code>false</code>，因此允许更改（如添加其他额外的通知）。</p>
@@ -15394,7 +15394,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <p>这些名称是当前工厂中的 bean 名称，包括来自祖先工厂的 bean 名称。你不能在这里提及 bean 引用，因为这样做会导致 <code>ProxyFactoryBean</code> 忽略通知的单例设置。</p>
 </div>
 <div class="paragraph">
-<p>你可以附加一个带有星号（<code>*</code>）的拦截器名字。这将导致应用中所有以星号前的部分开头的所有通知器 bean 被应用。使用此功能的示例可以在 <a href="#aop-global-advisors">使用'全局'通知器</a> 中找到。</p>
+<p>你可以附加一个带有星号（<code>*</code>）的拦截器名字。这将导致应用中所有以星号前的部分开头的所有 advisor bean 被应用。使用此功能的示例可以在 <a href="#aop-global-advisors">使用'全局' advisor</a> 中找到。</p>
 </div>
 <div class="ulist">
 <ul>
@@ -15450,7 +15450,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <p>将被代理的 <em>目标 bean</em>。这是下面示例中的 "personTarget" bean 定义。</p>
 </li>
 <li>
-<p>用于提供通知的 Advisor（通知器）和 Interceptor（拦截器） 。</p>
+<p>用于提供通知的 Advisor（advisor）和 Interceptor（拦截器） 。</p>
 </li>
 <li>
 <p>一个 AOP 代理 bean 定义，指定目标对象（personTarget bean）以及要代理的接口以及要应用的通知。</p>
@@ -15486,7 +15486,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="paragraph">
-<p>注意，<code>interceptorNames</code> 属性接受一个字符串列表：当前工厂中拦截器或通知器的 bean 名称。通知器，拦截器，前置通知，返回通知，异常通知都可以使用。通知器的排序很重要。</p>
+<p>注意，<code>interceptorNames</code> 属性接受一个字符串列表：当前工厂中拦截器或 advisor 的 bean 名称。advisor，拦截器，前置通知，返回通知，异常通知都可以使用。advisor 的排序很重要。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -15496,7 +15496,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </td>
 <td class="content">
 <div class="paragraph">
-<p>您可能想知道为什么列表不包含 bean 引用。原因是如果 ProxyFactoryBean 的 singleton 属性设置为 false，它必须能够返回独立的代理实例。如果任何通知器本身就是一个原型，那么就需要返回一个独立的实例，所以有必要从工厂获得一个原型实例; 保存一个引用是不够的。</p>
+<p>您可能想知道为什么列表不包含 bean 引用。原因是如果 ProxyFactoryBean 的 singleton 属性设置为 false，它必须能够返回独立的代理实例。如果任何 advisor 本身就是一个原型，那么就需要返回一个独立的实例，所以有必要从工厂获得一个原型实例; 保存一个引用是不够的。</p>
 </div>
 </td>
 </tr>
@@ -15588,9 +15588,9 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-global-advisors"><a class="anchor" href="#aop-global-advisors"></a>6.5.6. 使用'全局' advisor 通知器</h4>
+<h4 id="aop-global-advisors"><a class="anchor" href="#aop-global-advisors"></a>6.5.6. 使用'全局' advisor  advisor </h4>
 <div class="paragraph">
-<p>通过向拦截器名称附加星号，所有具有与星号前的部分匹配的 bean 名称的通知器将被添加到通知链中。 如果你需要添加一组标准的“全局”通知器，这可以派上用场：</p>
+<p>通过向拦截器名称附加星号，所有具有与星号前的部分匹配的 bean 名称的 advisor 将被添加到通知链中。 如果你需要添加一组标准的“全局” advisor，这可以派上用场：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15674,7 +15674,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <p>使用 Spring 以编程方式创建 AOP 代理很容易。这使你能够在不依赖于 Spring IoC 的情况下使用 Spring AOP。</p>
 </div>
 <div class="paragraph">
-<p>以下代码展示了使用一个拦截器和一个通知器为目标对象创建代理。目标对象实现的接口将自动被代理：</p>
+<p>以下代码展示了使用一个拦截器和一个 advisor 为目标对象创建代理。目标对象实现的接口将自动被代理：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15688,7 +15688,7 @@ MyBusinessInterface tb = (MyBusinessInterface) factory.getProxy();</code></pre>
 <p>第一步是构建一个 <code>org.springframework.aop.framework.ProxyFactory</code> 类型的对象。你可以使用目标对象来创建此对象，如上例所示，或者指定要在替代构造器中进行代理的接口。</p>
 </div>
 <div class="paragraph">
-<p>你可以添加通知（使用拦截器作为专门的通知）和/或通知器，并在 ProxyFactory 的生命周期中操纵它们。如果你添加了一个 IntroductionInterceptionAroundAdvisor，则可以使代理实现其他接口。</p>
+<p>你可以添加通知（使用拦截器作为专门的通知）和/或 advisor，并在 ProxyFactory 的生命周期中操纵它们。如果你添加了一个 IntroductionInterceptionAroundAdvisor，则可以使代理实现其他接口。</p>
 </div>
 <div class="paragraph">
 <p>ProxyFactory 上还有一些便利方法（继承自 <code>AdvisedSupport</code>），它们允许你添加其他的通知类型，比如前置通知异常通知。AdvisedSupport 是 ProxyFactory 和 ProxyFactoryBean 的超类。</p>
@@ -15709,12 +15709,9 @@ MyBusinessInterface tb = (MyBusinessInterface) factory.getProxy();</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-api-advised"><a class="anchor" href="#aop-api-advised"></a>6.8. Manipulating advised objects</h3>
+<h3 id="aop-api-advised"><a class="anchor" href="#aop-api-advised"></a>6.8. 操纵被通知的对象</h3>
 <div class="paragraph">
-<p>However you create AOP proxies, you can manipulate them using the
-<code>org.springframework.aop.framework.Advised</code> interface. Any AOP proxy can be cast to this
-interface, whichever other interfaces it implements. This interface includes the
-following methods:</p>
+<p>创建 AOP 代理，你可以使用 <code>org.springframework.aop.framework.Advised</code> 接口来操作它们。任何 AOP 代理都可以转换为此接口，无论它实现了哪个其他接口。该接口包含以下方法：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15740,28 +15737,16 @@ following methods:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>getAdvisors()</code> method will return an Advisor for every advisor, interceptor or
-other advice type that has been added to the factory. If you added an Advisor, the
-returned advisor at this index will be the object that you added. If you added an
-interceptor or other advice type, Spring will have wrapped this in an advisor with a
-pointcut that always returns true. Thus if you added a <code>MethodInterceptor</code>, the advisor
-returned for this index will be an <code>DefaultPointcutAdvisor</code> returning your
-<code>MethodInterceptor</code> and a pointcut that matches all classes and methods.</p>
+<p><code>getAdvisors()</code> 方法将为已添加到工厂的每个 advisor，拦截器或其他通知类型返回 Advisor。如果你添加了一个 Advisor，则此索引处的返回 Advisor 将是你添加的对象。如果你添加了拦截器或其他建议类型，Spring 将用一个总是返回 true 的切点将其包装在 advisor 中。因此，如果你添加了一个 <code>MethodInterceptor</code>，那么为该索引返回的 advisor 将是一个返回你的 <code>MethodInterceptor</code> 的 <code>DefaultPointcutAdvisor</code> ，以及一个匹配所有类和方法的切点。</p>
 </div>
 <div class="paragraph">
-<p>The <code>addAdvisor()</code> methods can be used to add any Advisor. Usually the advisor holding
-pointcut and advice will be the generic <code>DefaultPointcutAdvisor</code>, which can be used with
-any advice or pointcut (but not for introductions).</p>
+<p><code>addAdvisor()</code> 方法可以用来添加任何 Advisor。通常持有切点和通知的 advisor 将是通用的 <code>DefaultPointcutAdvisor</code>，它可以用于任何通知或切点（但不能用于引入）。</p>
 </div>
 <div class="paragraph">
-<p>By default, it&#8217;s possible to add or remove advisors or interceptors even once a proxy
-has been created. The only restriction is that it&#8217;s impossible to add or remove an
-introduction advisor, as existing proxies from the factory will not show the interface
-change. (You can obtain a new proxy from the factory to avoid this problem.)</p>
+<p>默认情况下，即使创建了代理，也可以添加或删除 advisor 或拦截器。唯一的限制是无法添加或删除 引入 advisor ，因为来自工厂的现有代理程序不会显示接口的更改。（你可以从工厂获取新代理以避免此问题。）</p>
 </div>
 <div class="paragraph">
-<p>A simple example of casting an AOP proxy to the <code>Advised</code> interface and examining and
-manipulating its advice:</p>
+<p>一个将 AOP 代理投射到 <code>Advised</code> 接口并检查和操縱其通知的简单示例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -15789,26 +15774,14 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </td>
 <td class="content">
 <div class="paragraph">
-<p>It&#8217;s questionable whether it&#8217;s advisable (no pun intended) to modify advice on a
-business object in production, although there are no doubt legitimate usage cases.
-However, it can be very useful in development: for example, in tests. I have sometimes
-found it very useful to be able to add test code in the form of an interceptor or other
-advice, getting inside a method invocation I want to test. (For example, the advice can
-get inside a transaction created for that method: for example, to run SQL to check that
-a database was correctly updated, before marking the transaction for roll back.)</p>
+<p>尽管有毫无疑问合法的使用案例，修改生产中的业务对象的通知是否可行仍然是有疑问的。但是，它在开发中非常有用：例如，在测试中。我有时发现能够以拦截器或其他通知的形式添加测试代码非常有用，这么做可以进入我想测试的方法调用。（例如，通知可以进入为该方法创建的事务中：例如，在标记事务回滚之前，运行SQL以检查数据库是否已正确更新。）</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Depending on how you created the proxy, you can usually set a <code>frozen</code> flag, in which
-case the <code>Advised</code> <code>isFrozen()</code> method will return true, and any attempts to modify
-advice through addition or removal will result in an <code>AopConfigException</code>. The ability
-to freeze the state of an advised object is useful in some cases, for example, to
-prevent calling code removing a security interceptor. It may also be used in Spring 1.1
-to allow aggressive optimization if runtime advice modification is known not to be
-required.</p>
+<p>根据创建代理的方式，通常可以设置一个 <code>frozen</code> 标志，在这种情况下，<code>Advised</code> <code>isFrozen()</code> 方法将返回 true，并且任何通过添加或删除来修改通知的尝试都将导致 <code>AopConfigException</code>。在某些情况下，冻结通知对象状态的功能很有用，例如，可以防止调用代码移除安全拦截器。如果知道不需要修改运行时通知，它也可以在 Spring 1.1中使用，以允许激进的优化。</p>
 </div>
 </div>
 <div class="sect2">
