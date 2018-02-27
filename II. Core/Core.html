@@ -257,7 +257,7 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>在你了解了Spring 的 IoC 容器之后，您可能想了解更多关于 Spring 的资源抽象的内容，正如在 <a href="#resources">资源</a> 里描述的，它提供了一种的从某种URI形式的地址中读取输入流的便捷机制。尤其是，<code>资源</code> 路径用于构建应用上下文，如在<a href="#resources-app-ctx">应用上下文和资源路径</a>描述的那样。</p>
+<p>在你了解了Spring 的 IoC 容器之后，你可能想了解更多关于 Spring 的资源抽象的内容，正如在 <a href="#resources">资源</a> 里描述的，它提供了一种的从某种URI形式的地址中读取输入流的便捷机制。尤其是，<code>资源</code> 路径用于构建应用上下文，如在<a href="#resources-app-ctx">应用上下文和资源路径</a>描述的那样。</p>
 </div>
 </td>
 </tr>
@@ -339,7 +339,7 @@
 </div>
 <div class="paragraph">
 <p>在上面的例子中，外部的 bean 定义从三个文件被加载进来:
-<code>services.xml</code>，<code>messageSource.xml</code> 和 <code>themeSource.xml</code>。对于进行导入操作的定义文件来说，所有的地址路径都是相对路径，所以 <code>services.xml</code> 必须与做导入操作的文件放在同一个目录或者同一个类路径，而 <code>messageSource.xml</code> 和 <code>themeSource.xml</code> 必须放在做导入操作的文件地址的下层 <code>resource</code> 地址中。如您所见，最前面的斜杠可以忽略不写，不过鉴于这些都是相对路径，最好彻底抛弃使用这个斜杠。这些被导入文件的内容，包括最顶层的 <code>&lt;beans/&gt;</code> 元素，也必须满足 Spring Schema 的有效定义。</p>
+<code>services.xml</code>，<code>messageSource.xml</code> 和 <code>themeSource.xml</code>。对于进行导入操作的定义文件来说，所有的地址路径都是相对路径，所以 <code>services.xml</code> 必须与做导入操作的文件放在同一个目录或者同一个类路径，而 <code>messageSource.xml</code> 和 <code>themeSource.xml</code> 必须放在做导入操作的文件地址的下层 <code>resource</code> 地址中。如你所见，最前面的斜杠可以忽略不写，不过鉴于这些都是相对路径，最好彻底抛弃使用这个斜杠。这些被导入文件的内容，包括最顶层的 <code>&lt;beans/&gt;</code> 元素，也必须满足 Spring Schema 的有效定义。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -452,7 +452,7 @@ PetStoreService service = context.getBean(<span class="string"><span class="deli
 <div class="sect2">
 <h3 id="beans-definition"><a class="anchor" href="#beans-definition"></a>1.3. Bean 概述</h3>
 <div class="paragraph">
-<p>Spring IoC 容器管理一个或多个 <em>bean</em>。这些bean是由您提供给容器的配置元数据创建的。例如，以XML中
+<p>Spring IoC 容器管理一个或多个 <em>bean</em>。这些bean是由你提供给容器的配置元数据创建的。例如，以XML中
 <code>&lt;bean/&gt;</code> 的形式定义。</p>
 </div>
 <div class="paragraph">
@@ -3748,7 +3748,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </table>
 </div>
 <div class="paragraph">
-<p>与以往一样，您可以将它们注册为单独的 bean 定义，也可以通过在基于XML的 Spring 配置（注意 <code>context</code> 命名空间的引入）中包含以下标记进行隐式注册：</p>
+<p>与以往一样，你可以将它们注册为单独的 bean 定义，也可以通过在基于XML的 Spring 配置（注意 <code>context</code> 命名空间的引入）中包含以下标记进行隐式注册：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5065,7 +5065,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>您可以将 <code>@Bean</code> 方法声明为 <code>static</code>，从而允许在不创建包含它们的配置类实例的情况下也可以调用它们。这在定义 post-processor bean 如 <code>BeanFactoryPostProcessor</code> 或者
+<p>你可以将 <code>@Bean</code> 方法声明为 <code>static</code>，从而允许在不创建包含它们的配置类实例的情况下也可以调用它们。这在定义 post-processor bean 如 <code>BeanFactoryPostProcessor</code> 或者
   <code>BeanPostProcessor</code> 时特别有用，因为这类 bean 会在容器的早期生命周期就被初始化，并且会会在那一刻避免触发配置的其它部分。</p>
 </div>
 <div class="paragraph">
@@ -5336,7 +5336,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>如果您正在使用Maven，则可以在标准Maven存储库（http://repo1.maven.org/maven2/javax/inject/javax.inject/1/）中使用 <code>javax.inject</code> artifact。你可以将以下依赖项添加到你的pom.xml 文件中：
+<p>如果你正在使用Maven，则可以在标准Maven存储库（http://repo1.maven.org/maven2/javax/inject/javax.inject/1/）中使用 <code>javax.inject</code> artifact。你可以将以下依赖项添加到你的pom.xml 文件中：
 </p>
 </div>
 <div class="listingblock">
@@ -5529,7 +5529,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Scope("singleton")</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Singleton</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSR-330 的默认作用域就像 Spring 的 <code>prototype</code> 原型作用域。但是，为了保持与 Spring 的一般默认值一致，Spring 容器中声明的 JSR-330 bean 默认是 code>singleton</code> 单例。为了使用除 <code>singleton</code> 单例之外的作用域，您应该使用 Spring 的 <code>@Scope</code> 注解。<code>javax.inject</code> 还提供了 <a href="http://download.oracle.com/javaee/6/api/javax/inject/Scope.html">@Scope</a> 注解。 不过，这只是为了用来创建自己的注释。</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSR-330 的默认作用域就像 Spring 的 <code>prototype</code> 原型作用域。但是，为了保持与 Spring 的一般默认值一致，Spring 容器中声明的 JSR-330 bean 默认是 code>singleton</code> 单例。为了使用除 <code>singleton</code> 单例之外的作用域，你应该使用 Spring 的 <code>@Scope</code> 注解。<code>javax.inject</code> 还提供了 <a href="http://download.oracle.com/javaee/6/api/javax/inject/Scope.html">@Scope</a> 注解。 不过，这只是为了用来创建自己的注释。</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@Qualifier</p></td>
@@ -5806,7 +5806,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <div class="sect4">
 <h5 id="beans-java-declaring-a-bean"><a class="anchor" href="#beans-java-declaring-a-bean"></a>bean 声明</h5>
 <div class="paragraph">
-<p>要声明一个 bean，只需使用@Bean注释来注释一个方法即可。 您可以使用此方法在 <code>ApplicationContext</code> 中注册一个类型指定为方法返回类型的bean 定义。默认情况下，这个 bean 的名字和方法名相同。 以下是一个 <code>@Bean</code> 方法声明的简单示例：</p>
+<p>要声明一个 bean，只需使用@Bean注释来注释一个方法即可。 你可以使用此方法在 <code>ApplicationContext</code> 中注册一个类型指定为方法返回类型的bean 定义。默认情况下，这个 bean 的名字和方法名相同。 以下是一个 <code>@Bean</code> 方法声明的简单示例：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -5864,7 +5864,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>如果你始终通过声明的服务接口来引用你的类型，那么你的 <code>@Bean</code> 返回类型可以安全地加入该设计决策。但是，对于实现多个接口的组件或可能由其实现类型引用的组件，声明最具体的可能返回类型（至少与引用您的bean 的注入点要求相同）会更加安全。</p>
+<p>如果你始终通过声明的服务接口来引用你的类型，那么你的 <code>@Bean</code> 返回类型可以安全地加入该设计决策。但是，对于实现多个接口的组件或可能由其实现类型引用的组件，声明最具体的可能返回类型（至少与引用你的bean 的注入点要求相同）会更加安全。</p>
 </div>
 </td>
 </tr>
@@ -5992,7 +5992,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>当您直接使用 Java 时，您可以对对象进行任何操作，而不总是需要依靠容器的生命周期！</p>
+<p>当你直接使用 Java 时，你可以对对象进行任何操作，而不总是需要依靠容器的生命周期！</p>
 </div>
 </td>
 </tr>
@@ -6026,7 +6026,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <div class="sect5">
 <h6 id="beans-java-scoped-proxy"><a class="anchor" href="#beans-java-scoped-proxy"></a>@Scope 和作用域代理</h6>
 <div class="paragraph">
-<p>Spring 提供了一个通过 <a href="#beans-factory-scopes-other-injection">作用域代理</a> 来处理作用域依赖的方便方法。使用 XML 配置时创建这种代理的最简单方法是使用 <code>&lt;aop:scoped-proxy/&gt;</code> 元素。在 Java 中配置 bean 的时候使用 @Scope 注解与 proxyMode 特性的支持是等效的。 默认是没有代理（<code>ScopedProxyMode.NO</code>），但您可以指定 <code>ScopedProxyMode.TARGET_CLASS</code> 或 <code>ScopedProxyMode.INTERFACES</code>。</p>
+<p>Spring 提供了一个通过 <a href="#beans-factory-scopes-other-injection">作用域代理</a> 来处理作用域依赖的方便方法。使用 XML 配置时创建这种代理的最简单方法是使用 <code>&lt;aop:scoped-proxy/&gt;</code> 元素。在 Java 中配置 bean 的时候使用 @Scope 注解与 proxyMode 特性的支持是等效的。 默认是没有代理（<code>ScopedProxyMode.NO</code>），但你可以指定 <code>ScopedProxyMode.TARGET_CLASS</code> 或 <code>ScopedProxyMode.INTERFACES</code>。</p>
 </div>
 <div class="paragraph">
 <p>如果你将作用域代理示例从 XML 参考文档（请参阅前面的链接）移植到我们使用 Java 的 <code>@Bean</code> 中，它将如下所示：</p>
@@ -6177,7 +6177,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>使用Java配置支持，您可以创建 <code>CommandManager</code> 的子类，其中抽象 <code>createCommand()</code> 方法被重写，以便查找新的（原型）command 对象：</p>
+<p>使用Java配置支持，你可以创建 <code>CommandManager</code> 的子类，其中抽象 <code>createCommand()</code> 方法被重写，以便查找新的（原型）command 对象：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -6244,7 +6244,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>这种行为可能会根据您的 bean 的作用域而有所不同。我们在这里讨论单例 bean。</p>
+<p>这种行为可能会根据你的 bean 的作用域而有所不同。我们在这里讨论单例 bean。</p>
 </div>
 </td>
 </tr>
@@ -6261,7 +6261,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <p>由于 CGLIB 在启动时动态添加功能，因此有一些限制，特别是配置类不能是 final 的。但是，从 Spring 4.3 开始，任何构造函数都可以在配置类上使用，包括使用 <code>@Autowired</code>或对默认注入使用单个非默认构造器声明。</p>
 </div>
 <div class="paragraph">
-<p>如果您希望避免任何 CGLIB 限制，请考虑在非 <code>@Configuration</code> 类上声明 <code>@Bean</code> 方法，例如使用简单的 <code>@Component</code> 类。 <code>@Bean</code> 方法之间的跨方法调用将不会被拦截，因此你必须完全依赖于构造器或方法级别的依赖注入。</p>
+<p>如果你希望避免任何 CGLIB 限制，请考虑在非 <code>@Configuration</code> 类上声明 <code>@Bean</code> 方法，例如使用简单的 <code>@Component</code> 类。 <code>@Bean</code> 方法之间的跨方法调用将不会被拦截，因此你必须完全依赖于构造器或方法级别的依赖注入。</p>
 </div>
 </td>
 </tr>
@@ -6324,7 +6324,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>从Spring Framework 4.2开始，<code>@Import</code> 还支持对常规组件类的引用，类似 <code>AnnotationConfigApplicationContext.register</code> 方法。如果您想避免组件扫描，将一些配置类作为明确定义所有组件的入口点，这个支持特别有用。</p>
+<p>从Spring Framework 4.2开始，<code>@Import</code> 还支持对常规组件类的引用，类似 <code>AnnotationConfigApplicationContext.register</code> 方法。如果你想避免组件扫描，将一些配置类作为明确定义所有组件的入口点，这个支持特别有用。</p>
 </div>
 </td>
 </tr>
@@ -6462,7 +6462,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <div class="title"><a id="beans-java-injecting-imported-beans-fq"></a>便于导航的全限定导入 bean</div>
 <div class="content">
 <div class="paragraph">
-<p>在上面的场景中，使用 <code>@Autowired</code> 运行良好，并提供了所需的模块化，但是确定自动装配的 bean 定义的确切位置仍然有些模糊。例如，作为一名开发人员查看一下 <code>ServiceConfig</code>，你如何确切知道 <code>@Autowired AccountRepository</code> bean 的声明位置？这在代码中并不明确，这个例子可能刚好是 OK 的。记住，<a href="https://spring.io/tools/sts">Spring Tool Suite</a> 提供的工具可以渲染拓扑图，显示所有组件是怎么连接起来的 - 这可能就是您所需要的。另外，您的Java IDE可以轻松找到 <code>AccountRepository</code> 类型的所有声明和用法，并且会快速向您显示返回该类型的 <code>@Bean</code> 方法的位置。</p>
+<p>在上面的场景中，使用 <code>@Autowired</code> 运行良好，并提供了所需的模块化，但是确定自动装配的 bean 定义的确切位置仍然有些模糊。例如，作为一名开发人员查看一下 <code>ServiceConfig</code>，你如何确切知道 <code>@Autowired AccountRepository</code> bean 的声明位置？这在代码中并不明确，这个例子可能刚好是 OK 的。记住，<a href="https://spring.io/tools/sts">Spring Tool Suite</a> 提供的工具可以渲染拓扑图，显示所有组件是怎么连接起来的 - 这可能就是你所需要的。另外，你的Java IDE可以轻松找到 <code>AccountRepository</code> 类型的所有声明和用法，并且会快速向你显示返回该类型的 <code>@Bean</code> 方法的位置。</p>
 </div>
 <div class="paragraph">
 <p>如果这种歧义是不可接受的，并且你希望从 IDE 中的一个 <code>@Configuration</code> 类直接导航到另一个 <code>@Configuration</code>类，请考虑自动装配配置类本身：</p>
@@ -6580,7 +6580,7 @@ dataSource.url=jdbc:mysql:mydb</pre>
 <div class="sect4">
 <h5 id="beans-java-combining"><a class="anchor" href="#beans-java-combining"></a>结合 Java 和 XML 配置</h5>
 <div class="paragraph">
-<p>Spring 对 <code>@Configuration</code> 类的支持并不是瞄准要成为 Spring XML 的 100％完全的替代方案这个目标。Spring XML 的命名空间等一些工具仍然是配置容器的理想方法。在使用 XML 更方便或必要的情况下，您可以选择：使用 <code>ClassPathXmlApplicationContext</code> 的“以 XML 配置为中心”的方式实例化容器，或者使用 <code>AnnotationConfigApplicationContext</code> 和用 <code>@ImportResource</code> 注解根据需要导入 XML 的“以Java 代码注解为中心”的方式实例化容器 。</p>
+<p>Spring 对 <code>@Configuration</code> 类的支持并不是瞄准要成为 Spring XML 的 100％完全的替代方案这个目标。Spring XML 的命名空间等一些工具仍然是配置容器的理想方法。在使用 XML 更方便或必要的情况下，你可以选择：使用 <code>ClassPathXmlApplicationContext</code> 的“以 XML 配置为中心”的方式实例化容器，或者使用 <code>AnnotationConfigApplicationContext</code> 和用 <code>@ImportResource</code> 注解根据需要导入 XML 的“以Java 代码注解为中心”的方式实例化容器 。</p>
 </div>
 <div class="sect5">
 <h6 id="beans-java-combining-xml-centric"><a class="anchor" href="#beans-java-combining-xml-centric"></a>以 XML 配置为中心使用 @Configuration 类</h6>
@@ -6927,7 +6927,7 @@ jdbc.password=</pre>
 <p>在 <code>@Bean</code> 方法上使用 <code>@Profile</code> 时，可能会遇到一个特殊情况：对于重载的方法名相同的 <code>@Bean</code> 方法（类似于构造器重载），必须在所有重载的方法上一致地声明 <code>@Profile</code> 条件。如果条件不一致，那么只有重载方法中第一个声明的条件会有用。因此 <code>@Profile</code> 不能被用使用特定的参数签名来区分重载方法；同一个 bean 的所有工厂方法之间的解析在创建时遵循 Spring 的构造器解析算法。</p>
 </div>
 <div class="paragraph">
-<p>如果您想定义具有不同 profile 的备用 bean，应该使用不同的 Java 方法名，通过 <code>@Bean</code> 的 name 特性指向同一个 bean 名字，就像上例所示。如果参数签名都是相同的（例如，所有的变体都有无参工厂方法），这是在 Java 类中表示这种布局的唯一方法（因为对特定相同的方法名和参数签名只有一个方法有效）。</p>
+<p>如果你想定义具有不同 profile 的备用 bean，应该使用不同的 Java 方法名，通过 <code>@Bean</code> 的 name 特性指向同一个 bean 名字，就像上例所示。如果参数签名都是相同的（例如，所有的变体都有无参工厂方法），这是在 Java 类中表示这种布局的唯一方法（因为对特定相同的方法名和参数签名只有一个方法有效）。</p>
 </div>
 </td>
 </tr>
@@ -7131,7 +7131,7 @@ Environment env = ctx.getEnvironment();
 </table>
 </div>
 <div class="paragraph">
-<p>最重要的是，这整个机制是可配置的。也许你有一个自定义的属性来源，你想将他集成到这个搜索过程中。没问题 - 只需实现并实例化您自己的 <code>PropertySource</code> 并将其添加到当前  <code>Environment</code> 的 <code>PropertySources</code> 集合：</p>
+<p>最重要的是，这整个机制是可配置的。也许你有一个自定义的属性来源，你想将他集成到这个搜索过程中。没问题 - 只需实现并实例化你自己的 <code>PropertySource</code> 并将其添加到当前  <code>Environment</code> 的 <code>PropertySources</code> 集合：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7198,7 +7198,7 @@ sources.addFirst(<span class="keyword">new</span> MyPropertySource());</code></p
 <div class="sect3">
 <h4 id="placeholder-resolution-in-statements"><a class="anchor" href="#placeholder-resolution-in-statements"></a>1.13.4. 语句中的占位符解析</h4>
 <div class="paragraph">
-<p>从历史上看，元素中占位符的值只能根据 JVM 系统属性或环境变量来解决。现在这种情况已经不复存在。由于环境抽象被集成到整个容器中，通过它可以轻松地路由占位符的解析。这意味着你可以用任何你喜欢的方式配置解析过程：改变搜索系统属性和环境变量的优先级，或者完全删除它们; 根据需要添加您自己的属性源来混合使用。</p>
+<p>从历史上看，元素中占位符的值只能根据 JVM 系统属性或环境变量来解决。现在这种情况已经不复存在。由于环境抽象被集成到整个容器中，通过它可以轻松地路由占位符的解析。这意味着你可以用任何你喜欢的方式配置解析过程：改变搜索系统属性和环境变量的优先级，或者完全删除它们; 根据需要添加你自己的属性源来混合使用。</p>
 </div>
 <div class="paragraph">
 <p>具体而言，只要在 <code>Environment</code> 中可用，无论 <code>customer</code> 属性是在哪里定义的，以下语句都可以正常工作：</p>
@@ -7280,7 +7280,7 @@ sources.addFirst(<span class="keyword">new</span> MyPropertySource());</code></p
 <p><code>String getMessage(String code, Object[] args, Locale loc)</code>：基本上与前面的方法相同，但有一点不同：不能指定默认消息; 如果无法找到消息，则抛出 <code>NoSuchMessageException</code> 异常。</p>
 </li>
 <li>
-<p><code>String getMessage(MessageSourceResolvable resolvable, Locale locale)</code>：前面的方法中使用的所有属性也都包装在一个名为 <code>MessageSourceResolvable</code> 的类中，您可以在该方法中使用它。</p>
+<p><code>String getMessage(MessageSourceResolvable resolvable, Locale locale)</code>：前面的方法中使用的所有属性也都包装在一个名为 <code>MessageSourceResolvable</code> 的类中，你可以在该方法中使用它。</p>
 </li>
 </ul>
 </div>
@@ -7422,7 +7422,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </div>
 </div>
 <div class="paragraph">
-<p>您还可以使用 <code>MessageSourceAware</code> 接口来获取对已定义的任何 <code>MessageSource</code> 的引用。 任何在实现 <code>MessageSourceAware</code> 接口的 <code>ApplicationContext</code>  中定义的 bean 在被创建和配置的时候都会被应用程序上下文中的 <code>MessageSource</code>注入。</p>
+<p>你还可以使用 <code>MessageSourceAware</code> 接口来获取对已定义的任何 <code>MessageSource</code> 的引用。 任何在实现 <code>MessageSourceAware</code> 接口的 <code>ApplicationContext</code>  中定义的 bean 在被创建和配置的时候都会被应用程序上下文中的 <code>MessageSource</code>注入。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7698,10 +7698,10 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </tbody>
 </table>
 <div class="paragraph">
-<p>注意，<code>#root.event</code> 允许您访问基础事件，即使您的方法签名实际上是指已经发布的任意对象。</p>
+<p>注意，<code>#root.event</code> 允许你访问基础事件，即使你的方法签名实际上是指已经发布的任意对象。</p>
 </div>
 <div class="paragraph">
-<p>如果您需要发布一个作为处理另一个事件的结果事件，只需更改方法签名以返回应该发布的事件，如：</p>
+<p>如果你需要发布一个作为处理另一个事件的结果事件，只需更改方法签名以返回应该发布的事件，如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7725,7 +7725,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </table>
 </div>
 <div class="paragraph">
-<p>这个新方法将为每个由上述方法处理的 <code>BlackListEvent</code> 发布一个新的 <code>ListUpdateEvent</code> 。如果您需要发布多个事件，则只需返回事件的 <code>集合</code>。</p>
+<p>这个新方法将为每个由上述方法处理的 <code>BlackListEvent</code> 发布一个新的 <code>ListUpdateEvent</code> 。如果你需要发布多个事件，则只需返回事件的 <code>集合</code>。</p>
 </div>
 </div>
 <div class="sect4">
@@ -7751,7 +7751,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <p>如果事件监听器抛出 <code>异常</code>，它不会被传播给调用者，请查看 <code>AsyncUncaughtExceptionHandler</code> 以获取更多详细信息。</p>
 </li>
 <li>
-<p>这样的事件监听器不能发送回复。如果您需要发送另一个事件作为处理的结果，需要注入 <code>ApplicationEventPublisher</code> 手动发送事件。</p>
+<p>这样的事件监听器不能发送回复。如果你需要发送另一个事件作为处理的结果，需要注入 <code>ApplicationEventPublisher</code> 手动发送事件。</p>
 </li>
 </ol>
 </div>
@@ -7774,7 +7774,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <div class="sect4">
 <h5 id="context-functionality-events-generics"><a class="anchor" href="#context-functionality-events-generics"></a>泛型事件</h5>
 <div class="paragraph">
-<p>您也可以使用泛型来进一步定义事件的结构。考虑对于 <code>EntityCreatedEvent&lt;T&gt;</code>，其中 <code>T</code> 是创建的实际实体的类型。您可以创建以下侦听器定义用于只接收 <code>Person</code> <code>EntityCreatedEvent</code> 事件：</p>
+<p>你也可以使用泛型来进一步定义事件的结构。考虑对于 <code>EntityCreatedEvent&lt;T&gt;</code>，其中 <code>T</code> 是创建的实际实体的类型。你可以创建以下侦听器定义用于只接收 <code>Person</code> <code>EntityCreatedEvent</code> 事件：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7788,7 +7788,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <p>因为类型擦除，只有当被触发的事件正确解析了事件监听器过滤的泛型参数时（这与类PersonCreatedEvent 继承 EntityCreatedEvent <Person> {...}类似）才会有效。</p>
 </div>
 <div class="paragraph">
-<p>在某些情况下，如果所有事件都遵循相同的结构（如上面的事件），则这可能变得非常繁琐。在这种情况下，您可以实现 <code>ResolvableTypeProvider</code> 来引导框架超出运行时环境提供的功能：</p>
+<p>在某些情况下，如果所有事件都遵循相同的结构（如上面的事件），则这可能变得非常繁琐。在这种情况下，你可以实现 <code>ResolvableTypeProvider</code> 来引导框架超出运行时环境提供的功能：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -7832,7 +7832,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <p>应用程序上下文也是一个 <code>ResourceLoader</code> ，可以用来加载 <code>Resource</code>。<code>Resource</code> 本质上是 JDK 类 <code>java.net.URL</code> 的一个功能更丰富的版本，实际上，<code>Resource</code> 的实现是在适当的情况下包装了一个 <code>java.net.URL</code> 的实例。<code>Resource</code> 可以以透明的方式从几乎任何位置获取低级资源，包括类路径，文件系统位置，任何可用标准 URL 描述的地方以及其他一些变体。如果资源位置字符串是一个没有任何特殊前缀的简单路径，那么这些资源来自特定且适合于实际应用上下文类型。</p>
 </div>
 <div class="paragraph">
-<p>你可以配置一个部署到应用程序上下文中的 bean，以实现特殊的回调接口 <code>ResourceLoaderAware</code>，以便它在初始化时自动回调，同时应用程序上下文本身作为 <code>ResourceLoader</code> 传入。你还可以暴露<code>Resource</code> 类型的属性，用于访问静态资源;他们将像其他任何属性一样被注入。您可以将这些 <code>Resource</code> 属性指定为简单的字符串路径，并依靠能被上下文自动注册的特殊 JavaBean <code>PropertyEditor</code> 将这些文本字符串转换为实际的 <code>Resource</code> 对象。</p>
+<p>你可以配置一个部署到应用程序上下文中的 bean，以实现特殊的回调接口 <code>ResourceLoaderAware</code>，以便它在初始化时自动回调，同时应用程序上下文本身作为 <code>ResourceLoader</code> 传入。你还可以暴露<code>Resource</code> 类型的属性，用于访问静态资源;他们将像其他任何属性一样被注入。你可以将这些 <code>Resource</code> 属性指定为简单的字符串路径，并依靠能被上下文自动注册的特殊 JavaBean <code>PropertyEditor</code> 将这些文本字符串转换为实际的 <code>Resource</code> 对象。</p>
 </div>
 <div class="paragraph">
 <p>提供给 <code>ApplicationContext</code> 构造器的位置路径实际上是资源字符串，并以简单的形式被视为特定的上下文实现。<code>ClassPathXmlApplicationContext</code> 将简单的位置路径视为类路径位置。你也可以使用带有特殊前缀的位置路径（资源字符串）来强制从类路径或 URL 中加载定义，无论实际的上下文是什么类型。</p>
@@ -7874,7 +7874,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <p>查看 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/jca/context/SpringContextResourceAdapter.html"><code>SpringContextResourceAdapter</code></a> 类的 javadoc，了解 RAR 部署中涉及的配置细节。</p>
 </div>
 <div class="paragraph">
-<p><em>对于将 Spring ApplicationContext 简单部署为 Java EE RAR 文件：</em> 将所有应用程序类打包到 RAR 文件中, RAR 文件是具有不同文件扩展名的标准 JAR 文件。将所有必需的 JAR 库添加到 RAR 的归档根目录中。 添加一个 “META-INF/ra.xml” 部署描述符（如 <code>SpringContextResourceAdapter</code> javadoc 中所示）和相应的 Spring XML bean 定义文件（通常为“META-INF/applicationContext.xml”），然后将生成的 RAR 文件丢到到您的应用程序服务器的部署目录即可。</p>
+<p><em>对于将 Spring ApplicationContext 简单部署为 Java EE RAR 文件：</em> 将所有应用程序类打包到 RAR 文件中, RAR 文件是具有不同文件扩展名的标准 JAR 文件。将所有必需的 JAR 库添加到 RAR 的归档根目录中。 添加一个 “META-INF/ra.xml” 部署描述符（如 <code>SpringContextResourceAdapter</code> javadoc 中所示）和相应的 Spring XML bean 定义文件（通常为“META-INF/applicationContext.xml”），然后将生成的 RAR 文件丢到到你的应用程序服务器的部署目录即可。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -7906,7 +7906,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 <p>尽量使用 <code>ApplicationContext</code>，除非你有充分的理由不这样做。</p>
 </div>
 <div class="paragraph">
-<p>因为 <code>ApplicationContext</code> 包含了 <code>BeanFactory</code> 的所有功能，所以通常推荐使用 <code>BeanFactory</code>，除了一些情况，例如在资源受限的设备上运行的嵌入式应用程序，这些设备的内存消耗可能很重要，少数多余的 KB 可能就会对系统产生影响。 但是，对于大多数典型的企业应用程序和系统，<code>ApplicationContext</code> 才是你想要使用的。 Spring 会大量使用 <a href="#beans-factory-extension-bpp"><code>BeanPostProcessor</code> 扩展点</a>（以影响代理等等）。如果只使用一个普通的 <code>BeanFactory</code> ，那么在您没有采取额外步骤的情况下，相当数量的功能（如事务和AOP）将不会生效。这种情况可能会令人困惑，因为配置没有任何问题。</p>
+<p>因为 <code>ApplicationContext</code> 包含了 <code>BeanFactory</code> 的所有功能，所以通常推荐使用 <code>BeanFactory</code>，除了一些情况，例如在资源受限的设备上运行的嵌入式应用程序，这些设备的内存消耗可能很重要，少数多余的 KB 可能就会对系统产生影响。 但是，对于大多数典型的企业应用程序和系统，<code>ApplicationContext</code> 才是你想要使用的。 Spring 会大量使用 <a href="#beans-factory-extension-bpp"><code>BeanPostProcessor</code> 扩展点</a>（以影响代理等等）。如果只使用一个普通的 <code>BeanFactory</code> ，那么在你没有采取额外步骤的情况下，相当数量的功能（如事务和AOP）将不会生效。这种情况可能会令人困惑，因为配置没有任何问题。</p>
 </div>
 <div class="paragraph">
 <p>下表列出了 <code>BeanFactory</code> 和 <code>ApplicationContext</code> 接口和实现提供的功能。</p>
@@ -7954,7 +7954,7 @@ argument.required=Ebagum lad, the {0} argument is required, I say, required.</pr
 </tbody>
 </table>
 <div class="paragraph">
-<p>要使用 <code>BeanFactory</code> 实现显式注册 bean post-processor，您需要编写如下代码：</p>
+<p>要使用 <code>BeanFactory</code> 实现显式注册 bean post-processor，你需要编写如下代码：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8056,7 +8056,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </ul>
 </div>
 <div class="paragraph">
-<p>其他方法允许您获取表示资源的实际 <code>URL</code> 或 <code>File</code> 对象（如果底层实现兼容并支持该功能）。</p>
+<p>其他方法允许你获取表示资源的实际 <code>URL</code> 或 <code>File</code> 对象（如果底层实现兼容并支持该功能）。</p>
 </div>
 <div class="paragraph">
 <p>当资源被请求时，<code>Resource</code> 抽象以许多方法签名参数的形式在 Spring 本身中被广泛使用。在一些Spring API （比如各种 <code>ApplicationContext</code> 实现的构造函数）的其他方法中，它们接收 <code>String</code> 使用简单或者粗糙的形式创建一个适合于上下文实现的<code>Resource</code>  ，或者通过 <code>String</code> 路径上的特殊前缀，允许调用者指定必须创建和使用特定的 <code>Resource</code> 实现。</p>
@@ -8115,7 +8115,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 <p>给定的 <code>InputStream</code> 的 <code>Resource</code> 实现。只有在没有具体的 <code>Resource</code> 实现适用的情况下才会使用。特殊情况下，如果可能的话，首选 <code>ByteArrayResource</code> 或任何基于文件的 <code>Resource</code> 实现。</p>
 </div>
 <div class="paragraph">
-<p>与其他 <code>Resource</code> 实现相比，这表示的是已打开资源的描述符，因此调用 <code>isOpen()</code> 会返回 <code>true</code>。如果您需要将资源描述符保存在某处，或者需要多次读取流，请不要使用它。</p>
+<p>与其他 <code>Resource</code> 实现相比，这表示的是已打开资源的描述符，因此调用 <code>isOpen()</code> 会返回 <code>true</code>。如果你需要将资源描述符保存在某处，或者需要多次读取流，请不要使用它。</p>
 </div>
 </div>
 <div class="sect3">
@@ -8241,7 +8241,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 <p>当然，由于 <code>ApplicationContext</code> 是一个 <code>ResourceLoader</code>，bean 也可以实现 <code>ApplicationContextAware</code> 接口并直接使用提供的应用程序上下文来加载资源，但通常情况下，最好使用专用的 <code>ResourceLoader</code> 接口（如果这么做已经可以满足全部需求）。代码仅仅只是与资源加载接口耦合了，它可以被认为是一个工具接口，而不是整个 Spring <code>ApplicationContext</code> 接口。</p>
 </div>
 <div class="paragraph">
-<p>从 Spring 2.5 开始，您可以依靠 <code>ResourceLoader</code> 的自动装配来替代实现 <code>ResourceLoaderAware</code> 接口。“传统” <code>constructor</code>和 <code>byType</code> 自动装配模式（如<a href="#beans-factory-autowire">自动装配协作者</a> 中所述）现在可以分别为构造器参数或setter 方法参数提供 <code>ResourceLoader</code> 类型的依赖关系。为了获得更大的灵活性（包括自动装配字段和多个参数方法的能力），可以考虑使用新的基于注解的自动装配特性。在这种情况下，只要正在考虑的的字段，构造器或方法携带 <code>@Autowired</code> 注解，<code>ResourceLoader</code> 就会被自动装载到期望得到 <code>ResourceLoader</code> 类型的字段，构造器参数或方法参数中。有关更多信息，请参阅 <a href="#beans-autowired-annotation">@Autowired</a>。</p>
+<p>从 Spring 2.5 开始，你可以依靠 <code>ResourceLoader</code> 的自动装配来替代实现 <code>ResourceLoaderAware</code> 接口。“传统” <code>constructor</code>和 <code>byType</code> 自动装配模式（如<a href="#beans-factory-autowire">自动装配协作者</a> 中所述）现在可以分别为构造器参数或setter 方法参数提供 <code>ResourceLoader</code> 类型的依赖关系。为了获得更大的灵活性（包括自动装配字段和多个参数方法的能力），可以考虑使用新的基于注解的自动装配特性。在这种情况下，只要正在考虑的的字段，构造器或方法携带 <code>@Autowired</code> 注解，<code>ResourceLoader</code> 就会被自动装载到期望得到 <code>ResourceLoader</code> 类型的字段，构造器参数或方法参数中。有关更多信息，请参阅 <a href="#beans-autowired-annotation">@Autowired</a>。</p>
 </div>
 </div>
 <div class="sect2">
@@ -8284,7 +8284,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 <p>应用程序上下文构造器（对于特定的应用程序上下文类型）通常将字符串或字符串数组作为资源（如构成上下文定义的 XML 文件）的位置路径。</p>
 </div>
 <div class="paragraph">
-<p>当这样的位置路径没有前缀时，从该路径构建并用于加载 bean 定义的特定 <code>Resource</code> 类型取决于并适合于特定的应用程序上下文。 例如，如果您创建一个 <code>ClassPathXmlApplicationContext</code>，如下所示：</p>
+<p>当这样的位置路径没有前缀时，从该路径构建并用于加载 bean 定义的特定 <code>Resource</code> 类型取决于并适合于特定的应用程序上下文。 例如，如果你创建一个 <code>ClassPathXmlApplicationContext</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8292,7 +8292,7 @@ cfg.postProcessBeanFactory(factory);</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Bean 定义将从类路径中加载，因为将使用 <code>ClassPathResource</code>。但是，如果您创建一个 <code>FileSystemXmlApplicationContext</code>，如下所示：</p>
+<p>Bean 定义将从类路径中加载，因为将使用 <code>ClassPathResource</code>。但是，如果你创建一个 <code>FileSystemXmlApplicationContext</code>，如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8530,7 +8530,7 @@ ApplicationContext ctx =
 <p>数据绑定对于允许用户输入动态地绑定到应用程序的域模型（或用于处理用户输入的任何对象）是有用的。Spring 提供了所谓的 <code>DataBinder</code> 来做到这一点。 <code>Validator</code> 和 <code>DataBinder</code> 组成了验证包，主要用于但不限于 MVC 框架。</p>
 </div>
 <div class="paragraph">
-<p><code>BeanWrapper</code> 是 Spring 框架中的一个基本概念，在很多地方都有使用。但是，您可能没有直接使用 <code>BeanWrapper</code> 的需求。因为这是参考文件，所以我们会提供一些解释。我们将在本章中解释 <code>BeanWrapper</code> ，因为如果您打算使用它，那么你很可能将在尝试将数据绑定到对象时使用它。</p>
+<p><code>BeanWrapper</code> 是 Spring 框架中的一个基本概念，在很多地方都有使用。但是，你可能没有直接使用 <code>BeanWrapper</code> 的需求。因为这是参考文件，所以我们会提供一些解释。我们将在本章中解释 <code>BeanWrapper</code> ，因为如果你打算使用它，那么你很可能将在尝试将数据绑定到对象时使用它。</p>
 </div>
 <div class="paragraph">
 <p>Spring 的 DataBinder 和低级别的 BeanWrapper 都使用 PropertyEditors 来解析和格式化属性值。<code>PropertyEditor</code> 是 JavaBeans 规范的一部分，本章也会对此说明。Spring 3 引入了一个“core.convert”包，它提供了一个通用的类型转换工具，以及一个用于格式化 UI 字段值的高级“格式”包。这些新的包可以作为 PropertyEditor 的简单替代品，本章也将对其进行讨论。</p>
@@ -8595,7 +8595,7 @@ ApplicationContext ctx =
 </div>
 </div>
 <div class="paragraph">
-<p>如您所见，当 name 为 <code>null</code> 或空字符串时，<code>ValidationUtils</code> 类上的 <code>static</code> <code>rejectIfEmpty(..)</code> 方法就用于拒绝“name”属性。可以查看 <code>ValidationUtils</code> 的 javadocs 来查看它是如何工作的。</p>
+<p>如你所见，当 name 为 <code>null</code> 或空字符串时，<code>ValidationUtils</code> 类上的 <code>static</code> <code>rejectIfEmpty(..)</code> 方法就用于拒绝“name”属性。可以查看 <code>ValidationUtils</code> 的 javadocs 来查看它是如何工作的。</p>
 </div>
 <div class="paragraph">
 <p>尽管可以实现一个 <code>Validator</code> 类来验证富对象中的每个嵌套对象，但最好是将每个嵌套类对象的验证逻辑封装在自己的 <code>Validator</code> 实现中。一个“富”对象的简单例子是由两个 <code>String</code> 属性（第一个和第二个名字）和一个复杂的 <code>Address</code> 对象组成的 <code>Customer</code>。<code>Address</code> 对象可以独立于  <code>Customer</code>  对象使用，所以一个独特的 <code>AddressValidator</code> 已经被实现。如果你希望你的 <code>CustomerValidator</code> 重复使用 <code>AddressValidator</code> 类中包含的逻辑而无需复制粘贴，则可以在你的 <code>CustomerValidator</code> 中依赖注入或实例化 <code>AddressValidator</code> ，并像下面这样使用它：</p>
@@ -8646,7 +8646,7 @@ ApplicationContext ctx =
 <div class="sect2">
 <h3 id="validation-conversion"><a class="anchor" href="#validation-conversion"></a>3.3. 解析代码到对应错误信息</h3>
 <div class="paragraph">
-<p>我们已经讨论过数据绑定和验证。输出对应于验证错误的消息是我们需要讨论的最后一件事。在上面的例子中，我们拒绝了 <code>name</code> 和 <code>age</code> 字段。如果我们要通过使用 <code>MessageSource</code> 输出错误消息，我们将使用我们在拒绝字段（在这种情况下为“name”和“age”）时给出的错误代码。当你从 <code>Errors</code> 接口调用（直接或者间接使用 <code>ValidationUtils</code> 类）<code>rejectValue</code> 或者其他的 <code>reject</code> 方法时，底层的实现不仅会注册你传入的代码，还会传入一些附加的错误代码。它注册的错误代码由所使用的 <code>MessageCodesResolver</code> 决定。默认情况下，使用 <code>DefaultMessageCodesResolver</code> ，例如，它不仅会使用您提供的代码注册信息，还会使用包含您传递给拒绝方法的字段名的信息。因此，如果您使用<code>rejectValue("age", "too.darn.old")</code> 拒绝了一个字段，除了 <code>too.darn.old</code> 代码，Spring还将注册 <code>too.darn.old.age</code> 和 <code>too.darn.old.age.int</code>（这样第一个将包括字段名称，第二个将包括字段的类型）;这是为了方便开发人员定位错误消息等。</p>
+<p>我们已经讨论过数据绑定和验证。输出对应于验证错误的消息是我们需要讨论的最后一件事。在上面的例子中，我们拒绝了 <code>name</code> 和 <code>age</code> 字段。如果我们要通过使用 <code>MessageSource</code> 输出错误消息，我们将使用我们在拒绝字段（在这种情况下为“name”和“age”）时给出的错误代码。当你从 <code>Errors</code> 接口调用（直接或者间接使用 <code>ValidationUtils</code> 类）<code>rejectValue</code> 或者其他的 <code>reject</code> 方法时，底层的实现不仅会注册你传入的代码，还会传入一些附加的错误代码。它注册的错误代码由所使用的 <code>MessageCodesResolver</code> 决定。默认情况下，使用 <code>DefaultMessageCodesResolver</code> ，例如，它不仅会使用你提供的代码注册信息，还会使用包含你传递给拒绝方法的字段名的信息。因此，如果你使用<code>rejectValue("age", "too.darn.old")</code> 拒绝了一个字段，除了 <code>too.darn.old</code> 代码，Spring还将注册 <code>too.darn.old.age</code> 和 <code>too.darn.old.age.int</code>（这样第一个将包括字段名称，第二个将包括字段的类型）;这是为了方便开发人员定位错误消息等。</p>
 </div>
 <div class="paragraph">
 <p>有关 <code>MessageCodesResolver</code> 和默认策略的更多信息可分别在 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/validation/MessageCodesResolver.html"><code>MessageCodesResolver</code></a> 和 <a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/validation/DefaultMessageCodesResolver.html"><code>DefaultMessageCodesResolver</code></a> 的 javadoc 中找到。</p>
@@ -9004,7 +9004,7 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 <p>向 Spring 容器注册属性编辑器的另一种机制是创建和使用 <code>PropertyEditorRegistrar</code>。当你需要在几种不同的情况下使用同一组属性编辑器时，此接口特别有用：编写相应的注册器，并在每种情况下重用。<code>PropertyEditorRegistrars</code> 与一个名为 <code>PropertyEditorRegistry</code> 的接口同时使用，这是一个被 Spring <code>BeanWrapper</code>（和 <code>DataBinder</code> ）实现的接口。 <code>PropertyEditorRegistrars</code> 与 <code>CustomEditorConfigurer</code>（在 <a href="#beans-beans-conversion-customeditor-registration">这里</a> 介绍）结合使用时特别方便，它暴露了一个名为<code>setPropertyEditorRegistrars(..)</code> 的属性：以这种方式添加到 <code>CustomEditorConfigurer</code> 的 <code>PropertyEditorRegistrars</code> 可以很容易地与<code>DataBinder</code> 和 Spring MVC <code>Controllers</code> 共享。此外，它避免了在自定义编辑器上需要同步的缺点：<code>PropertyEditorRegistrar</code> 应该为每次创建 bean 的尝试对应创建新的 <code>PropertyEditor</code> 实例。</p>
 </div>
 <div class="paragraph">
-<p>使用 <code>PropertyEditorRegistrar</code> 最好的方法在例子中。首先，您需要创建自己的 <code>PropertyEditorRegistrar</code> 实现：</p>
+<p>使用 <code>PropertyEditorRegistrar</code> 最好的方法在例子中。首先，你需要创建自己的 <code>PropertyEditorRegistrar</code> 实现：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9096,7 +9096,7 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 <p>要创建自己的转换器，只需实现上面的接口。 将 <code>S</code> 指定为要转换的类型，将 <code>T</code> 指定为转换后的类型。 如果 <code>S</code> 的集合或者数组需要被转换为 <code>T</code> 的数组或者集合的话，这样的转换器也可以被透明地应用，只要委托的数组/收集转换器也被注册（默认是 <code>DefaultConversionService</code>）。</p>
 </div>
 <div class="paragraph">
-<p>对于每个<code>convert(S)</code> 调用，源参数保证不为 null。如果转换失败，您的转换器可能会抛出任何未检查的异常; 具体而言，应抛出 <code>IllegalArgumentException</code> 异常来报告无效的源值。 注意确保您的 <code>Converter</code> 实现是线程安全的。</p>
+<p>对于每个<code>convert(S)</code> 调用，源参数保证不为 null。如果转换失败，你的转换器可能会抛出任何未检查的异常; 具体而言，应抛出 <code>IllegalArgumentException</code> 异常来报告无效的源值。 注意确保你的 <code>Converter</code> 实现是线程安全的。</p>
 </div>
 <div class="paragraph">
 <p>为方便起见，<code>core.convert.support</code> 包提供了几个转换器实现。这些包括从字符串到数字和其他常见类型的转换器。 以 <code>StringToInteger</code>  作为典型的 <code>Converter</code> 实现的例子：</p>
@@ -9118,7 +9118,7 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 <div class="sect3">
 <h4 id="core-convert-ConverterFactory-SPI"><a class="anchor" href="#core-convert-ConverterFactory-SPI"></a>3.5.2. ConverterFactory 转换工厂</h4>
 <div class="paragraph">
-<p>当您需要集中整个类层次结构的转换逻辑时，例如，从 String 转换为 java.lang.Enum 对象时，实现 <code>ConverterFactory</code>：</p>
+<p>当你需要集中整个类层次结构的转换逻辑时，例如，从 String 转换为 java.lang.Enum 对象时，实现 <code>ConverterFactory</code>：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9166,7 +9166,7 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 <div class="sect3">
 <h4 id="core-convert-GenericConverter-SPI"><a class="anchor" href="#core-convert-GenericConverter-SPI"></a>3.5.3. GenericConverter 通用转换器</h4>
 <div class="paragraph">
-<p>当您需要某个复杂的 Converter 实现时，请考虑 GenericConverter 接口。使用更灵活但更少的强类型签名，GenericConverter 支持在多个源类型和目标类型之间进行转换。此外，GenericConverter 还提供了在实现转换逻辑时可以使用的源和目标字段上下文。 这样的上下文允许类型转换由字段注解或在字段签名上声明的通用信息来驱动。</p>
+<p>当你需要某个复杂的 Converter 实现时，请考虑 GenericConverter 接口。使用更灵活但更少的强类型签名，GenericConverter 支持在多个源类型和目标类型之间进行转换。此外，GenericConverter 还提供了在实现转换逻辑时可以使用的源和目标字段上下文。 这样的上下文允许类型转换由字段注解或在字段签名上声明的通用信息来驱动。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -9257,7 +9257,7 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 <div class="sect3">
 <h4 id="core-convert-Spring-config"><a class="anchor" href="#core-convert-Spring-config"></a>3.5.5. 配置 ConversionService</h4>
 <div class="paragraph">
-<p>ConversionService 是一个无状态对象，被设计用于在应用程序启动时实例化，然后在多个线程之间共享。 在 Spring 应用程序中，通常为每个 Spring 容器（或 ApplicationContext）配置一个 ConversionService 实例。 该 ConversionService 将被 Spring 获取，然后在框架需要执行类型转换时使用。 您也可以将这个 ConversionService 注入到任何一个bean中，并直接调用它。</p>
+<p>ConversionService 是一个无状态对象，被设计用于在应用程序启动时实例化，然后在多个线程之间共享。 在 Spring 应用程序中，通常为每个 Spring 容器（或 ApplicationContext）配置一个 ConversionService 实例。 该 ConversionService 将被 Spring 获取，然后在框架需要执行类型转换时使用。 你也可以将这个 ConversionService 注入到任何一个bean中，并直接调用它。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -9301,7 +9301,7 @@ company.setPropertyValue(<span class="string"><span class="delimiter">&quot;</sp
 <p>在 Spring MVC 应用程序中使用 ConversionService 也很常见。 请参阅 Spring MVC 章节中的 <a href="web.html#mvc-config-conversion">转换和格式化</a>。</p>
 </div>
 <div class="paragraph">
-<p>在某些情况下，您可能希望在转换过程中对其进行格式化。有关使用 <code>FormattingConversionServiceFactoryBean</code> 的详细信息，请参阅 <a href="#format-FormatterRegistry-SPI">FormatterRegistry SPI</a>。</p>
+<p>在某些情况下，你可能希望在转换过程中对其进行格式化。有关使用 <code>FormattingConversionServiceFactoryBean</code> 的详细信息，请参阅 <a href="#format-FormatterRegistry-SPI">FormatterRegistry SPI</a>。</p>
 </div>
 </div>
 <div class="sect3">
@@ -9355,7 +9355,7 @@ cs.convert(input,
 <p>如上一小节所述，<a href="#core-convert"><code>core.convert</code></a> 是一个通用的类型转换系统。它提供了一个统一的 ConversionService API 以及一个强类型的 Converter SPI，用于实现从一种类型到另一种类型的转换逻辑。 Spring 容器使用这个系统来绑定 bean 的属性值。另外，Spring 表达式语言（SpEL）和 DataBinder 都使用这个系统绑定字段值。例如，当 SpEL 需要强制将 <code>Short</code> 转换为 <code>Long</code> 来完成一个 <code>expression.setValue(Object bean, Object value)</code> 尝试时，core.convert 系统会强制执行这个操作。</p>
 </div>
 <div class="paragraph">
-<p>现在考虑典型客户端环境（如 Web 或桌面应用程序）的类型转换要求。在这样的环境中，您通常将 String 作为转换的源类型来支持客户端回发过程，并将 String 作为转换的目的类型返回以支持视图呈现过程。另外，您经常需要本地化字符串值。更一般的 <em>core.convert</em> Converter SPI 不能直接解决这种格式化要求。为了直接解决这些问题，Spring 3 引入了一个方便的 Formatter SPI，为客户端环境提供了 PropertyEditor 的一个简单而健壮的替代方案。</p>
+<p>现在考虑典型客户端环境（如 Web 或桌面应用程序）的类型转换要求。在这样的环境中，你通常将 String 作为转换的源类型来支持客户端回发过程，并将 String 作为转换的目的类型返回以支持视图呈现过程。另外，你经常需要本地化字符串值。更一般的 <em>core.convert</em> Converter SPI 不能直接解决这种格式化要求。为了直接解决这些问题，Spring 3 引入了一个方便的 Formatter SPI，为客户端环境提供了 PropertyEditor 的一个简单而健壮的替代方案。</p>
 </div>
 <div class="paragraph">
 <p>通常，在需要实现通用类型转换逻辑时使用 Converter SPI；例如，在 java.util.Date 和 java.lang.Long 之间进行类型转换。在客户端环境（如Web应用程序）中使用 Formatter SPI 时，需要解析和打印本地化的字段值。 ConversionService 为两个 SPI 提供了一个统一的类型转换API。</p>
@@ -9393,7 +9393,7 @@ cs.convert(input,
 </div>
 </div>
 <div class="paragraph">
-<p>要创建自己的格式化程序，只需实现上面的格式化接口。将 T 参数化为要格式化的对象的类型，例如 <code>java.util.Date</code>。实现 <code>print()</code> 操作来打印 T 的实例以在客户端语言环境中显示。实现 <code>parse()</code>操作，从客户端语言环境返回的格式化表示中解析 T 的一个实例。如果解析尝试失败，则格式化程序应该抛出 ParseException 或 IllegalArgumentException。注意确保您的 Formatter 实现是线程安全的。
+<p>要创建自己的格式化程序，只需实现上面的格式化接口。将 T 参数化为要格式化的对象的类型，例如 <code>java.util.Date</code>。实现 <code>print()</code> 操作来打印 T 的实例以在客户端语言环境中显示。实现 <code>parse()</code>操作，从客户端语言环境返回的格式化表示中解析 T 的一个实例。如果解析尝试失败，则格式化程序应该抛出 ParseException 或 IllegalArgumentException。注意确保你的 Formatter 实现是线程安全的。
 </p>
 </div>
 <div class="paragraph">
@@ -9566,7 +9566,7 @@ cs.convert(input,
 <p>如上所示，Formatter 可以通过 fieldType 或注解进行注册。</p>
 </div>
 <div class="paragraph">
-<p>FormatterRegistry SPI 允许您集中配置格式化规则，而不是在控制器中复制这样的配置。例如，你可能希望强制所有日期字段以特定方式格式化，或者使用特定注解的字段以特定方式格式化。使用共享的 FormatterRegistry，你只要一次性定义这些规则，然后需要格式化时应用这些规则。</p>
+<p>FormatterRegistry SPI 允许你集中配置格式化规则，而不是在控制器中复制这样的配置。例如，你可能希望强制所有日期字段以特定方式格式化，或者使用特定注解的字段以特定方式格式化。使用共享的 FormatterRegistry，你只要一次性定义这些规则，然后需要格式化时应用这些规则。</p>
 </div>
 </div>
 <div class="sect3">
@@ -9765,7 +9765,7 @@ cs.convert(input,
 </div>
 </div>
 <div class="paragraph">
-<p>如果您的 bean 需要Spring Validation API，则注入对 <code>org.springframework.validation.Validator</code> 的引用：</p>
+<p>如果你的 bean 需要Spring Validation API，则注入对 <code>org.springframework.validation.Validator</code> 的引用：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11565,7 +11565,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 <p>Spring 框架的核心原则之一是 <em>非侵入式</em>；意思就是你不应该被迫在你的业务/领域模型中引入框架特定的类和接口。然而，在一些地方，Spring 框架的确给了你在你的代码库中引入特定的 Spring 框架的依赖关系的选择：给你这样的选择的理由是因为在某些情况下，阅读或者编写一些特定的功能可能会变得更加简单。Spring 框架（几乎）总会为你提供这样选择：你可以自由决定哪个选项最适合你的特定用例或场景。</p>
 </div>
 <div class="paragraph">
-<p>与本章相关的此类选择是对于 AOP 框架（以及 AOP 风格）的选择。您可以选择 AspectJ 和/或 Spring AOP，也可以选择 @AspectJ 注解风格的方式或 Spring XML 配置风格的方式。本章首先选择引入的是 @AspectJ 风格的方式，这个事实不应该被认为是：相比Spring XML 配置风格， Spring 团队更喜欢使用 @AspectJ 注解风格的方式。</p>
+<p>与本章相关的此类选择是对于 AOP 框架（以及 AOP 风格）的选择。你可以选择 AspectJ 和/或 Spring AOP，也可以选择 @AspectJ 注解风格的方式或 Spring XML 配置风格的方式。本章首先选择引入的是 @AspectJ 风格的方式，这个事实不应该被认为是：相比Spring XML 配置风格， Spring 团队更喜欢使用 @AspectJ 注解风格的方式。</p>
 </div>
 <div class="paragraph">
 <p>请参阅 <a href="#aop-choosing">选择使用哪种 AOP 声明风格</a> 来更全面地讨论每种风格的原因和动机。</p>
@@ -11686,7 +11686,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 <td class="content">
 <div class="title">通过组件扫描自动检测切面</div>
 <div class="paragraph">
-<p>你可以在 Spring XML 配置中将切面类注册为常规 bean，或者像通过其他 Spring 管理的 bean 一样通过类路径扫描来自动检测它们。但是，注意，<em>@Aspect</em> 注解对于类路径中的自动检测是不够的：为此，您需要添加一个单独的 <em>@Component</em> 注解（或者按照 Spring 组件扫描器的规则，添加一个自定义 stereotype 注解）。</p>
+<p>你可以在 Spring XML 配置中将切面类注册为常规 bean，或者像通过其他 Spring 管理的 bean 一样通过类路径扫描来自动检测它们。但是，注意，<em>@Aspect</em> 注解对于类路径中的自动检测是不够的：为此，你需要添加一个单独的 <em>@Component</em> 注解（或者按照 Spring 组件扫描器的规则，添加一个自定义 stereotype 注解）。</p>
 </div>
 </td>
 </tr>
@@ -11913,7 +11913,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>在这个切面定义的切点可以在任何需要切点表达式的地方引用。例如，要使服务层事务化，您可以编写：</p>
+<p>在这个切面定义的切点可以在任何需要切点表达式的地方引用。例如，要使服务层事务化，你可以编写：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11946,7 +11946,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>除了返回类型模式（上面代码段中的ret-type-pattern），命名模式和参数模式以外的所有部分都是可选的。返回类型模式决定了该方法的返回类型必须是什么，才能匹配连接点。大多数情况下，您将使用 <code>*</code> 作为返回类型，它匹配任何返回类型。只有当方法返回给定类型时，完全限定类型名称才会匹配。命名模式匹配方法名。您可以使用 <code>*</code> 通配符作为命名模式的全部或部分。如果要指定一个声明类型模式，就在命名模式后面添加 <code>.</code>。参数模式稍微复杂一点：<code>()</code> 匹配一个不带参数的方法，而 <code>(..)</code> 匹配任意数量的参数（零个或多个）。<code>(*)</code> 模式匹配任何类型接受一个参数的方法，<code>(*,String)</code> 匹配接受两个参数的方法，第一个可以是任何类型，第二个必须是一个字符串。有关更多信息，请参阅 “AspectJ 编程指南” 的 <a href="https://www.eclipse.org/aspectj/doc/released/progguide/semantics-pointcuts.html">语言语义</a> 部分。</p>
+<p>除了返回类型模式（上面代码段中的ret-type-pattern），命名模式和参数模式以外的所有部分都是可选的。返回类型模式决定了该方法的返回类型必须是什么，才能匹配连接点。大多数情况下，你将使用 <code>*</code> 作为返回类型，它匹配任何返回类型。只有当方法返回给定类型时，完全限定类型名称才会匹配。命名模式匹配方法名。你可以使用 <code>*</code> 通配符作为命名模式的全部或部分。如果要指定一个声明类型模式，就在命名模式后面添加 <code>.</code>。参数模式稍微复杂一点：<code>()</code> 匹配一个不带参数的方法，而 <code>(..)</code> 匹配任意数量的参数（零个或多个）。<code>(*)</code> 模式匹配任何类型接受一个参数的方法，<code>(*,String)</code> 匹配接受两个参数的方法，第一个可以是任何类型，第二个必须是一个字符串。有关更多信息，请参阅 “AspectJ 编程指南” 的 <a href="https://www.eclipse.org/aspectj/doc/released/progguide/semantics-pointcuts.html">语言语义</a> 部分。</p>
 </div>
 <div class="paragraph">
 <p>常见切点表达式的一些例子如下所示。</p>
@@ -12354,7 +12354,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>有时您需要在通知主体中访问返回的实际值。你可以使用 <code>@AfterReturning</code> 的形式来绑定这个返回值：</p>
+<p>有时你需要在通知主体中访问返回的实际值。你可以使用 <code>@AfterReturning</code> 的形式来绑定这个返回值：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12452,7 +12452,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 <div class="sect4">
 <h5 id="aop-ataspectj-around-advice"><a class="anchor" href="#aop-ataspectj-around-advice"></a>环绕通知</h5>
 <div class="paragraph">
-<p>最后一种类型的通知是环绕通知。环绕通知“环绕”匹配的方法执行。它可以在方法执行之前和之后进行工作，并确定方法实际上何时，如何甚至是何时执行。如果您需要以线程安全的方式（例如启动和停止计时器）在方法执行之前和之后共享状态，则通常会使用“围绕”通知。总是使用符合你要求的功能最少的通知（即在如果简单的前置通知就能完成就不要使用环绕通知）。</p>
+<p>最后一种类型的通知是环绕通知。环绕通知“环绕”匹配的方法执行。它可以在方法执行之前和之后进行工作，并确定方法实际上何时，如何甚至是何时执行。如果你需要以线程安全的方式（例如启动和停止计时器）在方法执行之前和之后共享状态，则通常会使用“围绕”通知。总是使用符合你要求的功能最少的通知（即在如果简单的前置通知就能完成就不要使用环绕通知）。</p>
 </div>
 <div class="paragraph">
 <p>环绕通知使用 <code>@Around</code> 注解来声明。通知方法的第一个参数必须是 <code>ProceedingJoinPoint</code> 类型。在通知的主体中，在 <code>ProceedingJoinPoint</code> 上调用 <code>proceed()</code> 会似的底层方法执行。 <code>proceed</code> 方法也可以通过传递 <code>Object[]</code> 调用-数组的值将会被当作参数在方法执行时继续使用。</p>
@@ -12606,7 +12606,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>为了使这个设置有效，我们将不得不检查集合中的每一个元素，这是不合理的，因为我们也不能决定如何处理 <code>null</code> 值。为了实现类似于此的操作，您必须将参数键入 <code>Collection&lt;?&gt;</code> 并手动检查元素的类型。</p>
+<p>为了使这个设置有效，我们将不得不检查集合中的每一个元素，这是不合理的，因为我们也不能决定如何处理 <code>null</code> 值。为了实现类似于此的操作，你必须将参数键入 <code>Collection&lt;?&gt;</code> 并手动检查元素的类型。</p>
 </div>
 </div>
 <div class="sect5">
@@ -12645,7 +12645,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>对于那些不需要收集任何连接点上下文信息的通知来说，对给定的参数类型为 <code>JoinPoint</code>，<code>ProceedingJoinPoint</code>，或者 <code>JoinPoint.StaticPart</code> 的第一个参数的特殊处理很方便的。在这种情况下，您只需省略“argNames”属性即可。例如，以下通知不需要声明“argNames”属性：</p>
+<p>对于那些不需要收集任何连接点上下文信息的通知来说，对给定的参数类型为 <code>JoinPoint</code>，<code>ProceedingJoinPoint</code>，或者 <code>JoinPoint.StaticPart</code> 的第一个参数的特殊处理很方便的。在这种情况下，你只需省略“argNames”属性即可。例如，以下通知不需要声明“argNames”属性：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -12716,7 +12716,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
   当多个通知都想在同一个连接点上执行时会发生什么？ Spring AOP 遵循与 AspectJ 相同的优先规则来确定通知执行的顺序。在切面从连接点到通知的执行进入过程中，最高优先级的通知首先执行“on the way in”（因此对于给定的两个前置通知，优先级高的通知先执行）。在切面从通知到连接点执行退出的过程中，优先级最高的通知最后运行“on the way out”（因此对于给定的两个后置通知，优先级高的通知后执行）。</p>
 </div>
 <div class="paragraph">
-<p>当在不同切面定义的两个通知都需要在同一个连接点上执行时，除非你指定了否则执行的顺序是未定义的。您可以通过指定优先级来控制执行顺序。这是通过在切面类中实现 <code>org.springframework.core.Ordered</code> 接口或使用 <code>Order</code> 注解对其进行注解以正常的 Spring 方式完成的。给定两个切面，从 <code>Ordered.getValue()</code> 或注解值）返回较低值的切面具有较高的优先级。</p>
+<p>当在不同切面定义的两个通知都需要在同一个连接点上执行时，除非你指定了否则执行的顺序是未定义的。你可以通过指定优先级来控制执行顺序。这是通过在切面类中实现 <code>org.springframework.core.Ordered</code> 接口或使用 <code>Order</code> 注解对其进行注解以正常的 Spring 方式完成的。给定两个切面，从 <code>Ordered.getValue()</code> 或注解值）返回较低值的切面具有较高的优先级。</p>
 </div>
 <div class="paragraph">
 <p>当在同一切面定义的两个通知都需要在同一个连接点上执行时，执行顺势是未定义的（因为没有办法通过反射为 javac 编译的类检索声明顺序）。考虑将这些通知方法分解成每个切面类中的每个连接点的一个通知方法，或者将多个通知重构成单独的切面类 - 可以在切面级别进行排序。</p>
@@ -12897,7 +12897,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 <div class="sect2">
 <h3 id="aop-schema"><a class="anchor" href="#aop-schema"></a>5.3. 基于 Schema 的 AOP 支持</h3>
 <div class="paragraph">
-<p>如果您更喜欢基于 XML 格式配置，那么 Spring 还提供了使用新的 “aop” 命名空间标签来支持定义切面。 使用 @AspectJ 风格，支持完全相同的切入点表达式和通知类型，因此在本节中，我们将重点介绍新的语法，并请读者参考前一节（<a href="#aop-ataspectj">@AspectJ 支持</a>）中的讨论，以便理解编写切点表达式和通知参数的绑定。</p>
+<p>如果你更喜欢基于 XML 格式配置，那么 Spring 还提供了使用新的 “aop” 命名空间标签来支持定义切面。 使用 @AspectJ 风格，支持完全相同的切入点表达式和通知类型，因此在本节中，我们将重点介绍新的语法，并请读者参考前一节（<a href="#aop-ataspectj">@AspectJ 支持</a>）中的讨论，以便理解编写切点表达式和通知参数的绑定。</p>
 </div>
 <div class="paragraph">
 <p>要使用本节中描述的 aop 命名空间标签，你需要按照 <a href="appendix.html#xsd-configuration">基于 XML schema 的配置</a> 中所述导入 <code>spring-aop</code> 模式。 参阅<a href="appendix.html#xsd-config-body-schemas-aop">AOP schema</a> 以了解如何在 <code>aop</code> 命名空间中导入标签。</p>
@@ -13207,7 +13207,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 <div class="sect4">
 <h5 id="aop-schema-advice-around"><a class="anchor" href="#aop-schema-advice-around"></a>环绕通知</h5>
 <div class="paragraph">
-<p>最后一种类型的通知是环绕通知。环绕通知“环绕”匹配的方法执行。它可以在方法执行之前和之后进行工作，并确定方法实际上何时，如何甚至是何时执行。如果您需要以线程安全的方式（例如启动和停止计时器）在方法执行之前和之后共享状态，则通常会使用“围绕”通知。总是使用符合你要求的功能最少的通知（即在如果简单的前置通知就能完成就不要使用环绕通知）.</p>
+<p>最后一种类型的通知是环绕通知。环绕通知“环绕”匹配的方法执行。它可以在方法执行之前和之后进行工作，并确定方法实际上何时，如何甚至是何时执行。如果你需要以线程安全的方式（例如启动和停止计时器）在方法执行之前和之后共享状态，则通常会使用“围绕”通知。总是使用符合你要求的功能最少的通知（即在如果简单的前置通知就能完成就不要使用环绕通知）.</p>
 </div>
 <div class="paragraph">
 <p>环绕通知使用 <code>aop:around</code> 元素来声明。通知方法的第一个参数必须是 <code>ProceedingJoinPoint</code> 类型。在通知的主体中，在 <code>ProceedingJoinPoint</code> 上调用 <code>proceed()</code> 会似的底层方法执行。 <code>proceed</code> 方法也可以通过传递 <code>Object[]</code> 调用-数组的值将会被当作参数在方法执行时继续使用。有关调用带有<code>Object[]</code> 的 proceed 的要点，参见 <a href="#aop-ataspectj-around-advice">环绕通知</a>。</p>
@@ -13847,7 +13847,7 @@ MyInterfaceType proxy = factory.getProxy();</code></pre>
 <p>本章到目前为止所介绍的所有有东西都是纯 Spring AOP。在本节中，我们将介绍如何使用 AspectJ 编译器/织入器代替 Spring AOP，或者除了 Spring AOP 之外，如果你的需要 Spring AOP 提供的功能之外的东西</p>
 </div>
 <div class="paragraph">
-<p>Spring 提供了一个小的 AspectJ 切面库，它可以在你的发行版中作为 <code>spring-aspects.jar</code> 单独使用; 你需要将其添加到您的类路径中，以便使用其中的切面。 <a href="#aop-atconfigurable">在 Spring 中使用 AspectJ 对域对象进行依赖注入</a> 和 <a href="#aop-ajlib-other">AspectJ 的其他 Spring 切面</a> 讨论这个库的内容以及如何使用它。<a href="#aop-aj-configure">使用 Spring IoC 配置 AspectJ 切面</a> 讨论了如何依赖注入使用 AspectJ 编译器织入的 AspectJ 切面。最后，<a href="#aop-aj-ltw">在 Spring 框架中使用 AspectJ Load-time 织入</a> 介绍了使用 AspectJ 的 Spring 应用程序的加载时织入。</p>
+<p>Spring 提供了一个小的 AspectJ 切面库，它可以在你的发行版中作为 <code>spring-aspects.jar</code> 单独使用; 你需要将其添加到你的类路径中，以便使用其中的切面。 <a href="#aop-atconfigurable">在 Spring 中使用 AspectJ 对域对象进行依赖注入</a> 和 <a href="#aop-ajlib-other">AspectJ 的其他 Spring 切面</a> 讨论这个库的内容以及如何使用它。<a href="#aop-aj-configure">使用 Spring IoC 配置 AspectJ 切面</a> 讨论了如何依赖注入使用 AspectJ 编译器织入的 AspectJ 切面。最后，<a href="#aop-aj-ltw">在 Spring 框架中使用 AspectJ Load-time 织入</a> 介绍了使用 AspectJ 的 Spring 应用程序的加载时织入。</p>
 </div>
 <div class="sect3">
 <h4 id="aop-atconfigurable"><a class="anchor" href="#aop-atconfigurable"></a>5.8.1. 在 Spring 中使用 AspectJ 对域对象进行依赖注入</h4>
@@ -13901,7 +13901,7 @@ MyInterfaceType proxy = factory.getProxy();</code></pre>
 <p>你也可以使用自动装配来避免必须指定特定的 bean 定义。要使 Spring 通过使用 <code>@Configurable</code> 注解的 <code>autowire</code> 属性来应用自动装配：要么指定<code>@Configurable(autowire=Autowire.BY_TYPE)</code> 要么指定 <code>@Configurable(autowire=Autowire.BY_NAME</code>，以分别按类型或名称的方式自动装配。从 Spring 2.5 开始，最好通过在字段或方法级别使用 <code>@Autowired</code> 或 <code>@Inject</code>（请参阅<a href="#beans-annotation-config">基于注解的容器配置</a>以获取更多详细信息）为你的 <code>@Configurable</code>  bean 指定显式的，注解驱动的依赖注入。</p>
 </div>
 <div class="paragraph">
-<p>最后，您可以使用  <code>dependencyCheck</code> 特性（例如：@Configurable（<code>@Configurable(autowire=Autowire.BY_NAME,dependencyCheck=true)</code>）为新创建和配置的对象中的对象引用启用Spring 依赖项检查。如果此特性设置为 true，则 Spring 将在配置后验证所有属性（<em>不是基本类型或集合</em>）都已被设置。</p>
+<p>最后，你可以使用  <code>dependencyCheck</code> 特性（例如：@Configurable（<code>@Configurable(autowire=Autowire.BY_NAME,dependencyCheck=true)</code>）为新创建和配置的对象中的对象引用启用Spring 依赖项检查。如果此特性设置为 true，则 Spring 将在配置后验证所有属性（<em>不是基本类型或集合</em>）都已被设置。</p>
 </div>
 <div class="paragraph">
 <p>当然，对它本身使用这个注解不会有任何作用。作用于注解的是 <code>spring-aspects.jar</code> 中的 <code>AnnotationBeanConfigurerAspect</code> 。切面从本质上来说就是“在从 <code>@Configurable</code> 注解的新对象的初始化返回后，根据注解的属性使用 Spring 配置新创建的对象”。在这个上下文中，初始化是指新实例化的对象（例如，用 <code>new</code> 运算符实例化的对象）以及正在经历反序列化（例如，通过 <a href="http://docs.oracle.com/javase/6/docs/api/java/io/Serializable.html">readResolve()</a>）的可序列化对象。</p>
@@ -13922,7 +13922,7 @@ MyInterfaceType proxy = factory.getProxy();</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>您可以在 <a href="https://www.eclipse.org/aspectj/doc/next/progguide/index.html">AspectJ编程指南</a> 的 <a href="https://www.eclipse.org/aspectj/doc/next/progguide/semantics-joinPoints.html">附录</a> 中找到关于 AspectJ 中各种切点类型语言语义的更多信息。</p>
+<p>你可以在 <a href="https://www.eclipse.org/aspectj/doc/next/progguide/index.html">AspectJ编程指南</a> 的 <a href="https://www.eclipse.org/aspectj/doc/next/progguide/semantics-joinPoints.html">附录</a> 中找到关于 AspectJ 中各种切点类型语言语义的更多信息。</p>
 </div>
 </td>
 </tr>
@@ -13992,7 +13992,7 @@ MyInterfaceType proxy = factory.getProxy();</code></pre>
    应用程序配置，其中包含一个共享的父应用程序上下文，它定义了公用 business servsisce 以及支持它们的所有东西，以及一个子应用程序上下文，对应每个包含定义的 servlet 。所有这些上下文将在同一个类加载器层次结构中共存，因此 <code>AnnotationBeanConfigurerAspect</code> 只能拥有对其中一个的引用。在这种情况下，我们建议在共享（父）应用程序上下文中定义 <code>@EnableSpringConfigured</code> bean：这定义了你可能希望注入到域对象中的服务。结果是，你不能使用 @Configurable 机制（可能不是你想要的东西！）来对在子（与 servlet 关连的）上下文中配置中定义的 bean 引用配置域对象。</p>
 </div>
 <div class="paragraph">
-<p>在同一容器中部署多个 web 应用程序时，请确保每个web应用程序使用自己的类加载器加载 <code>spring-aspects.jar</code> 中的类型（例如，将 <code>spring-aspects.jar</code> 放在 <code>'WEB-INF/lib'</code> 中）。如果 <code>spring-aspects.jar</code> 仅添加到容器范围的类路径（因此由共享的父类加载器加载），则所有 Web 应用程序将共享相同的切面实例，这可能不是您想要的。</p>
+<p>在同一容器中部署多个 web 应用程序时，请确保每个web应用程序使用自己的类加载器加载 <code>spring-aspects.jar</code> 中的类型（例如，将 <code>spring-aspects.jar</code> 放在 <code>'WEB-INF/lib'</code> 中）。如果 <code>spring-aspects.jar</code> 仅添加到容器范围的类路径（因此由共享的父类加载器加载），则所有 Web 应用程序将共享相同的切面实例，这可能不是你想要的。</p>
 </div>
 </div>
 </div>
@@ -14066,7 +14066,7 @@ MyInterfaceType proxy = factory.getProxy();</code></pre>
 <p>非单例切面的配置比较困难：但是，一旦切面实例被 AspectJ 运行时创建，通过创建原型 bean 定义并使用 <code>spring-aspects.jar</code> 中的 <code>@Configurable</code> 支持来配置切面实例是可能的。</p>
 </div>
 <div class="paragraph">
-<p>如果您想要使用 AspectJ 编写一些 @AspectJ 切面（例如，为域模型类型使用 load-time 织入）或者你希望与 Spring AOP 一起使用的其他 @AspectJ 切面，并且这些切面都使用 Spring 进行配置 ，那么你需要告诉 Spring AOP @AspectJ 自动代理支持，在配置中定义的 @AspectJ 切面的哪个确切子集应该用于自动代理。你可以通过在<code>&lt;aop:aspectj-autoproxy/&gt;</code> 声明中使用一个或多个 <code>&lt;include/&gt;</code> 元素来完成此操作。每个 <code>&lt;include/&gt;</code> 元素指定一个命名模式，并且只有名字与至少一个模式相匹配的 bean 才会用于Spring AOP 的自动代理配置：</p>
+<p>如果你想要使用 AspectJ 编写一些 @AspectJ 切面（例如，为域模型类型使用 load-time 织入）或者你希望与 Spring AOP 一起使用的其他 @AspectJ 切面，并且这些切面都使用 Spring 进行配置 ，那么你需要告诉 Spring AOP @AspectJ 自动代理支持，在配置中定义的 @AspectJ 切面的哪个确切子集应该用于自动代理。你可以通过在<code>&lt;aop:aspectj-autoproxy/&gt;</code> 声明中使用一个或多个 <code>&lt;include/&gt;</code> 元素来完成此操作。每个 <code>&lt;include/&gt;</code> 元素指定一个命名模式，并且只有名字与至少一个模式相匹配的 bean 才会用于Spring AOP 的自动代理配置：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -14300,7 +14300,7 @@ ms     %     Task name
 <div class="sect4">
 <h5 id="aop-aj-ltw-the-aspects"><a class="anchor" href="#aop-aj-ltw-the-aspects"></a>切面</h5>
 <div class="paragraph">
-<p>您在 LTW 中使用的切面必须是 AspectJ 切面。它们可以用 AspectJ 语言本身编写，也可以用 @AspectJ 风格编写。这意味着你的切面是有效的 AspectJ 和 Spring AOP 切面。而且，编译的切面类需要在类路径中可用</p>
+<p>你在 LTW 中使用的切面必须是 AspectJ 切面。它们可以用 AspectJ 语言本身编写，也可以用 @AspectJ 风格编写。这意味着你的切面是有效的 AspectJ 和 Spring AOP 切面。而且，编译的切面类需要在类路径中可用</p>
 </div>
 </div>
 <div class="sect4">
@@ -14620,7 +14620,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </div>
 </div>
 <div class="paragraph">
-<p>注意，对 VM 启动脚本的修改可能会阻止你使用应用程序服务器环境（具体取决于您的操作策略）。另外，JDK 代理将会测试整个虚拟机，这个代价会很高。</p>
+<p>注意，对 VM 启动脚本的修改可能会阻止你使用应用程序服务器环境（具体取决于你的操作策略）。另外，JDK 代理将会测试整个虚拟机，这个代价会很高。</p>
 </div>
 <div class="paragraph">
 <p>出于性能原因，只有在目标环境（如 <a href="https://www.eclipse.org/jetty/">Jetty</a>）没有（或不支持）专用 LTW 时，才推荐使用此配置。</p>
@@ -14649,7 +14649,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <div class="sect2">
 <h3 id="aop-api-introduction"><a class="anchor" href="#aop-api-introduction"></a>6.1. 简介</h3>
 <div class="paragraph">
-<p>上一章介绍了 Spring 使用 @AspectJ 和基于模式的切面定义对 AOP 的支持。在本章中，我们将讨论 Spring 1.2 应用程序中使用的较低级别的 Spring AOP API 和 AOP 支持。对于新的应用程序，我们推荐使用前一章中介绍的 Spring 2.0 及更高版本的 AOP 支持，但是在处理现存应用程序或阅读书籍和文章时，您可能会遇到 Spring 1.2 风格的示例。Spring 4.0 向后兼容 Spring 1.2，本章描述的所有内容在 Spring 4.0 中完全支持。</p>
+<p>上一章介绍了 Spring 使用 @AspectJ 和基于模式的切面定义对 AOP 的支持。在本章中，我们将讨论 Spring 1.2 应用程序中使用的较低级别的 Spring AOP API 和 AOP 支持。对于新的应用程序，我们推荐使用前一章中介绍的 Spring 2.0 及更高版本的 AOP 支持，但是在处理现存应用程序或阅读书籍和文章时，你可能会遇到 Spring 1.2 风格的示例。Spring 4.0 向后兼容 Spring 1.2，本章描述的所有内容在 Spring 4.0 中完全支持。</p>
 </div>
 </div>
 <div class="sect2">
@@ -15496,7 +15496,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 </td>
 <td class="content">
 <div class="paragraph">
-<p>您可能想知道为什么列表不包含 bean 引用。原因是如果 ProxyFactoryBean 的 singleton 属性设置为 false，它必须能够返回独立的代理实例。如果任何 advisor 本身就是一个原型，那么就需要返回一个独立的实例，所以有必要从工厂获得一个原型实例; 保存一个引用是不够的。</p>
+<p>你可能想知道为什么列表不包含 bean 引用。原因是如果 ProxyFactoryBean 的 singleton 属性设置为 false，它必须能够返回独立的代理实例。如果任何 advisor 本身就是一个原型，那么就需要返回一个独立的实例，所以有必要从工厂获得一个原型实例; 保存一个引用是不够的。</p>
 </div>
 </td>
 </tr>
@@ -15559,7 +15559,7 @@ Server （版本 7 及以上），Resin （3.1 及以上） 和 JBoss（6.x 及�
 <div class="sect3">
 <h4 id="aop-api-proxying-class"><a class="anchor" href="#aop-api-proxying-class"></a>6.5.5. 代理类</h4>
 <div class="paragraph">
-<p>如果您需要代理一个类而不是一个或多个接口，该怎么办？</p>
+<p>如果你需要代理一个类而不是一个或多个接口，该怎么办？</p>
 </div>
 <div class="paragraph">
 <p>想象一下，在我们上面的示例中，没有 <code>Person</code> 接口：我们需要通知一个名为 <code>Person</code> 的类，它没有实现任何业务接口。在这种情况下，你可以将 Spring 配置为使用 CGLIB 代理，而不是动态代理。只需将上面的 ProxyFactoryBean 上的 <code>proxyTargetClass</code> 属性设置为 true 即可。尽管最好对接口进行编程，而不是类，但在处理遗留代码时，具有通知未实现接口的类的能力会很有用。（一般来说，Spring 不是严格规范的，虽然它可以很容易地应用与良好的实践，但它避免了强制使用某种特定的方式。）</p>
@@ -15885,7 +15885,7 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </div>
 </div>
 <div class="paragraph">
-<p>如果您想要将相同的通知一致地应用于许多业务对象，则 <code>DefaultAdvisorAutoProxyCreator</code> 非常有用。一旦基础设施定义就位，你可以简单地添加新的业务对象，而不包括特定的代理配置。您还可以非常轻松地添加其他切面 - 例如跟踪或性能监视方面 - 只需对配置进行最少的更改即可。</p>
+<p>如果你想要将相同的通知一致地应用于许多业务对象，则 <code>DefaultAdvisorAutoProxyCreator</code> 非常有用。一旦基础设施定义就位，你可以简单地添加新的业务对象，而不包括特定的代理配置。你还可以非常轻松地添加其他切面 - 例如跟踪或性能监视方面 - 只需对配置进行最少的更改即可。</p>
 </div>
 <div class="paragraph">
 <p>DefaultAdvisorAutoProxyCreator 支持过滤（使用命名约定，以便只评估某些 advisor，允许在同一工厂使用多个不同配置的 AdvisorAutoProxyCreators）并进行排序。advisors 可以实现 <code>org.springframework.core.Ordered</code> 接口，以确保正确的排序。上例中使用的 TransactionAttributeSourceAdvisor 具有可配置的序列值；默认设置是无序的。</p>
@@ -15894,7 +15894,7 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 <div class="sect4">
 <h5 id="aop-api-autoproxy-abstract"><a class="anchor" href="#aop-api-autoproxy-abstract"></a>AbstractAdvisorAutoProxyCreator</h5>
 <div class="paragraph">
-<p>这是 DefaultAdvisorAutoProxyCreator 的超类。您可以通过继承这个类来创建自己的自动代理创建器，但不太可能的情况是，advisor 定义对框架 <code>DefaultAdvisorAutoProxyCreator</code> 的行为提供的定制不足。</p>
+<p>这是 DefaultAdvisorAutoProxyCreator 的超类。你可以通过继承这个类来创建自己的自动代理创建器，但不太可能的情况是，advisor 定义对框架 <code>DefaultAdvisorAutoProxyCreator</code> 的行为提供的定制不足。</p>
 </div>
 </div>
 </div>
@@ -15904,7 +15904,7 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 <p>元数据驱动的自动代理类型是自动代理中一个重要类型。它为 .NET ServicedComponents 生成了一个类似的编程模型。与在 XML 描述符中定义元数据不同，事务管理和其他企业服务的配置保存在源代码级别属性中。</p>
 </div>
 <div class="paragraph">
-<p>在这种情况下，您可以结合使用 <code>DefaultAdvisorAutoProxyCreator</code> 与理解元数据属性的advisor。元数据细节保存在候选 advisor 的切点部分，而不是自动代理创建类本身。</p>
+<p>在这种情况下，你可以结合使用 <code>DefaultAdvisorAutoProxyCreator</code> 与理解元数据属性的advisor。元数据细节保存在候选 advisor 的切点部分，而不是自动代理创建类本身。</p>
 </div>
 <div class="paragraph">
 <p>这实际上是 <code>DefaultAdvisorAutoProxyCreator</code> 的特例，but deserves
@@ -15974,7 +15974,7 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </td>
 <td class="content">
 <div class="paragraph">
-<p>如果您只需要声明式事务管理，那么使用这些通用 XML 定义将使 Spring 自动使用事务属性代理所有类或方法。您不需要直接使用 AOP，编程模型与 .NET ServicedComponents 类似。</p>
+<p>如果你只需要声明式事务管理，那么使用这些通用 XML 定义将使 Spring 自动使用事务属性代理所有类或方法。你不需要直接使用 AOP，编程模型与 .NET ServicedComponents 类似。</p>
 </div>
 </td>
 </tr>
@@ -15986,10 +15986,10 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 <div class="ulist">
 <ul>
 <li>
-<p>定义您的自定义属性。</p>
+<p>定义你的自定义属性。</p>
 </li>
 <li>
-<p>使用必要的通知指定 Advisor，其中包括由在类或方法中存在自定义属性触发的切点。您可能能够使用已经存在的通知，只需实现一个静态切点来提取自定义属性。</p>
+<p>使用必要的通知指定 Advisor，其中包括由在类或方法中存在自定义属性触发的切点。你可能能够使用已经存在的通知，只需实现一个静态切点来提取自定义属性。</p>
 </li>
 </ul>
 </div>
@@ -16012,26 +16012,18 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-targetsource"><a class="anchor" href="#aop-targetsource"></a>6.10. Using TargetSources</h3>
+<h3 id="aop-targetsource"><a class="anchor" href="#aop-targetsource"></a>6.10. 使用 TargetSources</h3>
 <div class="paragraph">
-<p>Spring offers the concept of a <em>TargetSource</em>, expressed in the
-<code>org.springframework.aop.TargetSource</code> interface. This interface is responsible for
-returning the "target object" implementing the join point. The <code>TargetSource</code>
-implementation is asked for a target instance each time the AOP proxy handles a method
-invocation.</p>
+<p>Spring提供了一个 <em>TargetSource</em> 的概念，用 <code>org.springframework.aop.TargetSource</code> 接口表示。该接口负责返回实现连接点的“目标对象”。每当 AOP 代理处理方法调用时，都会要求 <code>TargetSource</code> 实现目标实例。</p>
 </div>
 <div class="paragraph">
-<p>Developers using Spring AOP don&#8217;t normally need to work directly with TargetSources, but
-this provides a powerful means of supporting pooling, hot swappable and other
-sophisticated targets. For example, a pooling TargetSource can return a different target
-instance for each invocation, using a pool to manage instances.</p>
+<p>使用 Spring AOP 的开发人员通常不需要直接使用 TargetSource，但这提供了一种强大的支持池，热插拔和其他复杂目标的手段。例如，池化的 TargetSource 使用一个池来管理实例，可以为每个调用返回一个不同的目标实例。</p>
 </div>
 <div class="paragraph">
-<p>If you do not specify a TargetSource, a default implementation is used that wraps a
-local object. The same target is returned for each invocation (as you would expect).</p>
+<p>如果你没有指定 TargetSource，则会使用包装本地对象的默认实现。每次调用都会返回相同的目标（如你所期望的那样）。</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s look at the standard target sources provided with Spring, and how you can use them.</p>
+<p>我们看看 Spring 提供的标准目标资源，以及如何使用它们。</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -16041,26 +16033,22 @@ local object. The same target is returned for each invocation (as you would expe
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When using a custom target source, your target will usually need to be a prototype
-rather than a singleton bean definition. This allows Spring to create a new target
-instance when required.</p>
+<p>当使用自定义目标源时，你的目标通常需要是一个原型而不是单一的 bean 定义。这允许 Spring 在需要时创建新的目标实例。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect3">
-<h4 id="aop-ts-swap"><a class="anchor" href="#aop-ts-swap"></a>6.10.1. Hot swappable target sources</h4>
+<h4 id="aop-ts-swap"><a class="anchor" href="#aop-ts-swap"></a>6.10.1. 热插拔目标源</h4>
 <div class="paragraph">
-<p>The <code>org.springframework.aop.target.HotSwappableTargetSource</code> exists to allow the target
-of an AOP proxy to be switched while allowing callers to keep their references to it.</p>
+<p><code>org.springframework.aop.target.HotSwappableTargetSource</code> 的存在允许 AOP 代理的目标被切换，同时允许调用者保留对它的引用。</p>
 </div>
 <div class="paragraph">
-<p>Changing the target source&#8217;s target takes effect immediately. The
-<code>HotSwappableTargetSource</code> is threadsafe.</p>
+<p>更改目标源的目标会立即生效。<code>HotSwappableTargetSource</code> 是线程安全的。</p>
 </div>
 <div class="paragraph">
-<p>You can change the target via the <code>swap()</code> method on HotSwappableTargetSource as follows:</p>
+<p>你可以通过 HotSwappableTargetSource 的 <code>swap()</code> 方法更改目标：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16069,7 +16057,7 @@ of an AOP proxy to be switched while allowing callers to keep their references t
 </div>
 </div>
 <div class="paragraph">
-<p>The XML definitions required look as follows:</p>
+<p>所需的 XML 定义如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16085,34 +16073,22 @@ of an AOP proxy to be switched while allowing callers to keep their references t
 </div>
 </div>
 <div class="paragraph">
-<p>The above <code>swap()</code> call changes the target of the swappable bean. Clients who hold a
-reference to that bean will be unaware of the change, but will immediately start hitting
-the new target.</p>
+<p>上面的 <code>swap()</code> 调用改变了可交换 bean 的目标。持有对该 bean 的引用的客户端不会感知这个变化，会立即开始触发新目标。</p>
 </div>
 <div class="paragraph">
-<p>Although this example doesn&#8217;t add any advice - and it&#8217;s not necessary to add advice to
-use a <code>TargetSource</code> - of course any <code>TargetSource</code> can be used in conjunction with
-arbitrary advice.</p>
+<p>虽然这个例子没有添加任何通知 - 并且没有必要添加使用 TargetSource 的通知 - 当然，任何 <code>TargetSource</code> 都可以与任意通知一起使用。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-ts-pool"><a class="anchor" href="#aop-ts-pool"></a>6.10.2. Pooling target sources</h4>
+<h4 id="aop-ts-pool"><a class="anchor" href="#aop-ts-pool"></a>6.10.2. 池化目标源</h4>
 <div class="paragraph">
-<p>Using a pooling target source provides a similar programming model to stateless session
-EJBs, in which a pool of identical instances is maintained, with method invocations
-going to free objects in the pool.</p>
+<p>使用池化目标源为无状态会话 EJB 提供了类似的编程模型，其中维持了相同实例池，并使用方法调用去释放池中的对象。</p>
 </div>
 <div class="paragraph">
-<p>A crucial difference between Spring pooling and SLSB pooling is that Spring pooling can
-be applied to any POJO. As with Spring in general, this service can be applied in a
-non-invasive way.</p>
+<p>Spring 池和 SLSB 池之间的一个关键区别是 Spring 池可以应用于任何 POJO。如同普通 Spring，该服务可以以非侵入方式应用。</p>
 </div>
 <div class="paragraph">
-<p>Spring provides out-of-the-box support for Commons Pool 2.2, which provides a
-fairly efficient pooling implementation. You&#8217;ll need the commons-pool Jar on your
-application&#8217;s classpath to use this feature. It&#8217;s also possible to subclass
-<code>org.springframework.aop.target.AbstractPoolingTargetSource</code> to support any other
-pooling API.</p>
+<p>Spring 为 Commons Pool 2.2 提供了开箱即用的支持，它提供了一个相当有效的池化实现。 你需要应用程序类路径上的 commons-pool Jar 才能使用此功能。 也可以对 <code>org.springframework.aop.target.AbstractPoolingTargetSource</code> 进行子类化以支持任何其他池化 API。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -16122,14 +16098,14 @@ pooling API.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Commons Pool 1.5+ is also supported but deprecated as of Spring Framework 4.2.</p>
+<p>Commons Pool 1.5+ 也被支持，但从 Spring Framework 4.2 开始被废弃。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Sample configuration is shown below:</p>
+<p>示例配置如下所示：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16150,23 +16126,13 @@ pooling API.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Note that the target object - "businessObjectTarget" in the example - <em>must</em> be a
-prototype. This allows the <code>PoolingTargetSource</code> implementation to create new instances
-of the target to grow the pool as necessary. See the javadocs of
-<code>AbstractPoolingTargetSource</code> and the concrete subclass you wish to use for information
-about its properties: "maxSize" is the most basic, and always guaranteed to be present.</p>
+<p>注意，目标对象 - 示例中的“businessObjectTarget” - 必须是原型。这允许 <code>PoolingTargetSource</code> 实现根据需要创建目标的新实例以增大池的尺寸。参见 <code>AbstractPoolingTargetSource</code> 的 javadoc 和你希望用于获取其属性信息的具体子类：“maxSize”是最基本的，并且始终确保被设置。</p>
 </div>
 <div class="paragraph">
-<p>In this case, "myInterceptor" is the name of an interceptor that would need to be
-defined in the same IoC context. However, it isn&#8217;t necessary to specify interceptors to
-use pooling. If you want only pooling, and no other advice, don&#8217;t set the
-interceptorNames property at all.</p>
+<p>在本例中，“myInterceptor” 是需要在同一个 IoC 上下文中定义的拦截器的名称。但是，没有必要指定拦截器来使用池。 如果你只想要池化，并且没有其他通知，请不要设置 interceptorNames 属性。</p>
 </div>
 <div class="paragraph">
-<p>It&#8217;s possible to configure Spring so as to be able to cast any pooled object to the
-<code>org.springframework.aop.target.PoolingConfig</code> interface, which exposes information
-about the configuration and current size of the pool through an introduction. You&#8217;ll
-need to define an advisor like this:</p>
+<p>可以配置 Spring，以便能够将任何池化对象转换到 <code>org.springframework.aop.target.PoolingConfig</code> 接口，该接口通过引入暴露有关池的配置和其当前大小的信息。 你需要像这样定义一个 advisor：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16177,13 +16143,10 @@ need to define an advisor like this:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This advisor is obtained by calling a convenience method on the
-<code>AbstractPoolingTargetSource</code> class, hence the use of MethodInvokingFactoryBean. This
-advisor&#8217;s name ("poolConfigAdvisor" here) must be in the list of interceptors names in
-the ProxyFactoryBean exposing the pooled object.</p>
+<p>这个 advisor 是通过调用 <code>AbstractPoolingTargetSource</code> 类的便捷方法获得的，因此可以使用 MethodInvokingFactoryBean。此 advisor 的名称（此处为“poolConfigAdvisor”）必须位于暴露池中的对象的 ProxyFactoryBean 的拦截器名称列表中。</p>
 </div>
 <div class="paragraph">
-<p>The cast will look as follows:</p>
+<p>转换如下：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16199,31 +16162,23 @@ the ProxyFactoryBean exposing the pooled object.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Pooling stateless service objects is not usually necessary. We don&#8217;t believe it should
-be the default choice, as most stateless objects are naturally thread safe, and instance
-pooling is problematic if resources are cached.</p>
+<p>池化无状态服务对象通常是不必要的。我们不相信它应该是默认选择，因为大多数无状态对象自然是线程安全的，并且如果资源被缓存，实例池是有问题的。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Simpler pooling is available using auto-proxying. It&#8217;s possible to set the TargetSources
-used by any auto-proxy creator.</p>
+<p>使用自动代理可以使用更简单的池。可以设置任何自动代理创建者使用的 TargetSources。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-ts-prototype"><a class="anchor" href="#aop-ts-prototype"></a>6.10.3. Prototype target sources</h4>
+<h4 id="aop-ts-prototype"><a class="anchor" href="#aop-ts-prototype"></a>6.10.3. 原型目标源</h4>
 <div class="paragraph">
-<p>Setting up a "prototype" target source is similar to a pooling TargetSource. In this
-case, a new instance of the target will be created on every method invocation. Although
-the cost of creating a new object isn&#8217;t high in a modern JVM, the cost of wiring up the
-new object (satisfying its IoC dependencies) may be more expensive. Thus you shouldn&#8217;t
-use this approach without very good reason.</p>
+<p>设置“原型”目标源与池化 TargetSource 类似。在这种情况下，每个方法调用都会创建一个新的目标实例。 尽管在现代 JVM 中创建新对象的成本不高，但连接新对象（满足其 IoC 依赖性）的成本可能更高。 因此，如果没有很好的理由，你不应该使用这种方法。</p>
 </div>
 <div class="paragraph">
-<p>To do this, you could modify the <code>poolTargetSource</code> definition shown above as follows.
-(I&#8217;ve also changed the name, for clarity.)</p>
+<p>为此，你可以修改上面展示的 <code>poolTargetSource</code> 定义，如下所示。（为了看起来更加清楚，我改了名字。）</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16233,19 +16188,13 @@ use this approach without very good reason.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>There&#8217;s only one property: the name of the target bean. Inheritance is used in the
-TargetSource implementations to ensure consistent naming. As with the pooling target
-source, the target bean must be a prototype bean definition.</p>
+<p>只有一个属性：目标 bean 的名称。TargetSource 实现中使用了继承来确保一致的命名。 与池化目标源一样，目标 bean 必须是原型 bean 定义。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="aop-ts-threadlocal"><a class="anchor" href="#aop-ts-threadlocal"></a>6.10.4. ThreadLocal target sources</h4>
+<h4 id="aop-ts-threadlocal"><a class="anchor" href="#aop-ts-threadlocal"></a>6.10.4. ThreadLocal 目标源</h4>
 <div class="paragraph">
-<p><code>ThreadLocal</code> target sources are useful if you need an object to be created for each
-incoming request (per thread that is). The concept of a <code>ThreadLocal</code> provide a JDK-wide
-facility to transparently store resource alongside a thread. Setting up a
-<code>ThreadLocalTargetSource</code> is pretty much the same as was explained for the other types
-of target source:</p>
+<p>如果你需要为每个传入请求（每个线程）创建一个对象，则 <code>ThreadLocal</code> 目标源非常有用。<code>ThreadLocal</code> 的概念提供了一个 JDK 范围的工具来透明地将资源与线程一起存储。 设置 <code>ThreadLocalTargetSource</code> 几乎与其他类型的目标源所解释的一样：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -16262,15 +16211,7 @@ of target source:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>ThreadLocals come with serious issues (potentially resulting in memory leaks) when
-incorrectly using them in a multi-threaded and multi-classloader environments. One
-should always consider wrapping a threadlocal in some other class and never directly use
-the <code>ThreadLocal</code> itself (except of course in the wrapper class). Also, one should
-always remember to correctly set and unset (where the latter simply involved a call to
-<code>ThreadLocal.set(null)</code>) the resource local to the thread. Unsetting should be done in
-any case since not unsetting it might result in problematic behavior. Spring&#8217;s
-ThreadLocal support does this for you and should always be considered in favor of using
-ThreadLocals without other proper handling code.</p>
+<p>当在多线程和多类加载器环境中错误地使用它们时，ThreadLocals 会带来严重的问题（可能导致内存泄漏）。 你应该总是考虑在其他类中包装一个threadlocal，并且永远不要直接使用 <code>ThreadLocal</code> 本身（当然在包装类中除外）。另外，应该始终记住正确设置和取消设置（后者只需调用<code>ThreadLocal.set(null)</code>）线程的本地资源。 在任何情况下都应该进行取消设置，因为未取消设置可能会导致问题行为的产生。Spring 的 ThreadLocal 支持为你做到了这一点，并且应该始终考虑使用不含其他适当处理代码的 ThreadLocal。</p>
 </div>
 </td>
 </tr>
