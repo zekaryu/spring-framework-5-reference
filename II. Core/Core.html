@@ -10112,39 +10112,18 @@ ExpressionParser parser = <span class="keyword">new</span> SpelExpressionParser(
 <div class="sect3">
 <h4 id="expressions-evaluation-context"><a class="anchor" href="#expressions-evaluation-context"></a>4.3.1. EvaluationContext 接口</h4>
 <div class="paragraph">
-<p>The interface <code>EvaluationContext</code> is used when evaluating an expression to resolve
-properties, methods, fields, and to help perform type conversion. The out-of-the-box
-implementation, <code>StandardEvaluationContext</code>, uses reflection to manipulate the object,
-caching <code>java.lang.reflect.Method</code>, <code>java.lang.reflect.Field</code>, and
-<code>java.lang.reflect.Constructor</code> instances for increased performance.</p>
+<p>当评估某个表达式来解析属性，方法，字段并帮助执行类型转换时，将使用接口 <code>EvaluationContext</code>。开箱即用的实现 <code>StandardEvaluationContext</code> 使用反射来操纵对象，缓存 <code>java.lang.reflect.Method</code>，<code>java.lang.reflect.Field</code> 和 <code>java.lang.reflect.Constructor</code> 实例以提高性能。</p>
 </div>
 <div class="paragraph">
-<p>The <code>StandardEvaluationContext</code> is where you may specify the root object to evaluate
-against via the method <code>setRootObject()</code> or passing the root object into the
-constructor. You can also specify variables and functions that will be used in the
-expression using the methods <code>setVariable()</code> and <code>registerFunction()</code>. The use of
-variables and functions are described in the language reference sections
-<a href="#expressions-ref-variables">Variables</a> and <a href="#expressions-ref-functions">Functions</a>. The
-<code>StandardEvaluationContext</code> is also where you can register custom
-<code>ConstructorResolver</code>s, <code>MethodResolver</code>s, and <code>PropertyAccessor</code>s to extend how SpEL
-evaluates expressions. Please refer to the javadoc of these classes for more details.</p>
+<p><code>StandardEvaluationContext</code> 是你可以通过 <code>setRootObject()</code> 方法或者将根对象传递给构造器来指定根对象的位置。你还可以使用方法 <code>setVariable()</code> 和 code>registerFunction()</code> 指定将在表达式中使用的变量和函数。变量和函数的使用在 <a href="#expressions-ref-variables">变量</a> 和 <a href="#expressions-ref-functions">函数</a> 的语言参考章节中描述。<code>StandardEvaluationContext</code> 也是你可以注册自定义的<code>ConstructorResolver</code>，<code>MethodResolver</code>，和 <code>PropertyAccessor</code> 以扩展 SpEL 如何评估表达式的地方。有关更多详细信息，请参阅这些类的javadoc。</p>
 </div>
 <div class="sect4">
-<h5 id="expressions-type-conversion"><a class="anchor" href="#expressions-type-conversion"></a>Type Conversion</h5>
+<h5 id="expressions-type-conversion"><a class="anchor" href="#expressions-type-conversion"></a>类型转换</h5>
 <div class="paragraph">
-<p>By default SpEL uses the conversion service available in Spring core (
-<code>org.springframework.core.convert.ConversionService</code>). This conversion service comes
-with many converters built in for common conversions but is also fully extensible so
-custom conversions between types can be added. Additionally it has the key capability
-that it is generics aware. This means that when working with generic types in
-expressions, SpEL will attempt conversions to maintain type correctness for any objects
-it encounters.</p>
+<p>默认情况下，SpEL 使用 Spring 核心中可用的转换服务（<code>org.springframework.core.convert.ConversionService</code>）。这种转换服务附带许多用于通用转换的内置转换器，但也可以完全扩展以添加自定义类型转换。此外，它还具有一个关键能力也就是泛型感知。这意味着，当在表达式中使用泛型类型时，SpEL 将尝试转换以维持其遇到的任何对象的类型正确性。</p>
 </div>
 <div class="paragraph">
-<p>What does this mean in practice? Suppose assignment, using <code>setValue()</code>, is being used
-to set a <code>List</code> property. The type of the property is actually <code>List&lt;Boolean&gt;</code>. SpEL
-will recognize that the elements of the list need to be converted to <code>Boolean</code> before
-being placed in it. A simple example:</p>
+<p>这在实践中意味着什么？ 假设你正在使用 <code>setValue()</code> 进行赋值来设置 <code>List</code>  的属性。该属性的类型实际上是 <code>List&lt;Boolean&gt;</code>。SpEL 将认识到列表中的元素在被放置之前需要转换为布尔值。 一个简单的例子：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10169,16 +10148,9 @@ parser.parseExpression(<span class="string"><span class="delimiter">&quot;</span
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-parser-configuration"><a class="anchor" href="#expressions-parser-configuration"></a>4.3.2. Parser configuration</h4>
+<h4 id="expressions-parser-configuration"><a class="anchor" href="#expressions-parser-configuration"></a>4.3.2. 解析器配置</h4>
 <div class="paragraph">
-<p>It is possible to configure the SpEL expression parser using a parser configuration object
-(<code>org.springframework.expression.spel.SpelParserConfiguration</code>). The configuration
-object controls the behavior of some of the expression components. For example, if
-indexing into an array or collection and the element at the specified index is <code>null</code>
-it is possible to automatically create the element. This is useful when using expressions made up of a
-chain of property references. If indexing into an array or list
-and specifying an index that is beyond the end of the current size of the array or
-list it is possible to automatically grow the array or list to accommodate that index.</p>
+<p>可以使用解析器配置对象（<code>org.springframework.expression.spel.SpelParserConfiguration</code>）来配置 SpEL 表达式解析器。配置对象控制一些表达式组件的行为。例如，如果索引到数组或集合中，并且指定索引处的元素为 <code>null</code> ，则它会自动创建该元素。当使用由一系列属性引用组成的表达式时，这非常有用。如果索引到数组或列表中并指定超出数组或列表当前大小末尾的索引，则它会自动增大数组或列表以适应该索引。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10204,86 +10176,52 @@ Demo demo = <span class="keyword">new</span> Demo();
 </div>
 </div>
 <div class="paragraph">
-<p>It is also possible to configure the behaviour of the SpEL expression compiler.</p>
+<p>你也可以配置 SpEL 表达式编译器的行为。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-spel-compilation"><a class="anchor" href="#expressions-spel-compilation"></a>4.3.3. SpEL compilation</h4>
+<h4 id="expressions-spel-compilation"><a class="anchor" href="#expressions-spel-compilation"></a>4.3.3. SpEL 编译</h4>
 <div class="paragraph">
-<p>Spring Framework 4.1 includes a basic expression compiler. Expressions are usually
-interpreted which provides a lot of dynamic flexibility during evaluation but
-does not provide the optimum performance. For occasional expression usage
-this is fine, but when used by other components like Spring Integration,
-performance can be very important and there is no real need for the dynamism.</p>
+<p>Spring Framework 4.1 包含一个基本的表达式编译器。表达式的解释过程通常提供了很大的动态灵活性，但不能提供最佳性能。对于偶然的表达用法，这很好，但是当像 Spring Integration 这样的其他组件使用时，性能可能非常重要，并且它可能不需要动态性。</p>
 </div>
 <div class="paragraph">
-<p>The new SpEL compiler is intended to address this need. The
-compiler will generate a real Java class on the fly during evaluation that embodies the
-expression behavior and use that to achieve much faster expression
-evaluation. Due to the lack of typing around expressions the compiler
-uses information gathered during the interpreted evaluations of an
-expression when performing compilation. For example, it does not know the type
-of a property reference purely from the expression but during the first
-interpreted evaluation it will find out what it is. Of course, basing the
-compilation on this information could cause trouble later if the types of
-the various expression elements change over time. For this reason compilation
-is best suited to expressions whose type information is not going to change
-on repeated evaluations.</p>
+<p>新的 SpEL 编译器旨在解决此需求。编译器将在评估过程中动态生成一个真正的 Java 类，以体现表达式行为并使用它来实现更快的表达式评估。由于缺少表达式完整的输入信息，编译器在执行编译时使用在表达式的解释评估期间收集的信息。例如，它不完全知道表达式的属性引用的类型，但是在第一次解释评估期间，它会找出它是什么类型。当然，如果各种表达式元素的类型随着时间的推移而变化，那么基于这些信息的编译可能会在稍后造成麻烦。出于这个原因，编译最适合于在重复评估时其类型信息不会改变的表达式。</p>
 </div>
 <div class="paragraph">
-<p>For a basic expression like this:</p>
+<p>对于像这样的基本表达式：</p>
 </div>
 <div class="paragraph">
 <p><code>someArray[0].someProperty.someOtherProperty &lt; 0.1</code></p>
 </div>
 <div class="paragraph">
-<p>which involves array access, some property derefencing and numeric operations, the performance
-gain can be very noticeable. In an example micro benchmark run of 50000 iterations, it was
-taking 75ms to evaluate using only the interpreter and just 3ms using the compiled version
-of the expression.</p>
+<p>其中涉及数组访问，某些属性的引用消除和算数操作，性能增益可能非常明显。在 50000 次迭代的示例微观基准测试中，仅使用解释器评估需要 75ms，使用表达式的编译版本仅需要 3ms。</p>
 </div>
 <div class="sect4">
-<h5 id="expressions-compiler-configuration"><a class="anchor" href="#expressions-compiler-configuration"></a>Compiler configuration</h5>
+<h5 id="expressions-compiler-configuration"><a class="anchor" href="#expressions-compiler-configuration"></a>编译器配置</h5>
 <div class="paragraph">
-<p>The compiler is not turned on by default, but there are two ways to turn
-it on. It can be turned on using the parser configuration process discussed earlier or
-via a system property when SpEL usage is embedded inside another component. This section
-discusses both of these options.</p>
+<p>编译器默认情况下未打开，但有两种方法可以打开它。可以使用前面讨论过的解析器配置过程打开它，或者当SpEL 用法嵌入到另一个组件内时使用系统属性打开它。本节讨论这两个选项。</p>
 </div>
 <div class="paragraph">
-<p>It is important to understand that there are a few modes the compiler can operate in, captured
-in an enum (<code>org.springframework.expression.spel.SpelCompilerMode</code>). The modes are as follows:</p>
+<p>理解编译器可以运行的几种模式非常重要，可以在枚举中捕获（<code>org.springframework.expression.spel.SpelCompilerMode</code>）。模式如下：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>OFF</code> - The compiler is switched off; this is the default.</p>
+<p><code>OFF</code> - 编译器处于关闭状态;这是默认值。</p>
 </li>
 <li>
-<p><code>IMMEDIATE</code> - In immediate mode the expressions are compiled as soon as possible. This
-is typically after the first interpreted evaluation. If the compiled expression fails
-(typically due to a type changing, as described above) then the caller of the expression
-evaluation will receive an exception.</p>
+<p><code>IMMEDIATE</code> - 在即时模式下，表达式会被尽快编译。这通常是在第一次解释评估之后。如果编译的表达式失败（通常是由于类型改变，如上所述），则表达式评估的调用者将收到异常。</p>
 </li>
 <li>
-<p><code>MIXED</code> - In mixed mode the expressions silently switch between interpreted and compiled
-mode over time. After some number of interpreted runs they will switch to compiled
-form and if something goes wrong with the compiled form (like a type changing, as
-described above) then the expression will automatically switch back to interpreted form
-again. Sometime later it may generate another compiled form and switch to it. Basically
-the exception that the user gets in <code>IMMEDIATE</code> mode is instead handled internally.</p>
+<p><code>MIXED</code> - 在混合模式下，表达式会随着时间的推移在解释模式和编译模式之间静默切换。经过一些解释运行后，它们将切换到编译形式，并且如果编译形式出现问题（如类型改变，如上所述），则表达式将自动切换回解释形式。稍后它可能会生成另一个编译表单并切换到它。基本上，用户在 <code>IMMEDIATE</code> 模式得到的异常是在内部处理的。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><code>IMMEDIATE</code> mode exists because <code>MIXED</code> mode could cause issues for expressions that
-have side effects. If a compiled expression blows up after partially succeeding it
-may have already done something that has affected the state of the system. If this
-has happened the caller may not want it to silently re-run in interpreted mode
-since part of the expression may be running twice.</p>
+<p><code>IMMEDIATE</code> ，模式之所以存在是因为 <code>MIXED</code> 模式有可能使有副作用的表达式出现问题。如果编译后的表达式在部分成功后，它可能已经做了一些影响系统状态的事情。如果发生这种情况，调用者可能不希望它以解释模式静默地重新运行，因为表达式的一部分可能会运行两次。</p>
 </div>
 <div class="paragraph">
-<p>After selecting a mode, use the <code>SpelParserConfiguration</code> to configure the parser:</p>
+<p>选择模式后，使用 <code>SpelParserConfiguration</code> 来配置解析器：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10300,53 +10238,41 @@ MyMessage message = <span class="keyword">new</span> MyMessage();
 </div>
 </div>
 <div class="paragraph">
-<p>When specifying the compiler mode it is also possible to specify a classloader (passing null is allowed).
-Compiled expressions will be defined in a child classloader created under any that is supplied.
-It is important to ensure if a classloader is specified it can see all the types involved in
-the expression evaluation process.
-If none is specified then a default classloader will be used (typically the context classloader for
-the thread that is running during expression evaluation).</p>
+<p>指定编译器模式时，也可以指定一个类加载器（允许传递 null）。编译的表达式将在所提供的任何子类下创建的子类加载器中定义。确保是否指定类加载器很重要，它可以查看表达式评估过程中涉及的所有类型。 如果没有指定，则将使用默认的类加载器（通常是表达式评估期间运行的线程的上下文类加载器）。</p>
 </div>
 <div class="paragraph">
-<p>The second way to configure the compiler is for use when SpEL is embedded inside some other
-component and it may not be possible to configure via a configuration object.
-In these cases it is possible to use a system property. The property
-<code>spring.expression.compiler.mode</code> can be set to one of the <code>SpelCompilerMode</code>
-enum values (<code>off</code>, <code>immediate</code>, or <code>mixed</code>).</p>
+<p>配置编译器的第二种方式是在 SpEL 嵌入到其他组件中时使用，并且可能无法通过配置对象进行配置。 在这些情况下，可以使用系统属性。属性 <code>spring.expression.compiler.mode</code> 可以设置为其中一个 <code>SpelCompilerMode</code> 枚举值（<code>off</code>，<code>immediate</code>，或者 <code>mixed</code>）。</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="expressions-compiler-limitations"><a class="anchor" href="#expressions-compiler-limitations"></a>Compiler limitations</h5>
+<h5 id="expressions-compiler-limitations"><a class="anchor" href="#expressions-compiler-limitations"></a>编译器限制</h5>
 <div class="paragraph">
-<p>With Spring Framework 4.1 the basic compilation framework is in place. However, the framework does not
-yet support compiling every kind of expression. The initial focus has been on the common expressions that are
-likely to be used in performance critical contexts. These kinds of expression cannot be compiled
-at the moment:</p>
+<p>在 Spring Framework 4.1 中，基本的编译框架已经到位。但是，该框架还不支持编译各种表达式。 最初的重点是可能用于关键上下文性能的常用表达式。目前无法编译这些表达式：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>expressions involving assignment</p>
+<p>涉及赋值的表达式</p>
 </li>
 <li>
-<p>expressions relying on the conversion service</p>
+<p>依赖于转换服务表达式</p>
 </li>
 <li>
-<p>expressions using custom resolvers or accessors</p>
+<p>使用自定义解析器或访问器的表达式</p>
 </li>
 <li>
-<p>expressions using selection or projection</p>
+<p>使用选择或投影的表达式</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>More and more types of expression will be compilable in the future.</p>
+<p>未来将会支持更多表达式的编译。</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expressions-beandef"><a class="anchor" href="#expressions-beandef"></a>4.4. Expression support for defining bean definitions</h3>
+<h3 id="expressions-beandef"><a class="anchor" href="#expressions-beandef"></a>4.4. 定义 bean 定义的表达式支持</h3>
 <div class="paragraph">
 <p>SpEL expressions can be used with XML or annotation-based configuration metadata for
 defining <code>BeanDefinition</code>s. In both cases the syntax to define the expression is of the
