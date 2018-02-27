@@ -16220,22 +16220,15 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </div>
 </div>
 <div class="sect2">
-<h3 id="aop-extensibility"><a class="anchor" href="#aop-extensibility"></a>6.11. Defining new Advice types</h3>
+<h3 id="aop-extensibility"><a class="anchor" href="#aop-extensibility"></a>6.11. 定义新的通知类型</h3>
 <div class="paragraph">
-<p>Spring AOP is designed to be extensible. While the interception implementation strategy
-is presently used internally, it is possible to support arbitrary advice types in
-addition to the out-of-the-box interception around advice, before, throws advice and
-after returning advice.</p>
+<p>Spring AOP 被设计为可扩展的。虽然拦截实现策略目前在内部使用，但除了拦截环绕通知，前置通知，异常通知和返回通知，还可以支持任意开箱即用的通知类型。</p>
 </div>
 <div class="paragraph">
-<p>The <code>org.springframework.aop.framework.adapter</code> package is an SPI package allowing
-support for new custom advice types to be added without changing the core framework.
-The only constraint on a custom <code>Advice</code> type is that it must implement the
-<code>org.aopalliance.aop.Advice</code> marker interface.</p>
+<p><code>org.springframework.aop.framework.adapter</code> 包是一个 SPI 包，允许在不更改核心框架的情况下添加新的自定义通知类型。 自定义通知类型的唯一约束是它必须实现 <code>org.aopalliance.aop.Advice</code> 标记接口。</p>
 </div>
 <div class="paragraph">
-<p>Please refer to the <code>org.springframework.aop.framework.adapter</code> javadocs for further
-information.</p>
+<p>有关更多信息，请参阅 <code>org.springframework.aop.framework.adapter</code> javadoc。</p>
 </div>
 </div>
 <div class="sect2">
