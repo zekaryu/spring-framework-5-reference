@@ -16250,42 +16250,29 @@ assertEquals(<span class="string"><span class="delimiter">&quot;</span><span cla
 </div>
 </div>
 <div class="sect1">
-<h2 id="null-safety"><a class="anchor" href="#null-safety"></a>7. Null-safety</h2>
+<h2 id="null-safety"><a class="anchor" href="#null-safety"></a>7. Null 安全问题</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Although Java does not allow to express null-safety with its type system, Spring Framework
-now provides following annotations in the <code>org.springframework.lang</code> package to declare
-nullability of APIs and fields:</p>
+<p>虽然 Java 不允许用类型系统表示 null 安全，但 Spring Framework 现在在 <code>org.springframework.lang</code> 包中提供以下注解来声明 API 和字段的可以为 null：</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/NonNull.html"><code>@NonNull</code></a> annotation where specific parameter,
-return value or field cannot be <code>null</code> (not needed on parameter and return value
-where <code>@NonNullApi</code> and <code>@NonNullFields</code> apply) .</p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/NonNull.html"><code>@NonNull</code></a> 注解的特定参数，返回值或者字段不能为 <code>null</code> （在应用了 <code>@NonNullApi</code> 和 <code>@NonNullFields</code> 的参数和返回值上是不需要的）。</p>
 </li>
 <li>
-<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/Nullable.html"><code>@Nullable</code></a> annotation where specific
-parameter, return value or field can be <code>null</code>.</p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/Nullable.html"><code>@Nullable</code></a> 注解的特定参数，返回值或者字段可以为 <code>null</code>。</p>
 </li>
 <li>
-<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/NonNullApi.html"><code>@NonNullApi</code></a> annotation at package level
-declares non-null as the default behavior for parameters and return values.</p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/NonNullApi.html"><code>@NonNullApi</code></a> 注解在包级别上，声明参数和返回值的默认行为为非 null 的。</p>
 </li>
 <li>
-<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/NonNullFields.html"><code>@NonNullFields</code></a> annotation at package
-level declares non-null as the default behavior for fields.</p>
+<p><a href="https://docs.spring.io/spring-framework/docs/5.0.0.RELEASE/javadoc-api/org/springframework/lang/NonNullFields.html"><code>@NonNullFields</code></a> 注解在包级别上，声明字段默认行为为非 null 的。</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Spring Framework leverages itself these annotations, but they can also be used in any Spring based
-Java project to declare null-safe APIs and optionally null-safe fields. Generic type arguments,
-varargs and array elements nullability are not supported yet, but should be in an upcoming
-release, see <a href="https://jira.spring.io/browse/SPR-15942">SPR-15942</a> for up-to-date information.
-Nullability declaration are expected to be fine-tuned between Spring Framework release,
-including minor ones. Nullability of types used inside method bodies is outside of the
-scope of this feature.</p>
+<p>Spring 框架自身也利用了这些注解，但它们也可用于任何基于 Spring的 Java 项目来声明 null 安全的 API 和可选的 null 安全的字段。泛型类型参数，可变参数和数组元素可以为 null 的性质尚不受支持，但应在即将发布的版本中受到支持，请参见 <a href="https://jira.spring.io/browse/SPR-15942">SPR-15942</a> 以获取最新信息。预期可以在 Spring Framework 发布之间微调可 null 性声明，包括次要声明。方法体内使用的类型的可空性超出了此功能的范围。</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -16295,24 +16282,19 @@ scope of this feature.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Libraries like Reactor or Spring Data provide null-safe APIs leveraging this feature.</p>
+<p>像 Reactor 或 Spring Data 这样的库提供了利用这个特性的 null 安全 API。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="sect2">
-<h3 id="use-cases"><a class="anchor" href="#use-cases"></a>7.1. Use cases</h3>
+<h3 id="use-cases"><a class="anchor" href="#use-cases"></a>7.1. 用例</h3>
 <div class="paragraph">
-<p>In addition to providing an explicit declaration for Spring Framework API nullability,
-these annotation can be used by IDE (such as IDEA or Eclipse) to provide useful
-warnings to Java developers related to null-safety in order to avoid <code>NullPointerException</code>
-at runtime.</p>
+<p>除了提供 Spring Framework API 可 null 性的显式声明之外，IDE 还可以使用这些注解（例如 IDEA 或 Eclipse）为 Java 开发人员提供有关 null 安全的有用警告，以避免在运行时出现 <code>NullPointerException</code> 空指针异常。</p>
 </div>
 <div class="paragraph">
-<p>They are also used to make Spring API null-safe in Kotlin projects since Kotlin natively
-supports <a href="https://kotlinlang.org/docs/reference/null-safety.html">null-safety</a>. More details
-are available in <a href="kotlin.html#null-safety">Kotlin support documentation</a>.</p>
+<p>它们也被用来使 Kotlin 项目中的 Spring API 为 null 安全的，因为 Kotlin 本身支持 <a href="https://kotlinlang.org/docs/reference/null-safety.html">null 安全</a>。 更多细节可在 <a href="kotlin.html#null-safety"> Kotlin 支持文档</a> 中找到。</p>
 </div>
 </div>
 <div class="sect2">
