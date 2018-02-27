@@ -69,7 +69,7 @@
 <li><a href="#expressions-evaluation">4.3. 使用 Spring 表达式接口进行表达式运算</a></li>
 <li><a href="#expressions-beandef">4.4. bean 定义的表达式支持</a></li>
 <li><a href="#expressions-language-ref">4.5. 语言引用</a></li>
-<li><a href="#expressions-example-classes">4.6. 例子用用到的类</a></li>
+<li><a href="#expressions-example-classes">4.6. 例子中用到的类</a></li>
 </ul>
 </li>
 <li><a href="#aop">5. 使用 Spring 进行面向切面编程</a>
@@ -10411,18 +10411,14 @@ MyMessage message = <span class="keyword">new</span> MyMessage();
 </div>
 </div>
 <div class="sect2">
-<h3 id="expressions-language-ref"><a class="anchor" href="#expressions-language-ref"></a>4.5. Language Reference</h3>
+<h3 id="expressions-language-ref"><a class="anchor" href="#expressions-language-ref"></a>4.5. 语言引用</h3>
 <div class="sect3">
-<h4 id="expressions-ref-literal"><a class="anchor" href="#expressions-ref-literal"></a>4.5.1. Literal expressions</h4>
+<h4 id="expressions-ref-literal"><a class="anchor" href="#expressions-ref-literal"></a>4.5.1. 字面量表达式</h4>
 <div class="paragraph">
-<p>The types of literal expressions supported are strings, numeric values (int, real, hex),
-boolean and null. Strings are delimited by single quotes. To put a single quote itself
-in a string, use two single quote characters.</p>
+<p>支持的字面量表达式的类型是字符串，数值（int，real，hex），布尔值和 null。字符串由单引号分隔。 要将单引号本身放入字符串中，请使用两个单引号字符。</p>
 </div>
 <div class="paragraph">
-<p>The following listing shows simple usage of literals. Typically they would not be used
-in isolation like this but rather as part of a more complex expression, for example
-using a literal on one side of a logical comparison operator.</p>
+<p>下面的代码清单展示了字面量的简单用法。通常，它们不会像这样孤立地使用，而是作为更复杂表达式的一部分，例如在逻辑比较运算符的一侧使用字面量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10442,18 +10438,13 @@ using a literal on one side of a logical comparison operator.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Numbers support the use of the negative sign, exponential notation, and decimal points.
-By default real numbers are parsed using Double.parseDouble().</p>
+<p>数字支持使用负号，指数表示法和小数点 默认情况下，实数使用 Double.parseDouble() 进行解析。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-properties-arrays"><a class="anchor" href="#expressions-properties-arrays"></a>4.5.2. Properties, Arrays, Lists, Maps, Indexers</h4>
+<h4 id="expressions-properties-arrays"><a class="anchor" href="#expressions-properties-arrays"></a>4.5.2. Properties，数组，列表，Map，索引器</h4>
 <div class="paragraph">
-<p>Navigating with property references is easy: just use a period to indicate a nested
-property value. The instances of the <code>Inventor</code> class, pupin, and tesla, were populated with
-data listed in the section <a href="#expressions-example-classes">Classes used in the examples</a>.
-To navigate "down" and get Tesla&#8217;s year of birth and Pupin&#8217;s city of birth the following
-expressions are used.</p>
+<p>使用属性引用进行导航很简单：只需使用句点来指示嵌套的属性值。 <code>Inventor</code> 类的实例 pupin 和 tesla 用在 <a href="#expressions-example-classes">示例中使用的Classes</a> 一节中列出的数据填充。 为了“向下”导航并获得 Tesla 的出生年份和 Pupin 的出生城市，使用了以下表达式。 </p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10464,8 +10455,7 @@ expressions are used.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Case insensitivity is allowed for the first letter of property names. The contents of
-arrays and lists are obtained using square bracket notation.</p>
+<p>对于属性名称的第一个字母，不区分大小写。数组和列表的内容使用方括号符号获取。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10492,9 +10482,7 @@ StandardEvaluationContext societyContext = <span class="keyword">new</span> Stan
 </div>
 </div>
 <div class="paragraph">
-<p>The contents of maps are obtained by specifying the literal key value within the
-brackets. In this case, because keys for the Officers map are strings, we can specify
-string literals.</p>
+<p>通过指定括号内的字面量键值来获得 map 的内容。在这种情况下，因为 Officer map 的键是字符串，所以我们可以指定字符串字面量。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10514,9 +10502,9 @@ parser.parseExpression(<span class="string"><span class="delimiter">&quot;</span
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-inline-lists"><a class="anchor" href="#expressions-inline-lists"></a>4.5.3. Inline lists</h4>
+<h4 id="expressions-inline-lists"><a class="anchor" href="#expressions-inline-lists"></a>4.5.3. 内联列表</h4>
 <div class="paragraph">
-<p>Lists can be expressed directly in an expression using <code>{}</code> notation.</p>
+<p>列表可以使用 <code>{}</code> 符号直接在表达式中表达。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10527,15 +10515,13 @@ parser.parseExpression(<span class="string"><span class="delimiter">&quot;</span
 </div>
 </div>
 <div class="paragraph">
-<p><code>{}</code> by itself means an empty list. For performance reasons, if the list is itself
-entirely composed of fixed literals then a constant list is created to represent the
-expression, rather than building a new list on each evaluation.</p>
+<p><code>{}</code> 本身意味着一个空的列表。出于性能原因，如果列表本身完全由固定字面量组成，则会创建一个常量列表来表示表达式，而不是在每个评估中创建一个新列表。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-inline-maps"><a class="anchor" href="#expressions-inline-maps"></a>4.5.4. Inline Maps</h4>
+<h4 id="expressions-inline-maps"><a class="anchor" href="#expressions-inline-maps"></a>4.5.4. 内联 Map</h4>
 <div class="paragraph">
-<p>Maps can also be expressed directly in an expression using <code>{key:value}</code> notation.</p>
+<p>也可以使用 <code>{key:value}</code> 符号在表达式中直接表示 map。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10546,17 +10532,13 @@ expression, rather than building a new list on each evaluation.</p>
 </div>
 </div>
 <div class="paragraph">
-<p><code>{:}</code> by itself means an empty map. For performance reasons, if the map is itself composed
-of fixed literals or other nested constant structures (lists or maps) then a constant map is created
-to represent the expression, rather than building a new map on each evaluation. Quoting of the map keys
-is optional, the examples above are not using quoted keys.</p>
+<p><code>{:}</code> 本身意味着一个空的 map。出于性能原因，如果 map 本身由固定字面量或其他嵌套常量结构（列表或 map）组成，则将创建常量 map 来表示表达式，而不是在每次评估中构建新的 map 。对 map 的键使用引号是可选的，上面的例子没有使用带引号的键。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-array-construction"><a class="anchor" href="#expressions-array-construction"></a>4.5.5. Array construction</h4>
+<h4 id="expressions-array-construction"><a class="anchor" href="#expressions-array-construction"></a>4.5.5. 数组构建</h4>
 <div class="paragraph">
-<p>Arrays can be built using the familiar Java syntax, optionally supplying an initializer
-to have the array populated at construction time.</p>
+<p>可以使用熟悉的 Java 语法构建数组，可以选择提供初始化器以在构建时填充数组。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10570,15 +10552,13 @@ to have the array populated at construction time.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>It is not currently allowed to supply an initializer when constructing a
-multi-dimensional array.</p>
+<p>在构建多维数组时，目前不允许提供初始化器。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-methods"><a class="anchor" href="#expressions-methods"></a>4.5.6. Methods</h4>
+<h4 id="expressions-methods"><a class="anchor" href="#expressions-methods"></a>4.5.6. 方法</h4>
 <div class="paragraph">
-<p>Methods are invoked using typical Java programming syntax. You may also invoke methods
-on literals. Varargs are also supported.</p>
+<p>使用典型的 Java 编程语法调用方法。你也可以在字面量上调用方法。也支持可变参数。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10592,12 +10572,11 @@ on literals. Varargs are also supported.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-operators"><a class="anchor" href="#expressions-operators"></a>4.5.7. Operators</h4>
+<h4 id="expressions-operators"><a class="anchor" href="#expressions-operators"></a>4.5.7. 操作符</h4>
 <div class="sect4">
-<h5 id="expressions-operators-relational"><a class="anchor" href="#expressions-operators-relational"></a>Relational operators</h5>
+<h5 id="expressions-operators-relational"><a class="anchor" href="#expressions-operators-relational"></a>关系操作符</h5>
 <div class="paragraph">
-<p>The relational operators; equal, not equal, less than, less than or equal, greater than,
-and greater than or equal are supported using standard operator notation.</p>
+<p>关系运算符; 等于，不等于，小于，小于或等于，大于，大于或等于使用标准操作符支持。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10619,22 +10598,17 @@ and greater than or equal are supported using standard operator notation.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Greater/less-than comparisons against <code>null</code> follow a simple rule: <code>null</code> is treated as
-nothing here (i.e. NOT as zero). As a consequence, any other value is always greater
-than <code>null</code> (<code>X &gt; null</code> is always <code>true</code>) and no other value is ever less than nothing
-(<code>X &lt; null</code> is always <code>false</code>).</p>
+<p>对于 <code>null</code> 的大于/不小于比较遵循一个简单的规则：<code>null</code> 在这里被视为空（即不为0）。因此，任何其他值总是大于 <code>null</code>（<code>X &gt; null</code> 始终为 <code>true</code>），并且其他值永远不会小于空（<code>X &lt; null</code> 始终为 <code>false</code>）。</p>
 </div>
 <div class="paragraph">
-<p>If you prefer numeric comparisons instead, please avoid number-based <code>null</code> comparisons
-in favor of comparisons against zero (e.g. <code>X &gt; 0</code> or <code>X &lt; 0</code>).</p>
+<p>如果您更喜欢算数比较，请避免基于数字的 <code>null</code> 比较，以便与零比较（例如，<code>X &gt; 0</code> 或 <code>X &lt; 0</code>）。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>In addition to standard relational operators SpEL supports the <code>instanceof</code> and regular
-expression based <code>matches</code> operator.</p>
+<p>除标准关系运算符外，SpEL 还支持基于 <code>instanceof</code> 和正则表达式的 <code>matches</code> 运算符。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10659,27 +10633,21 @@ expression based <code>matches</code> operator.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Be careful with primitive types as they are immediately boxed up to the wrapper type,
-so <code>1 instanceof T(int)</code> evaluates to <code>false</code> while <code>1 instanceof T(Integer)</code>
-evaluates to <code>true</code>, as expected.</p>
+<p>注意基本类型，因为它们会立即装箱到包装类型，所以如预期的那样，<code>1 instanceof T(int)</code> 的计算结果为 <code>false</code>，而 <code>1 instanceof T(Integer)</code> 的计算结果为 <code>true</code>。</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Each symbolic operator can also be specified as a purely alphabetic equivalent. This
-avoids problems where the symbols used have special meaning for the document type in
-which the expression is embedded (eg. an XML document). The textual equivalents are
-shown here: <code>lt</code> (<code>&lt;</code>), <code>gt</code> (<code>&gt;</code>), <code>le</code> (<code>&#8656;</code>), <code>ge</code> (<code>&gt;=</code>), <code>eq</code> (<code>==</code>),
-<code>ne</code> (<code>!=</code>), <code>div</code> (<code>/</code>), <code>mod</code> (<code>%</code>), <code>not</code> (<code>!</code>). These are case insensitive.</p>
+<p>每个符号运算符也可以被指定为纯粹的字母等值。这避免了所使用的符号对嵌入表达式的文档类型（例如XML文档）具有特殊含义的问题。文本等价表达如下所示：<code>lt</code>（<code>&lt;</code>），<code>gt</code>（<code>&gt;</code>），<code>le</code>（<code>&#8656;</code>），<code>ge</code>（<code>&gt;=</code>），<code>eq</code>（<code>==</code>），<code>ne</code>（<code>!=</code>），<code>div</code>（<code>/</code>），<code>mod</code>（<code>%</code>），<code>not</code>（<code>!</code>）。 这些不区分大小写。
+  </p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="expressions-operators-logical"><a class="anchor" href="#expressions-operators-logical"></a>Logical operators</h5>
+<h5 id="expressions-operators-logical"><a class="anchor" href="#expressions-operators-logical"></a>逻辑操作符</h5>
 <div class="paragraph">
-<p>The logical operators that are supported are and, or, and not. Their use is demonstrated
-below.</p>
+<p>支持的逻辑运算符有且，或，非。以下说明它们的用法。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10713,12 +10681,9 @@ below.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="expressions-operators-mathematical"><a class="anchor" href="#expressions-operators-mathematical"></a>Mathematical operators</h5>
+<h5 id="expressions-operators-mathematical"><a class="anchor" href="#expressions-operators-mathematical"></a>算术操作符</h5>
 <div class="paragraph">
-<p>The addition operator can be used on both numbers and strings. Subtraction, multiplication
-and division can be used only on numbers. Other mathematical operators supported are
-modulus (%) and exponential power (^). Standard operator precedence is enforced. These
-operators are demonstrated below.</p>
+<p>加法运算符可用于数字和字符串。减法，乘法和除法只能用于数字。其他支持的数学运算符有取模（％）和指数函数（^）。 标准运算符的优先级是强制的。这些操作符示例如下。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10755,10 +10720,9 @@ operators are demonstrated below.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-assignment"><a class="anchor" href="#expressions-assignment"></a>4.5.8. Assignment</h4>
+<h4 id="expressions-assignment"><a class="anchor" href="#expressions-assignment"></a>4.5.8. 赋值</h4>
 <div class="paragraph">
-<p>Setting of a property is done by using the assignment operator. This would typically be
-done within a call to <code>setValue</code> but can also be done inside a call to <code>getValue</code>.</p>
+<p>属性的设置是通过使用赋值运算符完成的。这通常是在对 <code>setValue</code> 的调用中完成的，但也可以在对 <code>getValue</code> 的调用中完成。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10775,14 +10739,9 @@ parser.parseExpression(<span class="string"><span class="delimiter">&quot;</span
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-types"><a class="anchor" href="#expressions-types"></a>4.5.9. Types</h4>
+<h4 id="expressions-types"><a class="anchor" href="#expressions-types"></a>4.5.9. 类型</h4>
 <div class="paragraph">
-<p>The special <code>T</code> operator can be used to specify an instance of java.lang.Class (the
-<em>type</em>). Static methods are invoked using this operator as well. The
-<code>StandardEvaluationContext</code> uses a <code>TypeLocator</code> to find types and the
-<code>StandardTypeLocator</code> (which can be replaced) is built with an understanding of the
-java.lang package. This means T() references to types within java.lang do not need to be
-fully qualified, but all other type references must be.</p>
+<p>特殊的 <code>T</code> 运算符可用于指定 java.lang.Class（类型）的实例。也可以使用此运算符调用静态方法。<code>StandardEvaluationContext</code> 使用 <code>TypeLocator</code> 来查找类型，并且可以通过理解java.lang 包来构建 <code>StandardTypeLocator</code>（可以被替换）。这意味着 T() 对java.lang 中类型的引用不需要完全限定，但所有其他类型引用必须是完全限定名。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10797,11 +10756,9 @@ fully qualified, but all other type references must be.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-constructors"><a class="anchor" href="#expressions-constructors"></a>4.5.10. Constructors</h4>
+<h4 id="expressions-constructors"><a class="anchor" href="#expressions-constructors"></a>4.5.10. 构造器</h4>
 <div class="paragraph">
-<p>Constructors can be invoked using the new operator. The fully qualified class name
-should be used for all but the primitive type and String (where int, float, etc, can be
-used).</p>
+<p>可以使用 new 运算符调用构造器。除了基本类型和 String（可以使用 int，float 等）之外，全限定类名应该用于所有类。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10817,10 +10774,9 @@ p.parseExpression(
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-ref-variables"><a class="anchor" href="#expressions-ref-variables"></a>4.5.11. Variables</h4>
+<h4 id="expressions-ref-variables"><a class="anchor" href="#expressions-ref-variables"></a>4.5.11. 变量</h4>
 <div class="paragraph">
-<p>Variables can be referenced in the expression using the syntax <code>#variableName</code>. Variables
-are set using the method setVariable on the <code>StandardEvaluationContext</code>.</p>
+<p>变量可以使用语法 <code>#variableName</code> 在表达式中引用。变量是使用 <code>StandardEvaluationContext</code> 上的 setVariable 方法设置的。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10834,12 +10790,9 @@ parser.parseExpression(<span class="string"><span class="delimiter">&quot;</span
 </div>
 </div>
 <div class="sect4">
-<h5 id="expressions-this-root"><a class="anchor" href="#expressions-this-root"></a>The #this and #root variables</h5>
+<h5 id="expressions-this-root"><a class="anchor" href="#expressions-this-root"></a>#this 和 #root 变量</h5>
 <div class="paragraph">
-<p>The variable #this is always defined and refers to the current evaluation object
-(against which unqualified references are resolved). The variable #root is always
-defined and refers to the root context object. Although #this may vary as components of
-an expression are evaluated, #root always refers to the root.</p>
+<p>变量 #this 总是被定义并且引用当前评估对象（针对非全限定引用）。变量 #root 总是被定义并引用根上下文对象。 尽管 #this 可能会随着表达式组件的不同而变化，但 #root 总是指向根。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10861,11 +10814,9 @@ context.setVariable(<span class="string"><span class="delimiter">&quot;</span><s
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-ref-functions"><a class="anchor" href="#expressions-ref-functions"></a>4.5.12. Functions</h4>
+<h4 id="expressions-ref-functions"><a class="anchor" href="#expressions-ref-functions"></a>4.5.12. 函数</h4>
 <div class="paragraph">
-<p>You can extend SpEL by registering user defined functions that can be called within the
-expression string. The function is registered with the <code>StandardEvaluationContext</code> using
-the method.</p>
+<p>你可以通过注册可以在表达式字符串内调用的用户定义函数来扩展 SpEL。该函数在使用该方法的 <code>StandardEvaluationContext</code> 中注册。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10873,8 +10824,7 @@ the method.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A reference to a Java Method provides the implementation of the function. For example, a
-utility method to reverse a string is shown below.</p>
+<p>对 Java 方法的引用提供了该函数的实现。例如，用于反转字符串的工具方法如下所示。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10891,8 +10841,7 @@ utility method to reverse a string is shown below.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>This method is then registered with the evaluation context and can be used within an
-expression string.</p>
+<p>然后这个方法被注册到评估上下文中，并且可以在表达式字符串中使用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10908,10 +10857,9 @@ context.registerFunction(<span class="string"><span class="delimiter">&quot;</sp
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-bean-references"><a class="anchor" href="#expressions-bean-references"></a>4.5.13. Bean references</h4>
+<h4 id="expressions-bean-references"><a class="anchor" href="#expressions-bean-references"></a>4.5.13. Bean 引用</h4>
 <div class="paragraph">
-<p>If the evaluation context has been configured with a bean resolver it is possible to
-lookup beans from an expression using the (@) symbol.</p>
+<p>如果已经使用 bean 解析器配置了评估上下文，则可以使用（@）符号用表达式查找 bean。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10924,7 +10872,7 @@ context.setBeanResolver(<span class="keyword">new</span> MyBeanResolver());
 </div>
 </div>
 <div class="paragraph">
-<p>To access a factory bean itself, the bean name should instead be prefixed with a (&amp;) symbol.</p>
+<p>为了获取工厂 bean 本身，而不是工厂生产的 bean，bean 名称应该以（＆）符号为前缀。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10938,10 +10886,9 @@ context.setBeanResolver(<span class="keyword">new</span> MyBeanResolver());
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-operator-ternary"><a class="anchor" href="#expressions-operator-ternary"></a>4.5.14. Ternary Operator (If-Then-Else)</h4>
+<h4 id="expressions-operator-ternary"><a class="anchor" href="#expressions-operator-ternary"></a>4.5.14. 三元操作符（If-Then-Else）</h4>
 <div class="paragraph">
-<p>You can use the ternary operator for performing if-then-else conditional logic inside
-the expression. A minimal example is:</p>
+<p>你可以使用三元运算符来执行表达式中的 if-then-else 条件逻辑。 一个最小的例子是：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10950,8 +10897,7 @@ the expression. A minimal example is:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In this case, the boolean false results in returning the string value 'falseExp'. A more
-realistic example is shown below.</p>
+<p>在这个例子中，布尔值 false 结果将返回字符串值 'falseExp'。 下面显示了一个更实际的例子。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10967,17 +10913,13 @@ expression = <span class="string"><span class="delimiter">&quot;</span><span cla
 </div>
 </div>
 <div class="paragraph">
-<p>Also see the next section on the Elvis operator for an even shorter syntax for the
-ternary operator.</p>
+<p>另请参阅下一节的 Elvis 运算符，以获取三元运算符的更简短的语法。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-operator-elvis"><a class="anchor" href="#expressions-operator-elvis"></a>4.5.15. The Elvis Operator</h4>
+<h4 id="expressions-operator-elvis"><a class="anchor" href="#expressions-operator-elvis"></a>4.5.15. Elvis 操作符</h4>
 <div class="paragraph">
-<p>The Elvis operator is a shortening of the ternary operator syntax and is used in the
-<a href="http://www.groovy-lang.org/operators.html#_elvis_operator">Groovy</a> language.
-With the ternary operator syntax you usually have to repeat a variable twice, for
-example:</p>
+<p>Elvis 运算符缩短了三元运算符语法，并用于 <a href="http://www.groovy-lang.org/operators.html#_elvis_operator">Groovy</a> 语言。使用三元运算符语法，通常必须重复两次变量，例如：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10986,7 +10928,7 @@ example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Instead you can use the Elvis operator, named for the resemblance to Elvis' hair style.</p>
+<p>作为优化，你可以使用 Elvis 操作符，因与猫王的发型相似得名。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -10998,7 +10940,7 @@ example:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Here is a more complex example.</p>
+<p>这是一个更复杂的例子。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11020,13 +10962,9 @@ name = parser.parseExpression(<span class="string"><span class="delimiter">&quot
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-operator-safe-navigation"><a class="anchor" href="#expressions-operator-safe-navigation"></a>4.5.16. Safe Navigation operator</h4>
+<h4 id="expressions-operator-safe-navigation"><a class="anchor" href="#expressions-operator-safe-navigation"></a>4.5.16. 安全的导航操作符</h4>
 <div class="paragraph">
-<p>The Safe Navigation operator is used to avoid a <code>NullPointerException</code> and comes from
-the <a href="http://www.groovy-lang.org/operators.html#_safe_navigation_operator">Groovy</a>
-language. Typically when you have a reference to an object you might need to verify that
-it is not null before accessing methods or properties of the object. To avoid this, the
-safe navigation operator will simply return null instead of throwing an exception.</p>
+<p>安全导航运算符用于避免  <code>NullPointerException</code>，并且来自 <a href="http://www.groovy-lang.org/operators.html#_safe_navigation_operator">Groovy</a> 语言。 通常，当你访问某个对象时，可能需要在访问对象的方法或属性之前验证它是否为空。为了避免这种情况，安全导航运算符将简单地返回 null 而不是抛出异常。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11055,8 +10993,7 @@ city = parser.parseExpression(<span class="string"><span class="delimiter">&quot
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The Elvis operator can be used to apply default values in expressions, e.g. in an
-<code>@Value</code> expression:</p>
+<p>Elvis 运算符可以用于在表达式中应用默认值，例如，在 <code>@Value</code> 表达式中：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11064,7 +11001,7 @@ city = parser.parseExpression(<span class="string"><span class="delimiter">&quot
 </div>
 </div>
 <div class="paragraph">
-<p>This will inject a system property <code>pop3.port</code> if it is defined or 25 if not.</p>
+<p>这个例子中将注入一个系统属性 <code>pop3.port</code>（如果已定义），否则注入 25。</p>
 </div>
 </td>
 </tr>
@@ -11072,15 +11009,12 @@ city = parser.parseExpression(<span class="string"><span class="delimiter">&quot
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-collection-selection"><a class="anchor" href="#expressions-collection-selection"></a>4.5.17. Collection Selection</h4>
+<h4 id="expressions-collection-selection"><a class="anchor" href="#expressions-collection-selection"></a>4.5.17. 集合选择</h4>
 <div class="paragraph">
-<p>Selection is a powerful expression language feature that allows you to transform some
-source collection into another by selecting from its entries.</p>
+<p>选择是一种强大的表达式语言功能，允许你通过从条目中进行选择来将某个源集合转换为另一个源集合。</p>
 </div>
 <div class="paragraph">
-<p>Selection uses the syntax <code>.?[selectionExpression]</code>. This will filter the collection and
-return a new collection containing a subset of the original elements. For example,
-selection would allow us to easily get a list of Serbian inventors:</p>
+<p>选择使用语法<code>.?[selectionExpression]</code>。这将过滤集合并返回包含原始元素子集的新集合。 例如，选择可以让我们轻松获得塞尔维亚 inventor 名单：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11089,11 +11023,7 @@ selection would allow us to easily get a list of Serbian inventors:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Selection is possible upon both lists and maps. In the former case the selection
-criteria is evaluated against each individual list element whilst against a map the
-selection criteria is evaluated against each map entry (objects of the Java type
-<code>Map.Entry</code>). Map entries have their key and value accessible as properties for use in
-the selection.</p>
+<p>在列表和 map 上都可以进行选择。在前一种情况下，针对每个单独列表元素评估选择标准，同时针对映射针对每个映射条目（Java 类型 <code>Map.Entry</code> 的对象）评估选择标准。Map 条目将其键和值作为用于选择的属性进行访问。</p>
 </div>
 <div class="paragraph">
 <p>This expression will return a new map consisting of those elements of the original map
@@ -11105,19 +11035,13 @@ where the entry value is less than 27.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>In addition to returning all the selected elements, it is possible to retrieve just the
-first or the last value. To obtain the first entry matching the selection the syntax is
-<code>^[&#8230;&#8203;]</code> whilst to obtain the last matching selection the syntax is <code>$[&#8230;&#8203;]</code>.</p>
+<p>除了返回所有选定的元素之外，还可以检索第一个或最后一个值。要获得与选择相匹配的第一个条目，语法是 <code>^[&#8230;&#8203;]</code>，同时为了获得最后的匹配选择，语法是 <code>$[&#8230;&#8203;]</code>。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-collection-projection"><a class="anchor" href="#expressions-collection-projection"></a>4.5.18. Collection Projection</h4>
+<h4 id="expressions-collection-projection"><a class="anchor" href="#expressions-collection-projection"></a>4.5.18. 集合投影</h4>
 <div class="paragraph">
-<p>Projection allows a collection to drive the evaluation of a sub-expression and the
-result is a new collection. The syntax for projection is <code>![projectionExpression]</code>. Most
-easily understood by example, suppose we have a list of inventors but want the list of
-cities where they were born. Effectively we want to evaluate 'placeOfBirth.city' for
-every entry in the inventor list. Using projection:</p>
+<p>投影允许集合驱动子表达式的评估，结果是一个新的集合。投影的语法是 <code>![projectionExpression]</code>。 举例来说，最容易理解的是，假设我们有一个 inventor 名单，但想要他们出生的城市名单。 实际上，我们想要为发明人列表中的每个条目评估“placeOfBirth.city”。 使用投影：</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11126,18 +11050,13 @@ every entry in the inventor list. Using projection:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>A map can also be used to drive projection and in this case the projection expression is
-evaluated against each entry in the map (represented as a Java <code>Map.Entry</code>). The result
-of a projection across a map is a list consisting of the evaluation of the projection
-expression against each map entry.</p>
+<p>Map 也可以用于驱动投影，在这种情况下，投影表达式将针对 map 中的每个条目进行评估（表示为Java <code>Map.Entry</code>）。在 map 上投影的结果是一个列表，其中包含对每个 map 项的投影表达式的评估。</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="expressions-templating"><a class="anchor" href="#expressions-templating"></a>4.5.19. Expression templating</h4>
+<h4 id="expressions-templating"><a class="anchor" href="#expressions-templating"></a>4.5.19. 表达式模板</h4>
 <div class="paragraph">
-<p>Expression templates allow a mixing of literal text with one or more evaluation blocks.
-Each evaluation block is delimited with prefix and suffix characters that you can
-define, a common choice is to use <code>#{ }</code> as the delimiters. For example,</p>
+<p>表达式模板允许将文本文本与一个或多个评估块混合。每个评估块都使用可定义的前缀和后缀字符进行分隔，常见的选择是使用 <code>#{ }</code> 作为分隔符。 例如，</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11149,12 +11068,7 @@ define, a common choice is to use <code>#{ }</code> as the delimiters. For examp
 </div>
 </div>
 <div class="paragraph">
-<p>The string is evaluated by concatenating the literal text 'random number is ' with the
-result of evaluating the expression inside the #{ } delimiter, in this case the result
-of calling that random() method. The second argument to the method <code>parseExpression()</code>
-is of the type <code>ParserContext</code>. The <code>ParserContext</code> interface is used to influence how
-the expression is parsed in order to support the expression templating functionality.
-The definition of <code>TemplateParserContext</code> is shown below.</p>
+<p>该字符串通过将文本文本'random number is'与 #{ } 中的表达式的结果进行评估，在这个例子中调用了 random() 方法。方法 <code>parseExpression()</code> 的第二个参数的类型是 <code>ParserContext</code> 。 <code>ParserContext</code> 接口用于影响表达式如何解析以支持表达式模板功能。<code>TemplateParserContext</code> 的定义如下所示。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -11177,7 +11091,7 @@ The definition of <code>TemplateParserContext</code> is shown below.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="expressions-example-classes"><a class="anchor" href="#expressions-example-classes"></a>4.6. Classes used in the examples</h3>
+<h3 id="expressions-example-classes"><a class="anchor" href="#expressions-example-classes"></a>4.6. 示例中使用的类</h3>
 <div class="paragraph">
 <p>Inventor.java</p>
 </div>
